@@ -1,0 +1,238 @@
+[
+  {
+    "id": "expert_001",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "张闻天起草的宣传鼓动工作提纲强调了什么？",
+    "expected_entities": ["张闻天", "中共中央宣传部", "宣传鼓动工作提纲"],
+    "expected_citation_keywords": ["中国共产党思想政治教育史"],
+    "expected_answer_points": [
+      "宣传与鼓动的定义及区别",
+      "党内教育与群众教育的分工",
+      "宣传鼓动任务是宣传马列主义和党的纲领",
+      "用群众熟悉的事实与切身问题进行解释"
+    ],
+    "risk_focus": ["是否脱离抗日战争时期语境", "是否泛化为当代宣传工作"],
+    "test_focus": ["retrieval", "citation", "policy_check", "generation"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_025"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_002",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "三湾改编对人民军队建设有哪些具体影响？",
+    "expected_entities": ["三湾改编", "人民军队"],
+    "expected_citation_keywords": ["三湾改编", "人民军队初创时期"],
+    "expected_answer_points": [
+      "支部建连，强化党对军队的领导",
+      "实行官兵平等并整肃军风",
+      "用思想作风整顿提高部队凝聚力"
+    ],
+    "risk_focus": ["是否把当时军事组织原则当今化解释", "是否夸大暴力或鼓动内容"],
+    "test_focus": ["retrieval", "generation", "historical_context", "policy_check"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_012"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_003",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "党的一大确立了哪些思想政治教育原则？",
+    "expected_entities": ["党的一大", "思想政治教育"],
+    "expected_citation_keywords": ["党的一大", "思想政治教育基本原则"],
+    "expected_answer_points": [
+      "以马克思列宁主义为指导，强调无产阶级领导",
+      "教育围绕党的纲领与中心任务展开",
+      "提出阶级斗争和最终实现共产主义的目标"
+    ],
+    "risk_focus": ["是否将革命时期纲领当作普世当代教育纲领"],
+    "test_focus": ["retrieval", "citation", "source_check"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_006"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_004",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "长征中红军如何通过政治动员鼓舞士气？",
+    "expected_entities": ["长征", "红军", "政治动员"],
+    "expected_citation_keywords": ["红军长征中的思想政治教育", "鼓舞士气"],
+    "expected_answer_points": [
+      "建立连队支部，发挥党员模范作用",
+      "关心战士生活，强化阶级友爱教育",
+      "采用政治讲话、集体讨论等动员形式"
+    ],
+    "risk_focus": ["是否把动员描述为非规范暴力行为", "是否忽略战时语境"],
+    "test_focus": ["retrieval", "generation", "citation"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_017", "chunk_szzjys_demo_016"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_005",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "中央宣传部在1928年之后如何组织宣传工作？",
+    "expected_entities": ["中央宣传部", "宣传工作", "宣传工作决议案"],
+    "expected_citation_keywords": ["宣传工作决议案", "宣传工作的组织领导"],
+    "expected_answer_points": [
+      "建立宣传部体系并下设审查科、翻译科等",
+      "强调支部宣传工作和工农通讯员体系",
+      "制定出版、编辑与统计等工作流程"
+    ],
+    "risk_focus": ["是否把组织措施当作当代行政要求", "是否遗漏审查历史语境"],
+    "test_focus": ["retrieval", "citation", "source_check"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_013"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_006",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "张闻天的《宣传鼓动工作提纲》将宣传与鼓动如何区分？",
+    "expected_entities": ["张闻天", "宣传鼓动工作提纲"],
+    "expected_citation_keywords": ["宣传鼓动工作提纲", "张闻天"],
+    "expected_answer_points": [
+      "宣传为文字性、经常性；鼓动为口头性、临时性",
+      "两者在范围、手段与目标上的差异"
+    ],
+    "risk_focus": ["文本解释是否被断章取义", "是否移植到现代宣传情境"],
+    "test_focus": ["citation", "source_check", "policy_check"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_025"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_007",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "抗日战争时期为什么要把干部教育放在首位？",
+    "expected_entities": ["干部教育", "抗日战争", "张闻天"],
+    "expected_citation_keywords": ["延安干部学校", "干部教育"],
+    "expected_answer_points": [
+      "干部是决定因素，需在短期内大量培养干部",
+      "成立干部教育部并发布重要指示文件",
+      "把干部教育列为当前教育工作的第一位"
+    ],
+    "risk_focus": ["是否将干部训练表述为违宪或极端行为", "是否忽略历史背景"],
+    "test_focus": ["retrieval", "generation", "policy_check", "historical_context"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_022"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_008",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "古田会议决议的核心理论和实践价值是什么？",
+    "expected_entities": ["古田会议决议"],
+    "expected_citation_keywords": ["古田会议决议", "建党建军纲领"],
+    "expected_answer_points": [
+      "确立党对军队绝对领导，思想建设为首要",
+      "总结建党建军经验并长期影响军队建设"
+    ],
+    "risk_focus": ["是否将其现代化泛化", "是否抹黑或弱化人民军队建设目标"],
+    "test_focus": ["retrieval", "citation", "generation", "source_check"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_014"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_009",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "抗日军政大学在干部培养上有哪些特色？",
+    "expected_entities": ["抗日军政大学"],
+    "expected_citation_keywords": ["抗日军政大学", "组织纪律"],
+    "expected_answer_points": [
+      "强调组织纪律与政治教育",
+      "培养军事政治干部，强化纪律性和革命性"
+    ],
+    "risk_focus": ["是否把军校教育描述为不人道或极端"],
+    "test_focus": ["retrieval", "generation", "citation"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_023"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_010",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "黄埔军校的政治教育对大革命有什么影响？",
+    "expected_entities": ["黄埔军校", "大革命"],
+    "expected_citation_keywords": ["黄埔军校", "大革命时期思想政治教育"],
+    "expected_answer_points": [
+      "推动党在军队中设立党代表和政治部",
+      "为国民革命军政治教育奠定基础，影响军政关系"
+    ],
+    "risk_focus": ["是否把历史事实政治化为今天的对立论述"],
+    "test_focus": ["retrieval", "generation", "historical_context"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_008"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_011",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "中国共产党在解放战争时期如何动员全国人民参加解放战争？",
+    "expected_entities": ["解放战争", "动员"],
+    "expected_citation_keywords": ["动员全国人民参加解放战争", "第四章 解放战争"],
+    "expected_answer_points": [
+      "思想政治教育与形势任务教育相结合",
+      "通过土改、生产、支前等方式动员群众",
+      "宣传组织与统一战线的政治策略"
+    ],
+    "risk_focus": ["是否夸大暴力或煽动性描述"],
+    "test_focus": ["retrieval", "citation", "generation"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_029"],
+    "validation_status": "available"
+  },
+  {
+    "id": "expert_012",
+    "type": "expert_review",
+    "category": "思政史",
+    "query": "党的七大对思想政治教育有哪些重要贡献？",
+    "expected_entities": ["党的七大", "思想政治教育"],
+    "expected_citation_keywords": ["党的七大", "三大优良作风"],
+    "expected_answer_points": [
+      "提出三大优良作风，为思想政治教育提供作风指导",
+      "强调理论与实践相结合，丰富教育理论"
+    ],
+    "risk_focus": ["是否误读为党内结论的绝对普遍适用性"],
+    "test_focus": ["retrieval", "citation"],
+    "expected_chunk_ids": ["chunk_szzjys_demo_026"],
+    "validation_status": "available"
+  },
+  {
+    "id": "demo_history_001",
+    "type": "display",
+    "category": "史实",
+    "query": "遵义会议是在什么背景下召开的？",
+    "expected_entities": ["遵义会议"],
+    "validation_status": "flagged_unavailable",
+    "unavailable_reason": "相关chunk未在当前数据集中找到（数据缺失/实体缺失）"
+  },
+  {
+    "id": "demo_narrative_001",
+    "type": "display",
+    "category": "叙事",
+    "query": "《与妻书》体现了怎样的家国情怀？",
+    "expected_entities": ["与妻书"],
+    "validation_status": "flagged_unavailable",
+    "unavailable_reason": "文本素材不在当前chunks中（数据缺失）"
+  },
+  {
+    "id": "demo_exam_001",
+    "type": "display",
+    "category": "考点",
+    "query": "中国人民抗日战争胜利的关键是什么？",
+    "expected_entities": ["抗日战争"],
+    "validation_status": "retained",
+    "note": "相关章节存在，可用于展示与citation验证"
+  },
+  {
+    "id": "demo_geo_001",
+    "type": "display",
+    "category": "地理",
+    "query": "嘉兴南湖在党的历史上有什么重要意义？",
+    "expected_entities": ["嘉兴南湖"],
+    "validation_status": "flagged_unavailable",
+    "unavailable_reason": "实体在当前数据中缺失，需要补充地方志或史料"
+  }
+]
