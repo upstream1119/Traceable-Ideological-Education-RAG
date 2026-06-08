@@ -3,6 +3,7 @@ import os
 from functools import lru_cache
 from pathlib import Path
 
+from src.agents.agent_trace import build_agent_trace, build_final_decision
 from src.generator.evidence_generator import generate_answer
 from src.graph.graph_store import (
     build_adjacency,
@@ -291,6 +292,8 @@ def _build_response(
     generated: dict | None = None,
     source_check: dict | None = None,
     policy_check: dict | None = None,
+    agent_trace: list[dict] | None = None,
+    final_decision: dict | None = None,
 ) -> dict:
     generated = generated or {"answer": "", "citations_used": []}
     source_check = source_check or {
@@ -310,6 +313,13 @@ def _build_response(
             "label_options": [],
         },
     }
+    agent_trace = agent_trace or []
+    final_decision = final_decision or {
+        "status": "blocked",
+        "can_output": False,
+        "review_required": True,
+        "reason": "三智能体闭环尚未完成。",
+    }
     return {
         "status": "success",
         "project": PROJECT_NAME,
@@ -322,6 +332,8 @@ def _build_response(
         "citations_used": generated["citations_used"],
         "source_check": source_check,
         "policy_check": policy_check,
+        "agent_trace": agent_trace,
+        "final_decision": final_decision,
     }
 
 
@@ -354,6 +366,14 @@ def retrieve(query: str) -> dict:
         generated["citations_used"],
         source_check,
     )
+    agent_trace = build_agent_trace(
+        query_entities=query_entities,
+        hybrid_hits=hybrid_hits,
+        generated=generated,
+        source_check=source_check,
+        policy_check=policy_check,
+    )
+    final_decision = build_final_decision(source_check, policy_check)
 
     return _build_response(
         query=query_text,
@@ -364,4 +384,6 @@ def retrieve(query: str) -> dict:
         generated=generated,
         source_check=source_check,
         policy_check=policy_check,
+        agent_trace=agent_trace,
+        final_decision=final_decision,
     )
