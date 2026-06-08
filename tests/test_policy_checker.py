@@ -25,6 +25,9 @@ def test_policy_check_requires_evidence():
 
     assert result["status"] == NEED_REVIEW_STATUS
     assert "evidence_missing" in result["risk_types"]
+    assert result["review_required"] is True
+    assert result["max_severity"] == "high"
+    assert result["review_items"][0]["risk_type"] == "evidence_missing"
 
 
 def test_policy_check_blocks_failed_source_check():
@@ -47,6 +50,12 @@ def test_policy_check_warns_when_scope_statement_is_missing():
 
     assert result["status"] == WARNING_STATUS
     assert "missing_scope_statement" in result["risk_types"]
+    assert result["review_required"] is True
+    assert result["max_severity"] == "medium"
+    assert result["review_items"][0]["risk_type"] == "missing_scope_statement"
+    assert result["review_items"][0]["suggestion"]
+    assert result["feedback_collection"]["decision_options"]
+    assert result["feedback_collection"]["required_fields"]
 
 
 def test_policy_check_warns_for_absolute_claims():
@@ -80,4 +89,20 @@ def test_policy_check_passes_bounded_answer_with_clean_source_check():
 
     assert result["status"] == PASS_STATUS
     assert result["risk_types"] == []
+    assert result["review_required"] is False
+    assert result["max_severity"] == "none"
+    assert result["review_items"] == []
     assert result["feedback_collection"]["label_options"]
+
+
+def test_policy_check_marks_source_failure_as_high_severity():
+    result = check_policy_risk(
+        "有回答但溯源失败。",
+        [_citation()],
+        {"status": "fail"},
+    )
+
+    assert result["status"] == NEED_REVIEW_STATUS
+    assert result["review_required"] is True
+    assert result["max_severity"] == "high"
+    assert result["review_items"][0]["risk_type"] == "source_check_failed"
