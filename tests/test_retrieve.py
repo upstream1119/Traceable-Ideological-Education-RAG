@@ -45,8 +45,13 @@ def test_demo_queries_return_expected_evidence(monkeypatch):
         assert result["policy_check"]["status"] in {"pass", "warning"}, case["id"]
         assert isinstance(result["policy_check"]["risk_types"], list), case["id"]
         assert isinstance(result["policy_check"]["issues"], list), case["id"]
+        assert isinstance(result["policy_check"]["review_items"], list), case["id"]
+        assert isinstance(result["policy_check"]["review_required"], bool), case["id"]
+        assert result["policy_check"]["max_severity"] in {"none", "low", "medium", "high"}, case["id"]
         assert result["policy_check"]["suggestion"], case["id"]
         assert result["policy_check"]["feedback_collection"]["label_options"], case["id"]
+        assert result["policy_check"]["feedback_collection"]["decision_options"], case["id"]
+        assert result["policy_check"]["feedback_collection"]["required_fields"], case["id"]
 
         for hit in hybrid_hits:
             assert REQUIRED_HYBRID_FIELDS.issubset(hit), case["id"]
@@ -129,3 +134,5 @@ def test_team_mode_keeps_fixed_empty_contract(monkeypatch):
     assert result["source_check"]["checked_citation_count"] == 0
     assert result["policy_check"]["status"] == NEED_REVIEW_STATUS
     assert "evidence_missing" in result["policy_check"]["risk_types"]
+    assert result["policy_check"]["review_required"] is True
+    assert result["policy_check"]["max_severity"] == "high"
