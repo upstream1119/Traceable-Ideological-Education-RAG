@@ -74,6 +74,35 @@ def test_cadre_education_query_prioritizes_specific_chunk(monkeypatch):
     assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_022"
 
 
+def test_graphsim_expansion_contributes_to_graph_hits(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+
+    result = retrieve("张闻天起草的宣传鼓动工作提纲强调了什么？")
+
+    graph_hit = next(
+        hit for hit in result["graph_hits"]
+        if hit["id"] == "chunk_szzjys_demo_025"
+    )
+    assert "张闻天" in result["query_entities"]
+    assert "党的宣传鼓动工作提纲" in graph_hit["related_entities"]
+    assert graph_hit["graph_score"] > 0
+
+
+def test_graphsim_connects_antijapanese_war_to_cadre_education(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+
+    result = retrieve("抗日战争时期党的干部教育为什么重要？")
+
+    assert "干部教育" in result["query_entities"]
+    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_022"
+    assert any(
+        hit["id"] == "chunk_szzjys_demo_022" and hit["graph_score"] > 0
+        for hit in result["graph_hits"]
+    )
+
+
 def test_team_mode_keeps_fixed_empty_contract(monkeypatch):
     monkeypatch.delenv("DACHUANG_RETRIEVE_MODE", raising=False)
     monkeypatch.delenv("DACHUANG_LOCAL_MOCK_ACK", raising=False)
