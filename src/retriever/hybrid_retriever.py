@@ -46,7 +46,37 @@ MOCK_ENTITY_MAP = {
     "家书": "红色家书",
     "精神": "革命精神",
     "革命精神": "革命精神",
+    "张闻天": "张闻天",
+    "宣传鼓动工作提纲": "党的宣传鼓动工作提纲",
+    "党的宣传鼓动工作提纲": "党的宣传鼓动工作提纲",
+    "中共中央宣传部": "中共中央宣传部",
+    "新式整军运动": "新式整军运动",
+    "人民解放军": "人民解放军",
+    "国民党起义投诚部队": "国民党被俘、起义部队",
+    "国民党投诚部队": "国民党被俘、起义部队",
+    "起义投诚部队": "国民党被俘、起义部队",
+    "国民党军队": "国民党军队",
+    "马克思主义传播": "马克思主义",
+    "党的一大": "党的一大",
+    "三湾改编": "三湾改编",
 }
+
+RELATION_TYPE_WEIGHTS = {
+    "起草": 0.22,
+    "成立": 0.2,
+    "任部长": 0.18,
+    "确定": 0.18,
+    "首创": 0.18,
+    "采取": 0.16,
+    "开展": 0.16,
+    "服从": 0.16,
+    "需要": 0.14,
+    "传播": 0.14,
+    "宣传": 0.14,
+    "是": 0.1,
+    "关联": 0.04,
+}
+DEFAULT_RELATION_WEIGHT = 0.08
 
 
 def _count_keyword_hits(keywords: list[str], content: str) -> int:
@@ -151,6 +181,49 @@ def _matched_entities(entities: list[str], content: str) -> list[str]:
     return [entity for entity in entities if entity and entity in content]
 
 
+def _relation_weight(relation: str) -> float:
+    for relation_type, weight in RELATION_TYPE_WEIGHTS.items():
+        if relation_type in relation:
+            return weight
+    return DEFAULT_RELATION_WEIGHT
+
+
+def _filter_valid_graph_paths(
+    paths: list[dict],
+    query_entities: list[str],
+    related_entities: list[str],
+) -> list[dict]:
+    query_set = set(query_entities)
+    related_set = set(related_entities)
+    valid_paths: list[dict] = []
+
+    for path in paths:
+        nodes = path.get("path", [])
+        relations = path.get("relations", [])
+        hops = path.get("hops", 0)
+        if not nodes or hops <= 0:
+            continue
+        if hops > 2 or len(nodes) != hops + 1 or len(relations) != hops:
+            continue
+        if nodes[0] not in query_set or nodes[-1] not in related_set:
+            continue
+        if len(set(nodes)) != len(nodes):
+            continue
+        valid_paths.append(path)
+
+    return valid_paths
+
+
+def _score_graph_paths(paths: list[dict]) -> float:
+    score = 0.0
+    for path in paths:
+        hops = path.get("hops", 0)
+        hop_score = 0.26 if hops == 1 else 0.16
+        relation_score = sum(_relation_weight(relation) for relation in path.get("relations", []))
+        score += hop_score + relation_score / max(hops, 1)
+    return min(score, 0.3)
+
+
 def _score_graph_hit(
     query_entities: list[str],
     expanded_entities: list[str],
@@ -164,23 +237,28 @@ def _score_graph_hit(
         content,
     )
 
-    score += min(len(direct_matches) * 0.45, 0.75)
-    score += min(len(expanded_matches) * 0.18, 0.45)
+    score += min(len(direct_matches) * 0.34, 0.45)
+    score += min(len(expanded_matches) * 0.06, 0.18)
     if direct_matches and expanded_matches:
-        score += 0.15
+        score += 0.05
 
     related_entities = []
     for entity in direct_matches + expanded_matches:
         if entity not in related_entities:
             related_entities.append(entity)
 
-    graph_paths = find_entity_paths(
+    graph_paths = _filter_valid_graph_paths(
+        find_entity_paths(
+            query_entities,
+            related_entities,
+            _load_demo_adjacency(),
+            _load_demo_relation_lookup(),
+            max_hops=2,
+        ),
         query_entities,
         related_entities,
-        _load_demo_adjacency(),
-        _load_demo_relation_lookup(),
-        max_hops=2,
     )
+    score += _score_graph_paths(graph_paths)
 
     return min(score, 0.99), related_entities, graph_paths
 

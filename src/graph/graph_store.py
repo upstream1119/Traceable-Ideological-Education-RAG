@@ -22,6 +22,7 @@ def load_triples(path: str | Path) -> list[dict]:
             if missing_fields:
                 missing = ", ".join(sorted(missing_fields))
                 raise ValueError(f"line {line_number} missing fields: {missing}")
+            _validate_triple(triple, line_number)
             triples.append(triple)
     return triples
 
@@ -142,6 +143,21 @@ def _append_unique(adjacency: dict[str, list[str]], source: str, target: str) ->
     neighbors = adjacency.setdefault(source, [])
     if target not in neighbors:
         neighbors.append(target)
+
+
+def _validate_triple(triple: dict, line_number: int) -> None:
+    for field in ("head", "relation", "tail"):
+        value = triple[field]
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"line {line_number} field {field} must be a non-empty string")
+
+    source_chunk_ids = triple["source_chunk_ids"]
+    if not isinstance(source_chunk_ids, list) or not source_chunk_ids:
+        raise ValueError(f"line {line_number} source_chunk_ids must be a non-empty list")
+
+    for chunk_id in source_chunk_ids:
+        if not isinstance(chunk_id, str) or not chunk_id.strip():
+            raise ValueError(f"line {line_number} source_chunk_ids must contain non-empty strings")
 
 
 def _append_if_new(items: list[str], visited: set[str], item: str) -> None:
