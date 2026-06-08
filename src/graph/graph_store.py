@@ -1,4 +1,5 @@
 import json
+from collections import deque
 from pathlib import Path
 
 
@@ -38,6 +39,23 @@ def build_adjacency(triples: list[dict], bidirectional: bool = True) -> dict[str
     return adjacency
 
 
+def build_relation_lookup(
+    triples: list[dict],
+    bidirectional: bool = True,
+) -> dict[tuple[str, str], str]:
+    relation_lookup: dict[tuple[str, str], str] = {}
+
+    for triple in triples:
+        head = triple["head"]
+        tail = triple["tail"]
+        relation_lookup[(head, tail)] = triple["relation"]
+        if bidirectional:
+            # 反向边只用于检索扩展，避免把原始关系方向说反。
+            relation_lookup[(tail, head)] = "关联"
+
+    return relation_lookup
+
+
 def expand_entities(
     seed_entities: list[str],
     adjacency: dict[str, list[str]],
@@ -68,6 +86,58 @@ def expand_entities(
     return expanded
 
 
+def find_entity_paths(
+    seed_entities: list[str],
+    target_entities: list[str],
+    adjacency: dict[str, list[str]],
+    relation_lookup: dict[tuple[str, str], str] | None = None,
+    max_hops: int = 2,
+    limit: int = 5,
+) -> list[dict]:
+    if max_hops < 0:
+        raise ValueError("max_hops must be greater than or equal to 0")
+
+    relation_lookup = relation_lookup or {}
+    targets = set(_dedupe(target_entities))
+    paths: list[dict] = []
+    seen_paths: set[tuple[str, ...]] = set()
+
+    for seed in _dedupe(seed_entities):
+        queue = deque([[seed]])
+        while queue and len(paths) < limit:
+            path = queue.popleft()
+            if len(path) - 1 >= max_hops:
+                continue
+
+            current = path[-1]
+            for neighbor in adjacency.get(current, []):
+                if neighbor in path:
+                    continue
+
+                next_path = path + [neighbor]
+                if neighbor in targets:
+                    path_key = tuple(next_path)
+                    if path_key not in seen_paths:
+                        seen_paths.add(path_key)
+                        relations = _path_relations(next_path, relation_lookup)
+                        paths.append(
+                            {
+                                "from": seed,
+                                "to": neighbor,
+                                "hops": len(next_path) - 1,
+                                "path": next_path,
+                                "relations": relations,
+                                "path_text": _format_path_text(next_path, relations),
+                            }
+                        )
+                    if len(paths) >= limit:
+                        break
+
+                queue.append(next_path)
+
+    return paths
+
+
 def _append_unique(adjacency: dict[str, list[str]], source: str, target: str) -> None:
     neighbors = adjacency.setdefault(source, [])
     if target not in neighbors:
@@ -88,3 +158,23 @@ def _dedupe(items: list[str]) -> list[str]:
             seen.add(item)
             deduped.append(item)
     return deduped
+
+
+def _path_relations(
+    path: list[str],
+    relation_lookup: dict[tuple[str, str], str],
+) -> list[str]:
+    relations: list[str] = []
+    for source, target in zip(path, path[1:]):
+        relations.append(relation_lookup.get((source, target), "关联"))
+    return relations
+
+
+def _format_path_text(path: list[str], relations: list[str]) -> str:
+    if not path:
+        return ""
+
+    text = path[0]
+    for relation, target in zip(relations, path[1:]):
+        text += f" --{relation}--> {target}"
+    return text
