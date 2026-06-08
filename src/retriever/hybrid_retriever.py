@@ -4,6 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from src.generator.evidence_generator import generate_answer
+from src.graph.graph_store import build_adjacency, expand_entities, load_triples
 from src.reviewer.policy_checker import check_policy_risk
 from src.reviewer.source_checker import check_answer_sources
 
@@ -18,6 +19,7 @@ VECTOR_WEIGHT = ALPHA
 GRAPH_WEIGHT = 1 - ALPHA
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEMO_CHUNKS_PATH = REPO_ROOT / "data" / "processed" / "text_chunks_demo.jsonl"
+DEMO_TRIPLES_PATH = REPO_ROOT / "data" / "graph" / "triples_demo.jsonl"
 
 # 当前阶段用固定词表演示 query -> entities 的流程，后续替换为真实实体识别。
 MOCK_ENTITY_MAP = {
@@ -63,6 +65,16 @@ def _load_demo_knowledge_base() -> list[dict]:
             item.setdefault("topic", "")
             items.append(item)
     return items
+
+
+@lru_cache(maxsize=1)
+def _load_demo_triples() -> list[dict]:
+    return load_triples(DEMO_TRIPLES_PATH)
+
+
+@lru_cache(maxsize=1)
+def _load_demo_adjacency() -> dict[str, list[str]]:
+    return build_adjacency(_load_demo_triples())
 
 
 def _resolve_mode() -> str:
@@ -111,18 +123,47 @@ def _score_vector_hit(query: str, query_entities: list[str], item: dict) -> floa
     return min(score, 0.99)
 
 
-def _score_graph_hit(query_entities: list[str], item: dict) -> float:
-    score = 0.0
-    entities = item.get("entities", [])
-    related_entities = item.get("related_entities", entities)
+def _build_search_content(item: dict) -> str:
+    citation = item.get("citation", {})
+    fields = [
+        item.get("title", ""),
+        item.get("text", ""),
+        item.get("topic", ""),
+        citation.get("section", ""),
+        " ".join(item.get("entities", [])),
+        " ".join(item.get("related_entities", [])),
+    ]
+    return " ".join(field for field in fields if field)
 
-    overlap = sum(1 for entity in query_entities if entity in entities)
-    score += overlap * 0.45
-    related_overlap = sum(1 for entity in query_entities if entity in related_entities)
-    score += related_overlap * 0.15
-    if overlap > 0 and related_entities:
-        score += 0.2
-    return min(score, 0.99)
+
+def _matched_entities(entities: list[str], content: str) -> list[str]:
+    return [entity for entity in entities if entity and entity in content]
+
+
+def _score_graph_hit(
+    query_entities: list[str],
+    expanded_entities: list[str],
+    item: dict,
+) -> tuple[float, list[str]]:
+    score = 0.0
+    content = _build_search_content(item)
+    direct_matches = _matched_entities(query_entities, content)
+    expanded_matches = _matched_entities(
+        [entity for entity in expanded_entities if entity not in query_entities],
+        content,
+    )
+
+    score += min(len(direct_matches) * 0.45, 0.75)
+    score += min(len(expanded_matches) * 0.18, 0.45)
+    if direct_matches and expanded_matches:
+        score += 0.15
+
+    related_entities = []
+    for entity in direct_matches + expanded_matches:
+        if entity not in related_entities:
+            related_entities.append(entity)
+
+    return min(score, 0.99), related_entities
 
 
 def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_TOP_K) -> list[dict]:
@@ -156,15 +197,24 @@ def retrieve_graph(query_entities: list[str], top_k: int = GRAPH_TOP_K) -> list[
     架构师视角：基于实体间的明确关系进行游走。优点是“极其精准，逻辑严密（零幻觉底座）”，缺点是“缺乏语义泛化”。
     未来改造：接入真实的 Neo4j 图数据库，使用 Cypher 语句查询 1-hop 或 2-hop 关系节点。
     """
+    expanded_entities = expand_entities(
+        query_entities,
+        _load_demo_adjacency(),
+        max_hops=2,
+    )
     scored_hits = []
     for item in _load_demo_knowledge_base():
-        score = _score_graph_hit(query_entities, item)
+        score, related_entities = _score_graph_hit(
+            query_entities,
+            expanded_entities,
+            item,
+        )
         if score <= 0:
             continue
         scored_hits.append(
             {
                 "id": item["id"],
-                "related_entities": item.get("related_entities", item.get("entities", [])),
+                "related_entities": related_entities,
                 "graph_score": round(score, 3),
             }
         )

@@ -38,3 +38,7 @@
 {"head":"中国共产党","relation":"教育改造","tail":"国民党被俘、起义部队","source_chunk_ids":["chunk_szzjys_demo_034"]}
 {"head":"毛泽东","relation":"概括新民主主义文化为","tail":"民族的、科学的、大众的文化","source_chunk_ids":["chunk_szzjys_demo_038"]}
 {"head":"思想政治教育","relation":"服务于完成","tail":"新民主主义革命","source_chunk_ids":["chunk_szzjys_demo_040"]}
+{"head":"抗日战争","relation":"需要","tail":"干部教育","source_chunk_ids":["chunk_szzjys_demo_022"]}
+{"head":"中央宣传部","relation":"关联文件","tail":"党的宣传鼓动工作提纲","source_chunk_ids":["chunk_szzjys_demo_025"]}
+{"head":"人民解放军","relation":"开展","tail":"新式整军运动","source_chunk_ids":["chunk_szzjys_demo_033"]}
+{"head":"国民党起义投诚部队","relation":"接受","tail":"教育改造","source_chunk_ids":["chunk_szzjys_demo_034"]}
