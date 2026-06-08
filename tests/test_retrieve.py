@@ -86,7 +86,13 @@ def test_graphsim_expansion_contributes_to_graph_hits(monkeypatch):
     )
     assert "张闻天" in result["query_entities"]
     assert "党的宣传鼓动工作提纲" in graph_hit["related_entities"]
+    assert graph_hit["graph_paths"]
+    assert any(
+        "张闻天" in path["path"] and "党的宣传鼓动工作提纲" in path["path"]
+        for path in graph_hit["graph_paths"]
+    )
     assert graph_hit["graph_score"] > 0
+    assert result["hybrid_hits"][0]["graph_paths"]
 
 
 def test_graphsim_connects_antijapanese_war_to_cadre_education(monkeypatch):
@@ -99,6 +105,10 @@ def test_graphsim_connects_antijapanese_war_to_cadre_education(monkeypatch):
     assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_022"
     assert any(
         hit["id"] == "chunk_szzjys_demo_022" and hit["graph_score"] > 0
+        for hit in result["graph_hits"]
+    )
+    assert any(
+        hit["id"] == "chunk_szzjys_demo_022" and hit["graph_paths"]
         for hit in result["graph_hits"]
     )
 

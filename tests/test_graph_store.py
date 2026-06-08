@@ -2,7 +2,13 @@ import json
 
 import pytest
 
-from src.graph.graph_store import build_adjacency, expand_entities, load_triples
+from src.graph.graph_store import (
+    build_adjacency,
+    build_relation_lookup,
+    expand_entities,
+    find_entity_paths,
+    load_triples,
+)
 
 
 def _write_jsonl(path, rows: list[dict]) -> None:
@@ -102,3 +108,63 @@ def test_expand_entities_can_limit_to_one_hop():
 
     assert expanded == ["延安", "整风运动"]
     assert "思想政治教育" not in expanded
+
+
+def test_find_entity_paths_returns_explainable_one_hop_path():
+    triples = [
+        {
+            "head": "张闻天",
+            "relation": "起草",
+            "tail": "党的宣传鼓动工作提纲",
+            "source_chunk_ids": ["chunk_szzjys_demo_025"],
+        }
+    ]
+    adjacency = build_adjacency(triples)
+    relation_lookup = build_relation_lookup(triples)
+
+    paths = find_entity_paths(
+        ["张闻天"],
+        ["党的宣传鼓动工作提纲"],
+        adjacency,
+        relation_lookup,
+    )
+
+    assert paths == [
+        {
+            "from": "张闻天",
+            "to": "党的宣传鼓动工作提纲",
+            "hops": 1,
+            "path": ["张闻天", "党的宣传鼓动工作提纲"],
+            "relations": ["起草"],
+            "path_text": "张闻天 --起草--> 党的宣传鼓动工作提纲",
+        }
+    ]
+
+
+def test_find_entity_paths_returns_two_hop_path():
+    triples = [
+        {
+            "head": "抗日战争",
+            "relation": "需要",
+            "tail": "干部教育",
+            "source_chunk_ids": ["chunk_szzjys_demo_022"],
+        },
+        {
+            "head": "干部教育",
+            "relation": "服务于",
+            "tail": "抗战胜利",
+            "source_chunk_ids": ["chunk_szzjys_demo_022"],
+        },
+    ]
+    adjacency = build_adjacency(triples)
+    relation_lookup = build_relation_lookup(triples)
+
+    paths = find_entity_paths(
+        ["抗日战争"],
+        ["抗战胜利"],
+        adjacency,
+        relation_lookup,
+    )
+
+    assert paths[0]["path"] == ["抗日战争", "干部教育", "抗战胜利"]
+    assert paths[0]["relations"] == ["需要", "服务于"]

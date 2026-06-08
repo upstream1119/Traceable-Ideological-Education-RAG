@@ -4,7 +4,13 @@ from functools import lru_cache
 from pathlib import Path
 
 from src.generator.evidence_generator import generate_answer
-from src.graph.graph_store import build_adjacency, expand_entities, load_triples
+from src.graph.graph_store import (
+    build_adjacency,
+    build_relation_lookup,
+    expand_entities,
+    find_entity_paths,
+    load_triples,
+)
 from src.reviewer.policy_checker import check_policy_risk
 from src.reviewer.source_checker import check_answer_sources
 
@@ -77,6 +83,11 @@ def _load_demo_adjacency() -> dict[str, list[str]]:
     return build_adjacency(_load_demo_triples())
 
 
+@lru_cache(maxsize=1)
+def _load_demo_relation_lookup() -> dict[tuple[str, str], str]:
+    return build_relation_lookup(_load_demo_triples())
+
+
 def _resolve_mode() -> str:
     requested_mode = os.getenv("DACHUANG_RETRIEVE_MODE", TEAM_MODE).strip().lower()
     local_ack = os.getenv("DACHUANG_LOCAL_MOCK_ACK", "").strip()
@@ -144,7 +155,7 @@ def _score_graph_hit(
     query_entities: list[str],
     expanded_entities: list[str],
     item: dict,
-) -> tuple[float, list[str]]:
+) -> tuple[float, list[str], list[dict]]:
     score = 0.0
     content = _build_search_content(item)
     direct_matches = _matched_entities(query_entities, content)
@@ -163,7 +174,15 @@ def _score_graph_hit(
         if entity not in related_entities:
             related_entities.append(entity)
 
-    return min(score, 0.99), related_entities
+    graph_paths = find_entity_paths(
+        query_entities,
+        related_entities,
+        _load_demo_adjacency(),
+        _load_demo_relation_lookup(),
+        max_hops=2,
+    )
+
+    return min(score, 0.99), related_entities, graph_paths
 
 
 def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_TOP_K) -> list[dict]:
@@ -204,7 +223,7 @@ def retrieve_graph(query_entities: list[str], top_k: int = GRAPH_TOP_K) -> list[
     )
     scored_hits = []
     for item in _load_demo_knowledge_base():
-        score, related_entities = _score_graph_hit(
+        score, related_entities, graph_paths = _score_graph_hit(
             query_entities,
             expanded_entities,
             item,
@@ -215,6 +234,7 @@ def retrieve_graph(query_entities: list[str], top_k: int = GRAPH_TOP_K) -> list[
             {
                 "id": item["id"],
                 "related_entities": related_entities,
+                "graph_paths": graph_paths,
                 "graph_score": round(score, 3),
             }
         )
@@ -252,6 +272,8 @@ def fuse_results(vector_hits: list[dict], graph_hits: list[dict], knowledge_base
                 "citation": item["citation"],
                 "vector_score": vector_score,
                 "graph_score": graph_score,
+                "related_entities": graph_hit.get("related_entities", []) if graph_hit else [],
+                "graph_paths": graph_hit.get("graph_paths", []) if graph_hit else [],
                 "hybrid_score": hybrid_score,
             }
         )
