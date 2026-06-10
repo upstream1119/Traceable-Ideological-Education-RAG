@@ -3,7 +3,11 @@ import os
 from pathlib import Path
 
 from src.generator.template_generator import NO_EVIDENCE_ANSWER
-from src.retriever.hybrid_retriever import retrieve
+from src.retriever.hybrid_retriever import (
+    _filter_valid_graph_paths,
+    _score_graph_paths,
+    retrieve,
+)
 from src.reviewer.policy_checker import NEED_REVIEW_STATUS
 from src.reviewer.source_checker import NO_EVIDENCE_STATUS
 
@@ -131,6 +135,104 @@ def test_graphsim_connects_antijapanese_war_to_cadre_education(monkeypatch):
         hit["id"] == "chunk_szzjys_demo_022" and hit["graph_paths"]
         for hit in result["graph_hits"]
     )
+
+
+def test_graphsim_handles_party_first_congress_query(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+
+    result = retrieve("党的一大如何确定思想政治教育的根本目的？")
+
+    assert "党的一大" in result["query_entities"]
+    graph_hit = next(
+        hit for hit in result["graph_hits"]
+        if hit["id"] == "chunk_szzjys_demo_006"
+    )
+    assert "思想政治教育的根本目的" in graph_hit["related_entities"]
+    assert any(
+        path["path"] == ["党的一大", "思想政治教育的根本目的"]
+        for path in graph_hit["graph_paths"]
+    )
+
+
+def test_graphsim_prefers_marxism_spread_trend_evidence(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+
+    result = retrieve("马克思主义传播为什么成为潮流？")
+
+    assert "马克思主义" in result["query_entities"]
+    assert "滔滔滚滚的潮流" in result["query_entities"]
+    assert result["graph_hits"][0]["id"] == "chunk_szzjys_demo_003"
+    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_003"
+
+
+def test_graphsim_handles_kuomintang_surrendered_troops_query(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+
+    result = retrieve("国民党起义投诚部队为什么要接受人民解放军教育改造？")
+
+    assert "国民党被俘、起义部队" in result["query_entities"]
+    graph_hit = next(
+        hit for hit in result["graph_hits"]
+        if hit["id"] == "chunk_szzjys_demo_034"
+    )
+    assert "人民解放军" in graph_hit["related_entities"]
+    assert graph_hit["graph_paths"]
+    assert result["graph_hits"][0]["id"] == "chunk_szzjys_demo_034"
+    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_034"
+
+
+def test_graph_path_scoring_prefers_shorter_weighted_paths():
+    short_path = {
+        "from": "张闻天",
+        "to": "党的宣传鼓动工作提纲",
+        "hops": 1,
+        "path": ["张闻天", "党的宣传鼓动工作提纲"],
+        "relations": ["起草"],
+    }
+    long_path = {
+        "from": "张闻天",
+        "to": "思想政治教育",
+        "hops": 2,
+        "path": ["张闻天", "党的宣传鼓动工作提纲", "思想政治教育"],
+        "relations": ["起草", "关联"],
+    }
+
+    assert _score_graph_paths([short_path]) > _score_graph_paths([long_path])
+
+
+def test_invalid_graph_paths_are_filtered():
+    paths = [
+        {
+            "from": "张闻天",
+            "to": "党的宣传鼓动工作提纲",
+            "hops": 1,
+            "path": ["张闻天", "党的宣传鼓动工作提纲"],
+            "relations": ["起草"],
+        },
+        {
+            "from": "张闻天",
+            "to": "无关实体",
+            "hops": 1,
+            "path": ["张闻天", "无关实体"],
+            "relations": ["关联"],
+        },
+        {
+            "from": "张闻天",
+            "to": "张闻天",
+            "hops": 2,
+            "path": ["张闻天", "干部教育部", "张闻天"],
+            "relations": ["任部长", "关联"],
+        },
+    ]
+
+    assert _filter_valid_graph_paths(
+        paths,
+        query_entities=["张闻天"],
+        related_entities=["党的宣传鼓动工作提纲"],
+    ) == [paths[0]]
 
 
 def test_team_mode_keeps_fixed_empty_contract(monkeypatch):

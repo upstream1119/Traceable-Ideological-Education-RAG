@@ -41,4 +41,9 @@
 {"head":"抗日战争","relation":"需要","tail":"干部教育","source_chunk_ids":["chunk_szzjys_demo_022"]}
 {"head":"中央宣传部","relation":"关联文件","tail":"党的宣传鼓动工作提纲","source_chunk_ids":["chunk_szzjys_demo_025"]}
 {"head":"人民解放军","relation":"开展","tail":"新式整军运动","source_chunk_ids":["chunk_szzjys_demo_033"]}
-{"head":"国民党起义投诚部队","relation":"接受","tail":"教育改造","source_chunk_ids":["chunk_szzjys_demo_034"]}
+{"head":"国民党军队","relation":"起义、投诚和接受和平改编","tail":"人民解放军","source_chunk_ids":["chunk_szzjys_demo_034"]}
+{"head":"党的一大","relation":"确定","tail":"思想政治教育的根本目的","source_chunk_ids":["chunk_szzjys_demo_006"]}
+{"head":"马克思主义","relation":"在中国的传播成为","tail":"滔滔滚滚的潮流","source_chunk_ids":["chunk_szzjys_demo_003"]}
+{"head":"中共中央","relation":"成立","tail":"干部教育部","source_chunk_ids":["chunk_szzjys_demo_022"]}
+{"head":"张闻天","relation":"任部长","tail":"干部教育部","source_chunk_ids":["chunk_szzjys_demo_022"]}
+{"head":"国民党被俘、起义部队","relation":"服从","tail":"人民解放军的指挥、调动","source_chunk_ids":["chunk_szzjys_demo_034"]}
