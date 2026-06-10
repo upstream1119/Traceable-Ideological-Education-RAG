@@ -257,3 +257,15 @@ def test_team_mode_keeps_fixed_empty_contract(monkeypatch):
     assert result["final_decision"]["status"] == "blocked"
     assert result["final_decision"]["can_output"] is False
     assert result["final_decision"]["review_required"] is True
+
+
+def test_retrieve_response_exposes_generator_status(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+
+    result = retrieve("张闻天起草的宣传鼓动工作提纲强调了什么？")
+
+    assert result["generator_mode"]
+    assert "generator_provider" in result
+    assert "provider_status" in result
+    assert "used_fallback" in result

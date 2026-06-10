@@ -2,5 +2,6 @@ fastapi
 uvicorn
 faiss-cpu
 networkx
+openai>=1.0
 pyyaml
 pytest

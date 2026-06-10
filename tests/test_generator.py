@@ -1,4 +1,6 @@
+from src.generator import evidence_generator
 from src.generator.evidence_generator import generate_answer
+from src.generator.llm_provider import LLMGenerationResult
 
 
 def _hit(
@@ -45,6 +47,81 @@ def test_llm_mode_keeps_contract_and_builds_prompt(monkeypatch):
     assert result["citations_used"]
     assert "只能依据给定证据回答" in result["prompt_preview"]
     assert "思想政治教育需要依据具体历史材料展开" in result["prompt_preview"]
+
+
+def test_llm_mode_uses_successful_provider_answer(monkeypatch):
+    class SuccessfulProvider:
+        name = "zhipu"
+
+        def generate(self, prompt: str) -> LLMGenerationResult:
+            return LLMGenerationResult(
+                text="这是智谱根据证据生成的回答。",
+                provider_name=self.name,
+                status="success",
+            )
+
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "llm")
+    monkeypatch.setattr(
+        evidence_generator,
+        "get_llm_provider",
+        lambda provider_name: SuccessfulProvider(),
+    )
+
+    result = generate_answer("思想政治教育为什么重要？", [_hit()])
+
+    assert result["answer"] == "这是智谱根据证据生成的回答。"
+    assert result["generator_provider"] == "zhipu"
+    assert result["provider_status"] == "success"
+    assert result["used_fallback"] is False
+    assert result["citations_used"]
+
+
+def test_llm_mode_falls_back_when_provider_fails(monkeypatch):
+    class FailedProvider:
+        name = "zhipu"
+
+        def generate(self, prompt: str) -> LLMGenerationResult:
+            return LLMGenerationResult(
+                text="",
+                provider_name=self.name,
+                status="provider_error",
+            )
+
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "llm")
+    monkeypatch.setattr(
+        evidence_generator,
+        "get_llm_provider",
+        lambda provider_name: FailedProvider(),
+    )
+
+    result = generate_answer("思想政治教育为什么重要？", [_hit()])
+
+    assert result["answer"]
+    assert result["provider_status"] == "provider_error"
+    assert result["used_fallback"] is True
+    assert result["citations_used"]
+
+
+def test_llm_mode_skips_paid_call_without_evidence(monkeypatch):
+    class UnexpectedProvider:
+        name = "zhipu"
+
+        def generate(self, prompt: str) -> LLMGenerationResult:
+            raise AssertionError("无证据时不应调用外部模型")
+
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "llm")
+    monkeypatch.setattr(
+        evidence_generator,
+        "get_llm_provider",
+        lambda provider_name: UnexpectedProvider(),
+    )
+
+    result = generate_answer("一个知识库中没有证据的问题", [])
+
+    assert result["generator_mode"] == "llm"
+    assert result["provider_status"] == "skipped_no_evidence"
+    assert result["used_fallback"] is True
+    assert result["citations_used"] == []
 
 
 def test_unknown_generator_mode_falls_back_to_template(monkeypatch):
