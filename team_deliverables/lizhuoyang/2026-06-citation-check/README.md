@@ -7,6 +7,7 @@
 - 生成最小页码映射表，覆盖 40 条 chunk。
 - 优先抽查核心演示题相关 chunk：张闻天、干部教育、马克思主义传入、党的一大、长征政治动员。
 - 补充并修正 40 条 chunk 的 `entities`、`tags`、`topic`，方便后续 GraphSim 和检索。
+- 根据核心题检索回退反馈，恢复 `chunk_szzjys_demo_025` 的“宣传工作”实体，并收窄高频泛化实体/标签。
 
 ## 文件清单
 
@@ -25,6 +26,7 @@
   - `chunk_szzjys_demo_012`：75 -> 74
   - `chunk_szzjys_demo_034`：174 -> 173
 - 逐条补充或修正 `entities`、`tags`、`topic`。
+- 去掉公共 tag 中的“思想政治教育史”，过滤 exact 的“中国共产党”“思想政治教育”“马克思主义”等高频泛化实体；保留更具体的事件、文献、组织和主题词。
 - 未修改 `id`、`text`、`source`、`title`、`citation.doc`、`citation.section`。
 
 ## 页码口径
