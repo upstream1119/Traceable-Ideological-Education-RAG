@@ -56,6 +56,21 @@ def test_demo_queries_return_expected_evidence(monkeypatch):
         assert result["policy_check"]["feedback_collection"]["label_options"], case["id"]
         assert result["policy_check"]["feedback_collection"]["decision_options"], case["id"]
         assert result["policy_check"]["feedback_collection"]["required_fields"], case["id"]
+        assert len(result["agent_trace"]) == 4, case["id"]
+        assert [step["agent"] for step in result["agent_trace"]] == [
+            "retrieval_stage",
+            "generator",
+            "source_reviewer",
+            "policy_reviewer",
+        ], case["id"]
+        assert result["final_decision"]["status"] in {
+            "approved",
+            "needs_review",
+            "blocked",
+        }, case["id"]
+        assert isinstance(result["final_decision"]["can_output"], bool), case["id"]
+        assert isinstance(result["final_decision"]["review_required"], bool), case["id"]
+        assert result["final_decision"]["reason"], case["id"]
 
         for hit in hybrid_hits:
             assert REQUIRED_HYBRID_FIELDS.issubset(hit), case["id"]
@@ -225,3 +240,7 @@ def test_team_mode_keeps_fixed_empty_contract(monkeypatch):
     assert "evidence_missing" in result["policy_check"]["risk_types"]
     assert result["policy_check"]["review_required"] is True
     assert result["policy_check"]["max_severity"] == "high"
+    assert result["agent_trace"][0]["status"] == "no_evidence"
+    assert result["final_decision"]["status"] == "blocked"
+    assert result["final_decision"]["can_output"] is False
+    assert result["final_decision"]["review_required"] is True
