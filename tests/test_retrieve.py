@@ -155,6 +155,18 @@ def test_graphsim_handles_party_first_congress_query(monkeypatch):
     )
 
 
+def test_graphsim_prefers_marxism_spread_trend_evidence(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+
+    result = retrieve("马克思主义传播为什么成为潮流？")
+
+    assert "马克思主义" in result["query_entities"]
+    assert "滔滔滚滚的潮流" in result["query_entities"]
+    assert result["graph_hits"][0]["id"] == "chunk_szzjys_demo_003"
+    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_003"
+
+
 def test_graphsim_handles_kuomintang_surrendered_troops_query(monkeypatch):
     monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
     monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
@@ -169,6 +181,7 @@ def test_graphsim_handles_kuomintang_surrendered_troops_query(monkeypatch):
     assert "人民解放军" in graph_hit["related_entities"]
     assert graph_hit["graph_paths"]
     assert result["graph_hits"][0]["id"] == "chunk_szzjys_demo_034"
+    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_034"
 
 
 def test_graph_path_scoring_prefers_shorter_weighted_paths():

@@ -58,6 +58,7 @@ MOCK_ENTITY_MAP = {
     "起义投诚部队": "国民党被俘、起义部队",
     "国民党军队": "国民党军队",
     "马克思主义传播": "马克思主义",
+    "潮流": "滔滔滚滚的潮流",
     "党的一大": "党的一大",
     "三湾改编": "三湾改编",
 }
@@ -141,15 +142,15 @@ def extract_query_entities(query: str) -> list[str]:
 
 def _score_vector_hit(query: str, query_entities: list[str], item: dict) -> float:
     score = 0.0
-    entities = item.get("entities", [])
     text = item.get("text", "")
     title = item.get("title", "")
     citation_section = item.get("citation", {}).get("section", "")
     tags = item.get("tags", [])
     topic = item.get("topic", "")
 
-    if any(entity in entities for entity in query_entities):
-        score += 0.55
+    search_content = _build_search_content(item)
+    matched_entities = _matched_entities(query_entities, search_content)
+    score += min(len(matched_entities) * 0.35, 0.7)
     text_hits = _count_keyword_hits(query_entities, text)
     title_hits = _count_keyword_hits(query_entities, title)
     section_hits = _count_keyword_hits(query_entities, citation_section)
