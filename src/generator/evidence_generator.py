@@ -47,13 +47,25 @@ def build_evidence_prompt(query: str, hybrid_hits: list[dict], max_hits: int = 3
 def generate_answer(query: str, hybrid_hits: list[dict]) -> dict:
     mode = _resolve_generator_mode()
     if mode == LLM_MODE:
-        prompt = build_evidence_prompt(query, hybrid_hits)
         provider_name = os.getenv("DACHUANG_LLM_PROVIDER", DEFAULT_PROVIDER).strip().lower()
+        generated = generate_answer_from_hits(query, hybrid_hits, max_hits=3)
+
+        if not hybrid_hits:
+            generated["generator_mode"] = LLM_MODE
+            generated["generator_provider"] = provider_name
+            generated["provider_status"] = "skipped_no_evidence"
+            generated["used_fallback"] = True
+            return generated
+
+        prompt = build_evidence_prompt(query, hybrid_hits)
         provider = get_llm_provider(provider_name)
         provider_result = provider.generate(prompt)
 
-        # v0 先固定 provider 接口，真实国内模型 provider 下一轮接入。
-        generated = generate_answer_from_hits(query, hybrid_hits)
+        if provider_result.status == "success" and provider_result.text.strip():
+            generated["answer"] = provider_result.text.strip()
+            generated["used_fallback"] = False
+        else:
+            generated["used_fallback"] = True
         generated["generator_mode"] = LLM_MODE
         generated["generator_provider"] = provider_result.provider_name
         generated["provider_status"] = provider_result.status
