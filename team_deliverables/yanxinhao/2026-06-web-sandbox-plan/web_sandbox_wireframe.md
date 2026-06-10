@@ -24,12 +24,13 @@
 | - 当前选中地点高亮            | - citation 卡片                   |
 | - 地图弹窗显示 summary        | - vector_score / graph_score      |
 |                               | - source_check / policy_check     |
+|                               | - agent_trace / final_decision    |
 +-------------------------------+----------------------------------+
 | 底部：历史时间线                                                   |
 | 1921 建党 -> 1935 遵义会议 -> 1942 延安整风 -> 抗战时期 -> 1949   |
 +------------------------------------------------------------------+
 | 预留：数字人讲解区域                                               |
-| 文本回答 -> TTS -> 字幕/citation -> 轻量形象或口型同步              |
+| final_decision approved 后：文本回答 -> TTS -> 字幕/citation       |
 +------------------------------------------------------------------+
 ```
 
@@ -42,8 +43,8 @@
 ```text
 用户输入问题
   -> POST /retrieve
-  -> 返回 query_entities、hybrid_hits、citations_used、source_check、policy_check
-  -> 页面更新地图、时间线和 citation 卡片
+  -> 返回 query_entities、hybrid_hits、citations_used、source_check、policy_check、agent_trace、final_decision
+  -> 页面更新地图、时间线、citation 卡片和输出控制状态
 ```
 
 ### 3.2 地图点联动
@@ -78,6 +79,7 @@ citation 卡片来自 `/retrieve` 的 `hybrid_hits` 和 `citations_used`。
 - 根据 `related_entities`、`graph_paths` 或 citation 内容匹配地图点和时间线事件。
 - 高亮对应地标和时间线节点。
 - 如果 `source_check` 或 `policy_check` 提示风险，在卡片上显示“需复核”状态。
+- 如果 `final_decision.status` 不是 `approved`，卡片只能作为复核材料，不触发正式回答或数字人播报。
 
 ## 4. citation 卡片信息结构
 
@@ -95,6 +97,8 @@ citation 卡片来自 `/retrieve` 的 `hybrid_hits` 和 `citations_used`。
 相关实体：hybrid_hit.related_entities
 图谱路径：hybrid_hit.graph_paths
 审查状态：source_check / policy_check
+流程轨迹：agent_trace
+最终决策：final_decision.status / final_decision.reason
 ```
 
 显示规则：
@@ -103,6 +107,9 @@ citation 卡片来自 `/retrieve` 的 `hybrid_hits` 和 `citations_used`。
 - `page` 为 `null` 时，显示“页码待复核”，并保留 `verification_status`。
 - 不能把 `null` 页码改写成确定页码。
 - 如果 `policy_check` 给出风险，不直接隐藏证据，而是标记“需要人工复核”。
+- `final_decision.status = approved` 时，允许将回答作为正式展示内容。
+- `final_decision.status = needs_review` 时，只显示待人工复核，不触发播报。
+- `final_decision.status = blocked` 时，禁止播报，并显示 `final_decision.reason`。
 
 ## 5. 系统架构图文字版
 
@@ -119,19 +126,22 @@ citation 卡片来自 `/retrieve` 的 `hybrid_hits` 和 `citations_used`。
   -> answer
   -> source_check
   -> policy_check
+  -> agent_trace
+  -> final_decision
 
 6 月开发重点
-hybrid_hits + citation
+hybrid_hits + citation + final_decision
   -> 地图点
   -> 时间线事件
   -> citation 卡片
+  -> 回答输出控制
   -> 人物/事件解释卡片
   -> Web 沙盘页面草图
 
 未来展示层
 Web 沙盘
   -> 轻量 Three.js / 地图增强
-  -> TTS + 字幕 + citation
+  -> approved 后的 TTS + 字幕 + citation
   -> 轻量数字人讲解
   -> XR 时空沙盘
 ```
@@ -140,7 +150,8 @@ Web 沙盘
 
 - 当前不是普通聊天机器人，而是先找证据再生成回答。
 - citation 和审查结果是可信展示的基础。
-- XR/数字人只是展示方式，不能脱离证据链。
+- `final_decision` 是回答展示和数字人播报的最终控制字段。
+- XR/数字人只是展示方式，不能脱离证据链和 `final_decision`。
 - 6 月不追求复杂 3D，而是先把数据联动和页面结构设计清楚。
 
 ## 6. 暑假个人电脑开发计划
@@ -166,13 +177,14 @@ Web 沙盘
 
 - 增加问题输入框。
 - 调用 FastAPI `/retrieve`。
-- 展示 `hybrid_hits`、`citations_used`、`source_check`、`policy_check`。
+- 展示 `hybrid_hits`、`citations_used`、`source_check`、`policy_check`、`agent_trace`、`final_decision`。
 
 验收：
 
 - 输入核心问题后，页面能展示 citation 卡片。
 - `hybrid_score`、`vector_score`、`graph_score` 能显示。
 - 证据不足或政治风险提示能被看见。
+- `final_decision.status` 能控制回答是否直接输出。
 
 ### 第三阶段：证据到时空展示联动
 
@@ -192,12 +204,14 @@ Web 沙盘
 目标：
 
 - 不做高质量实时数字人。
-- 先预留一个讲解区域，展示 `answer`、字幕和 citation。
+- 先预留一个讲解区域，展示 `answer`、字幕、citation 和 `final_decision`。
 - 后续可接 TTS 或轻量口型同步。
 
 验收：
 
-- 讲解区域只显示 KG-RAG 生成并经过审查的内容。
+- `final_decision.status = approved` 时，讲解区域允许展示正式回答并触发 TTS/数字人播报。
+- `final_decision.status = needs_review` 时，讲解区域只显示待人工复核，不触发播报。
+- `final_decision.status = blocked` 时，讲解区域禁止播报，并显示阻断原因。
 - 页面明确展示 citation，不让数字人脱离证据自由讲解。
 
 ## 7. 风险边界
@@ -205,6 +219,7 @@ Web 沙盘
 - 不把当前 Demo 坐标当作正式测绘坐标。
 - 不把 `page: null` 写成确定页码。
 - 不把规则型 `policy_check` 宣称为已经替代专家审查。
+- 不绕过 `final_decision` 直接播放回答。
 - 不把 Web 页面草图宣称为完整 XR 沙盘。
 - 不把数字人作为 6 月重算力主线。
 - 不在前端或仓库中写入 API Key、模型权重或大文件。

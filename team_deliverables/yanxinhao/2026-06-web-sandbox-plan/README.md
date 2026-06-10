@@ -21,7 +21,7 @@
 - `data/processed/landmarks_demo.geojson`：6 个红色地标 GeoJSON 点位。
 - `data/processed/landmarks_demo.jsonl`：与地标对应的逐行 JSON 数据，包含 `citation.source_basis`。
 - `data/processed/timeline_demo_sizheng.json`：5 条思想政治教育史时间线事件。
-- `/retrieve`：当前核心检索接口，可返回 `vector_hits`、`graph_hits`、`hybrid_hits`、`answer`、`citations_used`、`source_check` 和 `policy_check`。
+- `/retrieve`：当前核心检索接口，可返回 `vector_hits`、`graph_hits`、`hybrid_hits`、`answer`、`citations_used`、`source_check`、`policy_check`、`agent_trace` 和 `final_decision`。
 - `hybrid_hits`：保留 `citation`、`vector_score`、`graph_score`、`hybrid_score`，可作为 citation 卡片的数据来源。
 
 这些内容只能说明“可溯源证据检索底座”和“展示层承接方案”，不能表述为完整 XR 系统或完整零幻觉系统已经完成。
@@ -55,13 +55,15 @@
   -> vector_hits + graph_hits
   -> hybrid_hits + citation
   -> source_check + policy_check
-  -> Web 地图点 / 时间线事件 / citation 卡片 / 未来数字人讲解
+  -> agent_trace + final_decision
+  -> Web 地图点 / 时间线事件 / citation 卡片 / 回答与数字人播报控制
 ```
 
 前端展示时应遵守两个原则：
 
 - citation 卡片展示的是证据来源、章节、页码或页码缺失原因，不补造来源。
-- 数字人讲解只能基于 `answer`、`citations_used` 和审查结果组织表达，不能脱离 KG-RAG 证据自由生成。
+- 数字人讲解只能基于 `answer`、`citations_used`、`agent_trace` 和 `final_decision` 组织表达，不能脱离 KG-RAG 证据自由生成。
+- 前端必须以 `final_decision.status` 控制输出：`approved` 才允许直接展示回答并播报；`needs_review` 只显示待人工复核；`blocked` 禁止数字人播报并显示阻断原因。
 
 ## 5. 暑假 Web 原型计划
 
@@ -72,7 +74,7 @@
 - 前端框架：React + Vite + TypeScript。
 - 地图展示：先用 Leaflet 读取 GeoJSON。
 - 时间线展示：先用普通 React 组件渲染 JSON 事件。
-- 检索联动：通过 FastAPI `/retrieve` 获取 `hybrid_hits` 和 `citations_used`。
+- 检索联动：通过 FastAPI `/retrieve` 获取 `hybrid_hits`、`citations_used`、`agent_trace` 和 `final_decision`。
 - 状态联动：用前端状态保存当前选中的地标、事件和 citation。
 
 建议先做 3 个页面或视图：

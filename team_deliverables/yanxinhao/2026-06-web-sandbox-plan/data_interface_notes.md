@@ -7,7 +7,7 @@
 - `data/processed/landmarks_demo.geojson`
 - `data/processed/landmarks_demo.jsonl`
 - `data/processed/timeline_demo_sizheng.json`
-- `/retrieve` 返回的 `hybrid_hits`、`citations_used`、`source_check`、`policy_check`
+- `/retrieve` 返回的 `hybrid_hits`、`citations_used`、`source_check`、`policy_check`、`agent_trace`、`final_decision`
 
 这些数据用于 Web/XR 展示层规划，不代表正式史料库已完成。正式展示或论文使用前，需要继续复核来源、页码和坐标精度。
 
@@ -40,7 +40,10 @@
 前端读取建议：
 
 ```text
-fetch('/data/processed/landmarks_demo.geojson')
+正式前端不应直接假设可访问仓库内的 data/processed 路径。
+推荐方式一：由 FastAPI 提供数据读取接口。
+推荐方式二：构建前端时把静态文件复制到 public/data/ 后读取。
+读取后：
   -> 渲染地图点
   -> 使用 properties.id 作为 key
   -> 使用 properties.entities 匹配 KG-RAG 返回实体
@@ -121,6 +124,28 @@ fetch('/data/processed/landmarks_demo.geojson')
 - `citations_used`：生成回答实际使用的 citation。
 - `source_check`：溯源审查结果。
 - `policy_check`：政治红线规则初筛结果。
+- `agent_trace`：三智能体流程轨迹，用于展示检索、生成、溯源审查、政治红线审查各阶段状态。
+- `final_decision`：最终输出控制结果，前端必须优先读取它，而不是只看 `answer` 是否存在。
+
+`agent_trace` 适合展示的字段：
+
+- `agent`：阶段标识，例如 `retrieval_stage`、`generator`、`source_reviewer`、`policy_reviewer`。
+- `role`：面向老师和前端展示的阶段名称。
+- `status`：该阶段状态。
+- `summary`：该阶段的简要统计或风险摘要。
+
+`final_decision` 适合展示的字段：
+
+- `status`：最终状态，当前包括 `approved`、`needs_review`、`blocked`。
+- `can_output`：是否允许前端直接输出正式回答。
+- `review_required`：是否需要人工复核。
+- `reason`：最终决策原因。
+
+`final_decision.status` 控制规则：
+
+- `approved`：允许展示正式回答，并允许 TTS 或数字人播报。
+- `needs_review`：不直接播报，只显示“待人工复核”和复核原因。
+- `blocked`：禁止播报，展示阻断原因。
 
 `hybrid_hits` 中适合展示的字段：
 
@@ -158,13 +183,14 @@ hybrid_hit.graph_paths
 
 1. 用户在搜索框输入问题。
 2. 前端调用 `/retrieve`。
-3. 右侧展示 `hybrid_hits` 和 citation 卡片。
-4. 前端用 `query_entities`、`related_entities`、`entities` 做轻量匹配。
-5. 匹配到的地图点高亮。
-6. 匹配到的时间线事件高亮。
-7. 用户点击地图点时，时间线跳转到相关事件，citation 区筛选相关证据。
-8. 用户点击时间线事件时，地图定位到对应地点，citation 区展示相关证据。
-9. 用户点击 citation 卡片时，地图点和时间线事件反向高亮。
+3. 右侧展示 `hybrid_hits`、citation 卡片、`agent_trace` 和 `final_decision`。
+4. 前端先读取 `final_decision.status`，决定回答和数字人播报是否可输出。
+5. 前端用 `query_entities`、`related_entities`、`entities` 做轻量匹配。
+6. 匹配到的地图点高亮。
+7. 匹配到的时间线事件高亮。
+8. 用户点击地图点时，时间线跳转到相关事件，citation 区筛选相关证据。
+9. 用户点击时间线事件时，地图定位到对应地点，citation 区展示相关证据。
+10. 用户点击 citation 卡片时，地图点和时间线事件反向高亮。
 
 ## 7. 缺失信息和后续补齐
 
@@ -173,5 +199,5 @@ hybrid_hit.graph_paths
 - 地标坐标需要正式点位复核。
 - `citation.page` 需要明确 PDF 页码和书本页码口径。
 - 部分地标、时间线事件目前只有来源依据说明，没有正式页码。
-- 未来如正式进入 Web 前端，应确认静态数据文件的服务路径，避免浏览器直接读取本地文件。
-- 未来如进入 XR/数字人展示，应继续保证讲解内容基于 `citations_used`，不要脱离证据自由生成。
+- 未来如正式进入 Web 前端，应通过 FastAPI 接口读取数据，或将静态文件复制到前端 `public/data/` 后读取，避免浏览器直接读取仓库内的 `data/processed/` 路径。
+- 未来如进入 XR/数字人展示，应继续保证讲解内容基于 `citations_used`、`agent_trace` 和 `final_decision`，不要脱离证据自由生成。
