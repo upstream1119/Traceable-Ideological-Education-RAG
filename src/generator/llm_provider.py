@@ -1,11 +1,29 @@
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 from openai import OpenAI
 
 
 ZHIPU_BASE_URL = "https://open.bigmodel.cn/api/paas/v4/"
 DEFAULT_ZHIPU_MODEL = "glm-4.5-air"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+LOCAL_ENV_PATH = REPO_ROOT / ".env.local"
+
+
+def _read_local_env_value(name: str) -> str:
+    if not LOCAL_ENV_PATH.exists():
+        return ""
+
+    for line in LOCAL_ENV_PATH.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.lstrip("\ufeff")
+        if key.strip() == name:
+            return value.strip().strip('"').strip("'")
+    return ""
 
 
 @dataclass
@@ -30,7 +48,7 @@ class ZhipuLLMProvider:
     name = "zhipu"
 
     def generate(self, prompt: str) -> LLMGenerationResult:
-        api_key = os.getenv("ZAI_API_KEY", "").strip()
+        api_key = os.getenv("ZAI_API_KEY", "").strip() or _read_local_env_value("ZAI_API_KEY")
         if not api_key:
             return LLMGenerationResult(
                 text="",

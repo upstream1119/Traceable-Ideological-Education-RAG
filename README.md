@@ -112,6 +112,7 @@ team_deliverables/     非核心阶段交付物、汇报素材、草稿和说明
 outputs/               本地运行产物
 README_run.md          本地运行说明
 README_architecture.md 检索中枢架构说明
+docs/knowledge_base_ingestion_standard.md 思政知识库 chunk 入库标准
 ```
 
 目录原则：
