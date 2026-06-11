@@ -11,6 +11,7 @@ def test_zhipu_provider_is_selected_by_name():
 
 def test_zhipu_provider_reports_missing_api_key(monkeypatch):
     monkeypatch.delenv("ZAI_API_KEY", raising=False)
+    monkeypatch.setattr(llm_provider, "_read_local_env_value", lambda name: "", raising=False)
 
     result = llm_provider.get_llm_provider("zhipu").generate("测试提示词")
 
