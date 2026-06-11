@@ -51,6 +51,44 @@ FEEDBACK_LABEL_OPTIONS = [
     "需要专家复核",
 ]
 
+POLICY_REVIEW_DIMENSIONS = [
+    {
+        "id": "evidence_alignment",
+        "name": "证据支撑",
+        "description": "判断回答中的结论是否能被当前 citation 证据支撑。",
+    },
+    {
+        "id": "citation_integrity",
+        "name": "溯源完整性",
+        "description": "判断 citation 的文献、章节、页码是否足够完整。",
+    },
+    {
+        "id": "expression_safety",
+        "name": "表述稳妥性",
+        "description": "判断是否存在绝对化、扩大化或不够严谨的政治表述。",
+    },
+    {
+        "id": "historical_context",
+        "name": "历史语境",
+        "description": "判断回答是否交代清楚历史阶段、对象和语境。",
+    },
+    {
+        "id": "expert_feedback",
+        "name": "专家反馈",
+        "description": "记录赵老师或研究生标注时关注的审查理由。",
+    },
+]
+
+EVIDENCE_BOUNDARY_PHRASES = [
+    "仅依据当前检索到的证据",
+    "仅依据给定证据",
+    "只依据给定证据",
+    "根据当前检索到的证据",
+    "根据给定证据",
+    "证据显示",
+    "从材料看",
+]
+
 
 def _build_feedback_collection(
     stage: str,
@@ -61,6 +99,7 @@ def _build_feedback_collection(
         "stage": stage,
         "recommended_reviewer": recommended_reviewer,
         "expert_review_priority": expert_review_priority,
+        "review_dimensions": POLICY_REVIEW_DIMENSIONS,
         "label_options": FEEDBACK_LABEL_OPTIONS,
         "decision_options": DECISION_OPTIONS,
         "required_fields": ANNOTATION_REQUIRED_FIELDS,
@@ -80,6 +119,7 @@ def _add_issue(
     severity: str,
     suggestion: str,
     expert_focus: str,
+    dimension: str,
 ) -> None:
     if risk_type not in risk_types:
         risk_types.append(risk_type)
@@ -87,6 +127,7 @@ def _add_issue(
     review_items.append(
         {
             "risk_type": risk_type,
+            "dimension": dimension,
             "severity": severity,
             "reason": issue,
             "suggestion": suggestion,
@@ -149,6 +190,7 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             "review_items": [
                 {
                     "risk_type": "evidence_missing",
+                    "dimension": "evidence_alignment",
                     "severity": SEVERITY_HIGH,
                     "reason": "当前回答缺少可用证据支撑，不建议直接输出。",
                     "suggestion": "请补充检索证据，或交由人工复核。",
@@ -172,6 +214,7 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             review_items=[
                 {
                     "risk_type": "source_check_failed",
+                    "dimension": "citation_integrity",
                     "severity": SEVERITY_HIGH,
                     "reason": "溯源审查未通过，回答来源链条不完整。",
                     "suggestion": "请先修复 citation，再进行政治红线审查。",
@@ -194,9 +237,10 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             SEVERITY_MEDIUM,
             "请核对 citation.page、citation.section 与回答内容是否一致。",
             "请专家或研究生确认引用证据是否足以支撑回答。",
+            "citation_integrity",
         )
 
-    if "仅依据当前检索到的证据" not in answer:
+    if not _contains_any(answer, EVIDENCE_BOUNDARY_PHRASES):
         _add_issue(
             issues,
             risk_types,
@@ -206,6 +250,7 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             SEVERITY_MEDIUM,
             "补充“仅依据当前检索证据生成”的限定语。",
             "请专家判断该回答是否容易被误解为无条件定论。",
+            "evidence_alignment",
         )
 
     absolute_claims = _contains_any(answer, ABSOLUTE_CLAIM_PHRASES)
@@ -219,6 +264,7 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             SEVERITY_HIGH,
             "删除或弱化绝对化表述，并补充证据边界。",
             "请专家确认这些绝对化表述是否符合教材和政治表达口径。",
+            "expression_safety",
         )
 
     context_terms = _contains_any(answer, HISTORICAL_CONTEXT_TERMS)
@@ -232,6 +278,7 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             SEVERITY_MEDIUM,
             "补充历史阶段、对象和材料依据，避免脱离语境概括。",
             "请专家确认历史语境和表述边界是否稳妥。",
+            "historical_context",
         )
 
     status = WARNING_STATUS if issues else PASS_STATUS
