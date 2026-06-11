@@ -53,9 +53,22 @@ def test_policy_check_warns_when_scope_statement_is_missing():
     assert result["review_required"] is True
     assert result["max_severity"] == "medium"
     assert result["review_items"][0]["risk_type"] == "missing_scope_statement"
+    assert result["review_items"][0]["dimension"] == "evidence_alignment"
     assert result["review_items"][0]["suggestion"]
+    assert result["feedback_collection"]["review_dimensions"]
     assert result["feedback_collection"]["decision_options"]
     assert result["feedback_collection"]["required_fields"]
+
+
+def test_policy_check_accepts_alternative_evidence_boundary_statement():
+    result = check_policy_risk(
+        "根据给定证据，可以认为该回答仍需要结合教材章节进一步复核。",
+        [_citation()],
+        {"status": "pass"},
+    )
+
+    assert result["status"] == PASS_STATUS
+    assert "missing_scope_statement" not in result["risk_types"]
 
 
 def test_policy_check_warns_for_absolute_claims():
