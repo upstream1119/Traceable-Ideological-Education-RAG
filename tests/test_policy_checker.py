@@ -93,6 +93,35 @@ def test_policy_check_warns_for_sensitive_historical_context():
     assert "historical_context_needs_review" in result["risk_types"]
 
 
+def test_policy_check_warns_for_incomplete_long_march_mobilization_answer():
+    result = check_policy_risk(
+        "仅依据当前检索到的证据，长征中红军通过政治动员鼓舞士气，主要依靠关心战士生活和生活保障。",
+        [_citation()],
+        {"status": "pass"},
+    )
+
+    assert result["status"] == WARNING_STATUS
+    assert "political_mobilization_needs_review" in result["risk_types"]
+    item = next(
+        review_item
+        for review_item in result["review_items"]
+        if review_item["risk_type"] == "political_mobilization_needs_review"
+    )
+    assert item["dimension"] == "mobilization_completeness"
+    assert "关心战士生活" in item["reason"]
+
+
+def test_policy_check_passes_complete_long_march_mobilization_answer():
+    result = check_policy_risk(
+        "仅依据当前检索到的证据，长征中红军通过政治动员鼓舞士气，既强调理想信念和革命目标，也依托组织纪律、连队党支部、宣传鼓动和生活关怀。",
+        [_citation()],
+        {"status": "pass"},
+    )
+
+    assert result["status"] == PASS_STATUS
+    assert "political_mobilization_needs_review" not in result["risk_types"]
+
+
 def test_policy_check_passes_bounded_answer_with_clean_source_check():
     result = check_policy_risk(
         "以上回答仅依据当前检索到的证据生成，后续仍需要专家进一步复核。",
