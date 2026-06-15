@@ -11,13 +11,13 @@ fields:
   source_type: 
     type: "string"
     required: true
-    enum: ["event_doc", "textbook", "letter", "landmark", "exam"]
+    enum: ["event_doc", "textbook", "courseware", "paper", "policy_doc", "letter", "landmark", "exam"]
   title: {type: "string", required: true, description: "篇章或事件标题"}
   text: {type: "string", required: true, description: "清洗后的正文，严禁为空"}
   chunk_type:
     type: "string"
     required: true
-    enum: ["event", "textbook_chunk", "narrative", "qa", "landmark"]
+    enum: ["event", "textbook_chunk", "courseware_chunk", "paper_chunk", "policy_chunk", "narrative", "qa", "landmark"]
   topic: 
     type: "string" 
     required: true 
