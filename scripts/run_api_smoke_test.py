@@ -43,6 +43,15 @@ def _prepare_runtime_env() -> None:
     os.environ.setdefault("DACHUANG_LLM_MODEL", "glm-4.5-air")
 
 
+def _active_model_name() -> str:
+    provider = os.getenv("DACHUANG_LLM_PROVIDER", "").strip().lower()
+    if provider in {"deepseek", "deepseek-chat", "deepseek-v4-flash"}:
+        return os.getenv("DACHUANG_DEEPSEEK_MODEL", "deepseek-v4-flash")
+    if provider in {"qwen", "dashscope", "bailian", "qwen-plus"}:
+        return os.getenv("DACHUANG_QWEN_MODEL", "qwen-plus")
+    return os.getenv("DACHUANG_LLM_MODEL", "")
+
+
 def _compact_result(index: int, query: str, response: dict) -> dict:
     citations_used = response.get("citations_used") or []
     source_check = response.get("source_check") or {}
@@ -86,7 +95,7 @@ def _write_summary(path: Path, rows: list[dict]) -> None:
         "- 检索模式：mock",
         f"- 生成模式：{os.getenv('DACHUANG_GENERATOR_MODE', '')}",
         f"- LLM Provider：{os.getenv('DACHUANG_LLM_PROVIDER', '')}",
-        f"- LLM Model：{os.getenv('DACHUANG_LLM_MODEL', '')}",
+        f"- LLM Model：{_active_model_name()}",
         "",
         "| 序号 | 问题 | provider_status | fallback | citation数 | source_check | policy_check | final_decision | answer_len |",
         "|---:|---|---|---|---:|---|---|---|---:|",
