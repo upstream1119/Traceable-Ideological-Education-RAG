@@ -83,7 +83,8 @@ def test_llm_mode_uses_successful_provider_answer(monkeypatch):
 
     result = generate_answer("思想政治教育为什么重要？", [_hit()])
 
-    assert result["answer"] == answer
+    assert result["answer"].startswith("仅依据当前检索到的证据，")
+    assert answer in result["answer"]
     assert result["generator_provider"] == "zhipu"
     assert result["provider_status"] == "success"
     assert result["used_fallback"] is False
