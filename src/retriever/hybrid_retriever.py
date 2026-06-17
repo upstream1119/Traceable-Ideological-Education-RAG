@@ -183,6 +183,32 @@ def _matched_entities(entities: list[str], content: str) -> list[str]:
     return [entity for entity in entities if entity and entity in content]
 
 
+@lru_cache(maxsize=None)
+def _entity_document_frequency(entity: str) -> int:
+    if not entity:
+        return 0
+    return sum(
+        1
+        for item in _load_demo_knowledge_base()
+        if entity in _build_search_content(item)
+    )
+
+
+def _score_specific_entity_matches(
+    query_entities: list[str],
+    direct_matches: list[str],
+) -> float:
+    score = 0.0
+    for entity in direct_matches:
+        if entity not in query_entities or len(entity) < 4:
+            continue
+        document_frequency = _entity_document_frequency(entity)
+        if document_frequency <= 0:
+            continue
+        score += min(0.12 / document_frequency, 0.08)
+    return min(score, 0.12)
+
+
 def _relation_weight(relation: str) -> float:
     for relation_type, weight in RELATION_TYPE_WEIGHTS.items():
         if relation_type in relation:
@@ -241,6 +267,7 @@ def _score_graph_hit(
 
     score += min(len(direct_matches) * 0.34, 0.45)
     score += min(len(expanded_matches) * 0.06, 0.18)
+    score += _score_specific_entity_matches(query_entities, direct_matches)
     if direct_matches and expanded_matches:
         score += 0.05
 
