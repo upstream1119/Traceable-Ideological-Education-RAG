@@ -45,6 +45,16 @@ class FaissVectorStore:
         self._index.add(matrix)
         self._records = list(records)
 
+    @property
+    def dimension(self) -> int:
+        if self._index is None:
+            raise RuntimeError("vector store has not been built")
+        return int(self._index.d)
+
+    @property
+    def record_count(self) -> int:
+        return len(self._records)
+
     def search(self, query_vector: np.ndarray, top_k: int = 5) -> list[dict]:
         if self._index is None:
             raise RuntimeError("vector store has not been built")

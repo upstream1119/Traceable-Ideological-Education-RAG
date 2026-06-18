@@ -121,3 +121,19 @@ def test_faiss_search_rejects_dimension_mismatch():
 
     with pytest.raises(ValueError, match="dimension"):
         store.search(np.asarray([1.0, 0.0, 0.0], dtype="float32"))
+
+
+def test_loaded_store_exposes_dimension_and_record_count(tmp_path):
+    store = FaissVectorStore()
+    store.build(
+        [{"id": "chunk_001"}],
+        np.asarray([[1.0, 0.0]], dtype="float32"),
+    )
+    index_path = tmp_path / "index.faiss"
+    metadata_path = tmp_path / "metadata.json"
+    store.save(index_path, metadata_path)
+
+    loaded = FaissVectorStore.load(index_path, metadata_path)
+
+    assert loaded.dimension == 2
+    assert loaded.record_count == 1
