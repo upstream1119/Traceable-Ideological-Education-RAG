@@ -14,6 +14,14 @@ DEFAULT_PROVIDER = "stub"
 MAX_GENERATION_EVIDENCE = 3
 MIN_LLM_ANSWER_LENGTH = 120
 SOURCE_MARKERS = ("来源：", "资料来源：")
+EVIDENCE_BOUNDARY_PHRASES = (
+    "仅依据当前检索到的证据",
+    "仅依据给定证据",
+    "只依据给定证据",
+    "根据当前检索到的证据",
+    "根据给定证据",
+)
+DEFAULT_EVIDENCE_BOUNDARY_PREFIX = "仅依据当前检索到的证据，"
 INCOMPLETE_ENDINGS = (
     "：",
     "；",
@@ -63,14 +71,15 @@ def build_evidence_prompt(query: str, hybrid_hits: list[dict], max_hits: int = 3
         "你只能依据给定证据回答，不能补充证据外内容。\n"
         "请直接形成一份语言自然、逻辑完整、能够独立阅读的中文回答。\n"
         "写作要求：\n"
-        "1. 先概括核心结论，再用一到两句话说明，并按照时间、原因、过程或意义展开。\n"
-        "2. 综合多条证据组织为二到四个自然段，不要逐条复制证据标题或教材目录。\n"
-        "3. 不要输出“绪论：”“第一章：”“第三节：”等章节标题式答案。\n"
-        "4. 在相关论述后使用 [1]、[2] 等编号标明证据，编号必须对应下方证据。\n"
-        "5. 回答末尾单列“来源：”，简要列出使用的证据编号、文献、章节和 PDF 页码。\n"
-        "6. 每句话和每个枚举必须完整结束，不能在引号、分号、“一是”或列举中间截断。\n"
-        "7. 建议控制在 300 至 600 个汉字，避免照抄大段教材原文。\n"
-        "8. 如果证据不足，请明确说明证据不足，不能编造 citation，也不能用常识补齐。\n\n"
+        "1. 回答第一句话必须包含“仅依据当前检索到的证据”，明确回答边界。\n"
+        "2. 先概括核心结论，再用一到两句话说明，并按照时间、原因、过程或意义展开。\n"
+        "3. 综合多条证据组织为二到四个自然段，不要逐条复制证据标题或教材目录。\n"
+        "4. 不要输出“绪论：”“第一章：”“第三节：”等章节标题式答案。\n"
+        "5. 在相关论述后使用 [1]、[2] 等编号标明证据，编号必须对应下方证据。\n"
+        "6. 回答末尾单列“来源：”，简要列出使用的证据编号、文献、章节和 PDF 页码。\n"
+        "7. 每句话和每个枚举必须完整结束，不能在引号、分号、“一是”或列举中间截断。\n"
+        "8. 建议控制在 300 至 600 个汉字，避免照抄大段教材原文。\n"
+        "9. 如果证据不足，请明确说明证据不足，不能编造 citation，也不能用常识补齐。\n\n"
         f"问题：{query}\n\n"
         f"证据：\n{evidence_text}"
     )
@@ -90,6 +99,17 @@ def _validate_llm_answer(answer: str) -> list[str]:
     if re.search(r"^\s*\d+\.\s*(绪论|第[一二三四五六七八九十]+[章节]|[一二三四五六七八九十]+、)", text, re.MULTILINE):
         issues.append("模型回答仍存在教材目录式拼接。")
     return issues
+
+
+def _has_evidence_boundary(answer: str) -> bool:
+    return any(phrase in answer for phrase in EVIDENCE_BOUNDARY_PHRASES)
+
+
+def _ensure_evidence_boundary(answer: str) -> str:
+    text = (answer or "").strip()
+    if not text or _has_evidence_boundary(text):
+        return text
+    return DEFAULT_EVIDENCE_BOUNDARY_PREFIX + text
 
 
 def generate_answer(query: str, hybrid_hits: list[dict]) -> dict:
@@ -125,7 +145,7 @@ def generate_answer(query: str, hybrid_hits: list[dict]) -> dict:
         quality_issues = []
 
         if provider_result.status == "success" and provider_result.text.strip():
-            candidate_answer = provider_result.text.strip()
+            candidate_answer = _ensure_evidence_boundary(provider_result.text)
             quality_issues = _validate_llm_answer(candidate_answer)
             if quality_issues:
                 generated["used_fallback"] = True
