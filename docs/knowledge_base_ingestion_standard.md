@@ -29,10 +29,17 @@ data/graph/        // triples、图结构、GraphSim 数据
 data/processed/text_chunks_demo.jsonl
 ```
 
-后续扩库建议新建版本文件，不要直接覆盖稳定 Demo 文件，例如：
+当前思政史扩库批次为：
 
 ```text
 data/processed/text_chunks_sizheng_v1.jsonl
+data/processed/text_chunks_sizheng_v2.jsonl
+```
+
+后续扩库建议继续新建版本文件，不要直接覆盖稳定 Demo 文件或已合并批次，例如：
+
+```text
+data/processed/text_chunks_sizheng_v3.jsonl
 ```
 
 ## 3. 每条 chunk 必填字段
@@ -139,6 +146,7 @@ data/processed/text_chunks_sizheng_v1.jsonl
   -> 人工抽查 citation
   -> JSONL 校验
   -> 检索命中测试
+  -> FAISS 冒烟实验（如进入向量检索评估）
   -> 负责人审核
   -> 合并 main
 ```
@@ -163,6 +171,24 @@ python -m pytest tests/test_retrieve.py -q
 python -m pytest tests/test_generator.py -q
 ```
 
+如涉及向量检索评估，需要运行 FAISS 冒烟实验：
+
+```powershell
+D:\anaconda\envs\dachuang_2026\python.exe -X utf8 scripts\run_embedding_faiss_smoke_test.py --limit 10 --top-k 5
+```
+
+验收记录至少应包含：
+
+- `summary.md` 路径。
+- `results.jsonl` 路径。
+- Chunk 数量。
+- Embedding 模型和向量维度。
+- Recall@1 / Recall@3 / Recall@5。
+- MRR。
+- 未命中或 Top-1 排序错误的问题说明。
+
+注意：FAISS 重建会调用外部 Embedding API 并产生 token 消费。若 chunk 数据、Embedding 模型和向量维度均未变化，应优先使用 `--reuse-index-dir` 复用已有索引。
+
 ## 7. 每批交付必须说明
 
 每批新增 chunks 至少附带说明：
@@ -181,7 +207,9 @@ python -m pytest tests/test_generator.py -q
 第一轮目标：
 
 - 基于《中国共产党思想政治教育史》和赵老师课件扩展到 100-200 条高质量 chunks。
-- 每批先交 10-20 条 sample，通过后再继续扩展。
+- 当前已完成并合并 `text_chunks_sizheng_v1.jsonl` 与 `text_chunks_sizheng_v2.jsonl`，共 245 条思政史 chunks。
+- 每批先交 30-50 条小批次，通过后再继续扩展。
+- 每批必须附带 `team_deliverables/成员/时间-任务/README.md`，说明来源、页码口径、清洗方法和已知缺口。
 
 第二轮目标：
 

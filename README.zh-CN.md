@@ -6,7 +6,7 @@
 
 本仓库是国家级大学生创新创业训练计划项目的一部分。当前重点是建设可溯源检索后端、稳定 API 契约和面向思政教育材料的证据化回答流程。
 
-> 当前状态：backend-first prototype。当前实现重点包括检索 API、schema 稳定性、citation 结构、生成骨架、来源检查、规则检查和 demo 验证。完整跨模态交互、数字人展示和 XR 沙盘流程属于后续阶段。
+> 当前状态：backend-first prototype，并已完成真实 FAISS 冒烟验证。当前实现重点包括检索 API、schema 稳定性、citation 结构、生成骨架、来源检查、规则检查和 demo 验证。FAISS 实验当前默认索引 `text_chunks_sizheng_v1.jsonl` 与 `text_chunks_sizheng_v2.jsonl`，但尚未正式替换 `/retrieve` 的向量检索路径。完整跨模态交互、数字人展示和 XR 沙盘流程属于后续阶段。
 
 ## 核心能力
 
@@ -16,6 +16,7 @@
 - 暴露 `/health` 和 `/retrieve` API。
 - 返回稳定的检索响应结构。
 - 读取处理后的思政教育文本 chunks。
+- 已用 Qwen `text-embedding-v4` + FAISS 对 245 条思政史 chunks 完成冒烟验证。
 - 使用 schema-driven API contract。
 - 包含 graph storage、evidence generation、source checking 和 policy checking 模块。
 - 维护 demo questions 和基础验收测试。
@@ -24,6 +25,8 @@
 规划能力：
 
 - 更强的关键词、向量和结构化字段混合检索。
+- 将已验证的 FAISS 向量索引接入 `retrieve_vector`。
+- 评估是否将已验证的 section-aware 排序接入正式 `retrieve_vector`。
 - 围绕人物、事件、地点、时间线和思政概念的知识图谱推理。
 - 面向生成、Citation 审查和政治安全审查的多智能体工作流。
 - 时间线、地图、事件卡片、数字人或 XR 学习交互。
@@ -92,6 +95,27 @@ README_architecture.md 检索架构说明
 ```
 
 正式代码不放 `team_deliverables/`。系统运行数据应放在 `data/`。汇报素材、草稿和团队交付物可以放在 `team_deliverables/`。
+
+## 当前检索实验状态
+
+最新 FAISS 冒烟测试使用：
+
+- `data/processed/text_chunks_sizheng_v1.jsonl`
+- `data/processed/text_chunks_sizheng_v2.jsonl`
+- `text-embedding-v4`
+- 1024 维向量
+- L2 归一化后的 `IndexFlatIP`
+
+2026-06-23 基于 245 条 chunks 和 10 道 demo 问题的结果为：
+
+| 指标 | 数值 |
+|---|---:|
+| Recall@1 | 1.0000 |
+| Recall@3 | 1.0000 |
+| Recall@5 | 1.0000 |
+| MRR | 1.0000 |
+
+注意：这是工程冒烟验收结果，不是正式论文实验结论。该指标包含冒烟脚本中的轻量 section-aware 章节重排，用于处理相近章节的 Top-1 排序问题。当前 FAISS 验证链路位于 `scripts/run_embedding_faiss_smoke_test.py`，`/retrieve` 仍保持稳定返回契约，尚未完全切换到 FAISS。
 
 ## 快速启动
 
