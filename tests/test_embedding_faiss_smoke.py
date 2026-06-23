@@ -30,6 +30,27 @@ def test_embed_in_batches_preserves_order_and_accumulates_usage():
     assert input_tokens == 10
 
 
+def test_load_jsonl_files_combines_multiple_files(tmp_path):
+    first = tmp_path / "first.jsonl"
+    second = tmp_path / "second.jsonl"
+    first.write_text('{"id": "chunk_001"}\n', encoding="utf-8")
+    second.write_text('{"id": "chunk_002"}\n', encoding="utf-8")
+
+    records = smoke._load_jsonl_files([first, second])
+
+    assert [record["id"] for record in records] == ["chunk_001", "chunk_002"]
+
+
+def test_load_jsonl_files_rejects_duplicate_ids(tmp_path):
+    first = tmp_path / "first.jsonl"
+    second = tmp_path / "second.jsonl"
+    first.write_text('{"id": "chunk_001"}\n', encoding="utf-8")
+    second.write_text('{"id": "chunk_001"}\n', encoding="utf-8")
+
+    with pytest.raises(ValueError, match="duplicate chunk ids"):
+        smoke._load_jsonl_files([first, second])
+
+
 def test_expected_section_match_ignores_spacing():
     hits = [
         {

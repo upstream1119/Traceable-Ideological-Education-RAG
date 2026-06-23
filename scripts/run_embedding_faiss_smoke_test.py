@@ -18,7 +18,10 @@ from src.vector.faiss_store import FaissVectorStore, build_embedding_text
 
 
 LOCAL_ENV_PATH = REPO_ROOT / ".env.local"
-DEFAULT_CHUNK_PATH = REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v1.jsonl"
+DEFAULT_CHUNK_PATHS = [
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v1.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v2.jsonl",
+]
 DEFAULT_QUERY_PATH = REPO_ROOT / "tests" / "demo_queries_sizheng_history.json"
 DEFAULT_OUTPUT_ROOT = REPO_ROOT / "outputs" / "vector_experiments" / "2026-06-faiss-smoke"
 
@@ -49,6 +52,22 @@ def _load_jsonl(path: Path) -> list[dict]:
             if not isinstance(data, dict):
                 raise ValueError(f"line {line_no} must contain a JSON object")
             records.append(data)
+    return records
+
+
+def _load_jsonl_files(paths: list[Path]) -> list[dict]:
+    records = []
+    seen_ids = set()
+    duplicate_ids = []
+    for path in paths:
+        for record in _load_jsonl(path):
+            record_id = record.get("id")
+            if record_id in seen_ids:
+                duplicate_ids.append(record_id)
+            seen_ids.add(record_id)
+            records.append(record)
+    if duplicate_ids:
+        raise ValueError(f"duplicate chunk ids: {duplicate_ids}")
     return records
 
 
@@ -143,10 +162,11 @@ def _aggregate_metrics(rows: list[dict]) -> dict:
 
 
 def _read_summary_value(path: Path, label: str) -> str:
-    prefix = f"- {label}："
     for line in path.read_text(encoding="utf-8").splitlines():
-        if line.startswith(prefix):
-            return line[len(prefix) :].strip()
+        for separator in ("：", ":"):
+            prefix = f"- {label}{separator}"
+            if line.startswith(prefix):
+                return line[len(prefix) :].strip()
     return ""
 
 
@@ -281,7 +301,7 @@ def _write_summary(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--chunks", type=Path, default=DEFAULT_CHUNK_PATH)
+    parser.add_argument("--chunks", type=Path, nargs="+", default=DEFAULT_CHUNK_PATHS)
     parser.add_argument("--queries", type=Path, default=DEFAULT_QUERY_PATH)
     parser.add_argument("--limit", type=int, default=3)
     parser.add_argument("--top-k", type=int, default=5)
@@ -299,7 +319,7 @@ def main() -> None:
         parser.error("--top-k must be at least 5 to calculate Recall@5")
 
     _load_local_env()
-    records = _load_jsonl(args.chunks)
+    records = _load_jsonl_files(args.chunks)
     queries = _load_queries(args.queries, args.limit)
     provider = QwenEmbeddingProvider(dimensions=args.dimensions)
     model = (
