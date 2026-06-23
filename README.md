@@ -6,7 +6,7 @@ Traceable KG-RAG system for ideological education with citation grounding, multi
 
 This repository is part of a National College Student Innovation and Entrepreneurship Training Program project. The current focus is to build a traceable retrieval backend, stable API contract, and evidence-grounded response workflow for ideological education materials.
 
-> Status: backend-first prototype. Current implementation focuses on retrieval API, schema stability, citation structure, generation scaffolding, source checking, policy checking, and demo validation. Full cross-modal interaction, digital-human presentation, and XR sandbox workflows are planned stages.
+> Status: backend-first prototype with real FAISS smoke validation. Current implementation focuses on retrieval API, schema stability, citation structure, generation scaffolding, source checking, policy checking, and demo validation. The FAISS experiment currently indexes `text_chunks_sizheng_v1.jsonl` and `text_chunks_sizheng_v2.jsonl`, but it has not yet replaced the `/retrieve` vector retrieval path. Full cross-modal interaction, digital-human presentation, and XR sandbox workflows are planned stages.
 
 ## What It Does
 
@@ -16,6 +16,7 @@ Current implemented capabilities:
 - Exposes `/health` and `/retrieve` APIs.
 - Returns a stable retrieval response structure.
 - Reads processed ideological education text chunks.
+- Validates a 245-chunk ideological education corpus through a Qwen `text-embedding-v4` + FAISS smoke workflow.
 - Uses a schema-driven API contract.
 - Includes graph storage, evidence generation, source checking, and policy checking modules.
 - Maintains demo questions and basic acceptance tests.
@@ -23,7 +24,8 @@ Current implemented capabilities:
 
 Planned capabilities:
 
-- Stronger hybrid retrieval with keyword, vector, and structured fields.
+- Production integration of the validated FAISS vector index into `retrieve_vector`.
+- Stronger hybrid retrieval with keyword, vector, structured fields, and reranking.
 - Knowledge graph reasoning for people, events, places, timelines, and ideological concepts.
 - Multi-agent review workflow for generation, citation auditing, and political safety review.
 - Timeline, map, event-card, digital-human, or XR-based learning interaction.
@@ -92,6 +94,27 @@ README_architecture.md Retrieval architecture notes
 ```
 
 Core code should stay outside `team_deliverables/`. Runtime data should stay inside `data/`. Presentation drafts and team materials can stay in `team_deliverables/`.
+
+## Current Retrieval Experiment
+
+The latest local FAISS smoke test uses:
+
+- `data/processed/text_chunks_sizheng_v1.jsonl`
+- `data/processed/text_chunks_sizheng_v2.jsonl`
+- `text-embedding-v4`
+- 1024-dimensional embeddings
+- `IndexFlatIP` with L2 normalization
+
+The 2026-06-23 smoke run on 245 chunks and 10 demo questions reported:
+
+| Metric | Value |
+|---|---:|
+| Recall@1 | 1.0000 |
+| Recall@3 | 1.0000 |
+| Recall@5 | 1.0000 |
+| MRR | 1.0000 |
+
+This is an engineering smoke-test result, not a formal paper experiment. The score includes the smoke script's lightweight section-aware rerank for near-neighbor sections. The current validated FAISS path lives under `scripts/run_embedding_faiss_smoke_test.py`; `/retrieve` still keeps the stable retrieval contract and has not yet fully switched to FAISS.
 
 ## Quick Start
 
