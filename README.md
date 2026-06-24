@@ -6,7 +6,7 @@ Traceable KG-RAG system for ideological education with citation grounding, multi
 
 This repository is part of a National College Student Innovation and Entrepreneurship Training Program project. The current focus is to build a traceable retrieval backend, stable API contract, and evidence-grounded response workflow for ideological education materials.
 
-> Status: backend-first prototype with real FAISS smoke validation. Current implementation focuses on retrieval API, schema stability, citation structure, generation scaffolding, source checking, policy checking, and demo validation. The FAISS experiment currently indexes `text_chunks_sizheng_v1.jsonl` and `text_chunks_sizheng_v2.jsonl`, but it has not yet replaced the `/retrieve` vector retrieval path. Full cross-modal interaction, digital-human presentation, and XR sandbox workflows are planned stages.
+> Status: backend-first prototype with real FAISS smoke validation. Current implementation focuses on retrieval API, schema stability, citation structure, generation scaffolding, source checking, policy checking, and demo validation. The FAISS path can now be enabled for `/retrieve` through `DACHUANG_VECTOR_BACKEND=faiss`, while the default path remains the stable lightweight retriever. Full cross-modal interaction, digital-human presentation, and XR sandbox workflows are planned stages.
 
 ## What It Does
 
@@ -17,6 +17,7 @@ Current implemented capabilities:
 - Returns a stable retrieval response structure.
 - Reads processed ideological education text chunks.
 - Validates a 245-chunk ideological education corpus through a Qwen `text-embedding-v4` + FAISS smoke workflow.
+- Provides an optional FAISS vector backend for `retrieve_vector`.
 - Uses a schema-driven API contract.
 - Includes graph storage, evidence generation, source checking, and policy checking modules.
 - Maintains demo questions and basic acceptance tests.
@@ -24,7 +25,7 @@ Current implemented capabilities:
 
 Planned capabilities:
 
-- Production integration of the validated FAISS vector index into `retrieve_vector`.
+- Promote the optional FAISS backend to the default vector path after chunk IDs and GraphSim triples are fully aligned.
 - Stronger hybrid retrieval with keyword, vector, structured fields, and reranking.
 - Knowledge graph reasoning for people, events, places, timelines, and ideological concepts.
 - Multi-agent review workflow for generation, citation auditing, and political safety review.
@@ -114,7 +115,7 @@ The 2026-06-23 smoke run on 245 chunks and 10 demo questions reported:
 | Recall@5 | 1.0000 |
 | MRR | 1.0000 |
 
-This is an engineering smoke-test result, not a formal paper experiment. The score includes the smoke script's lightweight section-aware rerank for near-neighbor sections. The current validated FAISS path lives under `scripts/run_embedding_faiss_smoke_test.py`; `/retrieve` still keeps the stable retrieval contract and has not yet fully switched to FAISS.
+This is an engineering smoke-test result, not a formal paper experiment. The score includes the smoke script's lightweight section-aware rerank for near-neighbor sections. The validated FAISS path can be enabled through `DACHUANG_VECTOR_BACKEND=faiss` and `DACHUANG_FAISS_INDEX_DIR`, while `/retrieve` keeps the same stable response contract.
 
 ## Quick Start
 

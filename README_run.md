@@ -57,3 +57,23 @@ outputs/vector_experiments/2026-06-faiss-smoke/
 
 注意：该命令会调用阿里云百炼 `text-embedding-v4`，会产生少量 API token 消费。除非正在做负责人验收或正式实验记录，组员不要重复重建索引；若 chunk 数据、模型和维度未变化，应优先使用 `--reuse-index-dir` 复用已有索引。
 
+## 5. 可选启用 FAISS 后端
+
+默认 `/retrieve` 仍使用轻量文本召回，保证组员本地能稳定运行。负责人验收真实 FAISS 链路时，可以临时启用：
+
+```powershell
+$env:DACHUANG_RETRIEVE_MODE="mock"
+$env:DACHUANG_LOCAL_MOCK_ACK="1"
+$env:DACHUANG_VECTOR_BACKEND="faiss"
+$env:DACHUANG_FAISS_INDEX_DIR="outputs\vector_experiments\2026-06-faiss-smoke\20260623_213511"
+uvicorn src.api.main:app --reload
+```
+
+启用后，`retrieve_vector()` 会优先读取：
+
+```text
+DACHUANG_FAISS_INDEX_DIR/index.faiss
+DACHUANG_FAISS_INDEX_DIR/metadata.json
+```
+
+如果索引目录不存在、API key 缺失、Embedding 调用失败或维度不匹配，系统会自动回退到原来的轻量召回，不会破坏 `/retrieve` 返回契约。

@@ -62,7 +62,7 @@
 
 截至 2026-06-23，245 条思政史 chunks 的 FAISS 冒烟结果为：在章节感知重排后，Recall@1=1.0000，Recall@3=1.0000，Recall@5=1.0000，MRR=1.0000。该结果用于工程验收，不等同于正式论文实验结论。
 
-注意：FAISS 目前已在实验脚本中验证，但尚未正式替换 `/retrieve` 中的 `retrieve_vector()`。
+注意：FAISS 目前已在实验脚本中验证，并已通过 `DACHUANG_VECTOR_BACKEND=faiss` 做成 `/retrieve` 的可选向量后端；默认路径仍保留轻量召回，避免组员本地运行时误消耗 Embedding API。
 
 融合分暂按作战文档口径执行：
 
@@ -102,7 +102,7 @@
 后续回到实验室环境时，优先替换 `src/retriever/hybrid_retriever.py` 内部实现，不改 API 契约：
 
 1. 用真实实体识别替换固定词表
-2. 用已验证的 FAISS / embedding 链路替换当前轻量文本召回
+2. 在 chunk ID 与 GraphSim triples 对齐后，将可选 FAISS / embedding 链路升级为默认向量召回
 3. 用 GraphSim / NetworkX 替换当前轻量 graph_hits
 4. 保留统一融合输出结构
 

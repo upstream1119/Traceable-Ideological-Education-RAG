@@ -3,6 +3,8 @@ import os
 from functools import lru_cache
 from pathlib import Path
 
+import numpy as np
+
 from src.agents.agent_trace import build_agent_trace, build_final_decision
 from src.generator.evidence_generator import generate_answer
 from src.graph.graph_store import (
@@ -12,13 +14,19 @@ from src.graph.graph_store import (
     find_entity_paths,
     load_triples,
 )
+from src.retriever.section_reranker import rerank_hits_by_query_terms
 from src.reviewer.policy_checker import check_policy_risk
 from src.reviewer.source_checker import check_answer_sources
+from src.vector.embedding_provider import QwenEmbeddingProvider
+from src.vector.faiss_store import FaissVectorStore
 
 
 PROJECT_NAME = "多智能体赋能的跨模态零幻觉交互式思政教育系统"
 TEAM_MODE = "team"
 MOCK_MODE = "mock"
+FAISS_VECTOR_BACKEND = "faiss"
+VECTOR_BACKEND_ENV = "DACHUANG_VECTOR_BACKEND"
+FAISS_INDEX_DIR_ENV = "DACHUANG_FAISS_INDEX_DIR"
 VECTOR_TOP_K = 3
 GRAPH_TOP_K = 3
 ALPHA = 0.7
@@ -126,6 +134,15 @@ def _resolve_mode() -> str:
     if requested_mode == MOCK_MODE and local_ack == "1":
         return MOCK_MODE
     return TEAM_MODE
+
+
+def _resolve_vector_backend() -> str:
+    return os.getenv(VECTOR_BACKEND_ENV, "").strip().lower()
+
+
+def _resolve_faiss_index_dir() -> Path | None:
+    index_dir = os.getenv(FAISS_INDEX_DIR_ENV, "").strip()
+    return Path(index_dir) if index_dir else None
 
 
 def extract_query_entities(query: str) -> list[str]:
@@ -298,6 +315,11 @@ def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_T
     架构师视角：利用 Embedding 捕获文本的深层语义。优点是“懂同义词，泛化好”，缺点是“容易不够精准”。
     未来改造：接入真实的 Embedding 模型 + FAISS 向量数据库。
     """
+    if _resolve_vector_backend() == FAISS_VECTOR_BACKEND:
+        faiss_hits = _retrieve_faiss_vector(query, top_k=top_k)
+        if faiss_hits:
+            return faiss_hits
+
     scored_hits = []
     for item in _load_demo_knowledge_base():
         score = _score_vector_hit(query, query_entities, item)
@@ -315,6 +337,32 @@ def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_T
         )
     scored_hits.sort(key=lambda hit: hit["vector_score"], reverse=True)
     return scored_hits[:top_k]
+
+
+def _retrieve_faiss_vector(query: str, top_k: int = VECTOR_TOP_K) -> list[dict]:
+    index_dir = _resolve_faiss_index_dir()
+    if not query or index_dir is None:
+        return []
+
+    index_path = index_dir / "index.faiss"
+    metadata_path = index_dir / "metadata.json"
+    if not index_path.exists() or not metadata_path.exists():
+        return []
+
+    embedding_result = QwenEmbeddingProvider().embed([query])
+    if embedding_result.status != "success" or not embedding_result.vectors:
+        return []
+
+    try:
+        store = FaissVectorStore.load(index_path, metadata_path)
+        hits = store.search(
+            np.asarray(embedding_result.vectors[0], dtype="float32"),
+            top_k=max(top_k, 5),
+        )
+    except (OSError, RuntimeError, ValueError):
+        return []
+
+    return rerank_hits_by_query_terms(query, hits)[:top_k]
 
 
 def retrieve_graph(query_entities: list[str], top_k: int = GRAPH_TOP_K) -> list[dict]:
@@ -362,7 +410,12 @@ def fuse_results(vector_hits: list[dict], graph_hits: list[dict], knowledge_base
     for hit_id in fused_ids:
         vector_hit = vector_by_id.get(hit_id)
         graph_hit = graph_by_id.get(hit_id)
-        item = next(entry for entry in knowledge_base if entry["id"] == hit_id)
+        item = next(
+            (entry for entry in knowledge_base if entry["id"] == hit_id),
+            vector_hit,
+        )
+        if item is None:
+            continue
         vector_score = vector_hit["vector_score"] if vector_hit else 0.0
         graph_score = graph_hit["graph_score"] if graph_hit else 0.0
         # 核心打分公式：通过 VECTOR_WEIGHT(0.7) 和 GRAPH_WEIGHT(0.3) 调节双路比重，答辩时可强调此参数的可调优性。

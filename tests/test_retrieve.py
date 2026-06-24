@@ -2,12 +2,16 @@ import json
 import os
 from pathlib import Path
 
+import numpy as np
+
 from src.generator.template_generator import NO_EVIDENCE_ANSWER
+from src.retriever import hybrid_retriever
 from src.retriever.hybrid_retriever import (
     _filter_valid_graph_paths,
     _score_graph_paths,
     retrieve,
 )
+from src.vector.faiss_store import FaissVectorStore
 from src.reviewer.policy_checker import NEED_REVIEW_STATUS
 from src.reviewer.source_checker import NO_EVIDENCE_STATUS
 
@@ -257,6 +261,119 @@ def test_team_mode_keeps_fixed_empty_contract(monkeypatch):
     assert result["final_decision"]["status"] == "blocked"
     assert result["final_decision"]["can_output"] is False
     assert result["final_decision"]["review_required"] is True
+
+
+def test_retrieve_vector_can_use_optional_faiss_backend(monkeypatch, tmp_path):
+    records = [
+        {
+            "id": "anti_encirclement",
+            "source": "测试教材",
+            "title": "进行政治动员鼓舞士气",
+            "text": "政治动员服务于反围剿斗争。",
+            "citation": {
+                "doc": "测试教材",
+                "section": (
+                    "第二章 / 第三节 红军反围剿斗争和长征中的思想政治教育"
+                    " / 一、思想政治教育为反围剿斗争服务"
+                ),
+                "page": 90,
+            },
+        },
+        {
+            "id": "long_march",
+            "source": "测试教材",
+            "title": "深入开展政治动员，激发官兵革命斗志",
+            "text": "红军长征中的思想政治教育重视政治动员。",
+            "citation": {
+                "doc": "测试教材",
+                "section": (
+                    "第二章 / 第三节 红军反围剿斗争和长征中的思想政治教育"
+                    " / 三、红军长征中的思想政治教育"
+                ),
+                "page": 95,
+            },
+        },
+    ]
+    store = FaissVectorStore()
+    store.build(records, np.asarray([[1.0, 0.0], [0.0, 1.0]], dtype="float32"))
+    store.save(tmp_path / "index.faiss", tmp_path / "metadata.json")
+
+    class FakeEmbeddingProvider:
+        def embed(self, texts):
+            return type(
+                "EmbeddingResult",
+                (),
+                {
+                    "status": "success",
+                    "vectors": [[0.718, 0.696]],
+                },
+            )()
+
+    monkeypatch.setenv("DACHUANG_VECTOR_BACKEND", "faiss")
+    monkeypatch.setenv("DACHUANG_FAISS_INDEX_DIR", str(tmp_path))
+    monkeypatch.setattr(
+        hybrid_retriever,
+        "QwenEmbeddingProvider",
+        FakeEmbeddingProvider,
+        raising=False,
+    )
+
+    hits = hybrid_retriever.retrieve_vector(
+        "长征中红军如何通过政治动员鼓舞士气？",
+        [],
+        top_k=2,
+    )
+
+    assert hits[0]["id"] == "long_march"
+    assert hits[0]["citation"]["page"] == 95
+    assert hits[0]["base_vector_score"] < hits[0]["vector_score"]
+
+
+def test_retrieve_can_fuse_faiss_hits_outside_demo_knowledge_base(monkeypatch, tmp_path):
+    records = [
+        {
+            "id": "external_chunk_001",
+            "source": "测试教材",
+            "title": "外部 FAISS 证据",
+            "text": "这是不在 text_chunks_demo.jsonl 中的 FAISS 证据。",
+            "citation": {
+                "doc": "测试教材",
+                "section": "第一章 / 第一节",
+                "page": 1,
+            },
+        }
+    ]
+    store = FaissVectorStore()
+    store.build(records, np.asarray([[1.0, 0.0]], dtype="float32"))
+    store.save(tmp_path / "index.faiss", tmp_path / "metadata.json")
+
+    class FakeEmbeddingProvider:
+        def embed(self, texts):
+            return type(
+                "EmbeddingResult",
+                (),
+                {
+                    "status": "success",
+                    "vectors": [[1.0, 0.0]],
+                },
+            )()
+
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
+    monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
+    monkeypatch.setenv("DACHUANG_VECTOR_BACKEND", "faiss")
+    monkeypatch.setenv("DACHUANG_FAISS_INDEX_DIR", str(tmp_path))
+    monkeypatch.setattr(
+        hybrid_retriever,
+        "QwenEmbeddingProvider",
+        FakeEmbeddingProvider,
+        raising=False,
+    )
+
+    result = retrieve("外部 FAISS 证据")
+
+    assert result["hybrid_hits"][0]["id"] == "external_chunk_001"
+    assert result["hybrid_hits"][0]["citation"]["page"] == 1
+    assert result["citations_used"][0]["id"] == "external_chunk_001"
 
 
 def test_retrieve_response_exposes_generator_status(monkeypatch):
