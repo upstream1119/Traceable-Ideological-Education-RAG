@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from scripts import run_embedding_faiss_smoke_test as smoke
+from src.retriever.section_reranker import rerank_hits_by_query_terms
 from src.vector.faiss_store import FaissVectorStore
 
 
@@ -140,7 +141,7 @@ def test_query_term_rerank_prefers_specific_long_march_section():
         },
     ]
 
-    reranked = smoke._rerank_hits_by_query_terms(query, hits)
+    reranked = rerank_hits_by_query_terms(query, hits)
 
     assert reranked[0]["id"] == "long_march"
     assert reranked[0]["base_vector_score"] == 0.763164
