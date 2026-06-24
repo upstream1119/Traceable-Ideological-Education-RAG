@@ -77,3 +77,26 @@ DACHUANG_FAISS_INDEX_DIR/metadata.json
 ```
 
 如果索引目录不存在、API key 缺失、Embedding 调用失败或维度不匹配，系统会自动回退到原来的轻量召回，不会破坏 `/retrieve` 返回契约。
+
+## 6. 后端对比实验：轻量检索 vs FAISS
+
+在不改变默认 `/retrieve` 行为的前提下，可以运行 10 题小样本对比：
+
+```powershell
+D:\anaconda\envs\dachuang_2026\python.exe -X utf8 scripts\run_retrieve_backend_comparison.py `
+  --faiss-index-dir outputs\vector_experiments\2026-06-faiss-smoke\20260623_213511 `
+  --limit 10
+```
+
+输出位于：
+
+```text
+outputs/retrieve_experiments/2026-06-backend-comparison/
+```
+
+说明：
+
+- lightweight 组不调用 embedding。
+- FAISS 组只调用 query embedding，不重建索引。
+- 脚本强制 `DACHUANG_GENERATOR_MODE=template`，不调用 LLM。
+- 结果用于判断 FAISS 是否具备进入默认检索链路的条件。
