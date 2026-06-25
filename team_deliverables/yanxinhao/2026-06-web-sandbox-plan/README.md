@@ -18,6 +18,8 @@
 
 当前仓库已具备以下展示层前置基础：
 
+- `data/processed/text_chunks_sizheng_v1.jsonl`：196 条思政史 chunks。
+- `data/processed/text_chunks_sizheng_v2.jsonl`：49 条补充 chunks；当前合计 245 条。
 - `data/processed/landmarks_demo.geojson`：6 个红色地标 GeoJSON 点位。
 - `data/processed/landmarks_demo.jsonl`：与地标对应的逐行 JSON 数据，包含 `citation.source_basis`。
 - `data/processed/timeline_demo_sizheng.json`：5 条思想政治教育史时间线事件。
@@ -26,12 +28,24 @@
 
 这些内容只能说明“可溯源证据检索底座”和“展示层承接方案”，不能表述为完整 XR 系统或完整零幻觉系统已经完成。
 
+### 2.1 当前检索后端状态
+
+- `/retrieve` 默认使用稳定的轻量检索，普通组员本地运行时不会默认调用 Embedding API。
+- FAISS 已完成基于 245 条 chunks 的工程冒烟验证，并已作为 `/retrieve` 的可选向量后端。
+- 负责人验收时可通过 `DACHUANG_VECTOR_BACKEND=faiss` 和有效的 `DACHUANG_FAISS_INDEX_DIR` 临时启用 FAISS。
+- 如果 FAISS 未配置、索引目录不存在、API Key 缺失、Embedding 调用失败或向量维度不匹配，系统会回退到轻量检索，并保持 `/retrieve` 返回契约不变。
+- 当前 FAISS 指标只用于工程冒烟验收，不是正式论文实验结论。后续需在 chunk ID、验收集和 GraphSim triples 对齐后，再评估是否将 FAISS 设为默认后端。
+
 ## 3. 6 月交付文件
 
 - `data_interface_notes.md`
   - 说明地标、时间线和 citation 卡片字段。
   - 说明 Web 沙盘如何读取现有数据。
   - 说明证据到地图点、时间线事件和人物/事件卡片的映射草案。
+
+- `spatiotemporal_mapping_notes.md`
+  - 将最新 v1/v2 chunks 映射到地图、时间线、人物卡片和事件卡片。
+  - 固定 8 个第一版核心展示节点，并记录真实 chunk ID、citation、映射依据和验证状态。
 
 - `web_sandbox_wireframe.md`
   - 给出 Web 沙盘页面区域草图。
@@ -51,9 +65,10 @@
 ```text
 用户提问
   -> /retrieve
-  -> query_entities
-  -> vector_hits + graph_hits
-  -> hybrid_hits + citation
+  -> 默认轻量检索 / 可选 FAISS
+  -> GraphSim
+  -> hybrid_hits
+  -> 生成回答 + citation
   -> source_check + policy_check
   -> agent_trace + final_decision
   -> Web 地图点 / 时间线事件 / citation 卡片 / 回答与数字人播报控制
@@ -76,6 +91,7 @@
 - 时间线展示：先用普通 React 组件渲染 JSON 事件。
 - 检索联动：通过 FastAPI `/retrieve` 获取 `hybrid_hits`、`citations_used`、`agent_trace` 和 `final_decision`。
 - 状态联动：用前端状态保存当前选中的地标、事件和 citation。
+- 后端选择：前端不自行决定使用轻量检索还是 FAISS，只读取 `/retrieve` 的稳定响应；后端切换由负责人验收环境控制。
 
 建议先做 3 个页面或视图：
 
