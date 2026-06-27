@@ -171,11 +171,23 @@ The current `/retrieve` response includes:
 - `project`
 - `query`
 - `query_entities`
-- `citations`
+- `vector_hits`
+- `graph_hits`
+- `hybrid_hits`
 - `answer`
-- `debug`
+- `citations_used`
+- `generator_mode`
+- `generator_provider`
+- `provider_status`
+- `used_fallback`
+- `source_check`
+- `policy_check`
+- `agent_trace`
+- `final_decision`
 
-The response structure will evolve as graph reasoning, generation agents, and auditing agents are added. Backward compatibility should be considered when frontend integration begins.
+`vector_hits` records vector-side evidence candidates, `graph_hits` records GraphSim/graph-side candidates, and `hybrid_hits` records fused evidence blocks with citation and scores.
+`citations_used`, `source_check`, `policy_check`, `agent_trace`, and `final_decision` are part of the current three-agent scaffold.
+Do not use the old `citations` or `debug` fields for new frontend or teammate integration.
 
 ## Roadmap
 

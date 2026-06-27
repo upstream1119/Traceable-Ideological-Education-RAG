@@ -79,12 +79,28 @@
 - `vector_hits`
 - `graph_hits`
 - `hybrid_hits`
+- `answer`
+- `citations_used`
+- `generator_mode`
+- `generator_provider`
+- `provider_status`
+- `used_fallback`
+- `source_check`
+- `policy_check`
+- `agent_trace`
+- `final_decision`
 
 其中：
 
-- `vector_hits` 表示语义检索候选
-- `graph_hits` 表示结构关系候选
+- `vector_hits` 表示向量侧证据候选
+- `graph_hits` 表示 GraphSim / 图谱侧证据候选
 - `hybrid_hits` 表示融合后的最终候选
+- `answer` 表示基于证据生成的阶段性回答
+- `citations_used` 表示回答实际引用的证据
+- `source_check` 表示溯源支撑检查结果
+- `policy_check` 表示政治红线规则初筛结果
+- `agent_trace` 表示检索、生成、审查链路轨迹
+- `final_decision` 表示当前回答是否可输出、是否需要人工复核
 
 `hybrid_hits` 当前必须保留：
 

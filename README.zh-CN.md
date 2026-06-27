@@ -171,11 +171,23 @@ python -m pytest tests -q
 - `project`
 - `query`
 - `query_entities`
-- `citations`
+- `vector_hits`
+- `graph_hits`
+- `hybrid_hits`
 - `answer`
-- `debug`
+- `citations_used`
+- `generator_mode`
+- `generator_provider`
+- `provider_status`
+- `used_fallback`
+- `source_check`
+- `policy_check`
+- `agent_trace`
+- `final_decision`
 
-接口结构会随着图谱推理、生成智能体和审查智能体接入继续扩展。开始前端集成时，应优先考虑向后兼容。
+`vector_hits` 表示向量侧证据候选，`graph_hits` 表示 GraphSim/图谱侧证据候选，`hybrid_hits` 表示融合后的证据块。
+`citations_used`、`source_check`、`policy_check`、`agent_trace` 和 `final_decision` 已属于当前三智能体最小链路。
+后续前端或组员联调不要再按旧的 `citations/debug` 字段写。
 
 ## 路线图
 
