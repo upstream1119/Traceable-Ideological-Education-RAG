@@ -38,6 +38,9 @@
 
 ## 3. 6 月交付文件
 
+- `P1路线图.md`
+  - 说明 P1 两张展示图的目标、事实边界、页面区域和验收条件。
+
 - `data_interface_notes.md`
   - 说明地标、时间线和 citation 卡片字段。
   - 说明 Web 沙盘如何读取现有数据。
@@ -53,8 +56,9 @@
   - 说明当前系统架构图应如何区分已完成、6 月重点和未来展示层。
 
 - `figures/`
-  - 预留 6 月新增图和草图的统一存放目录。
-  - 后续如生成新图，应放在本目录，不散放到 `docs/` 或 `scripts/` 根目录。
+  - `p1_system_display_architecture.svg`：展示 KG-RAG、生成审查链路与未来课堂展示层的承接关系。
+  - `p1_web_sandbox_wireframe.svg`：展示 Web 时空沙盘第一屏、citation 卡片和输出控制设计。
+  - 后续导出的 PNG 或新增图件继续统一放在本目录，不散放到 `docs/` 或 `scripts/` 根目录。
 
 ## 4. KG-RAG 到展示层的承接关系
 
