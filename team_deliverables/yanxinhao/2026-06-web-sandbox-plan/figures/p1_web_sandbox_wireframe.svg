@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1480" viewBox="0 0 2200 1480" role="img" aria-labelledby="title desc">
+  <title id="title">Web 时空沙盘页面草图</title>
+  <desc id="desc">展示问题输入、地图、时间线、citation 卡片、审查状态和未来数字人讲解预留区如何由可溯源 KG-RAG 结果联动的桌面端页面草图。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .canvas { fill:#FFFFFF; }
+      .title { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:42px; font-weight:700; fill:#0F172A; }
+      .subtitle { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:20px; fill:#475569; }
+      .app-title { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:25px; font-weight:700; fill:#0F172A; }
+      .panel-title { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:24px; font-weight:700; fill:#0F172A; }
+      .text { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:17px; fill:#334155; }
+      .small { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:15px; fill:#475569; }
+      .tiny { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:13px; fill:#64748B; }
+      .card-title { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:18px; font-weight:700; fill:#0F172A; }
+      .shell { fill:#F8FAFC; stroke:#94A3B8; stroke-width:2; }
+      .panel { fill:#FFFFFF; stroke:#CBD5E1; stroke-width:2; }
+      .map { fill:#EFF6FF; stroke:#185A9D; stroke-width:2; }
+      .map-label { fill:#FFFFFF; stroke:#B8C7D9; stroke-width:1.5; }
+      .map-label-selected { fill:#FFF8E1; stroke:#F59E0B; stroke-width:1.5; }
+      .timeline { fill:#F0FDF4; stroke:#2F855A; stroke-width:2; }
+      .evidence { fill:#FFFDF7; stroke:#9A6700; stroke-width:2; }
+      .future { fill:#FAFAFA; stroke:#6B7280; stroke-width:2; stroke-dasharray:10 7; }
+      .chip { fill:#EAF3FF; stroke:#185A9D; stroke-width:1.5; }
+      .p1-chip { fill:#FFF4D6; stroke:#9A6700; stroke-width:1.5; }
+      .good { fill:#E7F6EC; stroke:#2F855A; stroke-width:1.5; }
+      .warn { fill:#FFF4D6; stroke:#B7791F; stroke-width:1.5; }
+      .blocked { fill:#FDECEC; stroke:#B91C1C; stroke-width:1.5; }
+      .flow { fill:none; stroke:#334155; stroke-width:2.8; marker-end:url(#arrow); }
+      .link { fill:none; stroke:#0F766E; stroke-width:2.4; stroke-dasharray:7 5; marker-end:url(#arrow); }
+      .guide { fill:none; stroke:#64748B; stroke-width:2; stroke-dasharray:6 5; }
+      .number { font-family:"Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:16px; font-weight:700; fill:#FFFFFF; text-anchor:middle; }
+    </style>
+  </defs>
+
+  <rect class="canvas" x="0" y="0" width="2200" height="1480"/>
+  <text class="title" x="70" y="70">Web 时空沙盘页面草图</text>
+  <rect x="1740" y="45" width="390" height="42" rx="8" fill="#FFF4D6" stroke="#9A6700"/>
+  <text class="text" x="1760" y="72">P1 设计图，不代表正式前端已上线</text>
+
+  <!-- Application frame -->
+  <rect class="shell" x="45" y="145" width="2110" height="1240" rx="18"/>
+  <rect x="45" y="145" width="2110" height="62" rx="18" fill="#EAF3FF" stroke="#94A3B8" stroke-width="2"/>
+  <circle cx="82" cy="176" r="7" fill="#E35D6A"/>
+  <circle cx="105" cy="176" r="7" fill="#E5A93B"/>
+  <circle cx="128" cy="176" r="7" fill="#4FAE75"/>
+  <text class="app-title" x="165" y="184">证据驱动的 Web 时空沙盘原型</text>
+  <text class="small" x="1770" y="184">桌面端第一屏示意</text>
+
+  <!-- UI-01 Query and answer summary -->
+  <rect class="panel" x="75" y="235" width="2050" height="112" rx="12"/>
+  <text class="panel-title" x="105" y="275">1. 提问与结果摘要</text>
+  <rect x="395" y="254" width="800" height="58" rx="8" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/>
+  <text class="text" x="420" y="290">示例问题：长征中政治教育如何承接？</text>
+  <rect x="1215" y="254" width="145" height="58" rx="8" fill="#185A9D"/>
+  <text x="1260" y="290" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">检索证据</text>
+  <rect class="good" x="1430" y="254" width="630" height="58" rx="8"/>
+  <text class="card-title" x="1452" y="278">final_decision：approved（示例）</text>
+  <text class="small" x="1452" y="301">回答摘要：基于 citation 组织正式回答；真实状态由 API 返回，前端不可自行改写。</text>
+
+  <!-- UI-02 Map area -->
+  <rect class="map" x="75" y="380" width="1080" height="510" rx="12"/>
+  <text class="panel-title" x="105" y="422">2. 地图 / 时空主视图</text>
+  <text class="small" x="105" y="452">仅显示具有地点依据的节点；点位仅为页面示意，不代表测绘坐标。</text>
+  <path d="M145 525 C310 445, 420 610, 585 525 S860 465, 1070 590" fill="none" stroke="#B8C7D9" stroke-width="20" opacity="0.55"/>
+  <path d="M170 735 C360 625, 520 790, 690 685 S945 625, 1065 745" fill="none" stroke="#D5E3F1" stroke-width="26" opacity="0.9"/>
+  <path d="M210 495 L370 690 L600 535 L815 720 L1000 505" fill="none" stroke="#8CB4D8" stroke-width="2" stroke-dasharray="8 7"/>
+  <circle cx="255" cy="540" r="14" fill="#D94645" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="255" y1="556" x2="255" y2="565" stroke="#64748B" stroke-width="2"/>
+  <rect class="map-label" x="175" y="565" width="160" height="58" rx="7"/>
+  <text class="card-title" x="255" y="590" text-anchor="middle">嘉兴南湖</text>
+  <text class="tiny" x="255" y="612" text-anchor="middle">地图点 + 时间线关联</text>
+  <circle cx="470" cy="665" r="14" fill="#D94645" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="470" y1="681" x2="470" y2="690" stroke="#64748B" stroke-width="2"/>
+  <rect class="map-label" x="390" y="690" width="160" height="58" rx="7"/>
+  <text class="card-title" x="470" y="715" text-anchor="middle">井冈山</text>
+  <text class="tiny" x="470" y="737" text-anchor="middle">partial：区域映射待复核</text>
+  <circle cx="710" cy="520" r="16" fill="#F59E0B" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="710" y1="538" x2="710" y2="546" stroke="#64748B" stroke-width="2"/>
+  <rect class="map-label-selected" x="630" y="546" width="160" height="58" rx="7"/>
+  <text class="card-title" x="710" y="571" text-anchor="middle">遵义</text>
+  <text class="tiny" x="710" y="593" text-anchor="middle">partial：关联范围待复核</text>
+  <circle cx="925" cy="700" r="14" fill="#D94645" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="925" y1="716" x2="925" y2="725" stroke="#64748B" stroke-width="2"/>
+  <rect class="map-label" x="845" y="725" width="160" height="58" rx="7"/>
+  <text class="card-title" x="925" y="750" text-anchor="middle">西柏坡</text>
+  <text class="tiny" x="925" y="772" text-anchor="middle">partial：复用时间线节点</text>
+  <rect x="165" y="795" width="850" height="54" rx="7" fill="#FFFFFF" stroke="#9A6700" stroke-width="1.5"/>
+  <text class="text" x="190" y="827">无可靠地点依据：张闻天、新式整军运动等仅进入时间线、人物卡片或事件卡片。</text>
+  <text class="small" x="165" y="872">点击地图点 -> 高亮/跳转相关时间线事件 -> 筛选关联 citation</text>
+
+  <!-- UI-03 Timeline -->
+  <rect class="timeline" x="75" y="925" width="1080" height="285" rx="12"/>
+  <text class="panel-title" x="105" y="968">3. 历史时间线</text>
+  <text class="small" x="105" y="995">点击事件：高亮关联地标并筛选 citation；proposed 节点须保留其状态。</text>
+  <rect class="chip" x="125" y="1155" width="540" height="30" rx="5"/>
+  <text class="tiny" x="145" y="1176">点击事件 -> 定位/高亮地标 -> 筛选 citation</text>
+  <line x1="170" y1="1085" x2="1040" y2="1085" stroke="#2F855A" stroke-width="4"/>
+  <circle cx="220" cy="1085" r="15" fill="#2F855A" stroke="#FFFFFF" stroke-width="4"/>
+  <text class="card-title" x="160" y="1042">1921</text>
+  <text class="tiny" x="145" y="1130">党的一大</text>
+  <circle cx="445" cy="1085" r="15" fill="#2F855A" stroke="#FFFFFF" stroke-width="4"/>
+  <text class="card-title" x="385" y="1042">1927</text>
+  <text class="tiny" x="360" y="1130">三湾改编</text>
+  <circle cx="665" cy="1085" r="18" fill="#F59E0B" stroke="#FFFFFF" stroke-width="4"/>
+  <text class="card-title" x="605" y="1042">1935</text>
+  <text class="tiny" x="582" y="1130">遵义会议</text>
+  <circle cx="885" cy="1085" r="15" fill="#2F855A" stroke="#FFFFFF" stroke-width="4"/>
+  <text class="card-title" x="825" y="1042">1949</text>
+  <text class="tiny" x="795" y="1130">七届二中全会</text>
+  <rect x="755" y="1160" width="330" height="30" rx="5" fill="#FFFFFF" stroke="#9A6700"/>
+  <text class="tiny" x="775" y="1181">人物/无坐标事件：不强行进入地图</text>
+
+  <!-- UI-04 Citation area -->
+  <rect class="evidence" x="1190" y="380" width="935" height="560" rx="12"/>
+  <text class="panel-title" x="1220" y="422">4. KG-RAG 证据与 citation</text>
+  <text class="small" x="1220" y="452">展示来自 `/retrieve` 的 hybrid_hits；字段名用于说明，不伪造具体页码。</text>
+  <rect x="1220" y="480" width="875" height="128" rx="9" fill="#FFFFFF" stroke="#D6B161" stroke-width="1.5"/>
+  <text class="card-title" x="1245" y="514">证据卡片 A：标题 / 来源文件 / 章节</text>
+  <text class="text" x="1245" y="543">citation.page：PDF 页码或“页码待复核”</text>
+  <text class="small" x="1245" y="571">vector_score | graph_score | hybrid_score</text>
+  <rect class="chip" x="1775" y="520" width="285" height="38" rx="6"/>
+  <text class="small" x="1792" y="545">点击：反向高亮地图与时间线</text>
+  <text class="tiny" x="1245" y="595">related_entities / graph_paths 用于解释证据为什么被召回</text>
+  <rect x="1220" y="626" width="875" height="128" rx="9" fill="#FFFFFF" stroke="#D6B161" stroke-width="1.5"/>
+  <text class="card-title" x="1245" y="660">证据卡片 B：多条 citation 分别保留</text>
+  <text class="text" x="1245" y="689">不能把不同 chunk 的来源、章节或页码合并成虚构引用</text>
+  <text class="small" x="1245" y="718">点击：筛选相关实体、地标和时间线事件</text>
+  <rect class="p1-chip" x="1775" y="666" width="285" height="38" rx="6"/>
+  <text class="small" x="1792" y="691">风险提示：仅作复核材料</text>
+  <text class="tiny" x="1245" y="742">page 为 null 时明确显示“待复核”，不补写确定页码。</text>
+
+  <!-- UI-05 Trace and review -->
+  <rect x="1220" y="775" width="875" height="132" rx="9" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <text class="card-title" x="1245" y="808">5. 流程与审查状态</text>
+  <rect class="chip" x="1245" y="826" width="245" height="52" rx="6"/>
+  <text class="small" x="1260" y="849">agent_trace</text>
+  <text class="tiny" x="1260" y="869">检索 -> 生成 -> 审查</text>
+  <rect class="chip" x="1510" y="826" width="250" height="52" rx="6"/>
+  <text class="small" x="1525" y="849">source_check</text>
+  <text class="tiny" x="1525" y="869">来源核验状态</text>
+  <rect class="chip" x="1780" y="826" width="285" height="52" rx="6"/>
+  <text class="small" x="1795" y="849">policy_check</text>
+  <text class="tiny" x="1795" y="869">红线审查状态</text>
+
+  <!-- UI-06 Output and future presenter -->
+  <rect class="future" x="1190" y="970" width="935" height="240" rx="12"/>
+  <text class="panel-title" x="1220" y="1012">6. 回答与数字人讲解预留区</text>
+  <text class="small" x="1220" y="1041">未来出口，当前只定义展示控制规则；不代表已接入 TTS、数字人或 XR。</text>
+  <text class="small" x="1220" y="1062">所有回答与未来讲解均服从 final_decision。</text>
+  <rect class="good" x="1220" y="1070" width="260" height="54" rx="6"/>
+  <text class="small" x="1238" y="1101">approved：允许展示与播报</text>
+  <rect class="warn" x="1500" y="1070" width="270" height="54" rx="6"/>
+  <text class="tiny" x="1518" y="1093">needs_review：待人工复核</text>
+  <text class="tiny" x="1518" y="1114">显示复核原因，禁止播报</text>
+  <rect class="blocked" x="1790" y="1070" width="275" height="54" rx="6"/>
+  <text class="tiny" x="1808" y="1093">blocked：显示阻断原因</text>
+  <text class="tiny" x="1808" y="1114">禁止播报</text>
+  <rect x="1240" y="1140" width="820" height="42" rx="7" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text class="text" x="1270" y="1167">未来链路：回答文本 -> TTS -> 字幕 + citation -> 轻量数字人讲解</text>
+
+  <!-- Interaction annotations -->
+  <text class="tiny" x="395" y="335">调用 /retrieve 后，更新地图、时间线、citation 与审查状态</text>
+
+  <text class="tiny" x="75" y="1280">数据读取边界：正式前端后续通过 FastAPI 接口读取，或将静态数据复制到 public/data/；不直接 fetch 仓库 data/processed 路径。</text>
+  <text class="tiny" x="75" y="1310">事实边界：地图、时间线、citation 均来自正式数据与 P0 映射；无地点依据的内容不强行添加坐标。</text>
+</svg>
