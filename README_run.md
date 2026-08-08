@@ -17,6 +17,17 @@ python src/utils/validate_jsonl.py data/processed/events.jsonl
 
 注意：只有终端打印出 ✅ 质检通过！，才允许将数据提交给组长验收。如果报错，请对照 configs/schema.yaml 自行修改。
 
+提交 GraphSim 三元组前，还必须检查 `source_chunk_ids` 是否真实存在于正式知识库：
+
+```powershell
+python src/utils/validate_triples.py `
+  --triples data/graph/triples_demo.jsonl `
+  --chunks data/processed/text_chunks_sizheng_v1.jsonl `
+           data/processed/text_chunks_sizheng_v2.jsonl
+```
+
+该脚本只做校验，不会自动修改三元组或 chunk。出现 `source_chunk_id 不存在` 时，必须回到原文重新确认关系证据，禁止只按编号猜测替换。
+
 ## 🌐 3. 本地接口预览（Mock 环境）
 当你需要调试后端接口时，启动 FastAPI 服务：
 
