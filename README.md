@@ -20,6 +20,7 @@ Current implemented capabilities:
 - Provides an optional FAISS vector backend for `retrieve_vector`.
 - Uses a schema-driven API contract.
 - Includes graph storage, evidence generation, source checking, and policy checking modules.
+- Returns a deterministic V1 `display_route` for evidence cards, timeline/map, or digital-human entry points.
 - Maintains demo questions and basic acceptance tests.
 - Keeps project deliverables separated from core code.
 
@@ -153,9 +154,12 @@ Example request:
 
 ```json
 {
-  "query": "延安时期思想政治教育有什么特点？"
+  "query": "请面向高中生介绍延安时期思想政治教育有什么特点？",
+  "target_grade": "senior_high"
 }
 ```
+
+`target_grade` is optional. Supported values are `primary`, `junior_high`, `senior_high`, and `university`.
 
 Run tests:
 
@@ -184,9 +188,11 @@ The current `/retrieve` response includes:
 - `policy_check`
 - `agent_trace`
 - `final_decision`
+- `display_route`
 
 `vector_hits` records vector-side evidence candidates, `graph_hits` records GraphSim/graph-side candidates, and `hybrid_hits` records fused evidence blocks with citation and scores.
 `citations_used`, `source_check`, `policy_check`, `agent_trace`, and `final_decision` are part of the current three-agent scaffold.
+`display_route` contains `intent_type`, `target_grade`, `presentation_mode`, `timeline_ids`, `landmark_ids`, and `narrative_character`. See `docs/display_route_contract.md` for the V1 frontend contract.
 Do not use the old `citations` or `debug` fields for new frontend or teammate integration.
 
 ## Roadmap

@@ -17,6 +17,7 @@ from src.graph.graph_store import (
 from src.retriever.section_reranker import rerank_hits_by_query_terms
 from src.reviewer.policy_checker import check_policy_risk
 from src.reviewer.source_checker import check_answer_sources
+from src.router.display_router import build_display_route
 from src.vector.embedding_provider import QwenEmbeddingProvider
 from src.vector.faiss_store import FaissVectorStore
 
@@ -453,6 +454,7 @@ def _build_response(
     policy_check: dict | None = None,
     agent_trace: list[dict] | None = None,
     final_decision: dict | None = None,
+    display_route: dict | None = None,
 ) -> dict:
     generated = generated or {"answer": "", "citations_used": []}
     source_check = source_check or {
@@ -479,6 +481,7 @@ def _build_response(
         "review_required": True,
         "reason": "三智能体闭环尚未完成。",
     }
+    display_route = display_route or build_display_route(query, query_entities)
     return {
         "status": "success",
         "project": PROJECT_NAME,
@@ -497,10 +500,11 @@ def _build_response(
         "policy_check": policy_check,
         "agent_trace": agent_trace,
         "final_decision": final_decision,
+        "display_route": display_route,
     }
 
 
-def retrieve(query: str) -> dict:
+def retrieve(query: str, target_grade: str | None = None) -> dict:
     """
     大组长总控台：混合检索的总编排器。
     不管底层逻辑以后怎么换，这里的 5 步固定流程（实体->向量->图谱->融合->组装）作为工程契约，绝对不能破！
@@ -518,6 +522,12 @@ def retrieve(query: str) -> dict:
     else:
         query_entities = []
         vector_hits, graph_hits, hybrid_hits = [], [], []
+
+    display_route = build_display_route(
+        query_text,
+        query_entities,
+        target_grade=target_grade,
+    )
 
     generated = generate_answer(query_text, hybrid_hits)
     source_check = check_answer_sources(
@@ -549,4 +559,5 @@ def retrieve(query: str) -> dict:
         policy_check=policy_check,
         agent_trace=agent_trace,
         final_decision=final_decision,
+        display_route=display_route,
     )
