@@ -20,6 +20,7 @@
 - 已提供可选 FAISS 向量后端，用于 `retrieve_vector` 验证。
 - 使用 schema-driven API contract。
 - 包含 graph storage、evidence generation、source checking 和 policy checking 模块。
+- 返回确定性 V1 `display_route`，用于证据卡片、时空地图或数字人入口。
 - 维护 demo questions 和基础验收测试。
 - 将项目交付物与核心代码分离管理。
 
@@ -153,9 +154,12 @@ POST /retrieve
 
 ```json
 {
-  "query": "延安时期思想政治教育有什么特点？"
+  "query": "请面向高中生介绍延安时期思想政治教育有什么特点？",
+  "target_grade": "senior_high"
 }
 ```
+
+`target_grade` 为可选字段，支持 `primary`、`junior_high`、`senior_high` 和 `university`。
 
 运行测试：
 
@@ -184,9 +188,11 @@ python -m pytest tests -q
 - `policy_check`
 - `agent_trace`
 - `final_decision`
+- `display_route`
 
 `vector_hits` 表示向量侧证据候选，`graph_hits` 表示 GraphSim/图谱侧证据候选，`hybrid_hits` 表示融合后的证据块。
 `citations_used`、`source_check`、`policy_check`、`agent_trace` 和 `final_decision` 已属于当前三智能体最小链路。
+`display_route` 包含 `intent_type`、`target_grade`、`presentation_mode`、`timeline_ids`、`landmark_ids` 和 `narrative_character`。完整 V1 契约见 `docs/display_route_contract.md`。
 后续前端或组员联调不要再按旧的 `citations/debug` 字段写。
 
 ## 路线图

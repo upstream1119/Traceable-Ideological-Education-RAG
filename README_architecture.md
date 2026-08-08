@@ -24,6 +24,11 @@
     - `fuse_results`：融合打分骨架
     - 标准返回体组装
 
+- `src/router/display_router.py`
+  - 负责 V1 确定性意图与展示路由
+  - 返回证据卡片、时空地图或数字人入口所需字段
+  - 只映射正式时间线和地标 ID，不返回 proposed 节点
+
 - `configs/schema.yaml`
   - 负责统一数据字段规范
   - 为 ETL、向量索引、图谱构建和接口返回提供共同字段基础
@@ -89,6 +94,7 @@
 - `policy_check`
 - `agent_trace`
 - `final_decision`
+- `display_route`
 
 其中：
 
@@ -101,6 +107,9 @@
 - `policy_check` 表示政治红线规则初筛结果
 - `agent_trace` 表示检索、生成、审查链路轨迹
 - `final_decision` 表示当前回答是否可输出、是否需要人工复核
+- `display_route` 表示前端应使用的展示模式、目标学段和正式时空资产 ID
+
+`display_route` 的六字段定义、枚举、空值和联调样例见 `docs/display_route_contract.md`。前端必须先服从 `final_decision`，再消费 `display_route`，不能自行重新判断意图或强行补充地点。
 
 `hybrid_hits` 当前必须保留：
 
