@@ -1,0 +1,6 @@
+node_modules/
+dist/
+coverage/
+*.log
+/public/data/landmarks_demo.geojson
+/public/data/timeline_demo_sizheng.json
