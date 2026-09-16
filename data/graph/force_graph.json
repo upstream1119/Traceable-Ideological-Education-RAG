@@ -1,0 +1,2508 @@
+{
+  "schema_version": "1.0",
+  "directed": true,
+  "node_type_values": [
+    "person",
+    "organization",
+    "event",
+    "place",
+    "document",
+    "time",
+    "concept"
+  ],
+  "nodes": [
+    {
+      "id": "1920年11月21日",
+      "label": "1920年11月21日",
+      "type": "time",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "1921年7月",
+      "label": "1921年7月",
+      "type": "time",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "1921年7月23日",
+      "label": "1921年7月23日",
+      "type": "time",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "1947年冬至1948年夏",
+      "label": "1947年冬至1948年夏",
+      "type": "time",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "“工农武装割据”思想",
+      "label": "“工农武装割据”思想",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《中国共产党宣言》",
+      "label": "《中国共产党宣言》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《中国共产党第一个决议》",
+      "label": "《中国共产党第一个决议》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028",
+        "chunk_sizheng_v1_029"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "《中国共产党第一个纲领》",
+      "label": "《中国共产党第一个纲领》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《党的宣传鼓动工作提纲》",
+      "label": "《党的宣传鼓动工作提纲》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166",
+        "chunk_sizheng_v1_167"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "《共产党》月刊",
+      "label": "《共产党》月刊",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《共产党宣言》最早的中文全译本",
+      "label": "《共产党宣言》最早的中文全译本",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《关于争取少数民族的指示》",
+      "label": "《关于争取少数民族的指示》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "《关于进遵义城的口号和八项注意通令》",
+      "label": "《关于进遵义城的口号和八项注意通令》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《劳动界》周刊",
+      "label": "《劳动界》周刊",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《古田会议决议》",
+      "label": "《古田会议决议》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "《宣传工作决议案》",
+      "label": "《宣传工作决议案》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "《新青年》",
+      "label": "《新青年》",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "三查",
+      "label": "三查",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "上海党组织",
+      "label": "上海党组织",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "上海共产主义小组",
+      "label": "上海共产主义小组",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "上海机器工人工会",
+      "label": "上海机器工人工会",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "世界上第一个社会主义国家",
+      "label": "世界上第一个社会主义国家",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中共中央",
+      "label": "中共中央",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中国一批先进分子",
+      "label": "中国一批先进分子",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中国人民解放军",
+      "label": "中国人民解放军",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_034"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中国共产党",
+      "label": "中国共产党",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021",
+        "chunk_sizheng_v1_028",
+        "chunk_sizheng_v1_032",
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 5
+    },
+    {
+      "id": "中国共产党人",
+      "label": "中国共产党人",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 3
+    },
+    {
+      "id": "中国共产党思想政治教育的良好开端",
+      "label": "中国共产党思想政治教育的良好开端",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中国共产党的成立",
+      "label": "中国共产党的成立",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001",
+        "chunk_sizheng_v1_021"
+      ],
+      "degree": 3
+    },
+    {
+      "id": "中国共产党第一次全国代表大会",
+      "label": "中国共产党第一次全国代表大会",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 4
+    },
+    {
+      "id": "中国革命有了新的领导核心",
+      "label": "中国革命有了新的领导核心",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中央“九月来信”",
+      "label": "中央“九月来信”",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "degree": 3
+    },
+    {
+      "id": "中央党校",
+      "label": "中央党校",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中央宣传部",
+      "label": "中央宣传部",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "中央局",
+      "label": "中央局",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "中央总的宣传政策领导",
+      "label": "中央总的宣传政策领导",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中央红军",
+      "label": "中央红军",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "中革军委和总政治部",
+      "label": "中革军委和总政治部",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "为抗战服务、理论联系实际的教育方针",
+      "label": "为抗战服务、理论联系实际的教育方针",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "事实真实、生动",
+      "label": "事实真实、生动",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "人民当家作主的新中国",
+      "label": "人民当家作主的新中国",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "人民解放军的指挥、调动",
+      "label": "人民解放军的指挥、调动",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_031"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "人的认识规律",
+      "label": "人的认识规律",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_023"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "传达遵义会议精神",
+      "label": "传达遵义会议精神",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "俄罗斯研究",
+      "label": "俄罗斯研究",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "先进知识分子",
+      "label": "先进知识分子",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "党中央的正确路线",
+      "label": "党中央的正确路线",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党内教育",
+      "label": "党内教育",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党内教育和群众教育",
+      "label": "党内教育和群众教育",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党对宣传工作的绝对领导",
+      "label": "党对宣传工作的绝对领导",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_029"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党性原则",
+      "label": "党性原则",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_029"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党支部",
+      "label": "党支部",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党的一大",
+      "label": "党的一大",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党的原则、纲领和决议",
+      "label": "党的原则、纲领和决议",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_029"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党的宣传教育工作系统化、规范化",
+      "label": "党的宣传教育工作系统化、规范化",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党的宣传鼓动工作",
+      "label": "党的宣传鼓动工作",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "党的思想政治教育理论形成",
+      "label": "党的思想政治教育理论形成",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党的绝对领导下的革命军队",
+      "label": "党的绝对领导下的革命军队",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "党的重要战略任务",
+      "label": "党的重要战略任务",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "全国范围内的宣传教育工作",
+      "label": "全国范围内的宣传教育工作",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "共产主义小组",
+      "label": "共产主义小组",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "共产主义思想",
+      "label": "共产主义思想",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "具体更群众化的宣传工作",
+      "label": "具体更群众化的宣传工作",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_005"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "刘伯承",
+      "label": "刘伯承",
+      "type": "person",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "十月革命",
+      "label": "十月革命",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "口头",
+      "label": "口头",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "古田会议",
+      "label": "古田会议",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "degree": 3
+    },
+    {
+      "id": "各民族一律平等的政策",
+      "label": "各民族一律平等的政策",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "四渡赤水河",
+      "label": "四渡赤水河",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "大规模阶级教育和思想整顿",
+      "label": "大规模阶级教育和思想整顿",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "学校教育和在职教育",
+      "label": "学校教育和在职教育",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "宣传主任",
+      "label": "宣传主任",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "宣传工作",
+      "label": "宣传工作",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "宣传干事",
+      "label": "宣传干事",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "宣传鼓动",
+      "label": "宣传鼓动",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "宣传鼓动工作",
+      "label": "宣传鼓动工作",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167",
+        "chunk_sizheng_v2_005"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "宣传鼓动工作和组织工作",
+      "label": "宣传鼓动工作和组织工作",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "小叶丹",
+      "label": "小叶丹",
+      "type": "person",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "少数民族的风俗习惯和宗教信仰",
+      "label": "少数民族的风俗习惯和宗教信仰",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "工人运动",
+      "label": "工人运动",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "干部学校",
+      "label": "干部学校",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "干部战士的政治觉悟",
+      "label": "干部战士的政治觉悟",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_023"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "干部教育",
+      "label": "干部教育",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 5
+    },
+    {
+      "id": "干部教育部",
+      "label": "干部教育部",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "延安",
+      "label": "延安",
+      "type": "place",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "建党建军路线",
+      "label": "建党建军路线",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "张闻天",
+      "label": "张闻天",
+      "type": "person",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148",
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "思想政治教育",
+      "label": "思想政治教育",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001",
+        "chunk_sizheng_v1_029",
+        "chunk_sizheng_v1_032"
+      ],
+      "degree": 5
+    },
+    {
+      "id": "思想政治教育活动",
+      "label": "思想政治教育活动",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_029"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "思想政治教育的基本原则",
+      "label": "思想政治教育的基本原则",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "思想政治教育的纲领性文献",
+      "label": "思想政治教育的纲领性文献",
+      "type": "document",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "思想教育",
+      "label": "思想教育",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "总政治部",
+      "label": "总政治部",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116",
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 3
+    },
+    {
+      "id": "战斗力",
+      "label": "战斗力",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "抗战时期的干部教育",
+      "label": "抗战时期的干部教育",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "抗战胜利",
+      "label": "抗战胜利",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "抗日军政大学",
+      "label": "抗日军政大学",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "提高工人阶级思想觉悟",
+      "label": "提高工人阶级思想觉悟",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_032"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "支部",
+      "label": "支部",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_005"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "文字",
+      "label": "文字",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "新式整军运动",
+      "label": "新式整军运动",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021",
+        "chunk_sizheng_v2_022",
+        "chunk_sizheng_v2_023",
+        "chunk_sizheng_v2_034"
+      ],
+      "degree": 8
+    },
+    {
+      "id": "李达",
+      "label": "李达",
+      "type": "person",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "查阶级、查工作、查斗志",
+      "label": "查阶级、查工作、查斗志",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "毛泽东",
+      "label": "毛泽东",
+      "type": "person",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111",
+        "chunk_sizheng_v2_022"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "毛泽东为前委书记",
+      "label": "毛泽东为前委书记",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "生死攸关的转折点",
+      "label": "生死攸关的转折点",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "社会主义青年团",
+      "label": "社会主义青年团",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "红军",
+      "label": "红军",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "红军三大主力",
+      "label": "红军三大主力",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "红军从失败走向胜利",
+      "label": "红军从失败走向胜利",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "红军是工农群众自己的队伍",
+      "label": "红军是工农群众自己的队伍",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "红军长征胜利的思想基础",
+      "label": "红军长征胜利的思想基础",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "纪律教育",
+      "label": "纪律教育",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "统一党和部队的思想",
+      "label": "统一党和部队的思想",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "群众性的自我教育和相互教育运动",
+      "label": "群众性的自我教育和相互教育运动",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_023"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "群众教育工作",
+      "label": "群众教育工作",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "能独立解决问题的工作干部",
+      "label": "能独立解决问题的工作干部",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "苏区党代表会议",
+      "label": "苏区党代表会议",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "被俘、起义部队",
+      "label": "被俘、起义部队",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_031"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "诉苦三查",
+      "label": "诉苦三查",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "诉苦与三查",
+      "label": "诉苦与三查",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_023"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "诉苦和三查",
+      "label": "诉苦和三查",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "通过思想政治教育克服党内错误倾向的路线",
+      "label": "通过思想政治教育克服党内错误倾向的路线",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "遵义会议",
+      "label": "遵义会议",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "部队的各项任务",
+      "label": "部队的各项任务",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "长征",
+      "label": "长征",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "长征中的思想政治教育",
+      "label": "长征中的思想政治教育",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "长征的伟大胜利",
+      "label": "长征的伟大胜利",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "长征精神",
+      "label": "长征精神",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "阶级觉悟",
+      "label": "阶级觉悟",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "陈望道",
+      "label": "陈望道",
+      "type": "person",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "陈独秀",
+      "label": "陈独秀",
+      "type": "person",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "陕北",
+      "label": "陕北",
+      "type": "place",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "陕甘宁边区",
+      "label": "陕甘宁边区",
+      "type": "place",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "革命军队的生命线",
+      "label": "革命军队的生命线",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "革命的政治工作",
+      "label": "革命的政治工作",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "degree": 2
+    },
+    {
+      "id": "革命的道路",
+      "label": "革命的道路",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "马克思主义",
+      "label": "马克思主义",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022",
+        "chunk_sizheng_v1_028",
+        "chunk_sizheng_v1_032"
+      ],
+      "degree": 4
+    },
+    {
+      "id": "马克思主义与中国工人运动",
+      "label": "马克思主义与中国工人运动",
+      "type": "event",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "马克思主义启蒙教育活动",
+      "label": "马克思主义启蒙教育活动",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "马克思主义和党的方针政策",
+      "label": "马克思主义和党的方针政策",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "马克思主义和党的革命宗旨",
+      "label": "马克思主义和党的革命宗旨",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "马克思主义建党思想",
+      "label": "马克思主义建党思想",
+      "type": "organization",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "马克思主义旗帜之下",
+      "label": "马克思主义旗帜之下",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "马列主义的理论",
+      "label": "马列主义的理论",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "鸟之两翼，车之两轮",
+      "label": "鸟之两翼，车之两轮",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "degree": 1
+    },
+    {
+      "id": "鼓动工作",
+      "label": "鼓动工作",
+      "type": "concept",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "degree": 1
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_001",
+      "source": "十月革命",
+      "target": "世界上第一个社会主义国家",
+      "relation": "创立",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "directed": true,
+      "display_label": "创立"
+    },
+    {
+      "id": "edge_002",
+      "source": "中国一批先进分子",
+      "target": "马克思主义旗帜之下",
+      "relation": "汇集到",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "directed": true,
+      "display_label": "汇集到"
+    },
+    {
+      "id": "edge_003",
+      "source": "中国共产党的成立",
+      "target": "中国革命有了新的领导核心",
+      "relation": "标志着",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "directed": true,
+      "display_label": "标志着"
+    },
+    {
+      "id": "edge_004",
+      "source": "中国共产党的成立",
+      "target": "中国共产党思想政治教育的良好开端",
+      "relation": "标志着",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "directed": true,
+      "display_label": "标志着"
+    },
+    {
+      "id": "edge_005",
+      "source": "中国共产党人",
+      "target": "马克思主义和党的方针政策",
+      "relation": "宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "directed": true,
+      "display_label": "宣传"
+    },
+    {
+      "id": "edge_006",
+      "source": "中国共产党人",
+      "target": "思想政治教育",
+      "relation": "进行了",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "directed": true,
+      "display_label": "进行了"
+    },
+    {
+      "id": "edge_007",
+      "source": "中国共产党人",
+      "target": "人民当家作主的新中国",
+      "relation": "建立",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "directed": true,
+      "display_label": "建立"
+    },
+    {
+      "id": "edge_008",
+      "source": "中国共产党的成立",
+      "target": "马克思主义与中国工人运动",
+      "relation": "是结合产物",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "directed": true,
+      "display_label": "是结合产物"
+    },
+    {
+      "id": "edge_009",
+      "source": "先进知识分子",
+      "target": "共产主义小组",
+      "relation": "依托",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "directed": true,
+      "display_label": "依托"
+    },
+    {
+      "id": "edge_010",
+      "source": "先进知识分子",
+      "target": "马克思主义启蒙教育活动",
+      "relation": "开展",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "directed": true,
+      "display_label": "开展"
+    },
+    {
+      "id": "edge_011",
+      "source": "中国共产党",
+      "target": "1921年7月",
+      "relation": "成立于",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "directed": true,
+      "display_label": "成立于"
+    },
+    {
+      "id": "edge_012",
+      "source": "中国共产党",
+      "target": "工人运动",
+      "relation": "发动和领导",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_021"
+      ],
+      "directed": true,
+      "display_label": "发动和领导"
+    },
+    {
+      "id": "edge_013",
+      "source": "上海共产主义小组",
+      "target": "马克思主义",
+      "relation": "研究和宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "研究和宣传"
+    },
+    {
+      "id": "edge_014",
+      "source": "上海党组织",
+      "target": "社会主义青年团",
+      "relation": "建立",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "建立"
+    },
+    {
+      "id": "edge_015",
+      "source": "《新青年》",
+      "target": "马克思主义和党的革命宗旨",
+      "relation": "宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "宣传"
+    },
+    {
+      "id": "edge_016",
+      "source": "《新青年》",
+      "target": "俄罗斯研究",
+      "relation": "开辟",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "开辟"
+    },
+    {
+      "id": "edge_017",
+      "source": "陈望道",
+      "target": "《共产党宣言》最早的中文全译本",
+      "relation": "翻译",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "翻译"
+    },
+    {
+      "id": "edge_018",
+      "source": "《共产党》月刊",
+      "target": "马克思主义建党思想",
+      "relation": "宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "宣传"
+    },
+    {
+      "id": "edge_019",
+      "source": "上海共产主义小组",
+      "target": "《中国共产党宣言》",
+      "relation": "起草",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "起草"
+    },
+    {
+      "id": "edge_020",
+      "source": "《劳动界》周刊",
+      "target": "马克思主义",
+      "relation": "面向工人宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "面向工人宣传"
+    },
+    {
+      "id": "edge_021",
+      "source": "上海机器工人工会",
+      "target": "1920年11月21日",
+      "relation": "成立于",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_022"
+      ],
+      "directed": true,
+      "display_label": "成立于"
+    },
+    {
+      "id": "edge_022",
+      "source": "中国共产党第一次全国代表大会",
+      "target": "1921年7月23日",
+      "relation": "召开于",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "召开于"
+    },
+    {
+      "id": "edge_023",
+      "source": "中国共产党第一次全国代表大会",
+      "target": "中央局",
+      "relation": "选举",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "选举"
+    },
+    {
+      "id": "edge_024",
+      "source": "中央局",
+      "target": "陈独秀",
+      "relation": "由其任书记",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "由其任书记"
+    },
+    {
+      "id": "edge_025",
+      "source": "李达",
+      "target": "宣传主任",
+      "relation": "任职",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "任职"
+    },
+    {
+      "id": "edge_026",
+      "source": "中国共产党",
+      "target": "马克思主义",
+      "relation": "以其为行动指南",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "以其为行动指南"
+    },
+    {
+      "id": "edge_027",
+      "source": "中国共产党第一次全国代表大会",
+      "target": "《中国共产党第一个纲领》",
+      "relation": "通过",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "通过"
+    },
+    {
+      "id": "edge_028",
+      "source": "中国共产党第一次全国代表大会",
+      "target": "《中国共产党第一个决议》",
+      "relation": "通过",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "通过"
+    },
+    {
+      "id": "edge_029",
+      "source": "党的一大",
+      "target": "思想政治教育的基本原则",
+      "relation": "确立",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "directed": true,
+      "display_label": "确立"
+    },
+    {
+      "id": "edge_030",
+      "source": "《中国共产党第一个决议》",
+      "target": "党对宣传工作的绝对领导",
+      "relation": "规定",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_029"
+      ],
+      "directed": true,
+      "display_label": "规定"
+    },
+    {
+      "id": "edge_031",
+      "source": "思想政治教育活动",
+      "target": "党的原则、纲领和决议",
+      "relation": "必须遵守",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_029"
+      ],
+      "directed": true,
+      "display_label": "必须遵守"
+    },
+    {
+      "id": "edge_032",
+      "source": "思想政治教育",
+      "target": "党性原则",
+      "relation": "具有",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_029"
+      ],
+      "directed": true,
+      "display_label": "具有"
+    },
+    {
+      "id": "edge_033",
+      "source": "思想政治教育",
+      "target": "马克思主义",
+      "relation": "以其为指导思想",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_032"
+      ],
+      "directed": true,
+      "display_label": "以其为指导思想"
+    },
+    {
+      "id": "edge_034",
+      "source": "思想政治教育",
+      "target": "中国共产党",
+      "relation": "由其领导",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_032"
+      ],
+      "directed": true,
+      "display_label": "由其领导"
+    },
+    {
+      "id": "edge_035",
+      "source": "思想政治教育",
+      "target": "提高工人阶级思想觉悟",
+      "relation": "主要任务是",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_032"
+      ],
+      "directed": true,
+      "display_label": "主要任务是"
+    },
+    {
+      "id": "edge_036",
+      "source": "中央“九月来信”",
+      "target": "“工农武装割据”思想",
+      "relation": "肯定",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "directed": true,
+      "display_label": "肯定"
+    },
+    {
+      "id": "edge_037",
+      "source": "中央“九月来信”",
+      "target": "建党建军路线",
+      "relation": "肯定",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "directed": true,
+      "display_label": "肯定"
+    },
+    {
+      "id": "edge_038",
+      "source": "中央“九月来信”",
+      "target": "古田会议",
+      "relation": "为其召开创造前提",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "directed": true,
+      "display_label": "为其召开创造前提"
+    },
+    {
+      "id": "edge_039",
+      "source": "古田会议",
+      "target": "毛泽东为前委书记",
+      "relation": "选举",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "directed": true,
+      "display_label": "选举"
+    },
+    {
+      "id": "edge_040",
+      "source": "古田会议",
+      "target": "通过思想政治教育克服党内错误倾向的路线",
+      "relation": "确定",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "directed": true,
+      "display_label": "确定"
+    },
+    {
+      "id": "edge_041",
+      "source": "《古田会议决议》",
+      "target": "思想政治教育的纲领性文献",
+      "relation": "是",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "directed": true,
+      "display_label": "是"
+    },
+    {
+      "id": "edge_042",
+      "source": "《古田会议决议》",
+      "target": "党的思想政治教育理论形成",
+      "relation": "标志着",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "directed": true,
+      "display_label": "标志着"
+    },
+    {
+      "id": "edge_043",
+      "source": "革命的政治工作",
+      "target": "革命军队的生命线",
+      "relation": "是",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "directed": true,
+      "display_label": "是"
+    },
+    {
+      "id": "edge_044",
+      "source": "革命的政治工作",
+      "target": "党的绝对领导下的革命军队",
+      "relation": "保证",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_094"
+      ],
+      "directed": true,
+      "display_label": "保证"
+    },
+    {
+      "id": "edge_045",
+      "source": "中央红军",
+      "target": "陕北",
+      "relation": "到达",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "directed": true,
+      "display_label": "到达"
+    },
+    {
+      "id": "edge_046",
+      "source": "红军三大主力",
+      "target": "长征的伟大胜利",
+      "relation": "会师并取得",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "directed": true,
+      "display_label": "会师并取得"
+    },
+    {
+      "id": "edge_047",
+      "source": "长征中的思想政治教育",
+      "target": "红军从失败走向胜利",
+      "relation": "保障",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "directed": true,
+      "display_label": "保障"
+    },
+    {
+      "id": "edge_048",
+      "source": "遵义会议",
+      "target": "生死攸关的转折点",
+      "relation": "是",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "directed": true,
+      "display_label": "是"
+    },
+    {
+      "id": "edge_049",
+      "source": "传达遵义会议精神",
+      "target": "统一党和部队的思想",
+      "relation": "旨在",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "directed": true,
+      "display_label": "旨在"
+    },
+    {
+      "id": "edge_050",
+      "source": "毛泽东",
+      "target": "四渡赤水河",
+      "relation": "直接指挥",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "directed": true,
+      "display_label": "直接指挥"
+    },
+    {
+      "id": "edge_051",
+      "source": "党中央的正确路线",
+      "target": "红军长征胜利的思想基础",
+      "relation": "奠定",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "directed": true,
+      "display_label": "奠定"
+    },
+    {
+      "id": "edge_052",
+      "source": "中革军委和总政治部",
+      "target": "纪律教育",
+      "relation": "强调",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116"
+      ],
+      "directed": true,
+      "display_label": "强调"
+    },
+    {
+      "id": "edge_053",
+      "source": "总政治部",
+      "target": "《关于进遵义城的口号和八项注意通令》",
+      "relation": "发布",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116"
+      ],
+      "directed": true,
+      "display_label": "发布"
+    },
+    {
+      "id": "edge_054",
+      "source": "总政治部",
+      "target": "红军是工农群众自己的队伍",
+      "relation": "宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_116"
+      ],
+      "directed": true,
+      "display_label": "宣传"
+    },
+    {
+      "id": "edge_055",
+      "source": "红军",
+      "target": "各民族一律平等的政策",
+      "relation": "宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "directed": true,
+      "display_label": "宣传"
+    },
+    {
+      "id": "edge_056",
+      "source": "总政治部",
+      "target": "《关于争取少数民族的指示》",
+      "relation": "发布",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "directed": true,
+      "display_label": "发布"
+    },
+    {
+      "id": "edge_057",
+      "source": "《关于争取少数民族的指示》",
+      "target": "少数民族的风俗习惯和宗教信仰",
+      "relation": "要求尊重",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "directed": true,
+      "display_label": "要求尊重"
+    },
+    {
+      "id": "edge_058",
+      "source": "刘伯承",
+      "target": "小叶丹",
+      "relation": "与其歃血为盟",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "directed": true,
+      "display_label": "与其歃血为盟"
+    },
+    {
+      "id": "edge_059",
+      "source": "长征",
+      "target": "长征精神",
+      "relation": "形成",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "directed": true,
+      "display_label": "形成"
+    },
+    {
+      "id": "edge_060",
+      "source": "中国共产党",
+      "target": "干部教育",
+      "relation": "重视",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "重视"
+    },
+    {
+      "id": "edge_061",
+      "source": "干部教育",
+      "target": "党的重要战略任务",
+      "relation": "是",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "是"
+    },
+    {
+      "id": "edge_062",
+      "source": "干部教育",
+      "target": "抗战胜利",
+      "relation": "是重要保证",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "是重要保证"
+    },
+    {
+      "id": "edge_063",
+      "source": "苏区党代表会议",
+      "target": "延安",
+      "relation": "举行于",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "举行于"
+    },
+    {
+      "id": "edge_064",
+      "source": "中共中央",
+      "target": "干部教育部",
+      "relation": "成立",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "成立"
+    },
+    {
+      "id": "edge_065",
+      "source": "张闻天",
+      "target": "干部教育部",
+      "relation": "任部长",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "任部长"
+    },
+    {
+      "id": "edge_066",
+      "source": "干部教育",
+      "target": "共产主义思想",
+      "relation": "以其为指导思想",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "以其为指导思想"
+    },
+    {
+      "id": "edge_067",
+      "source": "干部教育",
+      "target": "思想教育",
+      "relation": "包括",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "directed": true,
+      "display_label": "包括"
+    },
+    {
+      "id": "edge_068",
+      "source": "抗战时期的干部教育",
+      "target": "学校教育和在职教育",
+      "relation": "主要形式",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "directed": true,
+      "display_label": "主要形式"
+    },
+    {
+      "id": "edge_069",
+      "source": "陕甘宁边区",
+      "target": "中央党校",
+      "relation": "举办",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "directed": true,
+      "display_label": "举办"
+    },
+    {
+      "id": "edge_070",
+      "source": "陕甘宁边区",
+      "target": "抗日军政大学",
+      "relation": "举办",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "directed": true,
+      "display_label": "举办"
+    },
+    {
+      "id": "edge_071",
+      "source": "干部学校",
+      "target": "为抗战服务、理论联系实际的教育方针",
+      "relation": "坚持",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_150"
+      ],
+      "directed": true,
+      "display_label": "坚持"
+    },
+    {
+      "id": "edge_072",
+      "source": "张闻天",
+      "target": "《党的宣传鼓动工作提纲》",
+      "relation": "起草",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "directed": true,
+      "display_label": "起草"
+    },
+    {
+      "id": "edge_073",
+      "source": "宣传工作",
+      "target": "文字",
+      "relation": "主要形式",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "directed": true,
+      "display_label": "主要形式"
+    },
+    {
+      "id": "edge_074",
+      "source": "鼓动工作",
+      "target": "口头",
+      "relation": "主要形式",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "directed": true,
+      "display_label": "主要形式"
+    },
+    {
+      "id": "edge_075",
+      "source": "党的宣传鼓动工作",
+      "target": "马列主义的理论",
+      "relation": "宣传",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "directed": true,
+      "display_label": "宣传"
+    },
+    {
+      "id": "edge_076",
+      "source": "党的宣传鼓动工作",
+      "target": "党内教育和群众教育",
+      "relation": "分为",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "directed": true,
+      "display_label": "分为"
+    },
+    {
+      "id": "edge_077",
+      "source": "党内教育",
+      "target": "能独立解决问题的工作干部",
+      "relation": "培养",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "directed": true,
+      "display_label": "培养"
+    },
+    {
+      "id": "edge_078",
+      "source": "群众教育工作",
+      "target": "革命的道路",
+      "relation": "引导群众走向",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166"
+      ],
+      "directed": true,
+      "display_label": "引导群众走向"
+    },
+    {
+      "id": "edge_079",
+      "source": "宣传鼓动",
+      "target": "事实真实、生动",
+      "relation": "要求",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "directed": true,
+      "display_label": "要求"
+    },
+    {
+      "id": "edge_080",
+      "source": "宣传鼓动工作和组织工作",
+      "target": "鸟之两翼，车之两轮",
+      "relation": "犹如",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "directed": true,
+      "display_label": "犹如"
+    },
+    {
+      "id": "edge_081",
+      "source": "宣传鼓动工作",
+      "target": "中央总的宣传政策领导",
+      "relation": "统一于",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "directed": true,
+      "display_label": "统一于"
+    },
+    {
+      "id": "edge_082",
+      "source": "《党的宣传鼓动工作提纲》",
+      "target": "党的宣传教育工作系统化、规范化",
+      "relation": "标志着",
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "directed": true,
+      "display_label": "标志着"
+    },
+    {
+      "id": "edge_083",
+      "source": "《宣传工作决议案》",
+      "target": "中央宣传部",
+      "relation": "要求建立健全",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "directed": true,
+      "display_label": "要求建立健全"
+    },
+    {
+      "id": "edge_084",
+      "source": "中央宣传部",
+      "target": "全国范围内的宣传教育工作",
+      "relation": "指导",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "directed": true,
+      "display_label": "指导"
+    },
+    {
+      "id": "edge_085",
+      "source": "党支部",
+      "target": "宣传干事",
+      "relation": "设置",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "directed": true,
+      "display_label": "设置"
+    },
+    {
+      "id": "edge_086",
+      "source": "支部",
+      "target": "宣传鼓动工作",
+      "relation": "是基本组织",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_005"
+      ],
+      "directed": true,
+      "display_label": "是基本组织"
+    },
+    {
+      "id": "edge_087",
+      "source": "支部",
+      "target": "具体更群众化的宣传工作",
+      "relation": "负责",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_005"
+      ],
+      "directed": true,
+      "display_label": "负责"
+    },
+    {
+      "id": "edge_088",
+      "source": "新式整军运动",
+      "target": "1947年冬至1948年夏",
+      "relation": "开展于",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "directed": true,
+      "display_label": "开展于"
+    },
+    {
+      "id": "edge_089",
+      "source": "新式整军运动",
+      "target": "诉苦和三查",
+      "relation": "采取",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "directed": true,
+      "display_label": "采取"
+    },
+    {
+      "id": "edge_090",
+      "source": "三查",
+      "target": "查阶级、查工作、查斗志",
+      "relation": "包括",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "directed": true,
+      "display_label": "包括"
+    },
+    {
+      "id": "edge_091",
+      "source": "新式整军运动",
+      "target": "大规模阶级教育和思想整顿",
+      "relation": "是",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "directed": true,
+      "display_label": "是"
+    },
+    {
+      "id": "edge_092",
+      "source": "新式整军运动",
+      "target": "部队的各项任务",
+      "relation": "结合",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "directed": true,
+      "display_label": "结合"
+    },
+    {
+      "id": "edge_093",
+      "source": "毛泽东",
+      "target": "新式整军运动",
+      "relation": "命名",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "directed": true,
+      "display_label": "命名"
+    },
+    {
+      "id": "edge_094",
+      "source": "诉苦三查",
+      "target": "阶级觉悟",
+      "relation": "提高",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "directed": true,
+      "display_label": "提高"
+    },
+    {
+      "id": "edge_095",
+      "source": "诉苦三查",
+      "target": "战斗力",
+      "relation": "提高",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "directed": true,
+      "display_label": "提高"
+    },
+    {
+      "id": "edge_096",
+      "source": "新式整军运动",
+      "target": "干部战士的政治觉悟",
+      "relation": "提高",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_023"
+      ],
+      "directed": true,
+      "display_label": "提高"
+    },
+    {
+      "id": "edge_097",
+      "source": "诉苦与三查",
+      "target": "群众性的自我教育和相互教育运动",
+      "relation": "是",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_023"
+      ],
+      "directed": true,
+      "display_label": "是"
+    },
+    {
+      "id": "edge_098",
+      "source": "新式整军运动",
+      "target": "人的认识规律",
+      "relation": "遵循",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_023"
+      ],
+      "directed": true,
+      "display_label": "遵循"
+    },
+    {
+      "id": "edge_099",
+      "source": "中国人民解放军",
+      "target": "新式整军运动",
+      "relation": "开展",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_034"
+      ],
+      "directed": true,
+      "display_label": "开展"
+    },
+    {
+      "id": "edge_100",
+      "source": "被俘、起义部队",
+      "target": "人民解放军的指挥、调动",
+      "relation": "服从",
+      "source_chunk_ids": [
+        "chunk_sizheng_v2_031"
+      ],
+      "directed": true,
+      "display_label": "服从"
+    }
+  ],
+  "display_paths": [
+    {
+      "id": "demo_zhangwentian_propaganda_outline",
+      "question": "张闻天起草的《党的宣传鼓动工作提纲》为什么重要？",
+      "seed_entities": [
+        "张闻天"
+      ],
+      "hops": 2,
+      "nodes": [
+        "张闻天",
+        "《党的宣传鼓动工作提纲》",
+        "党的宣传教育工作系统化、规范化"
+      ],
+      "relations": [
+        "起草",
+        "标志着"
+      ],
+      "source_chunk_ids": [
+        "chunk_sizheng_v1_166",
+        "chunk_sizheng_v1_167"
+      ],
+      "path_text": "张闻天 --起草--> 《党的宣传鼓动工作提纲》 --标志着--> 党的宣传教育工作系统化、规范化",
+      "evidence_chunks": [
+        {
+          "id": "chunk_sizheng_v1_166",
+          "title": "思想政治教育若干重要论著的发表（4）",
+          "citation": {
+            "doc": "中国共产党思想政治教育史",
+            "section": "第三章 抗日战争时期思想政治教育的日趋成熟 / 第三节 思想政治教育理论形成体系 / 二、思想政治教育若干重要论著的发表",
+            "page": 130
+          },
+          "text": "1941年6月，张闻天为中共中央宣传部起草了《党的宣传鼓动工作提纲》，主要内容有如下四个方面。第一，阐述了宣传鼓动工作的基本概念、性质、特点、范围和任务。张闻天在《提纲》中指出：宣传鼓动是思想意识方面的活动。宣传与鼓动是两个不同的环节，宣传工作主要是文字上的，带有经常性的特点。鼓动工作则主要是口头上的，带有临时性的特点。党的宣传鼓动工作范围非常广泛，“举凡一切理论、政治、教育、文化、文艺等等均属于宣传鼓动活动的范围。”党的宣传鼓动工作的任务是宣传马列主义的理论、党的纲领与主张、党的战略与策略，是在思想意识上动员全民族与全国人民为革命在一定阶段内的彻底胜利而奋斗。第二，论述了宣传鼓动工作的目的与内容。张闻天指出，党的宣传鼓动分为党内教育和群众教育两大部分。“党内教育的目的，就是提高全党政治理论的水准，思想上巩固党的队伍，培养掌握马列主义的能独立解决问题的工作干部。”群众教育工作“就是利用群众所熟悉的事实及切身的问题，目前国际国内或当时当地所发生的事件向群众解释，使群众认识事件的真象”，引导群众走革命的道路。党的宣传鼓动的内容是：马列主义，中国共产党的建设，中国革命的经验教训，党在各个革命时期的政治路线与具体政策，中国历史，中国社会政治经济知识等。第三，提出了宣传鼓动工作的原则与方法。张闻天指出，宣传鼓动工作的基本原则有：要掌握党的路线与政策；要正确估计客观环境；要区别不同情况进行宣传鼓动工作；"
+        },
+        {
+          "id": "chunk_sizheng_v1_167",
+          "title": "思想政治教育若干重要论著的发表（5）",
+          "citation": {
+            "doc": "中国共产党思想政治教育史",
+            "section": "第三章 抗日战争时期思想政治教育的日趋成熟 / 第三节 思想政治教育理论形成体系 / 二、思想政治教育若干重要论著的发表",
+            "page": 130
+          },
+          "text": "要根据群众自身的政治经验、觉悟程度与文化水平进行宣传鼓动；要坚持统一战线的策略方针；要善于使用一切宣传鼓动方式；要善于使用一切宣传鼓动的工具等。关于宣传鼓动的方法，张闻天指出，我们要掌握宣传鼓动工作的一般方法与特别方法。宣传鼓动要有说服力，要特别注意宣传内容的充实，语言要简单、明了、清楚、透彻，事实真实、生动。讲话要生动，富于情感，富于煽动性，时间要短。第四，强调了宣传鼓动工作的组织领导。张闻天指出，要注重宣传鼓动干部的培养，宣传家和鼓动家要具有很高的宣传鼓动素质。党的宣传鼓动工作和组织工作对于我党犹如“鸟之两翼，车之两轮，不可缺一”。要加强宣传工作的统一领导，健全宣传工作的组织系统。张闻天最后强调指出：“全党的宣传鼓动工作必须统一在中央总的宣传政策领导之下”，反对各自为政的宣传政策。《党的宣传鼓动工作提纲》一文，是党的宣传教育工作系统化、规范化的标志，在党的思想政治教育历史上具有重要地位。"
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "nodes": 147,
+    "edges": 100,
+    "evidence_chunks": 245
+  }
+}
