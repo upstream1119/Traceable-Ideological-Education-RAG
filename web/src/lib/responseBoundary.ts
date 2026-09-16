@@ -141,6 +141,7 @@ export function validateRetrieveResponse(input: unknown): BoundaryResult {
   if (
     !isRecord(input.source_check) ||
     !isRecord(input.policy_check) ||
+    !Array.isArray(input.citations_used) ||
     !Array.isArray(input.agent_trace) ||
     !Array.isArray(input.hybrid_hits)
   ) {

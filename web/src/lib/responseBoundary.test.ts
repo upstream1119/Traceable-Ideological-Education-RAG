@@ -58,6 +58,18 @@ function makeResponse(
 }
 
 describe("Response Boundary", () => {
+  it("missing citations_used returns Contract Error", () => {
+    const input = makeResponse();
+    delete input.citations_used;
+
+    const result = validateRetrieveResponse(input);
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe("retrieve_response_shape_incomplete");
+    }
+  });
+
   it("missing final_decision returns Contract Error", () => {
     const input = makeResponse();
     delete input.final_decision;
@@ -128,6 +140,60 @@ describe("Response Boundary", () => {
     }
   });
 
+  it("digital_human + missing narrative_character returns Contract Error", () => {
+    const response = makeResponse(
+      {},
+      {
+        intent_type: "character_narrative",
+        presentation_mode: "digital_human",
+      },
+    );
+    delete (response.display_route as Record<string, unknown>).narrative_character;
+
+    const result = validateRetrieveResponse(response);
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe("digital_human_character_required");
+    }
+  });
+
+  it("digital_human + empty narrative_character returns Contract Error", () => {
+    const result = validateRetrieveResponse(
+      makeResponse(
+        {},
+        {
+          intent_type: "character_narrative",
+          presentation_mode: "digital_human",
+          narrative_character: "",
+        },
+      ),
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe("digital_human_character_required");
+    }
+  });
+
+  it("digital_human + invalid narrative_character type returns Contract Error", () => {
+    const result = validateRetrieveResponse(
+      makeResponse(
+        {},
+        {
+          intent_type: "character_narrative",
+          presentation_mode: "digital_human",
+          narrative_character: 123,
+        },
+      ),
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe("digital_human_character_required");
+    }
+  });
+
   it("character_narrative + evidence_cards is legal", () => {
     const result = validateRetrieveResponse(
       makeResponse(
@@ -146,6 +212,17 @@ describe("Response Boundary", () => {
   it("non timeline_map with non-empty timeline_ids returns Contract Error", () => {
     const result = validateRetrieveResponse(
       makeResponse({}, { timeline_ids: ["timeline_sizheng_1921_foundation_001"] }),
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe("cross_field_assets_not_allowed");
+    }
+  });
+
+  it("non timeline_map with non-empty landmark_ids returns Contract Error", () => {
+    const result = validateRetrieveResponse(
+      makeResponse({}, { landmark_ids: ["landmark_1921_jiaxing_nanhu_001"] }),
     );
 
     expect(result.ok).toBe(false);
