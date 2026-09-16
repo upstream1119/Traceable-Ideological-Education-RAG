@@ -62,3 +62,5 @@ python src/utils/build_force_graph.py
 路径：`张闻天 --起草--> 《党的宣传鼓动工作提纲》 --标志着--> 党的宣传教育工作系统化、规范化`
 
 证据：`chunk_sizheng_v1_166`、`chunk_sizheng_v1_167`。`display_paths[0].evidence_chunks` 已内嵌标题、正文和 citation，可直接展示，无需人工抄图。
+
+`display_paths` 不保存手写路径常量。构建脚本只保存演示问题的起点、终点和最大跳数，并通过正式三元组邻接表动态计算路径、关系及逐边证据。必要边或正式 chunk 缺失时，构建会直接失败，避免生成过期演示数据。

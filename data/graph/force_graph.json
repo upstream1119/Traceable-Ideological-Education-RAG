@@ -290,7 +290,7 @@
     {
       "id": "中国革命有了新的领导核心",
       "label": "中国革命有了新的领导核心",
-      "type": "event",
+      "type": "concept",
       "source_chunk_ids": [
         "chunk_sizheng_v1_001"
       ],
@@ -407,7 +407,7 @@
     {
       "id": "传达遵义会议精神",
       "label": "传达遵义会议精神",
-      "type": "event",
+      "type": "concept",
       "source_chunk_ids": [
         "chunk_sizheng_v1_111"
       ],
@@ -925,7 +925,7 @@
     {
       "id": "新式整军运动",
       "label": "新式整军运动",
-      "type": "organization",
+      "type": "event",
       "source_chunk_ids": [
         "chunk_sizheng_v2_021",
         "chunk_sizheng_v2_022",
@@ -1082,7 +1082,7 @@
     {
       "id": "苏区党代表会议",
       "label": "苏区党代表会议",
-      "type": "organization",
+      "type": "event",
       "source_chunk_ids": [
         "chunk_sizheng_v1_148"
       ],
@@ -1163,7 +1163,7 @@
     {
       "id": "长征中的思想政治教育",
       "label": "长征中的思想政治教育",
-      "type": "event",
+      "type": "concept",
       "source_chunk_ids": [
         "chunk_sizheng_v1_110"
       ],
@@ -1172,7 +1172,7 @@
     {
       "id": "长征的伟大胜利",
       "label": "长征的伟大胜利",
-      "type": "event",
+      "type": "concept",
       "source_chunk_ids": [
         "chunk_sizheng_v1_110"
       ],
@@ -1181,7 +1181,7 @@
     {
       "id": "长征精神",
       "label": "长征精神",
-      "type": "event",
+      "type": "concept",
       "source_chunk_ids": [
         "chunk_sizheng_v1_117"
       ],
@@ -1244,7 +1244,7 @@
     {
       "id": "革命的政治工作",
       "label": "革命的政治工作",
-      "type": "event",
+      "type": "concept",
       "source_chunk_ids": [
         "chunk_sizheng_v1_094"
       ],
@@ -1253,7 +1253,7 @@
     {
       "id": "革命的道路",
       "label": "革命的道路",
-      "type": "event",
+      "type": "concept",
       "source_chunk_ids": [
         "chunk_sizheng_v1_166"
       ],
