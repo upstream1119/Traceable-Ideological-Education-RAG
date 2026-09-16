@@ -5,6 +5,7 @@ import pytest
 
 from src.graph.graph_store import (
     build_adjacency,
+    build_edge_lookup,
     build_relation_lookup,
     expand_entities,
     find_entity_paths,
@@ -13,7 +14,10 @@ from src.graph.graph_store import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEMO_CHUNKS_PATH = REPO_ROOT / "data" / "processed" / "text_chunks_demo.jsonl"
+FORMAL_CHUNKS_PATHS = (
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v1.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v2.jsonl",
+)
 DEMO_TRIPLES_PATH = REPO_ROOT / "data" / "graph" / "triples_demo.jsonl"
 
 
@@ -26,11 +30,12 @@ def _write_jsonl(path, rows: list[dict]) -> None:
 
 def _load_chunks_by_id() -> dict[str, dict]:
     chunks: dict[str, dict] = {}
-    with DEMO_CHUNKS_PATH.open("r", encoding="utf-8") as f:
-        for line in f:
-            if line.strip():
-                item = json.loads(line)
-                chunks[item["id"]] = item
+    for chunks_path in FORMAL_CHUNKS_PATHS:
+        with chunks_path.open("r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    item = json.loads(line)
+                    chunks[item["id"]] = item
     return chunks
 
 
@@ -119,11 +124,29 @@ def test_demo_triples_cover_high_value_graphsim_queries():
     triples = load_triples(DEMO_TRIPLES_PATH)
     edges = {(triple["head"], triple["relation"], triple["tail"]) for triple in triples}
 
-    assert ("党的一大", "确定", "思想政治教育的根本目的") in edges
-    assert ("马克思主义", "在中国的传播成为", "滔滔滚滚的潮流") in edges
+    assert ("党的一大", "确立", "思想政治教育的基本原则") in edges
+    assert ("上海共产主义小组", "研究和宣传", "马克思主义") in edges
     assert ("中共中央", "成立", "干部教育部") in edges
     assert ("张闻天", "任部长", "干部教育部") in edges
-    assert ("国民党被俘、起义部队", "服从", "人民解放军的指挥、调动") in edges
+    assert ("新式整军运动", "采取", "诉苦和三查") in edges
+
+
+def test_paths_can_return_edge_level_chunk_evidence():
+    triples = load_triples(DEMO_TRIPLES_PATH)
+    paths = find_entity_paths(
+        ["张闻天"],
+        ["党的宣传教育工作系统化、规范化"],
+        build_adjacency(triples),
+        build_relation_lookup(triples),
+        edge_lookup=build_edge_lookup(triples),
+    )
+
+    assert paths[0]["hops"] == 2
+    assert paths[0]["source_chunk_ids"] == [
+        "chunk_sizheng_v1_166",
+        "chunk_sizheng_v1_167",
+    ]
+    assert all(edge["source_chunk_ids"] for edge in paths[0]["edges"])
 
 
 def test_build_adjacency_uses_bidirectional_edges_by_default():
@@ -187,7 +210,7 @@ def test_find_entity_paths_returns_explainable_one_hop_path():
             "head": "张闻天",
             "relation": "起草",
             "tail": "党的宣传鼓动工作提纲",
-            "source_chunk_ids": ["chunk_szzjys_demo_025"],
+            "source_chunk_ids": ["chunk_test_025"],
         }
     ]
     adjacency = build_adjacency(triples)
@@ -218,13 +241,13 @@ def test_find_entity_paths_returns_two_hop_path():
             "head": "抗日战争",
             "relation": "需要",
             "tail": "干部教育",
-            "source_chunk_ids": ["chunk_szzjys_demo_022"],
+            "source_chunk_ids": ["chunk_test_022"],
         },
         {
             "head": "干部教育",
             "relation": "服务于",
             "tail": "抗战胜利",
-            "source_chunk_ids": ["chunk_szzjys_demo_022"],
+            "source_chunk_ids": ["chunk_test_022"],
         },
     ]
     adjacency = build_adjacency(triples)

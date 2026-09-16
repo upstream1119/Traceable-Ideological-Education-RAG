@@ -9,6 +9,7 @@ from src.agents.agent_trace import build_agent_trace, build_final_decision
 from src.generator.evidence_generator import generate_answer
 from src.graph.graph_store import (
     build_adjacency,
+    build_edge_lookup,
     build_relation_lookup,
     expand_entities,
     find_entity_paths,
@@ -34,7 +35,10 @@ ALPHA = 0.7
 VECTOR_WEIGHT = ALPHA
 GRAPH_WEIGHT = 1 - ALPHA
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DEMO_CHUNKS_PATH = REPO_ROOT / "data" / "processed" / "text_chunks_demo.jsonl"
+FORMAL_CHUNKS_PATHS = (
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v1.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v2.jsonl",
+)
 DEMO_TRIPLES_PATH = REPO_ROOT / "data" / "graph" / "triples_demo.jsonl"
 
 # 当前阶段用固定词表演示 query -> entities 的流程，后续替换为真实实体识别。
@@ -57,19 +61,22 @@ MOCK_ENTITY_MAP = {
     "精神": "革命精神",
     "革命精神": "革命精神",
     "张闻天": "张闻天",
-    "宣传鼓动工作提纲": "党的宣传鼓动工作提纲",
-    "党的宣传鼓动工作提纲": "党的宣传鼓动工作提纲",
+    "宣传鼓动工作提纲": "《党的宣传鼓动工作提纲》",
+    "党的宣传鼓动工作提纲": "《党的宣传鼓动工作提纲》",
     "中共中央宣传部": "中共中央宣传部",
     "新式整军运动": "新式整军运动",
     "人民解放军": "人民解放军",
-    "国民党起义投诚部队": "国民党被俘、起义部队",
-    "国民党投诚部队": "国民党被俘、起义部队",
-    "起义投诚部队": "国民党被俘、起义部队",
+    "国民党起义投诚部队": "被俘、起义部队",
+    "国民党投诚部队": "被俘、起义部队",
+    "起义投诚部队": "被俘、起义部队",
     "国民党军队": "国民党军队",
     "马克思主义传播": "马克思主义",
     "潮流": "滔滔滚滚的潮流",
     "党的一大": "党的一大",
     "三湾改编": "三湾改编",
+    "人民军队": "人民军队",
+    "中国人民解放军": "中国人民解放军",
+    "被俘和起义部队": "被俘、起义部队",
 }
 
 RELATION_TYPE_WEIGHTS = {
@@ -96,21 +103,21 @@ def _count_keyword_hits(keywords: list[str], content: str) -> int:
 
 @lru_cache(maxsize=1)
 def _load_demo_knowledge_base() -> list[dict]:
-    if not DEMO_CHUNKS_PATH.exists():
-        return []
-
     items: list[dict] = []
-    with DEMO_CHUNKS_PATH.open("r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            item = json.loads(line)
-            item.setdefault("entities", [])
-            item.setdefault("tags", [])
-            item.setdefault("related_entities", item.get("entities", []))
-            item.setdefault("topic", "")
-            items.append(item)
+    for chunks_path in FORMAL_CHUNKS_PATHS:
+        if not chunks_path.exists():
+            continue
+        with chunks_path.open("r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                item = json.loads(line)
+                item.setdefault("entities", [])
+                item.setdefault("tags", [])
+                item.setdefault("related_entities", item.get("entities", []))
+                item.setdefault("topic", "")
+                items.append(item)
     return items
 
 
@@ -127,6 +134,11 @@ def _load_demo_adjacency() -> dict[str, list[str]]:
 @lru_cache(maxsize=1)
 def _load_demo_relation_lookup() -> dict[tuple[str, str], str]:
     return build_relation_lookup(_load_demo_triples())
+
+
+@lru_cache(maxsize=1)
+def _load_demo_edge_lookup() -> dict[tuple[str, str], dict]:
+    return build_edge_lookup(_load_demo_triples())
 
 
 def _resolve_mode() -> str:
@@ -301,6 +313,7 @@ def _score_graph_hit(
             _load_demo_adjacency(),
             _load_demo_relation_lookup(),
             max_hops=2,
+            edge_lookup=_load_demo_edge_lookup(),
         ),
         query_entities,
         related_entities,

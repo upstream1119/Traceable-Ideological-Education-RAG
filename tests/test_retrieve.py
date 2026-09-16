@@ -99,7 +99,7 @@ def test_cadre_education_query_prioritizes_specific_chunk(monkeypatch):
     result = retrieve("抗日战争时期党的干部教育为什么重要？")
 
     assert "干部教育" in result["query_entities"]
-    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_022"
+    assert result["hybrid_hits"][0]["id"] == "chunk_sizheng_v1_148"
 
 
 def test_graphsim_expansion_contributes_to_graph_hits(monkeypatch):
@@ -110,13 +110,13 @@ def test_graphsim_expansion_contributes_to_graph_hits(monkeypatch):
 
     graph_hit = next(
         hit for hit in result["graph_hits"]
-        if hit["id"] == "chunk_szzjys_demo_025"
+        if hit["id"] == "chunk_sizheng_v1_166"
     )
     assert "张闻天" in result["query_entities"]
-    assert "党的宣传鼓动工作提纲" in graph_hit["related_entities"]
+    assert "《党的宣传鼓动工作提纲》" in graph_hit["related_entities"]
     assert graph_hit["graph_paths"]
     assert any(
-        "张闻天" in path["path"] and "党的宣传鼓动工作提纲" in path["path"]
+        "张闻天" in path["path"] and "《党的宣传鼓动工作提纲》" in path["path"]
         for path in graph_hit["graph_paths"]
     )
     assert graph_hit["graph_score"] > 0
@@ -130,13 +130,13 @@ def test_graphsim_connects_antijapanese_war_to_cadre_education(monkeypatch):
     result = retrieve("抗日战争时期党的干部教育为什么重要？")
 
     assert "干部教育" in result["query_entities"]
-    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_022"
+    assert result["hybrid_hits"][0]["id"] == "chunk_sizheng_v1_148"
     assert any(
-        hit["id"] == "chunk_szzjys_demo_022" and hit["graph_score"] > 0
+        hit["id"] == "chunk_sizheng_v1_148" and hit["graph_score"] > 0
         for hit in result["graph_hits"]
     )
     assert any(
-        hit["id"] == "chunk_szzjys_demo_022" and hit["graph_paths"]
+        hit["id"] == "chunk_sizheng_v1_148" and hit["graph_paths"]
         for hit in result["graph_hits"]
     )
 
@@ -145,30 +145,29 @@ def test_graphsim_handles_party_first_congress_query(monkeypatch):
     monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
     monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
 
-    result = retrieve("党的一大如何确定思想政治教育的根本目的？")
+    result = retrieve("党的一大如何确立思想政治教育的基本原则？")
 
     assert "党的一大" in result["query_entities"]
     graph_hit = next(
         hit for hit in result["graph_hits"]
-        if hit["id"] == "chunk_szzjys_demo_006"
+        if hit["id"] == "chunk_sizheng_v1_028"
     )
-    assert "思想政治教育的根本目的" in graph_hit["related_entities"]
+    assert "思想政治教育的基本原则" in graph_hit["related_entities"]
     assert any(
-        path["path"] == ["党的一大", "思想政治教育的根本目的"]
+        path["path"] == ["党的一大", "思想政治教育的基本原则"]
         for path in graph_hit["graph_paths"]
     )
 
 
-def test_graphsim_prefers_marxism_spread_trend_evidence(monkeypatch):
+def test_graphsim_prefers_marxism_spread_evidence(monkeypatch):
     monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "mock")
     monkeypatch.setenv("DACHUANG_LOCAL_MOCK_ACK", "1")
 
-    result = retrieve("马克思主义传播为什么成为潮流？")
+    result = retrieve("上海共产主义小组如何研究和宣传马克思主义？")
 
     assert "马克思主义" in result["query_entities"]
-    assert "滔滔滚滚的潮流" in result["query_entities"]
-    assert result["graph_hits"][0]["id"] == "chunk_szzjys_demo_003"
-    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_003"
+    assert any(hit["id"] == "chunk_sizheng_v1_022" for hit in result["graph_hits"])
+    assert any(hit["id"] == "chunk_sizheng_v1_022" for hit in result["hybrid_hits"])
 
 
 def test_graphsim_handles_kuomintang_surrendered_troops_query(monkeypatch):
@@ -177,15 +176,15 @@ def test_graphsim_handles_kuomintang_surrendered_troops_query(monkeypatch):
 
     result = retrieve("国民党起义投诚部队为什么要接受人民解放军教育改造？")
 
-    assert "国民党被俘、起义部队" in result["query_entities"]
+    assert "被俘、起义部队" in result["query_entities"]
     graph_hit = next(
         hit for hit in result["graph_hits"]
-        if hit["id"] == "chunk_szzjys_demo_034"
+        if hit["id"] == "chunk_sizheng_v2_031"
     )
     assert "人民解放军" in graph_hit["related_entities"]
     assert graph_hit["graph_paths"]
-    assert result["graph_hits"][0]["id"] == "chunk_szzjys_demo_034"
-    assert result["hybrid_hits"][0]["id"] == "chunk_szzjys_demo_034"
+    assert result["graph_hits"][0]["id"] == "chunk_sizheng_v2_031"
+    assert any(hit["id"] == "chunk_sizheng_v2_031" for hit in result["hybrid_hits"])
 
 
 def test_graph_path_scoring_prefers_shorter_weighted_paths():

@@ -57,6 +57,34 @@ def build_relation_lookup(
     return relation_lookup
 
 
+def build_edge_lookup(
+    triples: list[dict],
+    bidirectional: bool = True,
+) -> dict[tuple[str, str], dict]:
+    """Build an evidence-bearing edge lookup for explainable GraphSim paths."""
+    edge_lookup: dict[tuple[str, str], dict] = {}
+    for triple in triples:
+        head = triple["head"]
+        tail = triple["tail"]
+        evidence = {
+            "source": head,
+            "target": tail,
+            "relation": triple["relation"],
+            "source_chunk_ids": list(triple["source_chunk_ids"]),
+            "original_direction": True,
+        }
+        edge_lookup[(head, tail)] = evidence
+        if bidirectional:
+            edge_lookup[(tail, head)] = {
+                "source": tail,
+                "target": head,
+                "relation": "关联",
+                "source_chunk_ids": list(triple["source_chunk_ids"]),
+                "original_direction": False,
+            }
+    return edge_lookup
+
+
 def expand_entities(
     seed_entities: list[str],
     adjacency: dict[str, list[str]],
@@ -94,11 +122,13 @@ def find_entity_paths(
     relation_lookup: dict[tuple[str, str], str] | None = None,
     max_hops: int = 2,
     limit: int = 5,
+    edge_lookup: dict[tuple[str, str], dict] | None = None,
 ) -> list[dict]:
     if max_hops < 0:
         raise ValueError("max_hops must be greater than or equal to 0")
 
     relation_lookup = relation_lookup or {}
+    edge_lookup = edge_lookup or {}
     targets = set(_dedupe(target_entities))
     paths: list[dict] = []
     seen_paths: set[tuple[str, ...]] = set()
@@ -121,22 +151,54 @@ def find_entity_paths(
                     if path_key not in seen_paths:
                         seen_paths.add(path_key)
                         relations = _path_relations(next_path, relation_lookup)
-                        paths.append(
-                            {
-                                "from": seed,
-                                "to": neighbor,
-                                "hops": len(next_path) - 1,
-                                "path": next_path,
-                                "relations": relations,
-                                "path_text": _format_path_text(next_path, relations),
-                            }
-                        )
+                        path_result = {
+                            "from": seed,
+                            "to": neighbor,
+                            "hops": len(next_path) - 1,
+                            "path": next_path,
+                            "relations": relations,
+                            "path_text": _format_path_text(next_path, relations),
+                        }
+                        if edge_lookup:
+                            path_edges = _path_edges(next_path, relations, edge_lookup)
+                            path_result["source_chunk_ids"] = _path_source_chunk_ids(path_edges)
+                            path_result["edges"] = path_edges
+                        paths.append(path_result)
                     if len(paths) >= limit:
                         break
 
                 queue.append(next_path)
 
     return paths
+
+
+def _path_edges(
+    path: list[str],
+    relations: list[str],
+    edge_lookup: dict[tuple[str, str], dict],
+) -> list[dict]:
+    edges: list[dict] = []
+    for index, (source, target) in enumerate(zip(path, path[1:])):
+        evidence = edge_lookup.get((source, target), {})
+        edges.append(
+            {
+                "source": source,
+                "target": target,
+                "relation": relations[index],
+                "source_chunk_ids": list(evidence.get("source_chunk_ids", [])),
+                "original_direction": evidence.get("original_direction"),
+            }
+        )
+    return edges
+
+
+def _path_source_chunk_ids(edges: list[dict]) -> list[str]:
+    chunk_ids: list[str] = []
+    for edge in edges:
+        for chunk_id in edge.get("source_chunk_ids", []):
+            if chunk_id not in chunk_ids:
+                chunk_ids.append(chunk_id)
+    return chunk_ids
 
 
 def _append_unique(adjacency: dict[str, list[str]], source: str, target: str) -> None:
