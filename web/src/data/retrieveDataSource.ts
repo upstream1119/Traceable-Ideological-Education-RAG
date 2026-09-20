@@ -15,6 +15,21 @@ export interface RetrieveDataSource {
   retrieve(request: RetrieveRequest): Promise<RetrieveResponse>;
 }
 
+const DEFAULT_RETRIEVE_TIMEOUT_MS = 10_000;
+
+function resolveApiBaseUrl(): string {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+  if (!baseUrl) {
+    throw new AppError(
+      "transport",
+      "api_base_url_missing",
+      "缺少 VITE_API_BASE_URL，无法连接真实 /retrieve。",
+    );
+  }
+
+  return baseUrl.replace(/\/+$/, "");
+}
+
 export type MockScenarioId =
   | "approved_evidence"
   | "approved_timeline"
@@ -240,11 +255,76 @@ export class MockRetrieveDataSource implements RetrieveDataSource {
 }
 
 export class ApiRetrieveDataSource implements RetrieveDataSource {
-  async retrieve(_request: RetrieveRequest): Promise<RetrieveResponse> {
-    throw new AppError(
-      "transport",
-      "api_not_implemented",
-      "FE-B1 ApiRetrieveDataSource placeholder，FE-C 才连接真实 /retrieve。",
-    );
+  constructor(
+    private readonly baseUrl = resolveApiBaseUrl(),
+    private readonly timeoutMs = DEFAULT_RETRIEVE_TIMEOUT_MS,
+    private readonly fetchImpl: typeof fetch = fetch,
+  ) {}
+
+  async retrieve(request: RetrieveRequest): Promise<RetrieveResponse> {
+    const controller = new AbortController();
+    let timedOut = false;
+    const timeoutId = window.setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, this.timeoutMs);
+
+    try {
+      let response: Response;
+      try {
+        response = await this.fetchImpl(`${this.baseUrl.replace(/\/+$/, "")}/retrieve`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: request.query,
+            target_grade: request.target_grade ?? null,
+          }),
+          signal: controller.signal,
+        });
+      } catch (error: unknown) {
+        if (timedOut) {
+          throw new AppError("transport", "request_timeout", "请求 /retrieve 超时。");
+        }
+
+        throw new AppError("transport", "network_error", "无法连接 /retrieve。", error);
+      }
+
+      if (!response.ok) {
+        throw new AppError(
+          "transport",
+          "http_status",
+          `请求 /retrieve 失败（HTTP ${response.status}）。`,
+          { status: response.status },
+        );
+      }
+
+      let body: string;
+      try {
+        body = await response.text();
+      } catch (error: unknown) {
+        if (timedOut) {
+          throw new AppError("transport", "request_timeout", "请求 /retrieve 超时。");
+        }
+
+        throw new AppError("transport", "response_body_error", "无法读取 /retrieve 响应。", error);
+      }
+
+      if (!body.trim()) {
+        throw new AppError("transport", "empty_response", "/retrieve 返回空响应。");
+      }
+
+      try {
+        return JSON.parse(body) as RetrieveResponse;
+      } catch (error: unknown) {
+        throw new AppError(
+          "transport",
+          "invalid_json",
+          "/retrieve 返回了无法解析的 JSON。",
+          error,
+        );
+      }
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
   }
 }
