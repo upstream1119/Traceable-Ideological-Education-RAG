@@ -23,7 +23,13 @@ describe("DecisionGate", () => {
   });
 
   it("routes blocked into BlockedState without normal presentation", () => {
-    render(<DecisionGate response={getMockRetrieveResponse("blocked")} />);
+    const response = getMockRetrieveResponse("blocked");
+    expect(response.final_decision).toMatchObject({
+      status: "blocked",
+      can_output: false,
+      review_required: true,
+    });
+    render(<DecisionGate response={response} />);
 
     expect(screen.getByLabelText("阻断状态")).toBeInTheDocument();
     expect(screen.getByText("当前内容已阻断")).toBeInTheDocument();

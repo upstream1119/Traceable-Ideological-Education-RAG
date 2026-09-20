@@ -46,4 +46,34 @@ describe("App Shell", () => {
     expect(screen.queryByLabelText("EvidenceCardsView")).not.toBeInTheDocument();
     expect(screen.queryByText("FE-B2 Mock approved evidence answer。")).not.toBeInTheDocument();
   });
+
+  it.each([
+    {
+      id: "citation-title-invalid",
+      title: {},
+      citation: { doc: "doc", section: "section", page: null },
+    },
+    {
+      id: "citation-source-invalid",
+      source: {},
+      citation: { doc: "doc", section: "section", page: null },
+    },
+  ])("fails closed before rendering malformed citation metadata", async (citation) => {
+    const invalidResponse = getMockRetrieveResponse(
+      "approved_evidence",
+    ) as unknown as Record<string, unknown>;
+    invalidResponse.citations_used = [citation];
+
+    const invalidDataSource: RetrieveDataSource = {
+      async retrieve() {
+        return invalidResponse as unknown as RetrieveResponse;
+      },
+    };
+
+    render(<App dataSourceFactory={() => invalidDataSource} />);
+
+    expect(await screen.findByLabelText("数据契约异常")).toBeInTheDocument();
+    expect(screen.queryByLabelText("EvidenceCardsView")).not.toBeInTheDocument();
+    expect(screen.queryByText("FE-B2 Mock approved evidence answer。")).not.toBeInTheDocument();
+  });
 });

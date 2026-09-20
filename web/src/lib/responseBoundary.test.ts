@@ -100,6 +100,77 @@ describe("Response Boundary", () => {
     }
   });
 
+  it.each([
+    ["approved", true, false, true],
+    ["needs_review", false, true, true],
+    ["blocked", false, true, true],
+    ["approved", false, false, false],
+    ["approved", true, true, false],
+    ["needs_review", true, true, false],
+    ["needs_review", false, false, false],
+    ["blocked", true, true, false],
+    ["blocked", false, false, false],
+  ])(
+    "%s / can_output=%s / review_required=%s => %s",
+    (status, canOutput, reviewRequired, expectedOk) => {
+      const result = validateRetrieveResponse(
+        makeResponse({
+          final_decision: {
+            status,
+            can_output: canOutput,
+            review_required: reviewRequired,
+            reason: "decision flags test",
+          },
+        }),
+      );
+
+      expect(result.ok).toBe(expectedOk);
+      if (!result.ok) {
+        expect(result.error.code).toBe("inconsistent_final_decision");
+      }
+    },
+  );
+
+  it.each([
+    {
+      source_check: { status: "pass", issues: null },
+    },
+    {
+      citations_used: [{}],
+    },
+    {
+      citations_used: [
+        {
+          id: "citation-title-invalid",
+          title: {},
+          citation: { doc: "doc", section: "section", page: null },
+        },
+      ],
+    },
+    {
+      citations_used: [
+        {
+          id: "citation-source-invalid",
+          source: {},
+          citation: { doc: "doc", section: "section", page: null },
+        },
+      ],
+    },
+    {
+      hybrid_hits: [{}],
+    },
+    {
+      agent_trace: [{}],
+    },
+  ])("malformed shared evidence returns Contract Error", (overrides) => {
+    const result = validateRetrieveResponse(makeResponse(overrides));
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe("retrieve_response_shape_incomplete");
+    }
+  });
+
   it("missing display_route returns Contract Error", () => {
     const input = makeResponse();
     delete input.display_route;

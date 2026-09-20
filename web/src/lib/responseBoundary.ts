@@ -15,6 +15,62 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function isStringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every((item) => typeof item === "string");
+}
+
+function isOptionalString(value: unknown): boolean {
+  return value === undefined || typeof value === "string";
+}
+
+function isCitation(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.doc === "string" &&
+    typeof value.section === "string" &&
+    (typeof value.page === "string" ||
+      typeof value.page === "number" ||
+      value.page === null)
+  );
+}
+
+function isSharedEvidenceShape(input: Record<string, unknown>): boolean {
+  return (
+    isRecord(input.source_check) &&
+    typeof input.source_check.status === "string" &&
+    isStringArray(input.source_check.issues) &&
+    isRecord(input.policy_check) &&
+    typeof input.policy_check.status === "string" &&
+    isStringArray(input.policy_check.issues) &&
+    Array.isArray(input.citations_used) &&
+    input.citations_used.every(
+      (item) =>
+        isRecord(item) &&
+        typeof item.id === "string" &&
+        isOptionalString(item.title) &&
+        isOptionalString(item.source) &&
+        isCitation(item.citation),
+    ) &&
+    Array.isArray(input.hybrid_hits) &&
+    input.hybrid_hits.every(
+      (item) =>
+        isRecord(item) &&
+        typeof item.id === "string" &&
+        typeof item.title === "string" &&
+        typeof item.source === "string" &&
+        isCitation(item.citation),
+    ) &&
+    Array.isArray(input.agent_trace) &&
+    input.agent_trace.every(
+      (item) =>
+        isRecord(item) &&
+        typeof item.agent === "string" &&
+        typeof item.role === "string" &&
+        typeof item.status === "string",
+    )
+  );
+}
+
 function contractFailure(code: string, message: string): BoundaryResult {
   return {
     ok: false,
@@ -63,6 +119,18 @@ export function validateRetrieveResponse(input: unknown): BoundaryResult {
     return contractFailure(
       "invalid_final_decision_shape",
       "final_decision 结构非法，前端必须 Fail Closed。",
+    );
+  }
+
+  const expectedCanOutput = finalDecisionStatus === "approved";
+  const expectedReviewRequired = finalDecisionStatus !== "approved";
+  if (
+    input.final_decision.can_output !== expectedCanOutput ||
+    input.final_decision.review_required !== expectedReviewRequired
+  ) {
+    return contractFailure(
+      "inconsistent_final_decision",
+      "final_decision.status 与 can_output / review_required 不一致，前端必须 Fail Closed。",
     );
   }
 
@@ -138,13 +206,7 @@ export function validateRetrieveResponse(input: unknown): BoundaryResult {
     );
   }
 
-  if (
-    !isRecord(input.source_check) ||
-    !isRecord(input.policy_check) ||
-    !Array.isArray(input.citations_used) ||
-    !Array.isArray(input.agent_trace) ||
-    !Array.isArray(input.hybrid_hits)
-  ) {
+  if (!isSharedEvidenceShape(input)) {
     return contractFailure(
       "retrieve_response_shape_incomplete",
       "Retrieve response 缺少必要的共享证据链字段。",

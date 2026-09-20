@@ -161,7 +161,7 @@ function makeResponse({
     final_decision: {
       status: finalDecisionStatus,
       can_output: finalDecisionStatus === "approved",
-      review_required: finalDecisionStatus === "needs_review",
+      review_required: finalDecisionStatus !== "approved",
       reason: finalDecisionReason,
     },
     display_route: route,
