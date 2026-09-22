@@ -48,6 +48,10 @@ def test_event_type_takes_precedence_over_organization_term_matches():
     assert infer_node_type("中国人民解放军") == "organization"
 
 
+def test_force_graph_is_written_with_lf_only():
+    assert b"\r\n" not in FORCE_GRAPH_PATH.read_bytes()
+
+
 def test_display_path_is_computed_from_triples_and_fails_when_edge_is_missing():
     chunks = {
         "chunk_1": {"id": "chunk_1", "title": "第一段", "text": "甲到乙"},
