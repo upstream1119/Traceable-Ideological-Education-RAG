@@ -17,8 +17,8 @@ export interface RetrieveDataSource {
 
 const DEFAULT_RETRIEVE_TIMEOUT_MS = 10_000;
 
-function resolveApiBaseUrl(): string {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+function resolveApiBaseUrl(configuredBaseUrl = import.meta.env.VITE_API_BASE_URL): string {
+  const baseUrl = configuredBaseUrl?.trim();
   if (!baseUrl) {
     throw new AppError(
       "transport",
@@ -254,14 +254,23 @@ export class MockRetrieveDataSource implements RetrieveDataSource {
   }
 }
 
+class ConfigurationErrorDataSource implements RetrieveDataSource {
+  constructor(private readonly error: AppError) {}
+
+  async retrieve(_request: RetrieveRequest): Promise<RetrieveResponse> {
+    throw this.error;
+  }
+}
+
 export class ApiRetrieveDataSource implements RetrieveDataSource {
   constructor(
-    private readonly baseUrl = resolveApiBaseUrl(),
+    private readonly baseUrl?: string,
     private readonly timeoutMs = DEFAULT_RETRIEVE_TIMEOUT_MS,
     private readonly fetchImpl: typeof fetch = fetch,
   ) {}
 
   async retrieve(request: RetrieveRequest): Promise<RetrieveResponse> {
+    const baseUrl = resolveApiBaseUrl(this.baseUrl);
     const controller = new AbortController();
     let timedOut = false;
     const timeoutId = window.setTimeout(() => {
@@ -272,7 +281,7 @@ export class ApiRetrieveDataSource implements RetrieveDataSource {
     try {
       let response: Response;
       try {
-        response = await this.fetchImpl(`${this.baseUrl.replace(/\/+$/, "")}/retrieve`, {
+        response = await this.fetchImpl(`${baseUrl}/retrieve`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -327,4 +336,25 @@ export class ApiRetrieveDataSource implements RetrieveDataSource {
       window.clearTimeout(timeoutId);
     }
   }
+}
+
+export function createRuntimeRetrieveDataSource(
+  scenarioId: MockScenarioId,
+  mode: string | undefined = import.meta.env.VITE_RETRIEVE_MODE,
+): RetrieveDataSource {
+  if (mode === "mock") {
+    return new MockRetrieveDataSource(scenarioId);
+  }
+
+  if (mode === "api") {
+    return new ApiRetrieveDataSource();
+  }
+
+  return new ConfigurationErrorDataSource(
+    new AppError(
+      "transport",
+      "invalid_retrieve_mode",
+      "VITE_RETRIEVE_MODE 必须显式设置为 mock 或 api。",
+    ),
+  );
 }

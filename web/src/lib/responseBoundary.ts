@@ -93,6 +93,13 @@ export function validateRetrieveResponse(input: unknown): BoundaryResult {
     );
   }
 
+  if (typeof input.answer !== "string") {
+    return contractFailure(
+      "invalid_answer",
+      "Retrieve response.answer 必须是字符串，禁止正式输出和播报。",
+    );
+  }
+
   if (!isRecord(input.final_decision)) {
     return contractFailure(
       "missing_final_decision",
@@ -149,17 +156,17 @@ export function validateRetrieveResponse(input: unknown): BoundaryResult {
     );
   }
 
-  if (!Array.isArray(input.display_route.timeline_ids)) {
+  if (!isStringArray(input.display_route.timeline_ids)) {
     return contractFailure(
       "invalid_timeline_ids",
-      "display_route.timeline_ids 必须是数组。",
+      "display_route.timeline_ids 必须是字符串数组。",
     );
   }
 
-  if (!Array.isArray(input.display_route.landmark_ids)) {
+  if (!isStringArray(input.display_route.landmark_ids)) {
     return contractFailure(
       "invalid_landmark_ids",
-      "display_route.landmark_ids 必须是数组。",
+      "display_route.landmark_ids 必须是字符串数组。",
     );
   }
 

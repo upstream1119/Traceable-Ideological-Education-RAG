@@ -106,10 +106,13 @@ describe("Response Boundary", () => {
     ["blocked", false, true, true],
     ["approved", false, false, false],
     ["approved", true, true, false],
+    ["approved", false, true, false],
     ["needs_review", true, true, false],
     ["needs_review", false, false, false],
+    ["needs_review", true, false, false],
     ["blocked", true, true, false],
     ["blocked", false, false, false],
+    ["blocked", true, false, false],
   ])(
     "%s / can_output=%s / review_required=%s => %s",
     (status, canOutput, reviewRequired, expectedOk) => {
@@ -168,6 +171,23 @@ describe("Response Boundary", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.error.code).toBe("retrieve_response_shape_incomplete");
+    }
+  });
+
+  it.each([
+    ["answer", { text: "非法回答" }, "invalid_answer"],
+    ["timeline_ids", ["timeline_001", {}], "invalid_timeline_ids"],
+    ["landmark_ids", ["landmark_001", {}], "invalid_landmark_ids"],
+  ])("rejects malformed %s before formal Views render", (field, value, code) => {
+    const result = validateRetrieveResponse(
+      field === "answer"
+        ? makeResponse({ [field]: value })
+        : makeResponse({}, { [field]: value }),
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe(code);
     }
   });
 

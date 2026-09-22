@@ -2,7 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import { AppError } from "../lib/errors";
 import {
   ApiRetrieveDataSource,
+  createRuntimeRetrieveDataSource,
   getMockRetrieveResponse,
+  MockRetrieveDataSource,
 } from "./retrieveDataSource";
 
 const request = {
@@ -95,5 +97,45 @@ describe("ApiRetrieveDataSource", () => {
       expectTransportError(error, "invalid_json");
       return true;
     });
+  });
+});
+
+describe("createRuntimeRetrieveDataSource", () => {
+  it("uses MockRetrieveDataSource only when mock mode is explicit", () => {
+    expect(
+      createRuntimeRetrieveDataSource("approved_evidence", "mock"),
+    ).toBeInstanceOf(MockRetrieveDataSource);
+  });
+
+  it("uses ApiRetrieveDataSource when api mode is explicit", () => {
+    expect(
+      createRuntimeRetrieveDataSource("approved_evidence", "api"),
+    ).toBeInstanceOf(ApiRetrieveDataSource);
+  });
+
+  it("rejects an unknown mode instead of falling back to Mock", async () => {
+    const dataSource = createRuntimeRetrieveDataSource(
+      "approved_evidence",
+      "unknown",
+    );
+
+    await expect(dataSource.retrieve(request)).rejects.toSatisfy((error: unknown) => {
+      expectTransportError(error, "invalid_retrieve_mode");
+      return true;
+    });
+  });
+
+  it("rejects missing API base URL during retrieve instead of factory construction", async () => {
+    vi.stubEnv("VITE_API_BASE_URL", "");
+    try {
+      const dataSource = createRuntimeRetrieveDataSource("approved_evidence", "api");
+
+      await expect(dataSource.retrieve(request)).rejects.toSatisfy((error: unknown) => {
+        expectTransportError(error, "api_base_url_missing");
+        return true;
+      });
+    } finally {
+      vi.unstubAllEnvs();
+    }
   });
 });
