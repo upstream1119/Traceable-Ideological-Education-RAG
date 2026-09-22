@@ -14,10 +14,7 @@ if str(REPO_ROOT) not in sys.path:
 DEFAULT_CASES = REPO_ROOT / "data" / "graph" / "graphsim_regression_cases.json"
 DEFAULT_OUTPUT = REPO_ROOT / "reports" / "graphsim_regression_results.json"
 DEFAULT_SUMMARY = REPO_ROOT / "reports" / "graphsim_regression_summary.md"
-RUN_COMMAND = (
-    "DACHUANG_RETRIEVE_MODE=mock DACHUANG_LOCAL_MOCK_ACK=1 "
-    "python scripts/run_graphsim_regression.py"
-)
+RUN_COMMAND = "python scripts/run_graphsim_regression.py"
 
 
 def _path_matches(path: dict, expected: dict) -> bool:
@@ -52,7 +49,8 @@ def run_cases(cases: list[dict[str, Any]]) -> tuple[dict, dict]:
 
     raw_cases: list[dict] = []
     entity_hits = entity_total = 0
-    graph_hits = graph_total = 0
+    graph_hit_ids = graph_expected_ids = 0
+    graph_case_hits = graph_case_all_hits = graph_case_total = 0
     path_hits = path_total = 0
     edge_complete = edge_total = 0
 
@@ -67,8 +65,12 @@ def run_cases(cases: list[dict[str, Any]]) -> tuple[dict, dict]:
         hit_ids = [hit.get("id") for hit in top_three]
         expected_hit_ids = set(case.get("expected_hit_ids", []))
         if expected_hit_ids:
-            graph_total += 1
-            graph_hits += bool(expected_hit_ids.intersection(hit_ids))
+            graph_case_total += 1
+            hit_id_set = expected_hit_ids.intersection(hit_ids)
+            graph_hit_ids += len(hit_id_set)
+            graph_expected_ids += len(expected_hit_ids)
+            graph_case_hits += bool(hit_id_set)
+            graph_case_all_hits += hit_id_set == expected_hit_ids
 
         paths = list(_iter_paths(top_three))
         expected_path = case.get("expected_path")
@@ -107,7 +109,9 @@ def run_cases(cases: list[dict[str, Any]]) -> tuple[dict, dict]:
     summary = {
         "case_count": len(cases),
         "entity_hit_rate": _metric(entity_hits, entity_total),
-        "graph_hit_recall_at_3": _metric(graph_hits, graph_total),
+        "graph_hit_recall_at_3": _metric(graph_hit_ids, graph_expected_ids),
+        "graph_case_recall_at_3": _metric(graph_case_hits, graph_case_total),
+        "graph_case_all_expected_recall_at_3": _metric(graph_case_all_hits, graph_case_total),
         "path_hit_rate": _metric(path_hits, path_total),
         "edge_evidence_completeness_rate": _metric(edge_complete, edge_total),
         "raw_edge_count": edge_total,
@@ -137,6 +141,8 @@ def main() -> int:
     summary_text += f"- 题目数：{summary['case_count']}\n"
     summary_text += f"- 实体命中率：{summary['entity_hit_rate']['numerator']}/{summary['entity_hit_rate']['denominator']} = {summary['entity_hit_rate']['rate']}\n"
     summary_text += f"- Graph Hit Recall@3：{summary['graph_hit_recall_at_3']['numerator']}/{summary['graph_hit_recall_at_3']['denominator']} = {summary['graph_hit_recall_at_3']['rate']}\n"
+    summary_text += f"- 按题命中任一期望 ID：{summary['graph_case_recall_at_3']['numerator']}/{summary['graph_case_recall_at_3']['denominator']} = {summary['graph_case_recall_at_3']['rate']}\n"
+    summary_text += f"- 按题全部期望 ID 命中：{summary['graph_case_all_expected_recall_at_3']['numerator']}/{summary['graph_case_all_expected_recall_at_3']['denominator']} = {summary['graph_case_all_expected_recall_at_3']['rate']}\n"
     summary_text += f"- 路径命中率：{summary['path_hit_rate']['numerator']}/{summary['path_hit_rate']['denominator']} = {summary['path_hit_rate']['rate']}\n"
     summary_text += f"- 边证据完整率：{summary['edge_evidence_completeness_rate']['numerator']}/{summary['edge_evidence_completeness_rate']['denominator']} = {summary['edge_evidence_completeness_rate']['rate']}\n"
     summary_text += f"\n复跑命令：`{RUN_COMMAND}`\n"

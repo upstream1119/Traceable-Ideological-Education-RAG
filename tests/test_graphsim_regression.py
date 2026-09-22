@@ -38,10 +38,28 @@ def test_graphsim_regression_metrics_are_complete():
     for metric_name in (
         "entity_hit_rate",
         "graph_hit_recall_at_3",
+        "graph_case_recall_at_3",
+        "graph_case_all_expected_recall_at_3",
         "path_hit_rate",
         "edge_evidence_completeness_rate",
     ):
         metric = summary[metric_name]
         assert metric["denominator"] > 0
         assert 0 <= metric["rate"] <= 1
+    assert summary["graph_hit_recall_at_3"] == {"numerator": 18, "denominator": 19, "rate": 0.9474}
+    assert summary["graph_case_recall_at_3"] == {"numerator": 16, "denominator": 16, "rate": 1.0}
+    assert summary["graph_case_all_expected_recall_at_3"] == {
+        "numerator": 15,
+        "denominator": 16,
+        "rate": 0.9375,
+    }
     assert summary["edge_evidence_completeness_rate"]["rate"] == 1.0
+
+
+def test_graphsim_regression_recomputes_fresh_results_and_matches_report():
+    from scripts.run_graphsim_regression import run_cases
+
+    cases = json.loads(CASES_PATH.read_text(encoding="utf-8"))
+    committed_report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+    fresh_report, _ = run_cases(cases)
+    assert fresh_report == committed_report

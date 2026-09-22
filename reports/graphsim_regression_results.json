@@ -10,9 +10,19 @@
       "rate": 1.0
     },
     "graph_hit_recall_at_3": {
+      "numerator": 18,
+      "denominator": 19,
+      "rate": 0.9474
+    },
+    "graph_case_recall_at_3": {
       "numerator": 16,
       "denominator": 16,
       "rate": 1.0
+    },
+    "graph_case_all_expected_recall_at_3": {
+      "numerator": 15,
+      "denominator": 16,
+      "rate": 0.9375
     },
     "path_hit_rate": {
       "numerator": 17,
@@ -25,7 +35,7 @@
       "rate": 1.0
     },
     "raw_edge_count": 123,
-    "run_command": "DACHUANG_RETRIEVE_MODE=mock DACHUANG_LOCAL_MOCK_ACK=1 python scripts/run_graphsim_regression.py"
+    "run_command": "python scripts/run_graphsim_regression.py"
   },
   "cases": [
     {
