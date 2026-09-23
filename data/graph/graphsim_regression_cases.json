@@ -1,0 +1,19 @@
+[
+  {"id":"person_zhangwentian_outline","query":"张闻天起草的宣传鼓动工作提纲强调了什么？","expected_entities":["张闻天","《党的宣传鼓动工作提纲》"],"expected_hit_ids":["chunk_sizheng_v1_166","chunk_sizheng_v1_167"],"expected_path":{"nodes":["张闻天","《党的宣传鼓动工作提纲》"],"relations":["起草"]}},
+  {"id":"person_mao_naming","query":"毛泽东如何命名新式整军运动？","expected_entities":["毛泽东","新式整军运动"],"expected_hit_ids":["chunk_sizheng_v2_022"],"expected_path":{"nodes":["毛泽东","新式整军运动"],"relations":["命名"]}},
+  {"id":"event_new_style_method","query":"新式整军运动采取了什么方法？","expected_entities":["新式整军运动"],"expected_hit_ids":["chunk_sizheng_v2_021"],"expected_path":{"nodes":["新式整军运动","诉苦和三查"],"relations":["采取"]}},
+  {"id":"event_long_march_spirit","query":"长征形成了什么精神？","expected_entities":["长征"],"expected_hit_ids":["chunk_sizheng_v1_117"],"expected_path":{"nodes":["长征","长征精神"],"relations":["形成"]}},
+  {"id":"event_zunyi_turning_point","query":"遵义会议是什么性质的转折？","expected_entities":["遵义会议"],"expected_hit_ids":["chunk_sizheng_v1_111"],"expected_path":{"nodes":["遵义会议","生死攸关的转折点"],"relations":["是"]}},
+  {"id":"organization_central_propaganda","query":"中央宣传部如何指导宣传教育工作？","expected_entities":["中央宣传部"],"expected_hit_ids":["chunk_sizheng_v2_004"],"expected_path":{"nodes":["中央宣传部","全国范围内的宣传教育工作"],"relations":["指导"]}},
+  {"id":"organization_party_branch","query":"党支部如何开展宣传工作？","expected_entities":["党支部","支部"],"expected_hit_ids":["chunk_sizheng_v2_004","chunk_sizheng_v2_005"],"expected_path":{"nodes":["支部","宣传鼓动工作"],"relations":["是基本组织"]}},
+  {"id":"organization_pla_new_style","query":"中国人民解放军开展了什么运动？","expected_entities":["中国人民解放军"],"expected_hit_ids":["chunk_sizheng_v2_034"],"expected_path":{"nodes":["中国人民解放军","新式整军运动"],"relations":["开展"]}},
+  {"id":"document_outline_systematization","query":"宣传鼓动工作提纲标志着什么？","expected_entities":["《党的宣传鼓动工作提纲》"],"expected_hit_ids":["chunk_sizheng_v1_167"],"expected_path":{"nodes":["《党的宣传鼓动工作提纲》","党的宣传教育工作系统化、规范化"],"relations":["标志着"]}},
+  {"id":"document_first_congress","query":"党的一大如何确立思想政治教育的基本原则？","expected_entities":["党的一大","思想政治教育"],"expected_hit_ids":["chunk_sizheng_v1_028"],"expected_path":{"nodes":["党的一大","思想政治教育的基本原则"],"relations":["确立"]}},
+  {"id":"concept_education_origin","query":"思想政治教育的历史开端是什么？","expected_entities":["思想政治教育"],"expected_hit_ids":["chunk_sizheng_v1_001"],"expected_path":{"nodes":["思想政治教育","中国共产党人"],"relations":["关联"]}},
+  {"id":"concept_three_checks","query":"三查包括什么？","expected_entities":["三查"],"expected_hit_ids":["chunk_sizheng_v2_021"],"expected_path":{"nodes":["三查","查阶级、查工作、查斗志"],"relations":["包括"]}},
+  {"id":"concept_marxism_origin","query":"十月革命创立了什么？","expected_entities":["十月革命"],"expected_hit_ids":["chunk_sizheng_v1_001"],"expected_path":{"nodes":["十月革命","世界上第一个社会主义国家"],"relations":["创立"]}},
+  {"id":"concept_cadre_education","query":"中国共产党为什么重视干部教育？","expected_entities":["中国共产党","干部教育"],"expected_hit_ids":["chunk_sizheng_v1_148"],"expected_path":{"nodes":["中国共产党","干部教育"],"relations":["重视"]}},
+  {"id":"two_hop_pla_political_awareness","query":"中国人民解放军开展新式整军运动提高了什么？","expected_entities":["中国人民解放军","新式整军运动"],"expected_hit_ids":["chunk_sizheng_v2_034","chunk_sizheng_v2_023"],"expected_path":{"nodes":["中国人民解放军","新式整军运动","干部战士的政治觉悟"],"relations":["开展","提高"]}},
+  {"id":"two_hop_central_letter","query":"古田会议与中央九月来信有什么关系？","expected_entities":["古田会议"],"expected_hit_ids":["chunk_sizheng_v1_088"],"expected_path":{"nodes":["古田会议","中央“九月来信”"],"relations":["关联"]}},
+  {"id":"fallback_no_reliable_path","query":"未知实体与不存在事件的关系？","expected_entities":[],"expected_hit_ids":[],"expect_no_reliable_path":true}
+]

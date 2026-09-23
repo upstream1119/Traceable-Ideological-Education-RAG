@@ -1,4 +1,6 @@
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 from src.utils.build_force_graph import build_display_paths, infer_node_type
@@ -46,6 +48,18 @@ def test_event_type_takes_precedence_over_organization_term_matches():
     assert infer_node_type("新式整军运动") == "event"
     assert infer_node_type("诉苦与三查运动") == "event"
     assert infer_node_type("中国人民解放军") == "organization"
+
+
+def test_force_graph_is_written_with_lf_only(tmp_path):
+    output_path = tmp_path / "force_graph.json"
+    subprocess.run(
+        [sys.executable, "src/utils/build_force_graph.py", "--output", str(output_path)],
+        cwd=REPO_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert b"\r\n" not in output_path.read_bytes()
 
 
 def test_display_path_is_computed_from_triples_and_fails_when_edge_is_missing():

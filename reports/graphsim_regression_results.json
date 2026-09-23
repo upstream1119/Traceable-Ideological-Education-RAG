@@ -1,0 +1,4822 @@
+{
+  "schema_version": "1.0",
+  "source": "data/graph/triples_demo.jsonl + formal sizheng chunks",
+  "mode": "mock",
+  "summary": {
+    "case_count": 17,
+    "entity_hit_rate": {
+      "numerator": 22,
+      "denominator": 22,
+      "rate": 1.0
+    },
+    "graph_hit_recall_at_3": {
+      "numerator": 18,
+      "denominator": 19,
+      "rate": 0.9474
+    },
+    "graph_case_recall_at_3": {
+      "numerator": 16,
+      "denominator": 16,
+      "rate": 1.0
+    },
+    "graph_case_all_expected_recall_at_3": {
+      "numerator": 15,
+      "denominator": 16,
+      "rate": 0.9375
+    },
+    "path_hit_rate": {
+      "numerator": 17,
+      "denominator": 17,
+      "rate": 1.0
+    },
+    "edge_evidence_completeness_rate": {
+      "numerator": 123,
+      "denominator": 123,
+      "rate": 1.0
+    },
+    "raw_edge_count": 123,
+    "run_command": "python scripts/run_graphsim_regression.py"
+  },
+  "cases": [
+    {
+      "id": "person_zhangwentian_outline",
+      "query": "张闻天起草的宣传鼓动工作提纲强调了什么？",
+      "query_entities": [
+        "张闻天",
+        "《党的宣传鼓动工作提纲》",
+        "宣传鼓动工作"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_167",
+          "graph_score": 0.99,
+          "related_entities": [
+            "张闻天",
+            "《党的宣传鼓动工作提纲》",
+            "宣传鼓动工作",
+            "党的宣传教育工作系统化、规范化",
+            "中央总的宣传政策领导"
+          ],
+          "graph_paths": [
+            {
+              "from": "张闻天",
+              "to": "《党的宣传鼓动工作提纲》",
+              "hops": 1,
+              "path": [
+                "张闻天",
+                "《党的宣传鼓动工作提纲》"
+              ],
+              "relations": [
+                "起草"
+              ],
+              "path_text": "张闻天 --起草--> 《党的宣传鼓动工作提纲》",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166"
+              ],
+              "edges": [
+                {
+                  "source": "张闻天",
+                  "target": "《党的宣传鼓动工作提纲》",
+                  "relation": "起草",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "张闻天",
+              "to": "党的宣传教育工作系统化、规范化",
+              "hops": 2,
+              "path": [
+                "张闻天",
+                "《党的宣传鼓动工作提纲》",
+                "党的宣传教育工作系统化、规范化"
+              ],
+              "relations": [
+                "起草",
+                "标志着"
+              ],
+              "path_text": "张闻天 --起草--> 《党的宣传鼓动工作提纲》 --标志着--> 党的宣传教育工作系统化、规范化",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166",
+                "chunk_sizheng_v1_167"
+              ],
+              "edges": [
+                {
+                  "source": "张闻天",
+                  "target": "《党的宣传鼓动工作提纲》",
+                  "relation": "起草",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "《党的宣传鼓动工作提纲》",
+                  "target": "党的宣传教育工作系统化、规范化",
+                  "relation": "标志着",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_167"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "《党的宣传鼓动工作提纲》",
+              "to": "张闻天",
+              "hops": 1,
+              "path": [
+                "《党的宣传鼓动工作提纲》",
+                "张闻天"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "《党的宣传鼓动工作提纲》 --关联--> 张闻天",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166"
+              ],
+              "edges": [
+                {
+                  "source": "《党的宣传鼓动工作提纲》",
+                  "target": "张闻天",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "《党的宣传鼓动工作提纲》",
+              "to": "党的宣传教育工作系统化、规范化",
+              "hops": 1,
+              "path": [
+                "《党的宣传鼓动工作提纲》",
+                "党的宣传教育工作系统化、规范化"
+              ],
+              "relations": [
+                "标志着"
+              ],
+              "path_text": "《党的宣传鼓动工作提纲》 --标志着--> 党的宣传教育工作系统化、规范化",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_167"
+              ],
+              "edges": [
+                {
+                  "source": "《党的宣传鼓动工作提纲》",
+                  "target": "党的宣传教育工作系统化、规范化",
+                  "relation": "标志着",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_167"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "宣传鼓动工作",
+              "to": "中央总的宣传政策领导",
+              "hops": 1,
+              "path": [
+                "宣传鼓动工作",
+                "中央总的宣传政策领导"
+              ],
+              "relations": [
+                "统一于"
+              ],
+              "path_text": "宣传鼓动工作 --统一于--> 中央总的宣传政策领导",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_167"
+              ],
+              "edges": [
+                {
+                  "source": "宣传鼓动工作",
+                  "target": "中央总的宣传政策领导",
+                  "relation": "统一于",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_167"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_166",
+          "graph_score": 0.944,
+          "related_entities": [
+            "张闻天",
+            "《党的宣传鼓动工作提纲》",
+            "宣传鼓动工作",
+            "中共中央"
+          ],
+          "graph_paths": [
+            {
+              "from": "张闻天",
+              "to": "《党的宣传鼓动工作提纲》",
+              "hops": 1,
+              "path": [
+                "张闻天",
+                "《党的宣传鼓动工作提纲》"
+              ],
+              "relations": [
+                "起草"
+              ],
+              "path_text": "张闻天 --起草--> 《党的宣传鼓动工作提纲》",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166"
+              ],
+              "edges": [
+                {
+                  "source": "张闻天",
+                  "target": "《党的宣传鼓动工作提纲》",
+                  "relation": "起草",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "张闻天",
+              "to": "中共中央",
+              "hops": 2,
+              "path": [
+                "张闻天",
+                "干部教育部",
+                "中共中央"
+              ],
+              "relations": [
+                "任部长",
+                "关联"
+              ],
+              "path_text": "张闻天 --任部长--> 干部教育部 --关联--> 中共中央",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "张闻天",
+                  "target": "干部教育部",
+                  "relation": "任部长",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "干部教育部",
+                  "target": "中共中央",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "《党的宣传鼓动工作提纲》",
+              "to": "张闻天",
+              "hops": 1,
+              "path": [
+                "《党的宣传鼓动工作提纲》",
+                "张闻天"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "《党的宣传鼓动工作提纲》 --关联--> 张闻天",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166"
+              ],
+              "edges": [
+                {
+                  "source": "《党的宣传鼓动工作提纲》",
+                  "target": "张闻天",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_005",
+          "graph_score": 0.834,
+          "related_entities": [
+            "宣传鼓动工作",
+            "支部",
+            "具体更群众化的宣传工作"
+          ],
+          "graph_paths": [
+            {
+              "from": "宣传鼓动工作",
+              "to": "支部",
+              "hops": 1,
+              "path": [
+                "宣传鼓动工作",
+                "支部"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "宣传鼓动工作 --关联--> 支部",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "宣传鼓动工作",
+                  "target": "支部",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "宣传鼓动工作",
+              "to": "具体更群众化的宣传工作",
+              "hops": 2,
+              "path": [
+                "宣传鼓动工作",
+                "支部",
+                "具体更群众化的宣传工作"
+              ],
+              "relations": [
+                "关联",
+                "负责"
+              ],
+              "path_text": "宣传鼓动工作 --关联--> 支部 --负责--> 具体更群众化的宣传工作",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "宣传鼓动工作",
+                  "target": "支部",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "支部",
+                  "target": "具体更群众化的宣传工作",
+                  "relation": "负责",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "张闻天",
+        "《党的宣传鼓动工作提纲》"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_166",
+        "chunk_sizheng_v1_167"
+      ],
+      "expected_path": {
+        "nodes": [
+          "张闻天",
+          "《党的宣传鼓动工作提纲》"
+        ],
+        "relations": [
+          "起草"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "person_mao_naming",
+      "query": "毛泽东如何命名新式整军运动？",
+      "query_entities": [
+        "毛泽东",
+        "新式整军运动"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v2_021",
+          "graph_score": 0.894,
+          "related_entities": [
+            "新式整军运动",
+            "1947年冬至1948年夏",
+            "诉苦和三查",
+            "大规模阶级教育和思想整顿",
+            "部队的各项任务"
+          ],
+          "graph_paths": [
+            {
+              "from": "毛泽东",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "毛泽东",
+                "新式整军运动"
+              ],
+              "relations": [
+                "命名"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "毛泽东",
+              "to": "1947年冬至1948年夏",
+              "hops": 2,
+              "path": [
+                "毛泽东",
+                "新式整军运动",
+                "1947年冬至1948年夏"
+              ],
+              "relations": [
+                "命名",
+                "开展于"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动 --开展于--> 1947年冬至1948年夏",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "1947年冬至1948年夏",
+                  "relation": "开展于",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "毛泽东",
+              "to": "诉苦和三查",
+              "hops": 2,
+              "path": [
+                "毛泽东",
+                "新式整军运动",
+                "诉苦和三查"
+              ],
+              "relations": [
+                "命名",
+                "采取"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动 --采取--> 诉苦和三查",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "诉苦和三查",
+                  "relation": "采取",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "毛泽东",
+              "to": "大规模阶级教育和思想整顿",
+              "hops": 2,
+              "path": [
+                "毛泽东",
+                "新式整军运动",
+                "大规模阶级教育和思想整顿"
+              ],
+              "relations": [
+                "命名",
+                "是"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动 --是--> 大规模阶级教育和思想整顿",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "大规模阶级教育和思想整顿",
+                  "relation": "是",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "毛泽东",
+              "to": "部队的各项任务",
+              "hops": 2,
+              "path": [
+                "毛泽东",
+                "新式整军运动",
+                "部队的各项任务"
+              ],
+              "relations": [
+                "命名",
+                "结合"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动 --结合--> 部队的各项任务",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "部队的各项任务",
+                  "relation": "结合",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_022",
+          "graph_score": 0.884,
+          "related_entities": [
+            "毛泽东",
+            "新式整军运动",
+            "中国人民解放军"
+          ],
+          "graph_paths": [
+            {
+              "from": "毛泽东",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "毛泽东",
+                "新式整军运动"
+              ],
+              "relations": [
+                "命名"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "毛泽东",
+              "to": "中国人民解放军",
+              "hops": 2,
+              "path": [
+                "毛泽东",
+                "新式整军运动",
+                "中国人民解放军"
+              ],
+              "relations": [
+                "命名",
+                "关联"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动 --关联--> 中国人民解放军",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022",
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "中国人民解放军",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "毛泽东",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "毛泽东"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 毛泽东",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "毛泽东",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "中国人民解放军",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "中国人民解放军"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 中国人民解放军",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "中国人民解放军",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_034",
+          "graph_score": 0.884,
+          "related_entities": [
+            "毛泽东",
+            "新式整军运动",
+            "中国人民解放军"
+          ],
+          "graph_paths": [
+            {
+              "from": "毛泽东",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "毛泽东",
+                "新式整军运动"
+              ],
+              "relations": [
+                "命名"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "毛泽东",
+              "to": "中国人民解放军",
+              "hops": 2,
+              "path": [
+                "毛泽东",
+                "新式整军运动",
+                "中国人民解放军"
+              ],
+              "relations": [
+                "命名",
+                "关联"
+              ],
+              "path_text": "毛泽东 --命名--> 新式整军运动 --关联--> 中国人民解放军",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022",
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "毛泽东",
+                  "target": "新式整军运动",
+                  "relation": "命名",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "中国人民解放军",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "毛泽东",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "毛泽东"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 毛泽东",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "毛泽东",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "中国人民解放军",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "中国人民解放军"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 中国人民解放军",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "中国人民解放军",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "毛泽东",
+        "新式整军运动"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "expected_path": {
+        "nodes": [
+          "毛泽东",
+          "新式整军运动"
+        ],
+        "relations": [
+          "命名"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "event_new_style_method",
+      "query": "新式整军运动采取了什么方法？",
+      "query_entities": [
+        "新式整军运动"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v2_021",
+          "graph_score": 0.894,
+          "related_entities": [
+            "新式整军运动",
+            "1947年冬至1948年夏",
+            "诉苦和三查",
+            "大规模阶级教育和思想整顿",
+            "部队的各项任务"
+          ],
+          "graph_paths": [
+            {
+              "from": "新式整军运动",
+              "to": "1947年冬至1948年夏",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "1947年冬至1948年夏"
+              ],
+              "relations": [
+                "开展于"
+              ],
+              "path_text": "新式整军运动 --开展于--> 1947年冬至1948年夏",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "1947年冬至1948年夏",
+                  "relation": "开展于",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "诉苦和三查",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "诉苦和三查"
+              ],
+              "relations": [
+                "采取"
+              ],
+              "path_text": "新式整军运动 --采取--> 诉苦和三查",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "诉苦和三查",
+                  "relation": "采取",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "大规模阶级教育和思想整顿",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "大规模阶级教育和思想整顿"
+              ],
+              "relations": [
+                "是"
+              ],
+              "path_text": "新式整军运动 --是--> 大规模阶级教育和思想整顿",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "大规模阶级教育和思想整顿",
+                  "relation": "是",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "部队的各项任务",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "部队的各项任务"
+              ],
+              "relations": [
+                "结合"
+              ],
+              "path_text": "新式整军运动 --结合--> 部队的各项任务",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "部队的各项任务",
+                  "relation": "结合",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_022",
+          "graph_score": 0.834,
+          "related_entities": [
+            "新式整军运动",
+            "毛泽东",
+            "中国人民解放军"
+          ],
+          "graph_paths": [
+            {
+              "from": "新式整军运动",
+              "to": "毛泽东",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "毛泽东"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 毛泽东",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "毛泽东",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "中国人民解放军",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "中国人民解放军"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 中国人民解放军",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "中国人民解放军",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_023",
+          "graph_score": 0.834,
+          "related_entities": [
+            "新式整军运动",
+            "干部战士的政治觉悟",
+            "人的认识规律"
+          ],
+          "graph_paths": [
+            {
+              "from": "新式整军运动",
+              "to": "干部战士的政治觉悟",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "干部战士的政治觉悟"
+              ],
+              "relations": [
+                "提高"
+              ],
+              "path_text": "新式整军运动 --提高--> 干部战士的政治觉悟",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_023"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "干部战士的政治觉悟",
+                  "relation": "提高",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_023"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "人的认识规律",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "人的认识规律"
+              ],
+              "relations": [
+                "遵循"
+              ],
+              "path_text": "新式整军运动 --遵循--> 人的认识规律",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_023"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "人的认识规律",
+                  "relation": "遵循",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_023"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "新式整军运动"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "expected_path": {
+        "nodes": [
+          "新式整军运动",
+          "诉苦和三查"
+        ],
+        "relations": [
+          "采取"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "event_long_march_spirit",
+      "query": "长征形成了什么精神？",
+      "query_entities": [
+        "长征",
+        "革命精神"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_076",
+          "graph_score": 0.75,
+          "related_entities": [
+            "长征",
+            "长征精神"
+          ],
+          "graph_paths": [
+            {
+              "from": "长征",
+              "to": "长征精神",
+              "hops": 1,
+              "path": [
+                "长征",
+                "长征精神"
+              ],
+              "relations": [
+                "形成"
+              ],
+              "path_text": "长征 --形成--> 长征精神",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_117"
+              ],
+              "edges": [
+                {
+                  "source": "长征",
+                  "target": "长征精神",
+                  "relation": "形成",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_117"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_117",
+          "graph_score": 0.75,
+          "related_entities": [
+            "长征",
+            "长征精神"
+          ],
+          "graph_paths": [
+            {
+              "from": "长征",
+              "to": "长征精神",
+              "hops": 1,
+              "path": [
+                "长征",
+                "长征精神"
+              ],
+              "relations": [
+                "形成"
+              ],
+              "path_text": "长征 --形成--> 长征精神",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_117"
+              ],
+              "edges": [
+                {
+                  "source": "长征",
+                  "target": "长征精神",
+                  "relation": "形成",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_117"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_036",
+          "graph_score": 0.357,
+          "related_entities": [
+            "革命精神"
+          ],
+          "graph_paths": []
+        }
+      ],
+      "expected_entities": [
+        "长征"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "expected_path": {
+        "nodes": [
+          "长征",
+          "长征精神"
+        ],
+        "relations": [
+          "形成"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "event_zunyi_turning_point",
+      "query": "遵义会议是什么性质的转折？",
+      "query_entities": [
+        "遵义会议"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_111",
+          "graph_score": 0.78,
+          "related_entities": [
+            "遵义会议",
+            "生死攸关的转折点"
+          ],
+          "graph_paths": [
+            {
+              "from": "遵义会议",
+              "to": "生死攸关的转折点",
+              "hops": 1,
+              "path": [
+                "遵义会议",
+                "生死攸关的转折点"
+              ],
+              "relations": [
+                "是"
+              ],
+              "path_text": "遵义会议 --是--> 生死攸关的转折点",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_111"
+              ],
+              "edges": [
+                {
+                  "source": "遵义会议",
+                  "target": "生死攸关的转折点",
+                  "relation": "是",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_111"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_112",
+          "graph_score": 0.37,
+          "related_entities": [
+            "遵义会议"
+          ],
+          "graph_paths": []
+        },
+        {
+          "id": "chunk_sizheng_v1_117",
+          "graph_score": 0.37,
+          "related_entities": [
+            "遵义会议"
+          ],
+          "graph_paths": []
+        }
+      ],
+      "expected_entities": [
+        "遵义会议"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "expected_path": {
+        "nodes": [
+          "遵义会议",
+          "生死攸关的转折点"
+        ],
+        "relations": [
+          "是"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "organization_central_propaganda",
+      "query": "中央宣传部如何指导宣传教育工作？",
+      "query_entities": [
+        "中央宣传部"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v2_004",
+          "graph_score": 0.834,
+          "related_entities": [
+            "中央宣传部",
+            "《宣传工作决议案》",
+            "全国范围内的宣传教育工作"
+          ],
+          "graph_paths": [
+            {
+              "from": "中央宣传部",
+              "to": "《宣传工作决议案》",
+              "hops": 1,
+              "path": [
+                "中央宣传部",
+                "《宣传工作决议案》"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "中央宣传部 --关联--> 《宣传工作决议案》",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_004"
+              ],
+              "edges": [
+                {
+                  "source": "中央宣传部",
+                  "target": "《宣传工作决议案》",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_004"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "中央宣传部",
+              "to": "全国范围内的宣传教育工作",
+              "hops": 1,
+              "path": [
+                "中央宣传部",
+                "全国范围内的宣传教育工作"
+              ],
+              "relations": [
+                "指导"
+              ],
+              "path_text": "中央宣传部 --指导--> 全国范围内的宣传教育工作",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_004"
+              ],
+              "edges": [
+                {
+                  "source": "中央宣传部",
+                  "target": "全国范围内的宣传教育工作",
+                  "relation": "指导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_004"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_075",
+          "graph_score": 0.364,
+          "related_entities": [
+            "中央宣传部"
+          ],
+          "graph_paths": []
+        },
+        {
+          "id": "chunk_sizheng_v1_139",
+          "graph_score": 0.364,
+          "related_entities": [
+            "中央宣传部"
+          ],
+          "graph_paths": []
+        }
+      ],
+      "expected_entities": [
+        "中央宣传部"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "expected_path": {
+        "nodes": [
+          "中央宣传部",
+          "全国范围内的宣传教育工作"
+        ],
+        "relations": [
+          "指导"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "organization_party_branch",
+      "query": "党支部如何开展宣传工作？",
+      "query_entities": [
+        "宣传工作",
+        "党支部",
+        "支部"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v2_004",
+          "graph_score": 0.926,
+          "related_entities": [
+            "宣传工作",
+            "党支部",
+            "支部",
+            "宣传干事",
+            "宣传鼓动工作"
+          ],
+          "graph_paths": [
+            {
+              "from": "党支部",
+              "to": "宣传干事",
+              "hops": 1,
+              "path": [
+                "党支部",
+                "宣传干事"
+              ],
+              "relations": [
+                "设置"
+              ],
+              "path_text": "党支部 --设置--> 宣传干事",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_004"
+              ],
+              "edges": [
+                {
+                  "source": "党支部",
+                  "target": "宣传干事",
+                  "relation": "设置",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_004"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "支部",
+              "to": "宣传鼓动工作",
+              "hops": 1,
+              "path": [
+                "支部",
+                "宣传鼓动工作"
+              ],
+              "relations": [
+                "是基本组织"
+              ],
+              "path_text": "支部 --是基本组织--> 宣传鼓动工作",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "支部",
+                  "target": "宣传鼓动工作",
+                  "relation": "是基本组织",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_005",
+          "graph_score": 0.926,
+          "related_entities": [
+            "宣传工作",
+            "支部",
+            "宣传鼓动工作",
+            "具体更群众化的宣传工作"
+          ],
+          "graph_paths": [
+            {
+              "from": "支部",
+              "to": "宣传鼓动工作",
+              "hops": 1,
+              "path": [
+                "支部",
+                "宣传鼓动工作"
+              ],
+              "relations": [
+                "是基本组织"
+              ],
+              "path_text": "支部 --是基本组织--> 宣传鼓动工作",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "支部",
+                  "target": "宣传鼓动工作",
+                  "relation": "是基本组织",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "支部",
+              "to": "具体更群众化的宣传工作",
+              "hops": 1,
+              "path": [
+                "支部",
+                "具体更群众化的宣传工作"
+              ],
+              "relations": [
+                "负责"
+              ],
+              "path_text": "支部 --负责--> 具体更群众化的宣传工作",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "支部",
+                  "target": "具体更群众化的宣传工作",
+                  "relation": "负责",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_166",
+          "graph_score": 0.816,
+          "related_entities": [
+            "宣传工作",
+            "文字",
+            "宣传鼓动工作"
+          ],
+          "graph_paths": [
+            {
+              "from": "宣传工作",
+              "to": "文字",
+              "hops": 1,
+              "path": [
+                "宣传工作",
+                "文字"
+              ],
+              "relations": [
+                "主要形式"
+              ],
+              "path_text": "宣传工作 --主要形式--> 文字",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166"
+              ],
+              "edges": [
+                {
+                  "source": "宣传工作",
+                  "target": "文字",
+                  "relation": "主要形式",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "支部",
+              "to": "宣传鼓动工作",
+              "hops": 1,
+              "path": [
+                "支部",
+                "宣传鼓动工作"
+              ],
+              "relations": [
+                "是基本组织"
+              ],
+              "path_text": "支部 --是基本组织--> 宣传鼓动工作",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "支部",
+                  "target": "宣传鼓动工作",
+                  "relation": "是基本组织",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "党支部",
+        "支部"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v2_004",
+        "chunk_sizheng_v2_005"
+      ],
+      "expected_path": {
+        "nodes": [
+          "支部",
+          "宣传鼓动工作"
+        ],
+        "relations": [
+          "是基本组织"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "organization_pla_new_style",
+      "query": "中国人民解放军开展了什么运动？",
+      "query_entities": [
+        "人民解放军",
+        "中国人民解放军"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v2_022",
+          "graph_score": 0.944,
+          "related_entities": [
+            "人民解放军",
+            "中国人民解放军",
+            "新式整军运动",
+            "毛泽东"
+          ],
+          "graph_paths": [
+            {
+              "from": "中国人民解放军",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动"
+              ],
+              "relations": [
+                "开展"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "毛泽东",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "毛泽东"
+              ],
+              "relations": [
+                "开展",
+                "关联"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --关联--> 毛泽东",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "毛泽东",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_034",
+          "graph_score": 0.944,
+          "related_entities": [
+            "人民解放军",
+            "中国人民解放军",
+            "新式整军运动",
+            "毛泽东"
+          ],
+          "graph_paths": [
+            {
+              "from": "中国人民解放军",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动"
+              ],
+              "relations": [
+                "开展"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "毛泽东",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "毛泽东"
+              ],
+              "relations": [
+                "开展",
+                "关联"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --关联--> 毛泽东",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "毛泽东",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_021",
+          "graph_score": 0.874,
+          "related_entities": [
+            "人民解放军",
+            "新式整军运动",
+            "1947年冬至1948年夏",
+            "诉苦和三查",
+            "大规模阶级教育和思想整顿",
+            "部队的各项任务"
+          ],
+          "graph_paths": [
+            {
+              "from": "中国人民解放军",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动"
+              ],
+              "relations": [
+                "开展"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "1947年冬至1948年夏",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "1947年冬至1948年夏"
+              ],
+              "relations": [
+                "开展",
+                "开展于"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --开展于--> 1947年冬至1948年夏",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "1947年冬至1948年夏",
+                  "relation": "开展于",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "诉苦和三查",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "诉苦和三查"
+              ],
+              "relations": [
+                "开展",
+                "采取"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --采取--> 诉苦和三查",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "诉苦和三查",
+                  "relation": "采取",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "大规模阶级教育和思想整顿",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "大规模阶级教育和思想整顿"
+              ],
+              "relations": [
+                "开展",
+                "是"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --是--> 大规模阶级教育和思想整顿",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "大规模阶级教育和思想整顿",
+                  "relation": "是",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "部队的各项任务",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "部队的各项任务"
+              ],
+              "relations": [
+                "开展",
+                "结合"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --结合--> 部队的各项任务",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "部队的各项任务",
+                  "relation": "结合",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "中国人民解放军"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v2_034"
+      ],
+      "expected_path": {
+        "nodes": [
+          "中国人民解放军",
+          "新式整军运动"
+        ],
+        "relations": [
+          "开展"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "document_outline_systematization",
+      "query": "宣传鼓动工作提纲标志着什么？",
+      "query_entities": [
+        "《党的宣传鼓动工作提纲》",
+        "宣传鼓动工作"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_167",
+          "graph_score": 0.99,
+          "related_entities": [
+            "《党的宣传鼓动工作提纲》",
+            "宣传鼓动工作",
+            "张闻天",
+            "党的宣传教育工作系统化、规范化",
+            "中央总的宣传政策领导"
+          ],
+          "graph_paths": [
+            {
+              "from": "《党的宣传鼓动工作提纲》",
+              "to": "张闻天",
+              "hops": 1,
+              "path": [
+                "《党的宣传鼓动工作提纲》",
+                "张闻天"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "《党的宣传鼓动工作提纲》 --关联--> 张闻天",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166"
+              ],
+              "edges": [
+                {
+                  "source": "《党的宣传鼓动工作提纲》",
+                  "target": "张闻天",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "《党的宣传鼓动工作提纲》",
+              "to": "党的宣传教育工作系统化、规范化",
+              "hops": 1,
+              "path": [
+                "《党的宣传鼓动工作提纲》",
+                "党的宣传教育工作系统化、规范化"
+              ],
+              "relations": [
+                "标志着"
+              ],
+              "path_text": "《党的宣传鼓动工作提纲》 --标志着--> 党的宣传教育工作系统化、规范化",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_167"
+              ],
+              "edges": [
+                {
+                  "source": "《党的宣传鼓动工作提纲》",
+                  "target": "党的宣传教育工作系统化、规范化",
+                  "relation": "标志着",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_167"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "宣传鼓动工作",
+              "to": "中央总的宣传政策领导",
+              "hops": 1,
+              "path": [
+                "宣传鼓动工作",
+                "中央总的宣传政策领导"
+              ],
+              "relations": [
+                "统一于"
+              ],
+              "path_text": "宣传鼓动工作 --统一于--> 中央总的宣传政策领导",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_167"
+              ],
+              "edges": [
+                {
+                  "source": "宣传鼓动工作",
+                  "target": "中央总的宣传政策领导",
+                  "relation": "统一于",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_167"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_166",
+          "graph_score": 0.944,
+          "related_entities": [
+            "《党的宣传鼓动工作提纲》",
+            "宣传鼓动工作",
+            "张闻天"
+          ],
+          "graph_paths": [
+            {
+              "from": "《党的宣传鼓动工作提纲》",
+              "to": "张闻天",
+              "hops": 1,
+              "path": [
+                "《党的宣传鼓动工作提纲》",
+                "张闻天"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "《党的宣传鼓动工作提纲》 --关联--> 张闻天",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_166"
+              ],
+              "edges": [
+                {
+                  "source": "《党的宣传鼓动工作提纲》",
+                  "target": "张闻天",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_166"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_005",
+          "graph_score": 0.834,
+          "related_entities": [
+            "宣传鼓动工作",
+            "支部",
+            "具体更群众化的宣传工作"
+          ],
+          "graph_paths": [
+            {
+              "from": "宣传鼓动工作",
+              "to": "支部",
+              "hops": 1,
+              "path": [
+                "宣传鼓动工作",
+                "支部"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "宣传鼓动工作 --关联--> 支部",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "宣传鼓动工作",
+                  "target": "支部",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "宣传鼓动工作",
+              "to": "具体更群众化的宣传工作",
+              "hops": 2,
+              "path": [
+                "宣传鼓动工作",
+                "支部",
+                "具体更群众化的宣传工作"
+              ],
+              "relations": [
+                "关联",
+                "负责"
+              ],
+              "path_text": "宣传鼓动工作 --关联--> 支部 --负责--> 具体更群众化的宣传工作",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_005"
+              ],
+              "edges": [
+                {
+                  "source": "宣传鼓动工作",
+                  "target": "支部",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "支部",
+                  "target": "具体更群众化的宣传工作",
+                  "relation": "负责",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_005"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "《党的宣传鼓动工作提纲》"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "expected_path": {
+        "nodes": [
+          "《党的宣传鼓动工作提纲》",
+          "党的宣传教育工作系统化、规范化"
+        ],
+        "relations": [
+          "标志着"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "document_first_congress",
+      "query": "党的一大如何确立思想政治教育的基本原则？",
+      "query_entities": [
+        "党的一大",
+        "思想政治教育",
+        "政治教育"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_023",
+          "graph_score": 0.99,
+          "related_entities": [
+            "党的一大",
+            "思想政治教育",
+            "政治教育",
+            "马克思主义",
+            "中国共产党",
+            "工人运动"
+          ],
+          "graph_paths": [
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "马克思主义"
+              ],
+              "relations": [
+                "以其为指导思想"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "由其领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "马克思主义",
+                "中国共产党"
+              ],
+              "relations": [
+                "以其为指导思想",
+                "关联"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "马克思主义",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "工人运动",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "工人运动"
+              ],
+              "relations": [
+                "由其领导",
+                "发动和领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --发动和领导--> 工人运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_021"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "工人运动",
+                  "relation": "发动和领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "马克思主义"
+              ],
+              "relations": [
+                "由其领导",
+                "以其为行动指南"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --以其为行动指南--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "马克思主义",
+                  "relation": "以其为行动指南",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_027",
+          "graph_score": 0.99,
+          "related_entities": [
+            "党的一大",
+            "思想政治教育",
+            "政治教育",
+            "马克思主义",
+            "中国共产党",
+            "工人运动"
+          ],
+          "graph_paths": [
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "马克思主义"
+              ],
+              "relations": [
+                "以其为指导思想"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "由其领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "马克思主义",
+                "中国共产党"
+              ],
+              "relations": [
+                "以其为指导思想",
+                "关联"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "马克思主义",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "工人运动",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "工人运动"
+              ],
+              "relations": [
+                "由其领导",
+                "发动和领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --发动和领导--> 工人运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_021"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "工人运动",
+                  "relation": "发动和领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "马克思主义"
+              ],
+              "relations": [
+                "由其领导",
+                "以其为行动指南"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --以其为行动指南--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "马克思主义",
+                  "relation": "以其为行动指南",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_028",
+          "graph_score": 0.99,
+          "related_entities": [
+            "党的一大",
+            "思想政治教育",
+            "政治教育",
+            "思想政治教育的基本原则",
+            "马克思主义",
+            "中国共产党",
+            "1921年7月"
+          ],
+          "graph_paths": [
+            {
+              "from": "党的一大",
+              "to": "思想政治教育的基本原则",
+              "hops": 1,
+              "path": [
+                "党的一大",
+                "思想政治教育的基本原则"
+              ],
+              "relations": [
+                "确立"
+              ],
+              "path_text": "党的一大 --确立--> 思想政治教育的基本原则",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "党的一大",
+                  "target": "思想政治教育的基本原则",
+                  "relation": "确立",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "马克思主义"
+              ],
+              "relations": [
+                "以其为指导思想"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "由其领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "马克思主义",
+                "中国共产党"
+              ],
+              "relations": [
+                "以其为指导思想",
+                "关联"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "马克思主义",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "1921年7月",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "1921年7月"
+              ],
+              "relations": [
+                "由其领导",
+                "成立于"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --成立于--> 1921年7月",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_021"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "1921年7月",
+                  "relation": "成立于",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "党的一大",
+        "思想政治教育"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "expected_path": {
+        "nodes": [
+          "党的一大",
+          "思想政治教育的基本原则"
+        ],
+        "relations": [
+          "确立"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "concept_education_origin",
+      "query": "思想政治教育的历史开端是什么？",
+      "query_entities": [
+        "思想政治教育",
+        "政治教育"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_001",
+          "graph_score": 0.981,
+          "related_entities": [
+            "思想政治教育",
+            "政治教育",
+            "中国共产党人",
+            "马克思主义",
+            "中国共产党",
+            "马克思主义和党的方针政策",
+            "人民当家作主的新中国"
+          ],
+          "graph_paths": [
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党人",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "中国共产党人"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "思想政治教育 --关联--> 中国共产党人",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_001"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党人",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_001"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "马克思主义"
+              ],
+              "relations": [
+                "以其为指导思想"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "由其领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义和党的方针政策",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党人",
+                "马克思主义和党的方针政策"
+              ],
+              "relations": [
+                "关联",
+                "宣传"
+              ],
+              "path_text": "思想政治教育 --关联--> 中国共产党人 --宣传--> 马克思主义和党的方针政策",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_001"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党人",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_001"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "中国共产党人",
+                  "target": "马克思主义和党的方针政策",
+                  "relation": "宣传",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_001"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "人民当家作主的新中国",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党人",
+                "人民当家作主的新中国"
+              ],
+              "relations": [
+                "关联",
+                "建立"
+              ],
+              "path_text": "思想政治教育 --关联--> 中国共产党人 --建立--> 人民当家作主的新中国",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_001"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党人",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_001"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "中国共产党人",
+                  "target": "人民当家作主的新中国",
+                  "relation": "建立",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_001"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_002",
+          "graph_score": 0.981,
+          "related_entities": [
+            "思想政治教育",
+            "政治教育",
+            "马克思主义",
+            "中国共产党",
+            "工人运动"
+          ],
+          "graph_paths": [
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "马克思主义"
+              ],
+              "relations": [
+                "以其为指导思想"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "由其领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "马克思主义",
+                "中国共产党"
+              ],
+              "relations": [
+                "以其为指导思想",
+                "关联"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "马克思主义",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "工人运动",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "工人运动"
+              ],
+              "relations": [
+                "由其领导",
+                "发动和领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --发动和领导--> 工人运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_021"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "工人运动",
+                  "relation": "发动和领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "马克思主义"
+              ],
+              "relations": [
+                "由其领导",
+                "以其为行动指南"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --以其为行动指南--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "马克思主义",
+                  "relation": "以其为行动指南",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_006",
+          "graph_score": 0.981,
+          "related_entities": [
+            "思想政治教育",
+            "政治教育",
+            "马克思主义",
+            "中国共产党",
+            "工人运动"
+          ],
+          "graph_paths": [
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "马克思主义"
+              ],
+              "relations": [
+                "以其为指导思想"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "思想政治教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "由其领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "中国共产党",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "马克思主义",
+                "中国共产党"
+              ],
+              "relations": [
+                "以其为指导思想",
+                "关联"
+              ],
+              "path_text": "思想政治教育 --以其为指导思想--> 马克思主义 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "马克思主义",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "马克思主义",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "工人运动",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "工人运动"
+              ],
+              "relations": [
+                "由其领导",
+                "发动和领导"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --发动和领导--> 工人运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_021"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "工人运动",
+                  "relation": "发动和领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "思想政治教育",
+              "to": "马克思主义",
+              "hops": 2,
+              "path": [
+                "思想政治教育",
+                "中国共产党",
+                "马克思主义"
+              ],
+              "relations": [
+                "由其领导",
+                "以其为行动指南"
+              ],
+              "path_text": "思想政治教育 --由其领导--> 中国共产党 --以其为行动指南--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "思想政治教育",
+                  "target": "中国共产党",
+                  "relation": "由其领导",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "马克思主义",
+                  "relation": "以其为行动指南",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "思想政治教育"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "expected_path": {
+        "nodes": [
+          "思想政治教育",
+          "中国共产党人"
+        ],
+        "relations": [
+          "关联"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "concept_three_checks",
+      "query": "三查包括什么？",
+      "query_entities": [
+        "三查"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v2_021",
+          "graph_score": 0.75,
+          "related_entities": [
+            "三查",
+            "查阶级、查工作、查斗志"
+          ],
+          "graph_paths": [
+            {
+              "from": "三查",
+              "to": "查阶级、查工作、查斗志",
+              "hops": 1,
+              "path": [
+                "三查",
+                "查阶级、查工作、查斗志"
+              ],
+              "relations": [
+                "包括"
+              ],
+              "path_text": "三查 --包括--> 查阶级、查工作、查斗志",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "三查",
+                  "target": "查阶级、查工作、查斗志",
+                  "relation": "包括",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_022",
+          "graph_score": 0.34,
+          "related_entities": [
+            "三查"
+          ],
+          "graph_paths": []
+        },
+        {
+          "id": "chunk_sizheng_v2_023",
+          "graph_score": 0.34,
+          "related_entities": [
+            "三查"
+          ],
+          "graph_paths": []
+        }
+      ],
+      "expected_entities": [
+        "三查"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "expected_path": {
+        "nodes": [
+          "三查",
+          "查阶级、查工作、查斗志"
+        ],
+        "relations": [
+          "包括"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "concept_marxism_origin",
+      "query": "十月革命创立了什么？",
+      "query_entities": [
+        "十月革命"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_001",
+          "graph_score": 0.762,
+          "related_entities": [
+            "十月革命",
+            "世界上第一个社会主义国家"
+          ],
+          "graph_paths": [
+            {
+              "from": "十月革命",
+              "to": "世界上第一个社会主义国家",
+              "hops": 1,
+              "path": [
+                "十月革命",
+                "世界上第一个社会主义国家"
+              ],
+              "relations": [
+                "创立"
+              ],
+              "path_text": "十月革命 --创立--> 世界上第一个社会主义国家",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_001"
+              ],
+              "edges": [
+                {
+                  "source": "十月革命",
+                  "target": "世界上第一个社会主义国家",
+                  "relation": "创立",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_001"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_002",
+          "graph_score": 0.352,
+          "related_entities": [
+            "十月革命"
+          ],
+          "graph_paths": []
+        },
+        {
+          "id": "chunk_sizheng_v1_005",
+          "graph_score": 0.352,
+          "related_entities": [
+            "十月革命"
+          ],
+          "graph_paths": []
+        }
+      ],
+      "expected_entities": [
+        "十月革命"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "expected_path": {
+        "nodes": [
+          "十月革命",
+          "世界上第一个社会主义国家"
+        ],
+        "relations": [
+          "创立"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "concept_cadre_education",
+      "query": "中国共产党为什么重视干部教育？",
+      "query_entities": [
+        "干部教育",
+        "中国共产党"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_148",
+          "graph_score": 0.99,
+          "related_entities": [
+            "干部教育",
+            "中国共产党",
+            "党的重要战略任务",
+            "抗战胜利",
+            "共产主义思想",
+            "思想教育",
+            "马克思主义",
+            "思想政治教育"
+          ],
+          "graph_paths": [
+            {
+              "from": "干部教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "干部教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "干部教育 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "干部教育",
+              "to": "党的重要战略任务",
+              "hops": 1,
+              "path": [
+                "干部教育",
+                "党的重要战略任务"
+              ],
+              "relations": [
+                "是"
+              ],
+              "path_text": "干部教育 --是--> 党的重要战略任务",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "党的重要战略任务",
+                  "relation": "是",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "干部教育",
+              "to": "抗战胜利",
+              "hops": 1,
+              "path": [
+                "干部教育",
+                "抗战胜利"
+              ],
+              "relations": [
+                "是重要保证"
+              ],
+              "path_text": "干部教育 --是重要保证--> 抗战胜利",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "抗战胜利",
+                  "relation": "是重要保证",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "干部教育",
+              "to": "共产主义思想",
+              "hops": 1,
+              "path": [
+                "干部教育",
+                "共产主义思想"
+              ],
+              "relations": [
+                "以其为指导思想"
+              ],
+              "path_text": "干部教育 --以其为指导思想--> 共产主义思想",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "共产主义思想",
+                  "relation": "以其为指导思想",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "干部教育",
+              "to": "思想教育",
+              "hops": 1,
+              "path": [
+                "干部教育",
+                "思想教育"
+              ],
+              "relations": [
+                "包括"
+              ],
+              "path_text": "干部教育 --包括--> 思想教育",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "思想教育",
+                  "relation": "包括",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_143",
+          "graph_score": 0.881,
+          "related_entities": [
+            "干部教育",
+            "中国共产党",
+            "思想政治教育"
+          ],
+          "graph_paths": [
+            {
+              "from": "干部教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "干部教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "干部教育 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "干部教育",
+              "to": "思想政治教育",
+              "hops": 2,
+              "path": [
+                "干部教育",
+                "中国共产党",
+                "思想政治教育"
+              ],
+              "relations": [
+                "关联",
+                "关联"
+              ],
+              "path_text": "干部教育 --关联--> 中国共产党 --关联--> 思想政治教育",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148",
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "思想政治教育",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "中国共产党",
+              "to": "思想政治教育",
+              "hops": 1,
+              "path": [
+                "中国共产党",
+                "思想政治教育"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "中国共产党 --关联--> 思想政治教育",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "中国共产党",
+                  "target": "思想政治教育",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "中国共产党",
+              "to": "干部教育",
+              "hops": 1,
+              "path": [
+                "中国共产党",
+                "干部教育"
+              ],
+              "relations": [
+                "重视"
+              ],
+              "path_text": "中国共产党 --重视--> 干部教育",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "中国共产党",
+                  "target": "干部教育",
+                  "relation": "重视",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国共产党",
+              "to": "思想政治教育",
+              "hops": 2,
+              "path": [
+                "中国共产党",
+                "马克思主义",
+                "思想政治教育"
+              ],
+              "relations": [
+                "以其为行动指南",
+                "关联"
+              ],
+              "path_text": "中国共产党 --以其为行动指南--> 马克思主义 --关联--> 思想政治教育",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_028",
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "中国共产党",
+                  "target": "马克思主义",
+                  "relation": "以其为行动指南",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "马克思主义",
+                  "target": "思想政治教育",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_001",
+          "graph_score": 0.871,
+          "related_entities": [
+            "中国共产党",
+            "马克思主义",
+            "思想政治教育",
+            "中国共产党人"
+          ],
+          "graph_paths": [
+            {
+              "from": "干部教育",
+              "to": "中国共产党",
+              "hops": 1,
+              "path": [
+                "干部教育",
+                "中国共产党"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "干部教育 --关联--> 中国共产党",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "干部教育",
+              "to": "马克思主义",
+              "hops": 2,
+              "path": [
+                "干部教育",
+                "中国共产党",
+                "马克思主义"
+              ],
+              "relations": [
+                "关联",
+                "以其为行动指南"
+              ],
+              "path_text": "干部教育 --关联--> 中国共产党 --以其为行动指南--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148",
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "马克思主义",
+                  "relation": "以其为行动指南",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "干部教育",
+              "to": "思想政治教育",
+              "hops": 2,
+              "path": [
+                "干部教育",
+                "中国共产党",
+                "思想政治教育"
+              ],
+              "relations": [
+                "关联",
+                "关联"
+              ],
+              "path_text": "干部教育 --关联--> 中国共产党 --关联--> 思想政治教育",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_148",
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "干部教育",
+                  "target": "中国共产党",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_148"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "中国共产党",
+                  "target": "思想政治教育",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "中国共产党",
+              "to": "马克思主义",
+              "hops": 1,
+              "path": [
+                "中国共产党",
+                "马克思主义"
+              ],
+              "relations": [
+                "以其为行动指南"
+              ],
+              "path_text": "中国共产党 --以其为行动指南--> 马克思主义",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_028"
+              ],
+              "edges": [
+                {
+                  "source": "中国共产党",
+                  "target": "马克思主义",
+                  "relation": "以其为行动指南",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_028"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国共产党",
+              "to": "思想政治教育",
+              "hops": 1,
+              "path": [
+                "中国共产党",
+                "思想政治教育"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "中国共产党 --关联--> 思想政治教育",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_032"
+              ],
+              "edges": [
+                {
+                  "source": "中国共产党",
+                  "target": "思想政治教育",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_032"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "中国共产党",
+        "干部教育"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "expected_path": {
+        "nodes": [
+          "中国共产党",
+          "干部教育"
+        ],
+        "relations": [
+          "重视"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "two_hop_pla_political_awareness",
+      "query": "中国人民解放军开展新式整军运动提高了什么？",
+      "query_entities": [
+        "新式整军运动",
+        "人民解放军",
+        "中国人民解放军"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v2_021",
+          "graph_score": 0.99,
+          "related_entities": [
+            "新式整军运动",
+            "人民解放军",
+            "1947年冬至1948年夏",
+            "诉苦和三查",
+            "大规模阶级教育和思想整顿",
+            "部队的各项任务"
+          ],
+          "graph_paths": [
+            {
+              "from": "新式整军运动",
+              "to": "1947年冬至1948年夏",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "1947年冬至1948年夏"
+              ],
+              "relations": [
+                "开展于"
+              ],
+              "path_text": "新式整军运动 --开展于--> 1947年冬至1948年夏",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "1947年冬至1948年夏",
+                  "relation": "开展于",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "诉苦和三查",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "诉苦和三查"
+              ],
+              "relations": [
+                "采取"
+              ],
+              "path_text": "新式整军运动 --采取--> 诉苦和三查",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "诉苦和三查",
+                  "relation": "采取",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "大规模阶级教育和思想整顿",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "大规模阶级教育和思想整顿"
+              ],
+              "relations": [
+                "是"
+              ],
+              "path_text": "新式整军运动 --是--> 大规模阶级教育和思想整顿",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "大规模阶级教育和思想整顿",
+                  "relation": "是",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "部队的各项任务",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "部队的各项任务"
+              ],
+              "relations": [
+                "结合"
+              ],
+              "path_text": "新式整军运动 --结合--> 部队的各项任务",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_021"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "部队的各项任务",
+                  "relation": "结合",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_021"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动"
+              ],
+              "relations": [
+                "开展"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_023",
+          "graph_score": 0.948,
+          "related_entities": [
+            "新式整军运动",
+            "人民解放军",
+            "干部战士的政治觉悟",
+            "人的认识规律"
+          ],
+          "graph_paths": [
+            {
+              "from": "新式整军运动",
+              "to": "干部战士的政治觉悟",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "干部战士的政治觉悟"
+              ],
+              "relations": [
+                "提高"
+              ],
+              "path_text": "新式整军运动 --提高--> 干部战士的政治觉悟",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_023"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "干部战士的政治觉悟",
+                  "relation": "提高",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_023"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "人的认识规律",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "人的认识规律"
+              ],
+              "relations": [
+                "遵循"
+              ],
+              "path_text": "新式整军运动 --遵循--> 人的认识规律",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_023"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "人的认识规律",
+                  "relation": "遵循",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_023"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动"
+              ],
+              "relations": [
+                "开展"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "干部战士的政治觉悟",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "干部战士的政治觉悟"
+              ],
+              "relations": [
+                "开展",
+                "提高"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --提高--> 干部战士的政治觉悟",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_023"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "干部战士的政治觉悟",
+                  "relation": "提高",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_023"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "人的认识规律",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "人的认识规律"
+              ],
+              "relations": [
+                "开展",
+                "遵循"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --遵循--> 人的认识规律",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_023"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "人的认识规律",
+                  "relation": "遵循",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_023"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v2_022",
+          "graph_score": 0.908,
+          "related_entities": [
+            "新式整军运动",
+            "人民解放军",
+            "中国人民解放军",
+            "毛泽东"
+          ],
+          "graph_paths": [
+            {
+              "from": "新式整军运动",
+              "to": "毛泽东",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "毛泽东"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 毛泽东",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "毛泽东",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "新式整军运动",
+              "to": "中国人民解放军",
+              "hops": 1,
+              "path": [
+                "新式整军运动",
+                "中国人民解放军"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "新式整军运动 --关联--> 中国人民解放军",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "新式整军运动",
+                  "target": "中国人民解放军",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "新式整军运动",
+              "hops": 1,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动"
+              ],
+              "relations": [
+                "开展"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "中国人民解放军",
+              "to": "毛泽东",
+              "hops": 2,
+              "path": [
+                "中国人民解放军",
+                "新式整军运动",
+                "毛泽东"
+              ],
+              "relations": [
+                "开展",
+                "关联"
+              ],
+              "path_text": "中国人民解放军 --开展--> 新式整军运动 --关联--> 毛泽东",
+              "source_chunk_ids": [
+                "chunk_sizheng_v2_034",
+                "chunk_sizheng_v2_022"
+              ],
+              "edges": [
+                {
+                  "source": "中国人民解放军",
+                  "target": "新式整军运动",
+                  "relation": "开展",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_034"
+                  ],
+                  "original_direction": true
+                },
+                {
+                  "source": "新式整军运动",
+                  "target": "毛泽东",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v2_022"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_entities": [
+        "中国人民解放军",
+        "新式整军运动"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v2_023",
+        "chunk_sizheng_v2_034"
+      ],
+      "expected_path": {
+        "nodes": [
+          "中国人民解放军",
+          "新式整军运动",
+          "干部战士的政治觉悟"
+        ],
+        "relations": [
+          "开展",
+          "提高"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "two_hop_central_letter",
+      "query": "古田会议与中央九月来信有什么关系？",
+      "query_entities": [
+        "古田会议"
+      ],
+      "top_3_graph_hits": [
+        {
+          "id": "chunk_sizheng_v1_088",
+          "graph_score": 0.882,
+          "related_entities": [
+            "古田会议",
+            "中央“九月来信”",
+            "毛泽东为前委书记",
+            "通过思想政治教育克服党内错误倾向的路线",
+            "“工农武装割据”思想",
+            "建党建军路线"
+          ],
+          "graph_paths": [
+            {
+              "from": "古田会议",
+              "to": "中央“九月来信”",
+              "hops": 1,
+              "path": [
+                "古田会议",
+                "中央“九月来信”"
+              ],
+              "relations": [
+                "关联"
+              ],
+              "path_text": "古田会议 --关联--> 中央“九月来信”",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_088"
+              ],
+              "edges": [
+                {
+                  "source": "古田会议",
+                  "target": "中央“九月来信”",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_088"
+                  ],
+                  "original_direction": false
+                }
+              ]
+            },
+            {
+              "from": "古田会议",
+              "to": "毛泽东为前委书记",
+              "hops": 1,
+              "path": [
+                "古田会议",
+                "毛泽东为前委书记"
+              ],
+              "relations": [
+                "选举"
+              ],
+              "path_text": "古田会议 --选举--> 毛泽东为前委书记",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_088"
+              ],
+              "edges": [
+                {
+                  "source": "古田会议",
+                  "target": "毛泽东为前委书记",
+                  "relation": "选举",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_088"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "古田会议",
+              "to": "通过思想政治教育克服党内错误倾向的路线",
+              "hops": 1,
+              "path": [
+                "古田会议",
+                "通过思想政治教育克服党内错误倾向的路线"
+              ],
+              "relations": [
+                "确定"
+              ],
+              "path_text": "古田会议 --确定--> 通过思想政治教育克服党内错误倾向的路线",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_088"
+              ],
+              "edges": [
+                {
+                  "source": "古田会议",
+                  "target": "通过思想政治教育克服党内错误倾向的路线",
+                  "relation": "确定",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_088"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "古田会议",
+              "to": "“工农武装割据”思想",
+              "hops": 2,
+              "path": [
+                "古田会议",
+                "中央“九月来信”",
+                "“工农武装割据”思想"
+              ],
+              "relations": [
+                "关联",
+                "肯定"
+              ],
+              "path_text": "古田会议 --关联--> 中央“九月来信” --肯定--> “工农武装割据”思想",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_088"
+              ],
+              "edges": [
+                {
+                  "source": "古田会议",
+                  "target": "中央“九月来信”",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_088"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "中央“九月来信”",
+                  "target": "“工农武装割据”思想",
+                  "relation": "肯定",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_088"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            },
+            {
+              "from": "古田会议",
+              "to": "建党建军路线",
+              "hops": 2,
+              "path": [
+                "古田会议",
+                "中央“九月来信”",
+                "建党建军路线"
+              ],
+              "relations": [
+                "关联",
+                "肯定"
+              ],
+              "path_text": "古田会议 --关联--> 中央“九月来信” --肯定--> 建党建军路线",
+              "source_chunk_ids": [
+                "chunk_sizheng_v1_088"
+              ],
+              "edges": [
+                {
+                  "source": "古田会议",
+                  "target": "中央“九月来信”",
+                  "relation": "关联",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_088"
+                  ],
+                  "original_direction": false
+                },
+                {
+                  "source": "中央“九月来信”",
+                  "target": "建党建军路线",
+                  "relation": "肯定",
+                  "source_chunk_ids": [
+                    "chunk_sizheng_v1_088"
+                  ],
+                  "original_direction": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chunk_sizheng_v1_089",
+          "graph_score": 0.352,
+          "related_entities": [
+            "古田会议"
+          ],
+          "graph_paths": []
+        },
+        {
+          "id": "chunk_sizheng_v1_090",
+          "graph_score": 0.352,
+          "related_entities": [
+            "古田会议"
+          ],
+          "graph_paths": []
+        }
+      ],
+      "expected_entities": [
+        "古田会议"
+      ],
+      "expected_hit_ids": [
+        "chunk_sizheng_v1_088"
+      ],
+      "expected_path": {
+        "nodes": [
+          "古田会议",
+          "中央“九月来信”"
+        ],
+        "relations": [
+          "关联"
+        ]
+      },
+      "expect_no_reliable_path": false
+    },
+    {
+      "id": "fallback_no_reliable_path",
+      "query": "未知实体与不存在事件的关系？",
+      "query_entities": [],
+      "top_3_graph_hits": [],
+      "expected_entities": [],
+      "expected_hit_ids": [],
+      "expected_path": null,
+      "expect_no_reliable_path": true
+    }
+  ]
+}
