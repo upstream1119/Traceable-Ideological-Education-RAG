@@ -182,7 +182,9 @@ def main() -> int:
     }
     payload = build_payload(triples, chunks)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Force LF so Windows regeneration does not create a whole-file CRLF diff.
+    with args.output.open("w", encoding="utf-8", newline="\n") as output:
+        output.write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
     print(f"force graph written: {args.output} nodes={len(payload['nodes'])} edges={len(payload['edges'])}")
     return 0
 
