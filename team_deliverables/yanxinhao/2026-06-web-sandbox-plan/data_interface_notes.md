@@ -4,12 +4,23 @@
 
 当前 6 月说明基于仓库中已有的 Demo 数据：
 
+- `data/processed/text_chunks_sizheng_v1.jsonl`（196 条）
+- `data/processed/text_chunks_sizheng_v2.jsonl`（49 条）
 - `data/processed/landmarks_demo.geojson`
 - `data/processed/landmarks_demo.jsonl`
 - `data/processed/timeline_demo_sizheng.json`
 - `/retrieve` 返回的 `hybrid_hits`、`citations_used`、`source_check`、`policy_check`、`agent_trace`、`final_decision`
 
-这些数据用于 Web/XR 展示层规划，不代表正式史料库已完成。正式展示或论文使用前，需要继续复核来源、页码和坐标精度。
+v1 与 v2 当前合计 245 条 chunks。这些数据用于 Web/XR 展示层规划，不代表正式史料库已完成。正式展示或论文使用前，需要继续复核来源、页码和坐标精度。
+
+### 1.1 当前检索后端
+
+- 默认 `/retrieve` 使用轻量检索。
+- FAISS 是已完成工程冒烟验证的可选向量后端，不是默认链路。
+- 负责人可通过 `DACHUANG_VECTOR_BACKEND=faiss` 和有效的 `DACHUANG_FAISS_INDEX_DIR` 启用。
+- FAISS 未配置、索引目录不存在、API Key 缺失、Embedding 失败或向量维度不匹配时，后端自动回退轻量检索。
+- 两种后端保持相同的 `/retrieve` 返回契约，因此展示层不应依赖某一种检索后端的内部实现。
+- 当前 FAISS 结果属于工程验收，不作为正式论文实验结论。
 
 ## 2. 地标 GeoJSON 字段说明
 
@@ -160,6 +171,17 @@
 - `related_entities`
 - `graph_paths`
 
+最新 chunks 到展示节点的映射记录在 `spatiotemporal_mapping_notes.md`。映射节点至少包含：
+
+- `display_id`：展示节点稳定 ID。
+- `display_type`：地图时间线、纯时间线、人物卡片或事件卡片。
+- `source_chunk_ids`：真实 `chunk_sizheng_v1_xxx` 或 `chunk_sizheng_v2_xxx`。
+- `time`、`location`、`people`、`entities`：时空与人物信息。
+- `citation`：逐条保留源 chunk 的 `doc`、`section`、`page`。
+- `target_landmark_id`、`target_timeline_id`：映射到已有节点或 proposed 节点。
+- `mapping_basis`：映射依据。
+- `verification_status`：`verified`、`partial` 或 `needs_review`。
+
 映射规则草案：
 
 ```text
@@ -175,7 +197,19 @@ hybrid_hit.citation
 
 hybrid_hit.graph_paths
   -> 渲染“为什么召回这条证据”的关系解释
+
+source_chunk_ids
+  -> 追溯到最新 245 条 chunks
+  -> 提取人物、时间、地点和 citation
+  -> 形成地图 / 时间线 / 人物卡片 / 事件卡片
 ```
+
+映射限制：
+
+- chunk 的结构化 `time` 或 `location` 为空时，只能使用正文中明确出现且可核对的信息。
+- 无可靠地点的主题不得为了地图展示强行补坐标。
+- 现有地标使用正式 `landmark_...` ID；尚未进入正式时间线的新节点使用 `proposed_timeline_...` ID。
+- 多个 chunks 的 citation 不同时，应逐条保留，不能合并成虚构 citation。
 
 ## 6. 地图点、时间线和 citation 卡片联动
 
@@ -183,14 +217,15 @@ hybrid_hit.graph_paths
 
 1. 用户在搜索框输入问题。
 2. 前端调用 `/retrieve`。
-3. 右侧展示 `hybrid_hits`、citation 卡片、`agent_trace` 和 `final_decision`。
-4. 前端先读取 `final_decision.status`，决定回答和数字人播报是否可输出。
-5. 前端用 `query_entities`、`related_entities`、`entities` 做轻量匹配。
-6. 匹配到的地图点高亮。
-7. 匹配到的时间线事件高亮。
-8. 用户点击地图点时，时间线跳转到相关事件，citation 区筛选相关证据。
-9. 用户点击时间线事件时，地图定位到对应地点，citation 区展示相关证据。
-10. 用户点击 citation 卡片时，地图点和时间线事件反向高亮。
+3. 后端按默认轻量检索或负责人启用的可选 FAISS 产生稳定响应。
+4. 右侧展示 `hybrid_hits`、citation 卡片、`agent_trace` 和 `final_decision`。
+5. 前端先读取 `final_decision.status`，决定回答和数字人播报是否可输出。
+6. 前端用 `query_entities`、`related_entities`、`entities` 和映射表做节点匹配。
+7. 匹配到的地图点高亮。
+8. 匹配到的时间线事件高亮。
+9. 用户点击地图点时，时间线跳转到相关事件，citation 区筛选相关证据。
+10. 用户点击时间线事件时，地图定位到对应地点，citation 区展示相关证据。
+11. 用户点击 citation 卡片时，地图点和时间线事件反向高亮。
 
 ## 7. 缺失信息和后续补齐
 

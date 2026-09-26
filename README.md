@@ -6,7 +6,7 @@ Traceable KG-RAG system for ideological education with citation grounding, multi
 
 This repository is part of a National College Student Innovation and Entrepreneurship Training Program project. The current focus is to build a traceable retrieval backend, stable API contract, and evidence-grounded response workflow for ideological education materials.
 
-> Status: backend-first prototype. Current implementation focuses on retrieval API, schema stability, citation structure, generation scaffolding, source checking, policy checking, and demo validation. Full cross-modal interaction, digital-human presentation, and XR sandbox workflows are planned stages.
+> Status: backend-first prototype with real FAISS smoke validation. Current implementation focuses on retrieval API, schema stability, citation structure, generation scaffolding, source checking, policy checking, and demo validation. The FAISS path can now be enabled for `/retrieve` through `DACHUANG_VECTOR_BACKEND=faiss`, while the default path remains the stable lightweight retriever. Full cross-modal interaction, digital-human presentation, and XR sandbox workflows are planned stages.
 
 ## What It Does
 
@@ -16,14 +16,18 @@ Current implemented capabilities:
 - Exposes `/health` and `/retrieve` APIs.
 - Returns a stable retrieval response structure.
 - Reads processed ideological education text chunks.
+- Validates a 245-chunk ideological education corpus through a Qwen `text-embedding-v4` + FAISS smoke workflow.
+- Provides an optional FAISS vector backend for `retrieve_vector`.
 - Uses a schema-driven API contract.
 - Includes graph storage, evidence generation, source checking, and policy checking modules.
+- Returns a deterministic V1 `display_route` for evidence cards, timeline/map, or digital-human entry points.
 - Maintains demo questions and basic acceptance tests.
 - Keeps project deliverables separated from core code.
 
 Planned capabilities:
 
-- Stronger hybrid retrieval with keyword, vector, and structured fields.
+- Promote the optional FAISS backend to the default vector path after chunk IDs and GraphSim triples are fully aligned.
+- Stronger hybrid retrieval with keyword, vector, structured fields, and reranking.
 - Knowledge graph reasoning for people, events, places, timelines, and ideological concepts.
 - Multi-agent review workflow for generation, citation auditing, and political safety review.
 - Timeline, map, event-card, digital-human, or XR-based learning interaction.
@@ -93,6 +97,27 @@ README_architecture.md Retrieval architecture notes
 
 Core code should stay outside `team_deliverables/`. Runtime data should stay inside `data/`. Presentation drafts and team materials can stay in `team_deliverables/`.
 
+## Current Retrieval Experiment
+
+The latest local FAISS smoke test uses:
+
+- `data/processed/text_chunks_sizheng_v1.jsonl`
+- `data/processed/text_chunks_sizheng_v2.jsonl`
+- `text-embedding-v4`
+- 1024-dimensional embeddings
+- `IndexFlatIP` with L2 normalization
+
+The 2026-06-23 smoke run on 245 chunks and 10 demo questions reported:
+
+| Metric | Value |
+|---|---:|
+| Recall@1 | 1.0000 |
+| Recall@3 | 1.0000 |
+| Recall@5 | 1.0000 |
+| MRR | 1.0000 |
+
+This is an engineering smoke-test result, not a formal paper experiment. The score includes the smoke script's lightweight section-aware rerank for near-neighbor sections. The validated FAISS path can be enabled through `DACHUANG_VECTOR_BACKEND=faiss` and `DACHUANG_FAISS_INDEX_DIR`, while `/retrieve` keeps the same stable response contract.
+
 ## Quick Start
 
 Install dependencies:
@@ -129,9 +154,12 @@ Example request:
 
 ```json
 {
-  "query": "延安时期思想政治教育有什么特点？"
+  "query": "请面向高中生介绍延安时期思想政治教育有什么特点？",
+  "target_grade": "senior_high"
 }
 ```
+
+`target_grade` is optional. Supported values are `primary`, `junior_high`, `senior_high`, and `university`.
 
 Run tests:
 
@@ -147,11 +175,25 @@ The current `/retrieve` response includes:
 - `project`
 - `query`
 - `query_entities`
-- `citations`
+- `vector_hits`
+- `graph_hits`
+- `hybrid_hits`
 - `answer`
-- `debug`
+- `citations_used`
+- `generator_mode`
+- `generator_provider`
+- `provider_status`
+- `used_fallback`
+- `source_check`
+- `policy_check`
+- `agent_trace`
+- `final_decision`
+- `display_route`
 
-The response structure will evolve as graph reasoning, generation agents, and auditing agents are added. Backward compatibility should be considered when frontend integration begins.
+`vector_hits` records vector-side evidence candidates, `graph_hits` records GraphSim/graph-side candidates, and `hybrid_hits` records fused evidence blocks with citation and scores.
+`citations_used`, `source_check`, `policy_check`, `agent_trace`, and `final_decision` are part of the current three-agent scaffold.
+`display_route` contains `intent_type`, `target_grade`, `presentation_mode`, `timeline_ids`, `landmark_ids`, and `narrative_character`. See `docs/display_route_contract.md` for the V1 frontend contract.
+Do not use the old `citations` or `debug` fields for new frontend or teammate integration.
 
 ## Roadmap
 

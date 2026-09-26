@@ -43,9 +43,13 @@
 ```text
 用户输入问题
   -> POST /retrieve
+  -> 默认轻量检索 / 负责人可选 FAISS
+  -> GraphSim 实体扩展与路径解释
   -> 返回 query_entities、hybrid_hits、citations_used、source_check、policy_check、agent_trace、final_decision
   -> 页面更新地图、时间线、citation 卡片和输出控制状态
 ```
+
+前端不直接控制检索后端。默认轻量检索和可选 FAISS 均通过 `/retrieve` 提供相同返回结构；FAISS 未配置或发生异常时，由后端回退轻量检索。
 
 ### 3.2 地图点联动
 
@@ -119,18 +123,17 @@ citation 卡片来自 `/retrieve` 的 `hybrid_hits` 和 `citations_used`。
 当前已完成链路
 用户提问
   -> /retrieve
-  -> 实体识别
-  -> vector_hits
-  -> graph_hits
-  -> hybrid_hits + citation
-  -> answer
+  -> 默认轻量检索 / 可选 FAISS
+  -> GraphSim
+  -> hybrid_hits
+  -> 生成回答 + citation
   -> source_check
   -> policy_check
   -> agent_trace
   -> final_decision
 
 6 月开发重点
-hybrid_hits + citation + final_decision
+245 条 chunks + hybrid_hits + citation + final_decision
   -> 地图点
   -> 时间线事件
   -> citation 卡片
@@ -149,6 +152,8 @@ Web 沙盘
 对老师说明时的重点：
 
 - 当前不是普通聊天机器人，而是先找证据再生成回答。
+- 默认链路是轻量检索；FAISS 是已验证的可选后端，尚未默认启用。
+- 当前 FAISS 指标属于工程冒烟验收，不是正式论文实验结论。
 - citation 和审查结果是可信展示的基础。
 - `final_decision` 是回答展示和数字人播报的最终控制字段。
 - XR/数字人只是展示方式，不能脱离证据链和 `final_decision`。
@@ -163,6 +168,7 @@ Web 沙盘
 - 用 React + Vite + TypeScript 搭建前端。
 - 用 Leaflet 读取 `landmarks_demo.geojson`。
 - 用普通组件读取 `timeline_demo_sizheng.json`。
+- 读取 `spatiotemporal_mapping_notes.md` 中冻结的节点设计，后续实现时转换为正式 JSON 或 API 响应。
 - 实现地图点和时间线点击高亮。
 
 验收：
@@ -220,6 +226,7 @@ Web 沙盘
 - 不把 `page: null` 写成确定页码。
 - 不把规则型 `policy_check` 宣称为已经替代专家审查。
 - 不绕过 `final_decision` 直接播放回答。
+- 不把 FAISS 表述为当前默认检索，也不把工程冒烟结果表述为论文实验。
 - 不把 Web 页面草图宣称为完整 XR 沙盘。
 - 不把数字人作为 6 月重算力主线。
 - 不在前端或仓库中写入 API Key、模型权重或大文件。
