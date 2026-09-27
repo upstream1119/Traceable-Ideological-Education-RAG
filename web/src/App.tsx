@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { ContractErrorState } from "./components/ContractErrorState";
 import { DecisionGate } from "./components/DecisionGate";
 import {
@@ -8,7 +8,8 @@ import {
 } from "./data/retrieveDataSource";
 import { AppError, isAppError } from "./lib/errors";
 import { validateRetrieveResponse } from "./lib/responseBoundary";
-import type { RetrieveResponse } from "./types/backend";
+import type { RetrieveRequest, RetrieveResponse } from "./types/backend";
+import { TARGET_GRADES, type TargetGrade } from "./types/contract";
 
 const mockScenarios: { id: MockScenarioId; label: string }[] = [
   { id: "approved_evidence", label: "Approved Evidence" },
@@ -26,6 +27,11 @@ type RuntimeState =
   | { kind: "contract_error"; error: AppError }
   | { kind: "transport_error"; error: AppError };
 
+type SubmittedQuery = {
+  request: RetrieveRequest;
+  scenarioId: MockScenarioId;
+};
+
 interface AppProps {
   dataSourceFactory?: (scenarioId: MockScenarioId) => RetrieveDataSource;
 }
@@ -38,15 +44,23 @@ export default function App({
 }: AppProps) {
   const [scenarioId, setScenarioId] =
     useState<MockScenarioId>("approved_evidence");
+  const [queryDraft, setQueryDraft] = useState("");
+  const [targetGrade, setTargetGrade] = useState<TargetGrade | null>(null);
+  const [submittedQuery, setSubmittedQuery] =
+    useState<SubmittedQuery | null>(null);
   const [runtimeState, setRuntimeState] = useState<RuntimeState>({ kind: "idle" });
 
   useEffect(() => {
+    if (!submittedQuery) {
+      return;
+    }
+
     let active = true;
-    const dataSource = dataSourceFactory(scenarioId);
+    const dataSource = dataSourceFactory(submittedQuery.scenarioId);
 
     setRuntimeState({ kind: "loading" });
     dataSource
-      .retrieve({ query: "FE-B2 Mock scenario query", target_grade: null })
+      .retrieve(submittedQuery.request)
       .then((response) => {
         if (!active) {
           return;
@@ -76,7 +90,20 @@ export default function App({
     return () => {
       active = false;
     };
-  }, [dataSourceFactory, scenarioId]);
+  }, [dataSourceFactory, submittedQuery]);
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const query = queryDraft.trim();
+    if (!query) {
+      return;
+    }
+
+    setSubmittedQuery({
+      request: { query, target_grade: targetGrade },
+      scenarioId,
+    });
+  }
 
   return (
     <main className="app-shell">
@@ -89,7 +116,11 @@ export default function App({
         <span className="header-mark">FE-B2</span>
       </header>
 
-      <section className="query-strip" aria-label="演示查询控制">
+      <form
+        className="query-strip"
+        aria-label="演示查询控制"
+        onSubmit={handleSubmit}
+      >
         <div>
           <p className="section-label">当前演示查询</p>
           <h2>从可信回答开始探索一段思政历史</h2>
@@ -109,7 +140,39 @@ export default function App({
             ))}
           </select>
         </label>
-      </section>
+        <label htmlFor="query-draft">
+          问题
+          <input
+            id="query-draft"
+            aria-label="查询问题"
+            value={queryDraft}
+            onChange={(event) => setQueryDraft(event.target.value)}
+          />
+        </label>
+        <label htmlFor="target-grade">
+          目标学段
+          <select
+            id="target-grade"
+            aria-label="目标学段"
+            value={targetGrade ?? ""}
+            onChange={(event) =>
+              setTargetGrade(
+                event.target.value ? (event.target.value as TargetGrade) : null,
+              )
+            }
+          >
+            <option value="">不限定</option>
+            {TARGET_GRADES.map((grade) => (
+              <option key={grade} value={grade}>
+                {grade}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button type="submit" disabled={!queryDraft.trim()}>
+          提交查询
+        </button>
+      </form>
 
       <details className="demo-meta">
         <summary>演示 / 开发信息</summary>
