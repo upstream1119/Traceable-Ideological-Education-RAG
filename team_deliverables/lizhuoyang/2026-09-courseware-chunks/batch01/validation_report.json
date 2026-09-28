@@ -1,0 +1,460 @@
+{
+  "status": "batch01_candidate_data_checks_passed_pending_batch_acceptance",
+  "main_confirmation": {
+    "status": "confirmed_by_user",
+    "note": "用户本轮明确确认远端main；本轮不把前次网络失败当作阻塞项，也不声称再次独立取得远端SHA。"
+  },
+  "source_scope": {
+    "source": "data\\raw\\中国共产党思想政治教育史 .pdf",
+    "source_sha256": "e04a86c9564bbdf598ebeb91a15a526b49a4e8aaa91acdb5e2892432a0abae13",
+    "mineru": "data\\raw\\MinerU_中国共产党思想政治教育史 __20260615145108.json",
+    "mineru_sha256": "cb494527f5a3e84873e522ecdd8289938fe9530a5be1f7e24501631651b24f94",
+    "pdf_pages": [
+      201,
+      217
+    ],
+    "courseware": "excluded_by_user_for_this_batch"
+  },
+  "records": 24,
+  "accepted_samples_retained": 3,
+  "added_since_sample_review": 21,
+  "candidate_sha256": "19bfb97bca2b07dbd316a117e8e9304a966bf66fd640cc70ce7174b5da8fde11",
+  "schema": {
+    "errors": [],
+    "warnings": [],
+    "validated_records": 24
+  },
+  "tests": {
+    "suite": "tests.test_sizheng_chunks_v3",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  "text_length": {
+    "min": 192,
+    "max": 709,
+    "outside_300_700": [
+      {
+        "id": "chunk_sizheng_v3_004",
+        "length": 261
+      },
+      {
+        "id": "chunk_sizheng_v3_007",
+        "length": 264
+      },
+      {
+        "id": "chunk_sizheng_v3_014",
+        "length": 709
+      },
+      {
+        "id": "chunk_sizheng_v3_016",
+        "length": 289
+      },
+      {
+        "id": "chunk_sizheng_v3_019",
+        "length": 241
+      },
+      {
+        "id": "chunk_sizheng_v3_020",
+        "length": 285
+      },
+      {
+        "id": "chunk_sizheng_v3_021",
+        "length": 192
+      }
+    ]
+  },
+  "duplicates": {
+    "old_records": 285,
+    "compared_pairs": 7116,
+    "duplicate_ids": [],
+    "normalized_equal": [],
+    "whole_text_containment": [],
+    "thresholds": {
+      "sequence_ratio": 0.85,
+      "fivegram_containment": 0.8
+    },
+    "high_similarity_candidates": [],
+    "max_sequence_ratio": {
+      "pair": [
+        "chunk_sizheng_v3_015",
+        "chunk_sizheng_v1_176"
+      ],
+      "ratio": 0.19064124783362218
+    },
+    "max_fivegram_containment": {
+      "pair": [
+        "chunk_sizheng_v3_015",
+        "chunk_sizheng_v1_176"
+      ],
+      "ratio": 0.0823045267489712
+    }
+  },
+  "citation": {
+    "verified_full_text": 24,
+    "verified_start_page": 24,
+    "verified_section": 24,
+    "null_pages": [],
+    "cross_page_chunks": [
+      "chunk_sizheng_v3_001",
+      "chunk_sizheng_v3_002",
+      "chunk_sizheng_v3_005",
+      "chunk_sizheng_v3_007",
+      "chunk_sizheng_v3_009",
+      "chunk_sizheng_v3_010",
+      "chunk_sizheng_v3_012",
+      "chunk_sizheng_v3_013",
+      "chunk_sizheng_v3_014",
+      "chunk_sizheng_v3_017",
+      "chunk_sizheng_v3_018",
+      "chunk_sizheng_v3_021",
+      "chunk_sizheng_v3_023"
+    ],
+    "physical_prefix_shorter_than24": [
+      {
+        "id": "chunk_sizheng_v3_017",
+        "anchor": "1949年10月，华北高等教育委员会最先颁",
+        "length": 21
+      }
+    ],
+    "visual_review": {
+      "chunk_sizheng_v3_001": {
+        "pdf_pages": [
+          201,
+          202
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_002": {
+        "pdf_pages": [
+          211,
+          212
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_003": {
+        "pdf_pages": [
+          214
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_004": {
+        "pdf_pages": [
+          202
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_005": {
+        "pdf_pages": [
+          202,
+          203
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_006": {
+        "pdf_pages": [
+          203
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_007": {
+        "pdf_pages": [
+          203,
+          204
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_008": {
+        "pdf_pages": [
+          204
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_009": {
+        "pdf_pages": [
+          205,
+          206
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_010": {
+        "pdf_pages": [
+          206,
+          207
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_011": {
+        "pdf_pages": [
+          207
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_012": {
+        "pdf_pages": [
+          207,
+          208
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_013": {
+        "pdf_pages": [
+          208,
+          209
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_014": {
+        "pdf_pages": [
+          210,
+          211
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_015": {
+        "pdf_pages": [
+          212
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_016": {
+        "pdf_pages": [
+          213
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_017": {
+        "pdf_pages": [
+          213,
+          214
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_018": {
+        "pdf_pages": [
+          214,
+          215
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_019": {
+        "pdf_pages": [
+          215
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_020": {
+        "pdf_pages": [
+          215
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_021": {
+        "pdf_pages": [
+          215,
+          216
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_022": {
+        "pdf_pages": [
+          216
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_023": {
+        "pdf_pages": [
+          216,
+          217
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      },
+      "chunk_sizheng_v3_024": {
+        "pdf_pages": [
+          217
+        ],
+        "result": "passed",
+        "review": "正文、章节归属、跨页边界及清洗后内容逐条核对；前三条沿用已验收样例并核对源页。"
+      }
+    }
+  },
+  "cleanliness": {
+    "noise_scan": "passed",
+    "manual_reading": "passed",
+    "semantic_boundary_review": "24/24 reviewed; one main educational practice, policy, institution or meeting per record. Related directives or phases of the same practice may remain together.",
+    "ocr_corrections": "none; technical whitespace/footnote cleanup only"
+  },
+  "entities": {
+    "typed_records": 24,
+    "all_names_and_evidence_in_text": true,
+    "type_counts": {
+      "person": 9,
+      "organization": 25,
+      "place": 4,
+      "event": 20,
+      "time": 22,
+      "document": 22,
+      "role": 4,
+      "concept": 6,
+      "group": 1
+    },
+    "missing_values_not_invented": true
+  },
+  "questions": [
+    {
+      "id": "v3_b01_q01",
+      "question": "毛泽东1950年10月8日的命令如何阐明抗美援朝的国际主义义务？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_001"
+      ],
+      "evidence_anchors": [
+        "1950年10月8日",
+        "国际主义义务",
+        "抗美援朝"
+      ],
+      "expected_answer_points": [
+        "援助朝鲜人民",
+        "保卫世界和平",
+        "国际主义义务"
+      ],
+      "actual_static_evidence_ids": [
+        "chunk_sizheng_v3_001"
+      ],
+      "static_evidence_passed": true
+    },
+    {
+      "id": "v3_b01_q02",
+      "question": "1956年1月知识分子问题会议提出了哪些思想政治教育措施？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_002"
+      ],
+      "evidence_anchors": [
+        "1956年1月",
+        "知识分子问题会议",
+        "说服教育"
+      ],
+      "expected_answer_points": [
+        "建立同志式关系并帮助解决实际问题",
+        "自愿并结合具体需要开展学习",
+        "社会实践、业务和理论学习",
+        "说服教育和批评帮助"
+      ],
+      "actual_static_evidence_ids": [
+        "chunk_sizheng_v3_002"
+      ],
+      "static_evidence_passed": true
+    },
+    {
+      "id": "v3_b01_q03",
+      "question": "1952年9月2日转发的报告规定政治辅导处和辅导员承担哪些工作？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_003"
+      ],
+      "evidence_anchors": [
+        "1952年9月2日",
+        "政治辅导处",
+        "教育部党组"
+      ],
+      "expected_answer_points": [
+        "指导政治理论学习",
+        "协助指导马列主义理论课程教学",
+        "指导社会活动并掌握思想情况",
+        "平均每300名学生设1名政治辅导员"
+      ],
+      "actual_static_evidence_ids": [
+        "chunk_sizheng_v3_003"
+      ],
+      "static_evidence_passed": true
+    },
+    {
+      "id": "v3_b01_q04",
+      "question": "1954年5月第二次全国宣传工作会议确定了哪些主要任务和总路线宣传要求？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_008"
+      ],
+      "evidence_anchors": [
+        "1954年5月",
+        "第二次全国宣传工作会议",
+        "社会主义工业化"
+      ],
+      "expected_answer_points": [
+        "用社会主义思想教育全党和全国人民",
+        "服务过渡时期总路线和第一个五年计划",
+        "宣传工业化与社会主义改造、国家计划、工农联盟、国防及统一战线"
+      ],
+      "actual_static_evidence_ids": [
+        "chunk_sizheng_v3_008"
+      ],
+      "static_evidence_passed": true
+    },
+    {
+      "id": "v3_b01_q05",
+      "question": "毛泽东、周恩来、陈云如何通过座谈帮助工商业者接受社会主义改造？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_020"
+      ],
+      "evidence_anchors": [
+        "毛泽东、周恩来、陈云",
+        "工商界代表人物座谈",
+        "社会主义改造"
+      ],
+      "expected_answer_points": [
+        "邀请代表人物座谈并亲自做思想工作",
+        "把个人前途同国家前途结合起来",
+        "代表人物现身说法",
+        "通过座谈会、学习班及自我批评转变观念"
+      ],
+      "actual_static_evidence_ids": [
+        "chunk_sizheng_v3_020"
+      ],
+      "static_evidence_passed": true
+    }
+  ],
+  "runtime_retrieval": {
+    "status": "deferred_by_user",
+    "blocking": false,
+    "claim": "Static evidence lookup passed 5/5; no API, FAISS or graph-retrieval ranking result is claimed."
+  },
+  "formal_files_unchanged": true,
+  "formal_files_sha256_before": {
+    "data\\processed\\text_chunks_demo.jsonl": "9cf5a4aca87bad8e69208e623a287c7ae010c3ec7be785d0d13b6a3706cf22b3",
+    "data\\processed\\text_chunks_sizheng_v1.jsonl": "b857cfcc1ab8f459642269a88e4a11a16731d59db0b4448a9d11cfee745775f4",
+    "data\\processed\\text_chunks_sizheng_v2.jsonl": "0f920e5db28867030294f01f712864fba4f8a4237d5347248c47e3942291a93c"
+  },
+  "formal_files_sha256_after": {
+    "data\\processed\\text_chunks_demo.jsonl": "9cf5a4aca87bad8e69208e623a287c7ae010c3ec7be785d0d13b6a3706cf22b3",
+    "data\\processed\\text_chunks_sizheng_v1.jsonl": "b857cfcc1ab8f459642269a88e4a11a16731d59db0b4448a9d11cfee745775f4",
+    "data\\processed\\text_chunks_sizheng_v2.jsonl": "0f920e5db28867030294f01f712864fba4f8a4237d5347248c47e3942291a93c"
+  },
+  "samples_unchanged": true,
+  "pending": [
+    "第一批候选24条整体人工验收；第二批未开始",
+    "真实检索后续单独验证（用户明确不作为本批阻塞项）"
+  ],
+  "inherited_out_of_scope": [
+    "历史demo版本及元数据问题，本轮未处理；不影响候选文件独立交付"
+  ]
+}
