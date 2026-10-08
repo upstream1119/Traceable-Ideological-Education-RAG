@@ -1,0 +1,768 @@
+{
+  "review_date": "2026-10-09",
+  "pr_url": "https://github.com/upstream1119/Traceable-Ideological-Education-RAG/pull/39",
+  "pr_head": "57e770e3887b140d5ff78c675f09d1b198850fb5",
+  "remote_pr_state_at_check": "open",
+  "remote_pr_merged_at_check": false,
+  "remote_main_at_check": "8ca0041425f98b5da5fd138b26fca266a21769a0",
+  "worktree_branch": "lizhuoyang",
+  "worktree_head": "3a7e64258a729dfb1d50739e283a431ebb421922",
+  "scope": "21 added chunks: body, section hierarchy, physical PDF start/end; not full batch acceptance",
+  "status": "textbook_source_review_passed_pending_batch_acceptance_and_pr_merge",
+  "source": {
+    "pdf_path": "D:\\dachuang_local\\data\\raw\\中国共产党思想政治教育史 .pdf",
+    "pdf_sha256": "e04a86c9564bbdf598ebeb91a15a526b49a4e8aaa91acdb5e2892432a0abae13",
+    "total_pages": 523,
+    "mineru_path": "data\\raw\\MinerU_中国共产党思想政治教育史 __20260615145108.json",
+    "mineru_sha256": "cb494527f5a3e84873e522ecdd8289938fe9530a5be1f7e24501631651b24f94",
+    "inspected_pdf_pages": [
+      189,
+      197,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217
+    ],
+    "normalization": "Remove whitespace and circled footnote markers only; do not normalize words, dates, numbers or punctuation.",
+    "verification": "Full relevant PDF page images visually compared against each chunk; independent physical OCR stream matching used as supplemental check."
+  },
+  "candidate": {
+    "path": "data\\processed\\text_chunks_sizheng_v3.jsonl",
+    "sha256": "19bfb97bca2b07dbd316a117e8e9304a966bf66fd640cc70ce7174b5da8fde11",
+    "exact_bytes_equal_to_pr_head": true,
+    "accepted_samples_001_to_003_unchanged": true
+  },
+  "summary": {
+    "reviewed": 21,
+    "text_pass": 21,
+    "section_pass": 21,
+    "page_bounds_pass": 21,
+    "cross_page": 11,
+    "errors": 0
+  },
+  "raw_snapshot": {
+    "old_branch_tracked_files": 10,
+    "pr_head_tracked_files": 0,
+    "pr_head_ignore_rule": "/data/raw/",
+    "migration_performed": false,
+    "post_merge_worktree_ignore_and_untracked_verification": "pending PR merge and clean branch migration"
+  },
+  "pending": [
+    "第一批24条整批验收尚未由本次教材核对替代",
+    "PR #39尚未合并",
+    "合并后按干净分支方案迁移，并实际验证raw忽略规则及无跟踪状态",
+    "真实检索验证按用户决定另行开展，不阻塞本次教材核对",
+    "本机gh未登录，本核对表尚未作为GitHub评论或review发布"
+  ],
+  "rows": [
+    {
+      "chunk_id": "chunk_sizheng_v3_004",
+      "jsonl_line": 4,
+      "title": "抗美援朝中的群众支援行动",
+      "text_sha256": "f16b7a629d605e5e31caa5e2f5660a990ffc2c03f2b08ff50e2282b41741d895",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第二节 围绕党的主要工作开展思想政治教育 / 二、围绕抗美援朝进行思想政治教育 / （一）结合抗美援朝进行国际主义教育",
+        "page": 202
+      },
+      "pdf_start": 202,
+      "pdf_end": 202,
+      "printed_start": 188,
+      "printed_end": 188,
+      "start_anchor": "深入的宣传和思想教育，使广大人民群众在抗美援朝中表现出空前的积极",
+      "end_anchor": "710架，各种作战物资达560万吨，为战争的胜利做出了巨大贡献。",
+      "physical_body_characters_by_page": {
+        "202": 261
+      },
+      "section_heading_pdf_pages": [
+        189,
+        197,
+        201
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "核对1951年5月1日、约2.29亿人、3.4亿多人、飞机3710架、560万吨；均与原页一致。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_005",
+      "jsonl_line": 5,
+      "title": "抗美援朝中的爱国主义宣传教育",
+      "text_sha256": "dd63fafe2b7d91e6ab1d8153da1610739befe184a243e322a77a54cf33e09e79",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第二节 围绕党的主要工作开展思想政治教育 / 二、围绕抗美援朝进行思想政治教育 / （二）结合批判崇美、恐美、亲美思想进行爱国主义教育",
+        "page": 202
+      },
+      "pdf_start": 202,
+      "pdf_end": 203,
+      "printed_start": 188,
+      "printed_end": 189,
+      "start_anchor": "为教育广大群众认清美帝国主义的真面目，看穿其反动本质，1950年",
+      "end_anchor": "抗美援朝打下了坚实的物质基础，同时也推动了国民经济的恢复和发展。",
+      "physical_body_characters_by_page": {
+        "202": 319,
+        "203": 125
+      },
+      "section_heading_pdf_pages": [
+        189,
+        197,
+        201,
+        202
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "202页下半段至203页首段；1950年10月指示、三项教育内容及工农工商界行动均相符。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_006",
+      "jsonl_line": 6,
+      "title": "志愿军立功运动与革命英雄主义教育",
+      "text_sha256": "a844cb62001e6ec94a8b92a1cba9f060b3570f3c943469b8f0df73f7ea6cd4b4",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第二节 围绕党的主要工作开展思想政治教育 / 二、围绕抗美援朝进行思想政治教育 / （三）结合志愿军立功运动，开展革命英雄主义教育",
+        "page": 203
+      },
+      "pdf_start": 203,
+      "pdf_end": 203,
+      "printed_start": 189,
+      "printed_end": 189,
+      "start_anchor": "为鼓舞和提高部队士气，激励前线官兵抗美援朝、保家卫国的革命精神，",
+      "end_anchor": "愿军英雄事迹，受到了深刻的爱国主义、国际主义和革命英雄主义教育。",
+      "physical_body_characters_by_page": {
+        "203": 501
+      },
+      "section_heading_pdf_pages": [
+        189,
+        197,
+        201,
+        203
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "核对《立功条例》（草案）、7章、302774人、494人；均相符，未补写具体英雄姓名。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_007",
+      "jsonl_line": 7,
+      "title": "过渡时期总路线的公布与学习宣传",
+      "text_sha256": "5aca491c470b7b9a59113f9f693fa483ce0878f3b8b675b31c161de6d2955259",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第二节 围绕党的主要工作开展思想政治教育 / 三、过渡时期总路线的宣传教育",
+        "page": 203
+      },
+      "pdf_start": 203,
+      "pdf_end": 204,
+      "printed_start": 189,
+      "printed_end": 190,
+      "start_anchor": "随着国民经济恢复工作的胜利完成，党中央于1952年下半年开始提出",
+      "end_anchor": "育活动，很快在全国各阶层、各行业掀起了一场学习宣传总路线的热潮。",
+      "physical_body_characters_by_page": {
+        "203": 191,
+        "204": 73
+      },
+      "section_heading_pdf_pages": [
+        189,
+        197,
+        203
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "203页末段的文件标题跨至204页；1952年下半年、1953年9月25日、同年12月均有依据。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_008",
+      "jsonl_line": 8,
+      "title": "第二次全国宣传工作会议的任务与要求",
+      "text_sha256": "00d47593c7ae462a3cfeb6301baae9126314d4c52cf4ae9deefa6fd0447e2159",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第二节 围绕党的主要工作开展思想政治教育 / 三、过渡时期总路线的宣传教育",
+        "page": 204
+      },
+      "pdf_start": 204,
+      "pdf_end": 204,
+      "printed_start": 190,
+      "printed_end": 190,
+      "start_anchor": "1954年5月，中国共产党召开第二次全国宣传工作会议，确定党的宣",
+      "end_anchor": "。这次会议之后，围绕总路线的学习宣传活动进入了一个新的发展阶段。",
+      "physical_body_characters_by_page": {
+        "204": 628
+      },
+      "section_heading_pdf_pages": [
+        189,
+        197,
+        203
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "1954年5月会议、习仲勋报告及五项宣传要求均完整对应；未混入下一段总体评价。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_009",
+      "jsonl_line": 9,
+      "title": "1950年整风学习的要求和方法",
+      "text_sha256": "70d5988bc509a79dc1bb763643491cbe3cc525b8df8adcdf5d94c5e064ec29c9",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 一、执政党的思想作风建设与党内思想政治教育 / （一）整风学习",
+        "page": 205
+      },
+      "pdf_start": 205,
+      "pdf_end": 206,
+      "printed_start": 191,
+      "printed_end": 192,
+      "start_anchor": "1950年5月1日中共中央《关于整党的指示》规定：在中央领导下，",
+      "end_anchor": "群众意见，查找问题和不足，开展批评与自我批评，最终提高思想认识。",
+      "physical_body_characters_by_page": {
+        "205": 32,
+        "206": 643
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "起句在205页最末正文行，206页续接；5月1日、5月25日、4月19日、6月16日及四项方法均相符。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_010",
+      "jsonl_line": 10,
+      "title": "1951年全体党员教育的组织与实施",
+      "text_sha256": "2852fd7c16b2ac92fb64ba466cf8692b5432c23c5bdf0d7075d368747e431546",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 一、执政党的思想作风建设与党内思想政治教育 / （二）开展全体党员教育",
+        "page": 206
+      },
+      "pdf_start": 206,
+      "pdf_end": 207,
+      "printed_start": 192,
+      "printed_end": 193,
+      "start_anchor": "根据1951年2月中央政治局扩大会议的决定，先用一年的时间在全党",
+      "end_anchor": "材料，研究整党教育方法，为今后开展经常性的支部教育积累总结经验。",
+      "physical_body_characters_by_page": {
+        "206": 223,
+        "207": 127
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        206
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "206页（二）标题后至207页首段；1951年2月、3—4月及三项要求均相符。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_011",
+      "jsonl_line": 11,
+      "title": "支部经常教育与分类思想整顿",
+      "text_sha256": "d605a63c36a77017bf6bfbbadf167b02ba638d576fa0de2e84538b0c48250d10",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 一、执政党的思想作风建设与党内思想政治教育 / （三）健全支部教育",
+        "page": 207
+      },
+      "pdf_start": 207,
+      "pdf_end": 207,
+      "printed_start": 193,
+      "printed_end": 193,
+      "start_anchor": "中国共产党第一次全国组织工作会议通过的《关于整顿党的基层组织的决",
+      "end_anchor": "产阶级思想；农村支部注重引导农民互助合作，明确农村经济发展方向。",
+      "physical_body_characters_by_page": {
+        "207": 635
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        207
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "（三）标题下整段；五项支部教育规定与1952年2月3日分类整顿均有依据，脚注序号已清除。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_012",
+      "jsonl_line": 12,
+      "title": "执政初期干部理论教育的不足与任务",
+      "text_sha256": "72305781d7d1bf509342e59bdc54694727ed9e00ea44a2c7a70eceb3a65789e6",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 一、执政党的思想作风建设与党内思想政治教育 / （四）建立党政干部理论学习制度",
+        "page": 207
+      },
+      "pdf_start": 207,
+      "pdf_end": 208,
+      "printed_start": 193,
+      "printed_end": 194,
+      "start_anchor": "中国共产党执政后，面对各级政权的建设、政府机构的完善以及各项经济",
+      "end_anchor": "经常性的任务，不可能一下做好，大约要花十年的工夫才能前进一步。”",
+      "physical_body_characters_by_page": {
+        "207": 30,
+        "208": 509
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        207
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "207页（四）标题后的首行续至208页；理论教育不足及刘少奇1950年讲话均保留，三处脚注序号已清除。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_013",
+      "jsonl_line": 13,
+      "title": "在职干部理论学习制度与党校教育网络",
+      "text_sha256": "c7d61a70fdadb1c37dcf6e3d106f399ad40924b3e234fd90995709e0c070f356",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 一、执政党的思想作风建设与党内思想政治教育 / （四）建立党政干部理论学习制度",
+        "page": 208
+      },
+      "pdf_start": 208,
+      "pdf_end": 209,
+      "printed_start": 194,
+      "printed_end": 195,
+      "start_anchor": "中共中央先后制定颁发《关于在职干部学习问题的通知》（1950年1",
+      "end_anchor": "系统的思想理论教育、提高干部思想政治素质方面发挥了主渠道的作用。",
+      "physical_body_characters_by_page": {
+        "208": 270,
+        "209": 373
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        207
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "208页第二段至209页前半段，去掉承接词“为此，”；七份文件日期、三种学习程度、八个月/八小时/八分之一及党校网络均相符。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_014",
+      "jsonl_line": 14,
+      "title": "知识分子思想改造的实施及其问题",
+      "text_sha256": "dbf3814cd61720fe84ecd4ccf6ec4bcb5f569587a38b576f198a9ba98903e8ae",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 二、知识分子和思想文化界的思想政治教育 / （一）知识分子的思想政治教育 / 1. 新中国成立初期知识分子的政治学习与思想改造",
+        "page": 210
+      },
+      "pdf_start": 210,
+      "pdf_end": 211,
+      "printed_start": 196,
+      "printed_end": 197,
+      "start_anchor": "新中国成立后，又通过1951年9月至1952年秋开展的知识分子思",
+      "end_anchor": "界限等问题，使不少知识分子受到了不应有的伤害，产生了不好的影响。",
+      "physical_body_characters_by_page": {
+        "210": 539,
+        "211": 170
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        209,
+        210
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "210页“新中国成立后，又通过”起的两段，第二段续至211页首段；1951年9月至1952年秋、周恩来报告及运动存在的问题均完整保留。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_015",
+      "jsonl_line": 15,
+      "title": "新中国初期马列主义理论的出版与学习",
+      "text_sha256": "5925667e5389a97a637ebafd020394f91986880eaf563840c6ec55e4c176947b",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 二、知识分子和思想文化界的思想政治教育 / （二）开展思想文化领域的学习与批判运动",
+        "page": 212
+      },
+      "pdf_start": 212,
+      "pdf_end": 212,
+      "printed_start": 198,
+      "printed_end": 198,
+      "start_anchor": "新中国成立后，为彻底清除和改造帝国主义、封建主义和资本主义反动思",
+      "end_anchor": "。这对于中国人民的思想转变和国家各项事业的发展产生了深远的影响。",
+      "physical_body_characters_by_page": {
+        "212": 346
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        209,
+        212
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "（二）标题后前两段；出版物名称及1950年约100万人相符，切片结束于理论学习影响，未摘录后面的批判运动段。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_016",
+      "jsonl_line": 16,
+      "title": "学校思想改造与组织清理的指示",
+      "text_sha256": "a4a5e2388a27c3cb837e5a6d9b704ab145d42f18b706e6771f32a328f483328a",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 二、知识分子和思想文化界的思想政治教育 / （三）建立学校思想政治教育工作制度",
+        "page": 213
+      },
+      "pdf_start": 213,
+      "pdf_end": 213,
+      "printed_start": 199,
+      "printed_end": 199,
+      "start_anchor": "1951年11月30日，中共中央发出《关于在学校中进行思想改造和",
+      "end_anchor": "改造，抛弃原来反动的或错误的阶级立场，并在此基础上进行组织清理。",
+      "physical_body_characters_by_page": {
+        "213": 289
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        209,
+        212
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "去掉“首先，进行思想改造与组织清理。”后，从1951年11月30日截至“进行组织清理。”；未混入1949—1956年教育普及段。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_017",
+      "jsonl_line": 17,
+      "title": "新中国高校政治理论课程体系的建立",
+      "text_sha256": "881e77f471df9688fd58559f12a9da9b05580ea5437c758a67d080116c07d27c",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 二、知识分子和思想文化界的思想政治教育 / （三）建立学校思想政治教育工作制度",
+        "page": 213
+      },
+      "pdf_start": 213,
+      "pdf_end": 214,
+      "printed_start": 199,
+      "printed_end": 200,
+      "start_anchor": "1949年10月，华北高等教育委员会最先颁布《各大学、专科学校、",
+      "end_anchor": "体系的雏形。此外，在中学课程设置上，也开设了相应的政治教育课程。",
+      "physical_body_characters_by_page": {
+        "213": 21,
+        "214": 327
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        209,
+        212
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "去掉“其次，开设政治理论课。”；213页末仅有正文前21个规范化字符，214页以“布”续接。1949年10月/11月、1952年10月、1953年及课程名相符。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_018",
+      "jsonl_line": 18,
+      "title": "全行业公私合营的推进与思想教育",
+      "text_sha256": "7b493b049ee374282b66d6ee31e0736deaf97cbce63635ab1e46f308544cf9db",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 三、私营工商业者的思想政治教育",
+        "page": 214
+      },
+      "pdf_start": 214,
+      "pdf_end": 215,
+      "printed_start": 200,
+      "printed_end": 201,
+      "start_anchor": "新中国成立初期，党对民族资本主义实行利用、限制、改造政策，大多数",
+      "end_anchor": "全行业的公私合营，取得了资本主义工商业社会主义改造的决定性胜利。",
+      "physical_body_characters_by_page": {
+        "214": 190,
+        "215": 132
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        214
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "214页“三”标题后至215页首段；政策阶段、1956年1月底及50多个中等城市均有依据。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_019",
+      "jsonl_line": 19,
+      "title": "和平赎买政策的宣传与企业和人的改造",
+      "text_sha256": "6829ced3adff77bac13162faba3b00bb710b8de28f593a961a5d88f14bc231f5",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 三、私营工商业者的思想政治教育",
+        "page": 215
+      },
+      "pdf_start": 215,
+      "pdf_end": 215,
+      "printed_start": 201,
+      "printed_end": 201,
+      "start_anchor": "对资本主义工商业的改造是以和平赎买的方式实现的。在这场伟大的社会",
+      "end_anchor": "改造政策是符合国情的，也是符合广大工商业者在内的全国人民利益的。",
+      "physical_body_characters_by_page": {
+        "215": 241
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        214
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "215页“对资本主义工商业的改造”与“首先”两段；企业和人的改造、和平赎买政策宣传均对应原文。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_020",
+      "jsonl_line": 20,
+      "title": "领导人座谈与工商业者的思想改造",
+      "text_sha256": "b665dad65b9f8fcdf81c012255f1dde7374bb9565726e7368570a2e803468fed",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 三、私营工商业者的思想政治教育",
+        "page": 215
+      },
+      "pdf_start": 215,
+      "pdf_end": 215,
+      "printed_start": 201,
+      "printed_end": 201,
+      "start_anchor": "教育私营工商业者认清社会发展规律，从而自觉地接受社会主义改造。毛",
+      "end_anchor": "产阶级的大多数人经过思想斗争，接受了改造，走上了自食其力的新路。",
+      "physical_body_characters_by_page": {
+        "215": 285
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        214
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "215页“其次”与“再次”两段，去掉开头“其次，”；毛泽东、周恩来、陈云座谈及学习教育方式相符。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_021",
+      "jsonl_line": 21,
+      "title": "工商业者家属参与改造与代表会议",
+      "text_sha256": "36db9e5b66b60ebbdba4bcd3371a0bfc21a02103f14116551e022399b42c8b7c",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 三、私营工商业者的思想政治教育",
+        "page": 215
+      },
+      "pdf_start": 215,
+      "pdf_end": 216,
+      "printed_start": 201,
+      "printed_end": 202,
+      "start_anchor": "加强党的领导和工人群众的监督，在斗争实践中教育改造资产阶级分子。",
+      "end_anchor": "商业者家属及女工商业者代表会议，表彰了好人好事，交流了先进经验。",
+      "physical_body_characters_by_page": {
+        "215": 163,
+        "216": 29
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        214
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "215页末段去掉“最后，”后至216页首行；1956年3月30日、完整会议名称及表彰/交流内容相符。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_022",
+      "jsonl_line": 22,
+      "title": "农业互助合作中的农民社会主义教育",
+      "text_sha256": "70e77738d5d929f907a229f648c27d8f0eece4e8815d6d53f4ed910c265280ce",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 四、个体农民的社会主义教育改造",
+        "page": 216
+      },
+      "pdf_start": 216,
+      "pdf_end": 216,
+      "printed_start": 202,
+      "printed_end": 202,
+      "start_anchor": "新中国成立前夕，毛泽东针对个体农民的改造问题就提出：“严重的问题",
+      "end_anchor": "革命的远大目标和国家的利益，增加了继续革命的信念，政治热情高涨。",
+      "physical_body_characters_by_page": {
+        "216": 398
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        216
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "“四”标题后前两段；毛泽东引语和三类观念教育均相符，脚注序号已清除。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_023",
+      "jsonl_line": 23,
+      "title": "农村总路线宣传队伍与教育方法",
+      "text_sha256": "13ba7d11490f72cd94fcdc76f3be6c4235864be5410b591ae76d1ae7d1193a51",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 四、个体农民的社会主义教育改造",
+        "page": 216
+      },
+      "pdf_start": 216,
+      "pdf_end": 217,
+      "printed_start": 202,
+      "printed_end": 203,
+      "start_anchor": "二是配合社会主义改造运动开展总路线教育。过渡时期总路线公布后，党",
+      "end_anchor": "育，使农民群众懂得总路线和国家购粮政策，明确了今后农业发展方向。",
+      "physical_body_characters_by_page": {
+        "216": 189,
+        "217": 177
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        216
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "216页“二是”段续至217页首段；跨页接续“历史必然/性”。217页页眉不改变本段仍属第三节的事实。",
+      "errors": []
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_024",
+      "jsonl_line": 24,
+      "title": "农业合作化中的集体化与政策教育",
+      "text_sha256": "776f3876b747a216fccf8ca98f82852ea5dab12850cfab0216dfb728c38672bd",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第五章 新中国成立初期社会主义思想政治教育的全面推进 / 第三节 社会主义思想政治教育的全方位展开 / 四、个体农民的社会主义教育改造",
+        "page": 217
+      },
+      "pdf_start": 217,
+      "pdf_end": 217,
+      "printed_start": 203,
+      "printed_end": 203,
+      "start_anchor": "三是在农业合作化运动中开展集体化教育。动员农民走合作社道路，必须",
+      "end_anchor": "育；（5）进行党在农村中的阶级路线、贫农和中农亲密团结的教育等。",
+      "physical_body_characters_by_page": {
+        "217": 494
+      },
+      "section_heading_pdf_pages": [
+        189,
+        205,
+        216
+      ],
+      "visual_text_check": "pass",
+      "visual_section_check": "pass",
+      "visual_page_bounds_check": "pass",
+      "full_body_ocr_occurrences": 1,
+      "previous_citation_audit_agrees": true,
+      "note": "217页“三是”“四是”两段；1955年、五项政策教育内容相符；正文止于第四节标题之前，仍属第三节。",
+      "errors": []
+    }
+  ],
+  "publication_note": {
+    "batch_acceptance": "24条整体验收已由用户确认通过",
+    "github_cli_account": "lzy-24",
+    "github_cli_authenticated": true,
+    "historical_fields": "status、pending及Git快照保留生成文件时的状态；其中等待整批验收、gh未登录及尚未发布的记录不代表发布时状态。",
+    "evidence_unchanged": true,
+    "pr_merge_performed": false
+  }
+}
