@@ -39,6 +39,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 FORMAL_CHUNKS_PATHS = (
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v1.jsonl",
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v2.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v3.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v4.jsonl",
 )
 DEMO_TRIPLES_PATH = REPO_ROOT / "data" / "graph" / "triples_demo.jsonl"
 
