@@ -132,6 +132,17 @@ Start the API:
 uvicorn src.api.main:app --reload
 ```
 
+For local integration using formal v1/v2 files and template generation:
+
+```powershell
+$env:DACHUANG_RETRIEVE_MODE = "local"
+$env:DACHUANG_GENERATOR_MODE = "template"
+python -m uvicorn src.api.main:app --host 127.0.0.1 --port 8000
+```
+
+This uses the existing rule-based retrieval prototype.
+The default team mode remains the empty, blocked contract.
+
 Open API docs:
 
 ```text

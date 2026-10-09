@@ -26,6 +26,7 @@ from src.vector.faiss_store import FaissVectorStore
 PROJECT_NAME = "多智能体赋能的跨模态零幻觉交互式思政教育系统"
 TEAM_MODE = "team"
 MOCK_MODE = "mock"
+LOCAL_MODE = "local"
 FAISS_VECTOR_BACKEND = "faiss"
 VECTOR_BACKEND_ENV = "DACHUANG_VECTOR_BACKEND"
 FAISS_INDEX_DIR_ENV = "DACHUANG_FAISS_INDEX_DIR"
@@ -143,6 +144,8 @@ def _load_demo_edge_lookup() -> dict[tuple[str, str], dict]:
 
 def _resolve_mode() -> str:
     requested_mode = os.getenv("DACHUANG_RETRIEVE_MODE", TEAM_MODE).strip().lower()
+    if requested_mode == LOCAL_MODE:
+        return LOCAL_MODE
     local_ack = os.getenv("DACHUANG_LOCAL_MOCK_ACK", "").strip()
     if requested_mode == MOCK_MODE and local_ack == "1":
         return MOCK_MODE
@@ -525,7 +528,7 @@ def retrieve(query: str, target_grade: str | None = None) -> dict:
     query_text = (query or "").strip()
     mode = _resolve_mode()
 
-    if mode == MOCK_MODE:
+    if mode in {MOCK_MODE, LOCAL_MODE}:
         # 标准双路召回流水线：
         knowledge_base = _load_demo_knowledge_base()
         query_entities = extract_query_entities(query_text)
