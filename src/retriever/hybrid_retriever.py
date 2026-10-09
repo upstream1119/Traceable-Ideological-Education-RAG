@@ -39,6 +39,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 FORMAL_CHUNKS_PATHS = (
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v1.jsonl",
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v2.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v3.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v4.jsonl",
 )
 DEMO_TRIPLES_PATH = REPO_ROOT / "data" / "graph" / "triples_demo.jsonl"
 
@@ -338,10 +340,17 @@ def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_T
             return faiss_hits
 
     scored_hits = []
+    rank_keys = {}
     for item in _load_demo_knowledge_base():
         score = _score_vector_hit(query, query_entities, item)
         if score <= 0:
             continue
+        matches = _matched_entities(query_entities, _build_search_content(item))
+        rank_keys[item["id"]] = (
+            round(score, 3),
+            len(matches),
+            _score_specific_entity_matches(query_entities, matches),
+        )
         scored_hits.append(
             {
                 "id": item["id"],
@@ -352,7 +361,7 @@ def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_T
                 "vector_score": round(score, 3),
             }
         )
-    scored_hits.sort(key=lambda hit: hit["vector_score"], reverse=True)
+    scored_hits.sort(key=lambda hit: rank_keys[hit["id"]], reverse=True)
     return scored_hits[:top_k]
 
 

@@ -132,7 +132,7 @@ Start the API:
 uvicorn src.api.main:app --reload
 ```
 
-For local integration using formal v1/v2 files and template generation:
+For local integration using formal v1/v2/v3/v4 files (293 chunks) and template generation:
 
 ```powershell
 $env:DACHUANG_RETRIEVE_MODE = "local"
