@@ -34,12 +34,10 @@ def test_formal_batches_are_loaded(local_retrieval):
     "batch,case_id",
     [
         ("v3_batch01", "v3_b01_q01"),
-        pytest.param("v3_batch01", "v3_b01_q02", marks=pytest.mark.xfail(
-            strict=True, reason="现有轻量排序未召回知识分子问题会议证据")),
+        ("v3_batch01", "v3_b01_q02"),
         ("v3_batch01", "v3_b01_q03"),
         ("v3_batch01", "v3_b01_q04"),
-        pytest.param("v3_batch01", "v3_b01_q05", marks=pytest.mark.xfail(
-            strict=True, reason="现有轻量排序未召回工商业者改造证据")),
+        ("v3_batch01", "v3_b01_q05"),
         ("v4_batch02", "v4_b02_q01"),
         ("v4_batch02", "v4_b02_q02"),
         ("v4_batch02", "v4_b02_q03"),
