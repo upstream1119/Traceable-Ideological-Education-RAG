@@ -281,7 +281,7 @@ export class ApiRetrieveDataSource implements RetrieveDataSource {
     try {
       let response: Response;
       try {
-        response = await this.fetchImpl(`${baseUrl}/retrieve`, {
+        response = await this.fetchImpl.call(window, `${baseUrl}/retrieve`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
