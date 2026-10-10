@@ -172,6 +172,16 @@ def extract_query_entities(query: str) -> list[str]:
         for entity in item.get("entities", []):
             if entity in query and entity not in entities:
                 entities.append(entity)
+    if not entities:
+        for item in _load_demo_knowledge_base():
+            for tag in item.get("tags", []):
+                if (
+                    len(tag) >= 2
+                    and tag in query
+                    and tag in item.get("title", "")
+                    and tag not in entities
+                ):
+                    entities.append(tag)
     return entities
 
 

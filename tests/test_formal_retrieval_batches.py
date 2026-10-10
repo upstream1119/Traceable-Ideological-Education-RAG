@@ -54,3 +54,27 @@ def test_batch_query_recalls_expected_evidence(local_retrieval, batch, case_id):
     for chunk_id in case["expected_chunk_ids"]:
         assert chunk_id in hits
         assert hits[chunk_id]["citation"]["doc"] == "中国共产党思想政治教育史"
+
+
+def test_restored_gaokao_evidence_can_pass_gate(local_retrieval):
+    path = Path(__file__).with_name("queries_sizheng_v4_batch02.json")
+    case = json.loads(path.read_text(encoding="utf-8"))["cases"][0]
+    result = hybrid_retriever.retrieve(case["question"])
+    assert "恢复高考" in result["query_entities"]
+    citation = next(
+        item for item in result["citations_used"]
+        if item["id"] == "chunk_sizheng_v4_008"
+    )
+    assert citation["citation"]["doc"] == "中国共产党思想政治教育史"
+    assert citation["citation"]["page"] == 303
+    assert result["final_decision"]["status"] == "approved"
+    assert result["final_decision"]["can_output"] is True
+
+
+@pytest.mark.parametrize("query", ["batch02", "教材切片", "火星量子香蕉传送"])
+def test_non_topic_queries_remain_blocked(local_retrieval, query):
+    result = hybrid_retriever.retrieve(query)
+    assert result["query_entities"] == []
+    assert result["citations_used"] == []
+    assert result["final_decision"]["status"] == "blocked"
+    assert result["final_decision"]["can_output"] is False
