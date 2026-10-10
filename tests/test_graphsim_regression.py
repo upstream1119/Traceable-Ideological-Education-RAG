@@ -4,7 +4,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CASES_PATH = REPO_ROOT / "data" / "graph" / "graphsim_regression_cases.json"
-REPORT_PATH = REPO_ROOT / "reports" / "graphsim_regression_results.json"
+REPORT_PATH = REPO_ROOT / "reports" / "graphsim_regression_v1_v4_results.json"
 
 
 def test_graphsim_regression_has_required_coverage_and_raw_fields():
@@ -33,6 +33,10 @@ def test_graphsim_regression_has_required_coverage_and_raw_fields():
 
 def test_graphsim_regression_metrics_are_complete():
     report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+    assert report["chunk_count"] == 293
+    assert report["source"] == (
+        "data/graph/triples_demo.jsonl + formal sizheng v1/v2/v3/v4 chunks"
+    )
     summary = report["summary"]
     assert summary["case_count"] >= 15
     for metric_name in (

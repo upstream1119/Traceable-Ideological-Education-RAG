@@ -26,6 +26,7 @@ from src.vector.faiss_store import FaissVectorStore
 PROJECT_NAME = "多智能体赋能的跨模态零幻觉交互式思政教育系统"
 TEAM_MODE = "team"
 MOCK_MODE = "mock"
+LOCAL_MODE = "local"
 FAISS_VECTOR_BACKEND = "faiss"
 VECTOR_BACKEND_ENV = "DACHUANG_VECTOR_BACKEND"
 FAISS_INDEX_DIR_ENV = "DACHUANG_FAISS_INDEX_DIR"
@@ -38,6 +39,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 FORMAL_CHUNKS_PATHS = (
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v1.jsonl",
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v2.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v3.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v4.jsonl",
 )
 DEMO_TRIPLES_PATH = REPO_ROOT / "data" / "graph" / "triples_demo.jsonl"
 
@@ -143,6 +146,8 @@ def _load_demo_edge_lookup() -> dict[tuple[str, str], dict]:
 
 def _resolve_mode() -> str:
     requested_mode = os.getenv("DACHUANG_RETRIEVE_MODE", TEAM_MODE).strip().lower()
+    if requested_mode == LOCAL_MODE:
+        return LOCAL_MODE
     local_ack = os.getenv("DACHUANG_LOCAL_MOCK_ACK", "").strip()
     if requested_mode == MOCK_MODE and local_ack == "1":
         return MOCK_MODE
@@ -167,6 +172,16 @@ def extract_query_entities(query: str) -> list[str]:
         for entity in item.get("entities", []):
             if entity in query and entity not in entities:
                 entities.append(entity)
+    if not entities:
+        for item in _load_demo_knowledge_base():
+            for tag in item.get("tags", []):
+                if (
+                    len(tag) >= 2
+                    and tag in query
+                    and tag in item.get("title", "")
+                    and tag not in entities
+                ):
+                    entities.append(tag)
     return entities
 
 
@@ -335,10 +350,17 @@ def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_T
             return faiss_hits
 
     scored_hits = []
+    rank_keys = {}
     for item in _load_demo_knowledge_base():
         score = _score_vector_hit(query, query_entities, item)
         if score <= 0:
             continue
+        matches = _matched_entities(query_entities, _build_search_content(item))
+        rank_keys[item["id"]] = (
+            round(score, 3),
+            len(matches),
+            _score_specific_entity_matches(query_entities, matches),
+        )
         scored_hits.append(
             {
                 "id": item["id"],
@@ -349,7 +371,7 @@ def retrieve_vector(query: str, query_entities: list[str], top_k: int = VECTOR_T
                 "vector_score": round(score, 3),
             }
         )
-    scored_hits.sort(key=lambda hit: hit["vector_score"], reverse=True)
+    scored_hits.sort(key=lambda hit: rank_keys[hit["id"]], reverse=True)
     return scored_hits[:top_k]
 
 
@@ -525,7 +547,7 @@ def retrieve(query: str, target_grade: str | None = None) -> dict:
     query_text = (query or "").strip()
     mode = _resolve_mode()
 
-    if mode == MOCK_MODE:
+    if mode in {MOCK_MODE, LOCAL_MODE}:
         # 标准双路召回流水线：
         knowledge_base = _load_demo_knowledge_base()
         query_entities = extract_query_entities(query_text)

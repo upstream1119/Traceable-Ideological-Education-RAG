@@ -7,6 +7,7 @@ env/
 .env.*
 !.env.example
 outputs/
+/data/raw/
 .DS_Store
 cache.md
 AI_协作开发说明_学习优先版.md

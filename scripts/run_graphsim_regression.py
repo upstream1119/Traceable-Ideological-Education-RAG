@@ -12,8 +12,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 DEFAULT_CASES = REPO_ROOT / "data" / "graph" / "graphsim_regression_cases.json"
-DEFAULT_OUTPUT = REPO_ROOT / "reports" / "graphsim_regression_results.json"
-DEFAULT_SUMMARY = REPO_ROOT / "reports" / "graphsim_regression_summary.md"
+DEFAULT_OUTPUT = REPO_ROOT / "reports" / "graphsim_regression_v1_v4_results.json"
+DEFAULT_SUMMARY = REPO_ROOT / "reports" / "graphsim_regression_v1_v4_summary.md"
 RUN_COMMAND = "python scripts/run_graphsim_regression.py"
 
 
@@ -45,7 +45,13 @@ def run_cases(cases: list[dict[str, Any]]) -> tuple[dict, dict]:
     # Keep the environment explicit so a local run cannot silently use team mode.
     os.environ["DACHUANG_RETRIEVE_MODE"] = "mock"
     os.environ["DACHUANG_LOCAL_MOCK_ACK"] = "1"
+    os.environ["DACHUANG_VECTOR_BACKEND"] = ""
+    os.environ["DACHUANG_GENERATOR_MODE"] = "template"
+    from src.retriever import hybrid_retriever
     from src.retriever.hybrid_retriever import retrieve
+
+    hybrid_retriever._load_demo_knowledge_base.cache_clear()
+    hybrid_retriever._entity_document_frequency.cache_clear()
 
     raw_cases: list[dict] = []
     entity_hits = entity_total = 0
@@ -119,7 +125,8 @@ def run_cases(cases: list[dict[str, Any]]) -> tuple[dict, dict]:
     }
     report = {
         "schema_version": "1.0",
-        "source": "data/graph/triples_demo.jsonl + formal sizheng chunks",
+        "source": "data/graph/triples_demo.jsonl + formal sizheng v1/v2/v3/v4 chunks",
+        "chunk_count": len(hybrid_retriever._load_demo_knowledge_base()),
         "mode": "mock",
         "summary": summary,
         "cases": raw_cases,

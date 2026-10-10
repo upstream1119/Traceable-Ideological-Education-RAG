@@ -1,0 +1,158 @@
+{
+  "status": "step6_sample_only_pending_user_review",
+  "baseline": {
+    "branch": "lizhuoyang",
+    "head": "03b4e3a4dbd8df17ddf2b10f35bc84e4ca7c6dfd",
+    "local_main": "3d1d57f219549011b1b206124ee73b1e19e4725b",
+    "remote_latest_main_verified": false,
+    "remote_failure": "github.com:443 connection failed; remote main current SHA unavailable"
+  },
+  "records": 3,
+  "schema_errors": [],
+  "schema_warnings": [],
+  "text_lengths": {
+    "chunk_sizheng_v3_001": 308,
+    "chunk_sizheng_v3_002": 622,
+    "chunk_sizheng_v3_003": 300
+  },
+  "null_pages": [],
+  "duplicate_ids": [],
+  "normalized_equal_or_contained_text": [],
+  "compared_existing_records": 285,
+  "comparison_pairs": 858,
+  "similarity_thresholds": {
+    "sequence_ratio": 0.85,
+    "fivegram_containment": 0.8
+  },
+  "near_duplicate_candidates": [],
+  "highest_sequence_ratio": {
+    "sample_id": "chunk_sizheng_v3_003",
+    "compared_id": "chunk_sizheng_v1_145",
+    "sequence_ratio": 0.165625,
+    "fivegram_containment": 0.019011
+  },
+  "highest_fivegram_containment": {
+    "sample_id": "chunk_sizheng_v3_002",
+    "compared_id": "chunk_szzjys_demo_026",
+    "sequence_ratio": 0.084408,
+    "fivegram_containment": 0.039474
+  },
+  "citation_checks": [
+    {
+      "chunk_id": "chunk_sizheng_v3_001",
+      "pdf_start": 201,
+      "pdf_end": 202,
+      "mineru_local_page_idx_start": 0,
+      "global_offset": 200,
+      "full_text_matches_page_local_blocks": true,
+      "start_prefix24_matches_physical_start_page": true,
+      "pdf_visual_review": "passed",
+      "section_visual_review": "passed"
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_002",
+      "pdf_start": 211,
+      "pdf_end": 212,
+      "mineru_local_page_idx_start": 10,
+      "global_offset": 200,
+      "full_text_matches_page_local_blocks": true,
+      "start_prefix24_matches_physical_start_page": true,
+      "pdf_visual_review": "passed",
+      "section_visual_review": "passed"
+    },
+    {
+      "chunk_id": "chunk_sizheng_v3_003",
+      "pdf_start": 214,
+      "pdf_end": 214,
+      "mineru_local_page_idx_start": 13,
+      "global_offset": 200,
+      "full_text_matches_page_local_blocks": true,
+      "start_prefix24_matches_physical_start_page": true,
+      "pdf_visual_review": "passed",
+      "section_visual_review": "passed"
+    }
+  ],
+  "entity_name_and_evidence_in_text": true,
+  "semantic_review": "Each sample covers one educational policy or institution; sample 001 contains related directives within one internationalism education topic. No unrelated event concatenation.",
+  "retrieval_validation": {
+    "static_evidence_lookup": {
+      "method": "All listed terms must occur in text; scan existing 285 records plus 3 samples. This is not a retrieval ranking test.",
+      "cases": [
+        {
+          "question": "毛泽东1950年10月8日的命令如何阐明抗美援朝的国际主义义务？",
+          "terms": [
+            "抗美援朝",
+            "国际主义",
+            "1950年10月8日"
+          ],
+          "expected_chunk_id": "chunk_sizheng_v3_001",
+          "matching_chunk_ids": [
+            "chunk_sizheng_v3_001"
+          ],
+          "passed": true
+        },
+        {
+          "question": "1956年1月知识分子问题会议提出了哪些思想政治教育措施？",
+          "terms": [
+            "1956年1月",
+            "知识分子问题会议"
+          ],
+          "expected_chunk_id": "chunk_sizheng_v3_002",
+          "matching_chunk_ids": [
+            "chunk_sizheng_v3_002"
+          ],
+          "passed": true
+        },
+        {
+          "question": "1952年9月2日转发的报告规定政治辅导处和辅导员承担哪些工作？",
+          "terms": [
+            "1952年9月2日",
+            "政治辅导处",
+            "教育部党组"
+          ],
+          "expected_chunk_id": "chunk_sizheng_v3_003",
+          "matching_chunk_ids": [
+            "chunk_sizheng_v3_003"
+          ],
+          "passed": true
+        }
+      ],
+      "passed": 3,
+      "total": 3
+    },
+    "runtime_retrieval": {
+      "status": "not_run",
+      "reason": "Importing src.retriever.hybrid_retriever failed: ModuleNotFoundError: No module named openai. API, FAISS and graph retrieval were not tested."
+    }
+  },
+  "existing_files_sha256_before": {
+    "data\\processed\\text_chunks_demo.jsonl": "9cf5a4aca87bad8e69208e623a287c7ae010c3ec7be785d0d13b6a3706cf22b3",
+    "data\\processed\\text_chunks_sizheng_v1.jsonl": "b857cfcc1ab8f459642269a88e4a11a16731d59db0b4448a9d11cfee745775f4",
+    "data\\processed\\text_chunks_sizheng_v2.jsonl": "0f920e5db28867030294f01f712864fba4f8a4237d5347248c47e3942291a93c"
+  },
+  "source_pdf_sha256": "e04a86c9564bbdf598ebeb91a15a526b49a4e8aaa91acdb5e2892432a0abae13",
+  "mineru_sha256": "cb494527f5a3e84873e522ecdd8289938fe9530a5be1f7e24501631651b24f94",
+  "pending": [
+    "远端最新 main",
+    "赵老师课件原件",
+    "样例人工验收；未开始第一批扩量",
+    "真实检索验收：当前缺少 openai 依赖，静态证据定位不能替代 API/FAISS 召回"
+  ],
+  "entity_sidecar_validation": {
+    "records": 3,
+    "unique_chunk_ids": 3,
+    "names_match_chunk_entities": true,
+    "types_valid": true,
+    "evidence_substrings_verified": true
+  },
+  "existing_files_sha256_after": {
+    "data\\processed\\text_chunks_demo.jsonl": "9cf5a4aca87bad8e69208e623a287c7ae010c3ec7be785d0d13b6a3706cf22b3",
+    "data\\processed\\text_chunks_sizheng_v1.jsonl": "b857cfcc1ab8f459642269a88e4a11a16731d59db0b4448a9d11cfee745775f4",
+    "data\\processed\\text_chunks_sizheng_v2.jsonl": "0f920e5db28867030294f01f712864fba4f8a4237d5347248c47e3942291a93c"
+  },
+  "formal_files_unchanged": true,
+  "sample_files_sha256": {
+    "samples\\entity_types.jsonl": "55b653e57daf3d9a30731cb364140d7e9680b9c284492918e332071ff0f4759c",
+    "samples\\text_chunks_sizheng_v3_sample.jsonl": "d22beedbab35833e2b6f477650e3a36cb2763c6ace6e627525e644925415d163"
+  }
+}
