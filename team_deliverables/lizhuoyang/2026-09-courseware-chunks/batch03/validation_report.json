@@ -1,0 +1,471 @@
+{
+  "batch": "batch03",
+  "version": "v5",
+  "review_date": "2026-10-10",
+  "records": 15,
+  "old_records": 293,
+  "candidate_counts": {
+    "C01": 3,
+    "C02": 1,
+    "C03": 1,
+    "C04": 1,
+    "C05": 1,
+    "C06": 1,
+    "C08": 1,
+    "C09": 1,
+    "C10": 1,
+    "C11": 2,
+    "C12": 1,
+    "C13": 1
+  },
+  "C07_enabled": false,
+  "chapter_counts": {
+    "第八章 历史性伟大转折和改革开放起步阶段思想政治教育的拨乱反正": 3,
+    "第九章 开创社会主义现代化建设新局面进程中思想政治教育的全面展开": 3,
+    "第十章 社会主义市场经济条件下思想政治教育的与时俱进": 2,
+    "第十一章 全面建设小康社会进程中思想政治教育的科学发展": 5,
+    "第十二章 在实现中华民族伟大复兴道路上开创思想政治教育新局面": 2
+  },
+  "schema": {
+    "errors": [],
+    "warnings": [],
+    "error_count": 0,
+    "warning_count": 0
+  },
+  "sources": {
+    "pdf_file": "中国共产党思想政治教育史 .pdf",
+    "pdf_sha256": "e04a86c9564bbdf598ebeb91a15a526b49a4e8aaa91acdb5e2892432a0abae13",
+    "mineru": [
+      {
+        "file": "MinerU_中国共产党思想政治教育史 __20260615145108.json",
+        "physical_offset": 201,
+        "sha256": "cb494527f5a3e84873e522ecdd8289938fe9530a5be1f7e24501631651b24f94"
+      },
+      {
+        "file": "MinerU_中国共产党思想政治教育史 __20260615145133.json",
+        "physical_offset": 401,
+        "sha256": "c7ad75e0fe479415bae5ab344c33bac70a54fc55a3020a24f440016463112f5d"
+      }
+    ]
+  },
+  "citation": {
+    "text_pass": 15,
+    "section_pass": 15,
+    "pdf_bounds_pass": 15,
+    "citation_pass": 15,
+    "cross_page": 3,
+    "cross_page_pass": 3,
+    "reviewer": "Codex agent visual review",
+    "human_acceptance": "pending",
+    "page_uncertainties": []
+  },
+  "duplicate": {
+    "pairs": 4500,
+    "normalized_equal": [],
+    "whole_text_containment": [],
+    "high_similarity": [],
+    "sequence_threshold": 0.85,
+    "fivegram_threshold": 0.8,
+    "max_fivegram": {
+      "pair": [
+        "chunk_sizheng_v5_013",
+        "chunk_sizheng_v5_012"
+      ],
+      "ratio": 0.21518987341772153
+    },
+    "full_sequence_comparisons": 0,
+    "old_pairs": 4395,
+    "within_batch_pairs": 105,
+    "literal_equal": [],
+    "long_shared_spans": [],
+    "long_shared_span_threshold": 80,
+    "max_shared_span": 25
+  },
+  "semantic_duplicate_review": [
+    {
+      "new": [
+        "001",
+        "002",
+        "003"
+      ],
+      "old": [
+        "v2_045"
+      ],
+      "assessment": "主题相关但正文不同",
+      "reason": "本批1978年中央工作会议；旧条目为1947年12月中央工作会议中的经济纲领。"
+    },
+    {
+      "new": [
+        "004"
+      ],
+      "old": [
+        "v4_015"
+      ],
+      "assessment": "主题相关但正文不同",
+      "reason": "本批1983年景山题词；旧条目1982年十二大党章四有要求，相关段落未选入。"
+    },
+    {
+      "new": [
+        "005"
+      ],
+      "old": [
+        "v4_009",
+        "v4_010"
+      ],
+      "assessment": "主题相关但正文不同",
+      "reason": "本批1984年四部门北京高校会议；旧条目分别是1978年全国教育会议、武汉文科座谈会。"
+    },
+    {
+      "new": [
+        "006"
+      ],
+      "old": [
+        "v2_003"
+      ],
+      "assessment": "主题相关但正文不同",
+      "reason": "本批1984年专业设置文件与12所试点；旧条目是思想政治教育史课程的学习方法。"
+    },
+    {
+      "new": [
+        "007",
+        "008"
+      ],
+      "old": [],
+      "assessment": "不同文件事项，存在背景引用",
+      "reason": "C05为1994年学校德育意见的管理责任；C06为贯彻该文件而发布的1995年两课改革意见及课程定位，未重复截取管理责任。"
+    },
+    {
+      "new": [
+        "009"
+      ],
+      "old": [
+        "v3_010",
+        "v3_011"
+      ],
+      "assessment": "会议名称相关但事件不同",
+      "reason": "本批三所干部学院2005年开学，源段前文组织会议为2002年；旧条目为1951年组织工作会议及整党。2002年信息只作查重背景，不补进chunk。"
+    },
+    {
+      "new": [
+        "010",
+        "011"
+      ],
+      "old": [],
+      "assessment": "对象及文件不同",
+      "reason": "分别为未成年人和大学生，文件时间及落实会议不同，不合并。"
+    },
+    {
+      "new": [
+        "012",
+        "013"
+      ],
+      "old": [],
+      "assessment": "同一工程的不同证据边界",
+      "reason": "相邻两段分别记录文件部署与4月工作会议的研究重点/目标；正文无重叠，不重复描述同一文件。"
+    },
+    {
+      "new": [
+        "014"
+      ],
+      "old": [],
+      "assessment": "无同事件证据重复",
+      "reason": "2013年8月北京会议；旧库未包含该年月和全国宣传思想工作会议的组合证据。"
+    },
+    {
+      "new": [
+        "015"
+      ],
+      "old": [
+        "v1_094",
+        "v4_013",
+        "v4_002"
+      ],
+      "assessment": "名称或月日相同但正文不同",
+      "reason": "本批2014年古田全军政治工作会议；v1_094讲1929年古田决议及历史作用引语，v4_013为1978年真理标准讲话，v4_002的10月31日属于1977年中宣部重建。"
+    }
+  ],
+  "removed_duplicate_chunks": [],
+  "tests": {
+    "run": 10,
+    "passed": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "command": "python -B -m unittest tests.test_sizheng_chunks_v5 -v",
+    "output": "test_01_schema_and_ids (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_01_schema_and_ids) ... ok\ntest_02_previous_versions_unchanged (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_02_previous_versions_unchanged) ... ok\ntest_03_original_text_and_physical_bounds (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_03_original_text_and_physical_bounds) ... ok\ntest_04_sections_and_cross_page_continuity (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_04_sections_and_cross_page_continuity) ... ok\ntest_05_entities_and_dates (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_05_entities_and_dates) ... ok\ntest_06_approved_scope_and_special_boundaries (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_06_approved_scope_and_special_boundaries) ... ok\ntest_07_cleanliness (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_07_cleanliness) ... ok\ntest_08_full_duplicate_comparison (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_08_full_duplicate_comparison) ... ok\ntest_09_question_evidence_uniqueness (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_09_question_evidence_uniqueness) ... ok\ntest_10_reproducible_read_only_build (tests.test_sizheng_chunks_v5.SizhengV5Acceptance.test_10_reproducible_read_only_build) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 1.053s\n\nOK\n"
+  },
+  "questions": [
+    {
+      "question_id": "batch03_q01",
+      "question": "邓小平在1978年中央工作会议闭幕会上作了什么题目的讲话，重点论述什么关系？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_003"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_003"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第八章 历史性伟大转折和改革开放起步阶段思想政治教育的拨乱反正 / 第三节 党的十一届三中全会和思想政治教育的历史性转折 / 一、党的思想路线、政治路线的重新恢复和确立",
+        "page": 310
+      },
+      "pdf_evidence_pages": [
+        310,
+        311
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q02",
+      "question": "1984年全国高等学校思想政治工作会议何时、何地召开，由哪四个组织联合召开？请定位跨页证据。",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_005"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_005"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第九章 开创社会主义现代化建设新局面进程中思想政治教育的全面展开 / 第一节 党的十二大和群众性思想政治教育的有序展开 / 五、坚持“三个面向”和培养“四有新人”",
+        "page": 345
+      },
+      "pdf_evidence_pages": [
+        345,
+        346
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q03",
+      "question": "教育部1984年4月13日印发什么文件，决定在哪多少所院校首批增设什么专业？教材列举了哪三所院校？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_006"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_006"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第九章 开创社会主义现代化建设新局面进程中思想政治教育的全面展开 / 第三节 新时期思想政治教育的理论建设 / 一、思想政治教育的科学研究与学科建设",
+        "page": 360
+      },
+      "pdf_evidence_pages": [
+        360
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q04",
+      "question": "1994年8月学校德育意见对学校党组织、校长和行政系统的责任分别怎样规定？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_007"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_007"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第十章 社会主义市场经济条件下思想政治教育的与时俱进 / 第一节 党的十四大和各条战线思想政治教育的稳步推进 / 三、学校思想政治教育的加强和改进 / （二）学校德育体系的重新规划",
+        "page": 389
+      },
+      "pdf_evidence_pages": [
+        389
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q05",
+      "question": "教材中的三个干部教育培训基地位于哪里？三所干部学院何时建成并举行开学典礼？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_009"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_009"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第十一章 全面建设小康社会进程中思想政治教育的科学发展 / 第一节 党的十六大和思想政治教育的扎实推进 / 三、新时期的干部学校教育",
+        "page": 432
+      },
+      "pdf_evidence_pages": [
+        432
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q06",
+      "question": "关于未成年人思想道德建设的若干意见由谁在何时颁发？为落实文件随后召开了什么会议，时间到哪一月？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_010"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_010"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第十一章 全面建设小康社会进程中思想政治教育的科学发展 / 第一节 党的十六大和思想政治教育的扎实推进 / 四、青少年思想政治教育的加强与改进 / （一）加强未成年人思想道德建设",
+        "page": 435
+      },
+      "pdf_evidence_pages": [
+        435
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q07",
+      "question": "大学生思想政治教育意见于何时由谁印发，随后在2005年哪一月召开了什么落实会议？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_011"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_011"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第十一章 全面建设小康社会进程中思想政治教育的科学发展 / 第一节 党的十六大和思想政治教育的扎实推进 / 四、青少年思想政治教育的加强与改进 / （二）加强与改进大学生思想政治教育",
+        "page": 438
+      },
+      "pdf_evidence_pages": [
+        438
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q08",
+      "question": "2004年4月马克思主义理论研究和建设工程工作会议提出的研究重点、主攻方向和大致建设时长是什么？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_013"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_013"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第十一章 全面建设小康社会进程中思想政治教育的科学发展 / 第二节 构建社会主义和谐社会与思想政治教育的和谐发展 / 三、实施马克思主义理论研究和建设工程",
+        "page": 443
+      },
+      "pdf_evidence_pages": [
+        443
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q09",
+      "question": "2013年全国宣传思想工作会议在哪一月、何地召开，谁发表讲话，讲话阐述了哪些方面？请同时指出PDF起止页。",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_014"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_014"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第十二章 在实现中华民族伟大复兴道路上开创思想政治教育新局面 / 第三节 加强社会主义意识形态建设 / 一、召开全国宣传思想工作会议",
+        "page": 479
+      },
+      "pdf_evidence_pages": [
+        479,
+        480
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    },
+    {
+      "question_id": "batch03_q10",
+      "question": "2014年古田全军政治工作会议的起止时间、地点、主要任务是什么，习近平在哪一天发表讲话？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_015"
+      ],
+      "actual_static_evidence_matches": [
+        "chunk_sizheng_v5_015"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第十二章 在实现中华民族伟大复兴道路上开创思想政治教育新局面 / 第四节 全面加强党和军队的思想政治教育 / 四、古田全军政治工作会议的召开",
+        "page": 500
+      },
+      "pdf_evidence_pages": [
+        500
+      ],
+      "result": "PASS",
+      "runtime_retrieval_executed": false
+    }
+  ],
+  "question_scope": "Static exact evidence/answer/citation verification over v1-v5; not a ranking or retrieval test.",
+  "vector_retrieval": {
+    "required": false,
+    "executed": false,
+    "status": "not_required_not_run",
+    "failure": false
+  },
+  "previous_versions_canonical_sha256": {
+    "1": "7b359dfa97b51ffb3ecd00a63569b522f0de2719d0c2f5151345f7eb8a3c66a2",
+    "2": "7325edab55f4a297d08f861372fb4d6878b0398787d97d1d74ff7d818f9a90af",
+    "3": "19bfb97bca2b07dbd316a117e8e9304a966bf66fd640cc70ce7174b5da8fde11",
+    "4": "90f44874395e6654c978710855690b18238be944429d9c0dfdfd0763c5d85b63"
+  },
+  "git": {
+    "branch": "codex/lizhuoyang-clean-delivery",
+    "head": "80d3452e5e7a467ede07bcc506eec9f7616d1afe",
+    "origin_main": "80d3452e5e7a467ede07bcc506eec9f7616d1afe",
+    "raw_tracked": [],
+    "expected_new_files": [
+      "data/processed/text_chunks_sizheng_v5.jsonl",
+      "src/etl/build_sizheng_chunks_v5.py",
+      "tests/queries_sizheng_v5_batch03.json",
+      "tests/test_sizheng_chunks_v5.py",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/README.md",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/citation_review.md",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/citation_audit.jsonl",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/entity_types.jsonl",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/validation_report.json"
+    ],
+    "status_short": [
+      "?? data/processed/text_chunks_sizheng_v5.jsonl",
+      "?? src/etl/build_sizheng_chunks_v5.py",
+      "?? team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/README.md",
+      "?? team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/citation_audit.jsonl",
+      "?? team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/citation_review.md",
+      "?? team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/entity_types.jsonl",
+      "?? team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/validation_report.json",
+      "?? tests/queries_sizheng_v5_batch03.json",
+      "?? tests/test_sizheng_chunks_v5.py"
+    ],
+    "tracked_changes": [],
+    "staged_changes": [],
+    "new_file_count": 9,
+    "diff_check": {
+      "exit_code": 0,
+      "output": ""
+    },
+    "untracked_format_errors": [],
+    "raw_ignore": ".gitignore:10:/data/raw/\tdata/raw/MinerU_中国共产党思想政治教育史 __20260615145133.json",
+    "includes_main_80d3452": true
+  },
+  "known_limits": [
+    "负责人第三批整体验收待确认，不能把代理视觉复核写作人工验收通过。",
+    "合理语义边界产生15条，不为达到20条过度拆分，未启用C07。",
+    "C13由同一段两个有序原文摘录组成，中间省略代表组成和参观活动；非整段连续匹配。",
+    "1994年C05的OCR合并段归属388，但正文实际在PDF389。",
+    "部分日期仅到月或年初，不补日；学院集合不补造全名或人物；不自行标准化教材文件名。"
+  ],
+  "file_sha256": {
+    "data/processed/text_chunks_sizheng_v5.jsonl": "281924249abb6041e0b12aff83e6878eab4a3187ed05bc5fd063525f11ad9ccb",
+    "src/etl/build_sizheng_chunks_v5.py": "dd1b61ff480a310fc48ddf9ad3a22149a59b955d4368ea8c1584a96dd9b4b3bb",
+    "tests/queries_sizheng_v5_batch03.json": "54a7fb7740218d84c5370ad10a811ddebc1215ad8673659bf10609b0b0c49e35",
+    "tests/test_sizheng_chunks_v5.py": "4ef0c8eec64ad9bddc6b167fac180a4b951e9bd299a3d9133370a5b7fb507378",
+    "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/README.md": "ddab8d5c9275eddcea0f599b7abd1920d92cafe2f9befb49b19fd24d8f35d4ed",
+    "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/citation_review.md": "43fef746fe30ad93c4258cbf2c851eb87248d360336c95cd741b8d21ed516619",
+    "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/citation_audit.jsonl": "4ca2f8beef8bc0a60d9600ba0754774d3ab8811f8094819e1a69928656795249",
+    "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch03/entity_types.jsonl": "fa7a07c60a5162c4cfc2a5a6101ce8d4d2b17d1abdd2563b8f81e2388d80a200"
+  },
+  "documentation_links": "all_local_links_resolve"
+}
