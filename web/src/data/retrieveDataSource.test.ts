@@ -44,6 +44,25 @@ describe("ApiRetrieveDataSource", () => {
     });
   });
 
+  it("invokes an injected fetch implementation with the browser window receiver", async () => {
+    const expected = getMockRetrieveResponse("approved_evidence");
+    const fetchImpl = vi.fn(function (
+      this: typeof window,
+      _url: string,
+      _init?: RequestInit,
+    ) {
+      expect(this).toBe(window);
+      return Promise.resolve(new Response(JSON.stringify(expected), { status: 200 }));
+    }) as typeof fetch;
+    const dataSource = new ApiRetrieveDataSource(
+      "https://api.example.test",
+      10_000,
+      fetchImpl,
+    );
+
+    await expect(dataSource.retrieve(request)).resolves.toEqual(expected);
+  });
+
   it("maps network failure to a transport error", async () => {
     const fetchImpl = fetchStub().mockRejectedValue(new TypeError("network")) as typeof fetch;
     const dataSource = new ApiRetrieveDataSource("https://api.example.test", 10_000, fetchImpl);
