@@ -262,6 +262,20 @@ def test_team_mode_keeps_fixed_empty_contract(monkeypatch):
     assert result["final_decision"]["review_required"] is True
 
 
+def test_local_mode_returns_formal_evidence(monkeypatch):
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "local")
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "template")
+    monkeypatch.delenv("DACHUANG_LOCAL_MOCK_ACK", raising=False)
+    monkeypatch.delenv("DACHUANG_VECTOR_BACKEND", raising=False)
+
+    result = retrieve("马克思主义最初在中国如何传入？")
+
+    assert result["hybrid_hits"]
+    assert result["citations_used"]
+    assert result["citations_used"][0]["id"] == "chunk_sizheng_v1_001"
+    assert result["final_decision"]["status"] == "approved"
+
+
 def test_retrieve_vector_can_use_optional_faiss_backend(monkeypatch, tmp_path):
     records = [
         {

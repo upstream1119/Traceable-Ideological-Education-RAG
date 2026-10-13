@@ -1,0 +1,42 @@
+{
+  "batch": "sizheng_v3_batch01",
+  "status": "candidate_data_acceptance",
+  "validation_scope": "Static evidence lookup only; runtime retrieval is deferred by user instruction.",
+  "cases": [
+    {
+      "id": "v3_b01_q01",
+      "question": "毛泽东1950年10月8日的命令如何阐明抗美援朝的国际主义义务？",
+      "expected_chunk_ids": ["chunk_sizheng_v3_001"],
+      "evidence_anchors": ["1950年10月8日", "国际主义义务", "抗美援朝"],
+      "expected_answer_points": ["援助朝鲜人民", "保卫世界和平", "国际主义义务"]
+    },
+    {
+      "id": "v3_b01_q02",
+      "question": "1956年1月知识分子问题会议提出了哪些思想政治教育措施？",
+      "expected_chunk_ids": ["chunk_sizheng_v3_002"],
+      "evidence_anchors": ["1956年1月", "知识分子问题会议", "说服教育"],
+      "expected_answer_points": ["建立同志式关系并帮助解决实际问题", "自愿并结合具体需要开展学习", "社会实践、业务和理论学习", "说服教育和批评帮助"]
+    },
+    {
+      "id": "v3_b01_q03",
+      "question": "1952年9月2日转发的报告规定政治辅导处和辅导员承担哪些工作？",
+      "expected_chunk_ids": ["chunk_sizheng_v3_003"],
+      "evidence_anchors": ["1952年9月2日", "政治辅导处", "教育部党组"],
+      "expected_answer_points": ["指导政治理论学习", "协助指导马列主义理论课程教学", "指导社会活动并掌握思想情况", "平均每300名学生设1名政治辅导员"]
+    },
+    {
+      "id": "v3_b01_q04",
+      "question": "1954年5月第二次全国宣传工作会议确定了哪些主要任务和总路线宣传要求？",
+      "expected_chunk_ids": ["chunk_sizheng_v3_008"],
+      "evidence_anchors": ["1954年5月", "第二次全国宣传工作会议", "社会主义工业化"],
+      "expected_answer_points": ["用社会主义思想教育全党和全国人民", "服务过渡时期总路线和第一个五年计划", "宣传工业化与社会主义改造、国家计划、工农联盟、国防及统一战线"]
+    },
+    {
+      "id": "v3_b01_q05",
+      "question": "毛泽东、周恩来、陈云如何通过座谈帮助工商业者接受社会主义改造？",
+      "expected_chunk_ids": ["chunk_sizheng_v3_020"],
+      "evidence_anchors": ["毛泽东、周恩来、陈云", "工商界代表人物座谈", "社会主义改造"],
+      "expected_answer_points": ["邀请代表人物座谈并亲自做思想工作", "把个人前途同国家前途结合起来", "代表人物现身说法", "通过座谈会、学习班及自我批评转变观念"]
+    }
+  ]
+}

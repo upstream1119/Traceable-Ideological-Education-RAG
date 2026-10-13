@@ -1,0 +1,128 @@
+{
+  "batch": "sizheng_v4_batch02",
+  "validation_scope": "本批建议测试问题：静态证据与citation定位5/5；起止页及MinerU解释关联batch02/citation_audit.jsonl。Qwen/FAISS排名不在本批验收范围，运行时接入另行确认。",
+  "cases": [
+    {
+      "id": "v4_b02_q01",
+      "question": "1977年恢复高考的招生会议在哪里召开，采取什么录取办法，当年12月报考和录取人数分别是多少？请给出教材PDF页码。",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_008"
+      ],
+      "evidence_anchors": [
+        "1977年8月13日至9月25日",
+        "北京",
+        "570万",
+        "27.3万"
+      ],
+      "expected_answer_points": [
+        "北京",
+        "统一考试、择优录取",
+        "约570万青年参加考试",
+        "录取27.3万名学生"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section_suffix": "一、思想政治教育的局部进展",
+        "pdf_start": 303,
+        "pdf_end": 303
+      }
+    },
+    {
+      "id": "v4_b02_q02",
+      "question": "1978年高等学校文科教学工作座谈会何时、何地召开，会后组织编写了哪些政治理论课程教学大纲？证据跨哪些PDF页？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_010"
+      ],
+      "evidence_anchors": [
+        "1978年6月8日至29日",
+        "武汉",
+        "四门政治理论课程的教学大纲"
+      ],
+      "expected_answer_points": [
+        "1978年6月8日至29日，武汉",
+        "中国共产党历史",
+        "政治经济学",
+        "辩证唯物主义历史唯物主义",
+        "国际共产主义运动史"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section_suffix": "一、思想政治教育的局部进展",
+        "pdf_start": 303,
+        "pdf_end": 304
+      }
+    },
+    {
+      "id": "v4_b02_q03",
+      "question": "《实践是检验真理的唯一标准》由谁起草，先在哪一刊物发表，何时由《光明日报》公开发表？请定位教材PDF页。",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_012"
+      ],
+      "evidence_anchors": [
+        "胡福明",
+        "1978年5月9日",
+        "5月11日",
+        "第60期"
+      ],
+      "expected_answer_points": [
+        "南京大学教师胡福明起草，多位理论工作者修改",
+        "1978年5月9日中央党校《理论动态》第60期",
+        "5月11日《光明日报》以特约评论员名义公开发表"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section_suffix": "二、真理标准问题的讨论",
+        "pdf_start": 305,
+        "pdf_end": 305
+      }
+    },
+    {
+      "id": "v4_b02_q04",
+      "question": "1983年2月14日加强党员教育工作的通知如何分配党委及组织宣传部门的责任？正文从哪一PDF页开始，为什么不能只按日期所在页引用？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_017"
+      ],
+      "evidence_anchors": [
+        "1983年2月14日",
+        "第一把手要亲自抓",
+        "恢复组织员制度"
+      ],
+      "expected_answer_points": [
+        "党委第一把手亲自抓，主管党务书记经常抓",
+        "组织、宣传、纪律检查部门和党校共同抓",
+        "宣传部设党员教育处科组，组织部设党员管理机构并恢复组织员制度",
+        "正文开头在PDF327页末行，日期和后续内容在328页"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section_suffix": "一、思想政治教育制度化建设的新进展",
+        "pdf_start": 327,
+        "pdf_end": 328
+      }
+    },
+    {
+      "id": "v4_b02_q05",
+      "question": "1984年全国“五讲四美三热爱”活动工作会议何时在何地召开，推广了什么经验？实际PDF页码是否等于MinerU合并段落的起始页339？",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_023"
+      ],
+      "evidence_anchors": [
+        "1984年6月11日至18日",
+        "福建省三明市",
+        "人民城市人民建"
+      ],
+      "expected_answer_points": [
+        "1984年6月11日至18日，福建省三明市",
+        "推广三明市建设文明城市的经验",
+        "两个文明一起抓，思想教育贯穿全过程，发动群众与综合治理结合",
+        "实际PDF340页；不能用合并段落的339页代替"
+      ],
+      "expected_citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section_suffix": "（三）创建文明单位和文明城市活动",
+        "pdf_start": 340,
+        "pdf_end": 340
+      }
+    }
+  ]
+}

@@ -1,0 +1,1315 @@
+{
+  "status": "static_accepted_runtime_out_of_scope_clean_delivery",
+  "date": "2026-10-09",
+  "records": 24,
+  "existing_records": 309,
+  "chapter_counts": {
+    "第八章": 14,
+    "第九章": 10
+  },
+  "schema": {
+    "errors": [],
+    "warnings": [],
+    "records": 24
+  },
+  "tests": {
+    "suite": "tests.test_sizheng_chunks_v4",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "execution_context": "本次干净worktree复跑：7通过、0失败、0跳过"
+  },
+  "source": {
+    "doc": "中国共产党思想政治教育史",
+    "pdf_path": "D:/dachuang_local/data/raw/中国共产党思想政治教育史 .pdf",
+    "pdf_sha256": "e04a86c9564bbdf598ebeb91a15a526b49a4e8aaa91acdb5e2892432a0abae13",
+    "pdf_page_count": 523,
+    "mineru_path": "data\\raw\\MinerU_中国共产党思想政治教育史 __20260615145108.json",
+    "mineru_sha256": "cb494527f5a3e84873e522ecdd8289938fe9530a5be1f7e24501631651b24f94",
+    "visual_review_pages": [
+      293,
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      325,
+      326,
+      327,
+      328,
+      329,
+      337,
+      338,
+      339,
+      340,
+      341
+    ]
+  },
+  "citation": {
+    "full_body_unique_matches": 24,
+    "visual_text_section_and_bounds_passed": 24,
+    "cross_page_records": 8,
+    "null_pages": 0,
+    "method": "原PDF整页图像逐条对照+独立逐物理页preproc_blocks全文唯一匹配；用户已确认第二批静态验收通过。",
+    "spot_check_ids": [
+      "chunk_sizheng_v4_004",
+      "chunk_sizheng_v4_010",
+      "chunk_sizheng_v4_017",
+      "chunk_sizheng_v4_023",
+      "chunk_sizheng_v4_024"
+    ]
+  },
+  "duplicates": {
+    "pairs": 7692,
+    "normalized_equal": [],
+    "whole_text_containment": [],
+    "high_similarity": [],
+    "sequence_threshold": 0.85,
+    "fivegram_threshold": 0.8,
+    "max_fivegram": {
+      "pair": [
+        "chunk_sizheng_v4_004",
+        "chunk_sizheng_v4_003"
+      ],
+      "ratio": 0.08917197452229299
+    },
+    "full_sequence_comparisons": 0
+  },
+  "entities": {
+    "matched_records": 24,
+    "typed_entities": 124,
+    "type_counts": {
+      "event": 15,
+      "place": 5,
+      "time": 26,
+      "organization": 35,
+      "document": 19,
+      "role": 2,
+      "person": 15,
+      "concept": 7
+    }
+  },
+  "static_questions": {
+    "passed": 5,
+    "total": 5,
+    "runtime_retrieval": "out_of_scope_not_counted_as_failure"
+  },
+  "text_length": {
+    "min": 111,
+    "max": 662,
+    "short_complete_units": [
+      "chunk_sizheng_v4_001",
+      "chunk_sizheng_v4_004",
+      "chunk_sizheng_v4_009",
+      "chunk_sizheng_v4_011",
+      "chunk_sizheng_v4_012",
+      "chunk_sizheng_v4_020",
+      "chunk_sizheng_v4_023",
+      "chunk_sizheng_v4_024"
+    ]
+  },
+  "protected_files_sha256": {
+    "text_chunks_demo.jsonl": "9cf5a4aca87bad8e69208e623a287c7ae010c3ec7be785d0d13b6a3706cf22b3",
+    "text_chunks_sizheng_v1.jsonl": "b857cfcc1ab8f459642269a88e4a11a16731d59db0b4448a9d11cfee745775f4",
+    "text_chunks_sizheng_v2.jsonl": "0f920e5db28867030294f01f712864fba4f8a4237d5347248c47e3942291a93c",
+    "text_chunks_sizheng_v3.jsonl": "19bfb97bca2b07dbd316a117e8e9304a966bf66fd640cc70ce7174b5da8fde11"
+  },
+  "candidate_sha256": "90f44874395e6654c978710855690b18238be944429d9c0dfdfd0763c5d85b63",
+  "pending": [
+    "005教材文件名异写保留，不算citation错误；政策标准名称待独立原件依据。",
+    "024未给个人事迹、地点或具体日期，保持缺失。",
+    "运行时接入v4、Qwen/FAISS及PDF结束页展示另行确认，不属于本批静态验收门槛。"
+  ],
+  "static_acceptance": {
+    "user_confirmed": true,
+    "records_passed": 24,
+    "date": "2026-10-09"
+  },
+  "document_name_variant": {
+    "statement": "教材原文存在名称异写，当前按各页原文保留，未做规范化归一。",
+    "occurrences": [
+      {
+        "pdf_page": 299,
+        "printed_page": 285,
+        "name": "《关于决定办好各级党校的决定》",
+        "body_chunk_ids": [
+          "chunk_sizheng_v4_005"
+        ],
+        "source_para_block": 1
+      },
+      {
+        "pdf_page": 301,
+        "printed_page": 287,
+        "name": "《关于办好各级党校的决定》",
+        "body_chunk_ids": [],
+        "source_para_block": 1,
+        "note": "此干部培训段落未入库；同页开始的007选取下一段，不含此名称。"
+      }
+    ],
+    "same_document_assessment": "两处均指1977年10月中央办党校的决定，疑似同一文件；未核对政策原件，不能据此确定标准名称。",
+    "authority_check": "已检索本地教材OCR中的名称出现位置并视觉核对299、301页；未发现可消解异写的目录、注释或独立规范依据。301页注释属于前文徐向前文章。",
+    "standard_name": null,
+    "normalization_applied": false,
+    "citation_error": false
+  },
+  "historical_runtime_observation": {
+    "entrypoint": "src.api.main.retrieve -> src.retriever.hybrid_retriever.retrieve",
+    "mode": "local",
+    "backend": "lightweight",
+    "vector_top_k": 3,
+    "graph_top_k": 3,
+    "hybrid_limit": "两路结果并集；代码无另外截断",
+    "source_paths": [
+      "data/processed/text_chunks_sizheng_v1.jsonl",
+      "data/processed/text_chunks_sizheng_v2.jsonl"
+    ],
+    "v4_in_active_source": false,
+    "passed": 0,
+    "total": 5,
+    "cases": [
+      {
+        "id": "v4_b02_q01",
+        "question": "1977年恢复高考的招生会议在哪里召开，采取什么录取办法，当年12月报考和录取人数分别是多少？请给出教材PDF页码。",
+        "expected_chunk_ids": [
+          "chunk_sizheng_v4_008"
+        ],
+        "expected_citation": {
+          "doc": "中国共产党思想政治教育史",
+          "section_suffix": "一、思想政治教育的局部进展",
+          "pdf_start": 303,
+          "pdf_end": 303
+        },
+        "actual_top_k": [],
+        "vector_ids": [],
+        "graph_ids": [],
+        "expected_rank": null,
+        "citation": null,
+        "citation_correct": null,
+        "uniquely_located": false,
+        "first_batch_interference": [],
+        "other_returned_ids": [],
+        "result": "FAIL",
+        "failure_category": "embedding / index 未更新",
+        "notes": "当前既有local轻量检索基线；只加载v1/v2，不能视为Qwen/FAISS验收。",
+        "response": {
+          "status": "success",
+          "project": "多智能体赋能的跨模态零幻觉交互式思政教育系统",
+          "query": "1977年恢复高考的招生会议在哪里召开，采取什么录取办法，当年12月报考和录取人数分别是多少？请给出教材PDF页码。",
+          "query_entities": [],
+          "vector_hits": [],
+          "graph_hits": [],
+          "hybrid_hits": [],
+          "answer": "当前知识库中没有检索到足够证据，暂不生成回答。请补充资料或换一个问题。",
+          "citations_used": [],
+          "generator_mode": "template",
+          "generator_provider": "template",
+          "provider_status": "template_evidence_summary",
+          "used_fallback": true,
+          "source_check": {
+            "status": "no_evidence",
+            "issues": [
+              "当前回答没有可用 citation，系统应保持不生成或提示证据不足。"
+            ],
+            "checked_citation_count": 0
+          },
+          "policy_check": {
+            "status": "need_review",
+            "risk_types": [
+              "evidence_missing"
+            ],
+            "issues": [
+              "当前回答缺少可用证据支撑，不建议直接输出。"
+            ],
+            "review_required": true,
+            "max_severity": "high",
+            "review_items": [
+              {
+                "risk_type": "evidence_missing",
+                "dimension": "evidence_alignment",
+                "severity": "high",
+                "reason": "当前回答缺少可用证据支撑，不建议直接输出。",
+                "suggestion": "请补充检索证据，或交由人工复核。",
+                "expert_focus": "请确认该问题是否需要补充资料后再回答。"
+              }
+            ],
+            "suggestion": "请补充检索证据，或交由人工复核。",
+            "feedback_collection": {
+              "stage": "student_initial_label",
+              "recommended_reviewer": "研究生或项目组员先初标，赵老师抽样校准。",
+              "expert_review_priority": "high",
+              "review_dimensions": [
+                {
+                  "id": "evidence_alignment",
+                  "name": "证据支撑",
+                  "description": "判断回答中的结论是否能被当前 citation 证据支撑。"
+                },
+                {
+                  "id": "citation_integrity",
+                  "name": "溯源完整性",
+                  "description": "判断 citation 的文献、章节、页码是否足够完整。"
+                },
+                {
+                  "id": "expression_safety",
+                  "name": "表述稳妥性",
+                  "description": "判断是否存在绝对化、扩大化或不够严谨的政治表述。"
+                },
+                {
+                  "id": "historical_context",
+                  "name": "历史语境",
+                  "description": "判断回答是否交代清楚历史阶段、对象和语境。"
+                },
+                {
+                  "id": "mobilization_completeness",
+                  "name": "政治动员完整性",
+                  "description": "判断政治动员、鼓舞士气等回答是否覆盖理想信念、组织纪律、宣传鼓动和生活关怀等必要维度。"
+                },
+                {
+                  "id": "expert_feedback",
+                  "name": "专家反馈",
+                  "description": "记录赵老师或研究生标注时关注的审查理由。"
+                }
+              ],
+              "label_options": [
+                "通过",
+                "证据不足",
+                "表述不够稳妥",
+                "历史语境不清",
+                "政治动员维度不全",
+                "结论超出材料",
+                "需要专家复核"
+              ],
+              "decision_options": [
+                "通过",
+                "需要修改",
+                "需要专家复核",
+                "不能输出"
+              ],
+              "required_fields": [
+                "decision",
+                "reason",
+                "corrected_suggestion"
+              ]
+            }
+          },
+          "agent_trace": [
+            {
+              "agent": "retrieval_stage",
+              "role": "证据检索中枢",
+              "status": "no_evidence",
+              "summary": {
+                "query_entities_count": 0,
+                "hybrid_hits_count": 0
+              }
+            },
+            {
+              "agent": "generator",
+              "role": "生成智能体",
+              "status": "pass",
+              "summary": {
+                "generator_mode": "template",
+                "citations_used_count": 0
+              }
+            },
+            {
+              "agent": "source_reviewer",
+              "role": "溯源审查智能体",
+              "status": "no_evidence",
+              "summary": {
+                "checked_citation_count": 0,
+                "issue_count": 1
+              }
+            },
+            {
+              "agent": "policy_reviewer",
+              "role": "政治红线审查智能体",
+              "status": "need_review",
+              "summary": {
+                "review_required": true,
+                "max_severity": "high",
+                "risk_types": [
+                  "evidence_missing"
+                ]
+              }
+            }
+          ],
+          "final_decision": {
+            "status": "blocked",
+            "can_output": false,
+            "review_required": true,
+            "reason": "缺少可用证据或溯源检查未通过。"
+          },
+          "display_route": {
+            "intent_type": "spatiotemporal",
+            "target_grade": null,
+            "presentation_mode": "timeline_map",
+            "timeline_ids": [],
+            "landmark_ids": [],
+            "narrative_character": null
+          }
+        }
+      },
+      {
+        "id": "v4_b02_q02",
+        "question": "1978年高等学校文科教学工作座谈会何时、何地召开，会后组织编写了哪些政治理论课程教学大纲？证据跨哪些PDF页？",
+        "expected_chunk_ids": [
+          "chunk_sizheng_v4_010"
+        ],
+        "expected_citation": {
+          "doc": "中国共产党思想政治教育史",
+          "section_suffix": "一、思想政治教育的局部进展",
+          "pdf_start": 303,
+          "pdf_end": 304
+        },
+        "actual_top_k": [],
+        "vector_ids": [],
+        "graph_ids": [],
+        "expected_rank": null,
+        "citation": null,
+        "citation_correct": null,
+        "uniquely_located": false,
+        "first_batch_interference": [],
+        "other_returned_ids": [],
+        "result": "FAIL",
+        "failure_category": "embedding / index 未更新",
+        "notes": "当前既有local轻量检索基线；只加载v1/v2，不能视为Qwen/FAISS验收。",
+        "response": {
+          "status": "success",
+          "project": "多智能体赋能的跨模态零幻觉交互式思政教育系统",
+          "query": "1978年高等学校文科教学工作座谈会何时、何地召开，会后组织编写了哪些政治理论课程教学大纲？证据跨哪些PDF页？",
+          "query_entities": [],
+          "vector_hits": [],
+          "graph_hits": [],
+          "hybrid_hits": [],
+          "answer": "当前知识库中没有检索到足够证据，暂不生成回答。请补充资料或换一个问题。",
+          "citations_used": [],
+          "generator_mode": "template",
+          "generator_provider": "template",
+          "provider_status": "template_evidence_summary",
+          "used_fallback": true,
+          "source_check": {
+            "status": "no_evidence",
+            "issues": [
+              "当前回答没有可用 citation，系统应保持不生成或提示证据不足。"
+            ],
+            "checked_citation_count": 0
+          },
+          "policy_check": {
+            "status": "need_review",
+            "risk_types": [
+              "evidence_missing"
+            ],
+            "issues": [
+              "当前回答缺少可用证据支撑，不建议直接输出。"
+            ],
+            "review_required": true,
+            "max_severity": "high",
+            "review_items": [
+              {
+                "risk_type": "evidence_missing",
+                "dimension": "evidence_alignment",
+                "severity": "high",
+                "reason": "当前回答缺少可用证据支撑，不建议直接输出。",
+                "suggestion": "请补充检索证据，或交由人工复核。",
+                "expert_focus": "请确认该问题是否需要补充资料后再回答。"
+              }
+            ],
+            "suggestion": "请补充检索证据，或交由人工复核。",
+            "feedback_collection": {
+              "stage": "student_initial_label",
+              "recommended_reviewer": "研究生或项目组员先初标，赵老师抽样校准。",
+              "expert_review_priority": "high",
+              "review_dimensions": [
+                {
+                  "id": "evidence_alignment",
+                  "name": "证据支撑",
+                  "description": "判断回答中的结论是否能被当前 citation 证据支撑。"
+                },
+                {
+                  "id": "citation_integrity",
+                  "name": "溯源完整性",
+                  "description": "判断 citation 的文献、章节、页码是否足够完整。"
+                },
+                {
+                  "id": "expression_safety",
+                  "name": "表述稳妥性",
+                  "description": "判断是否存在绝对化、扩大化或不够严谨的政治表述。"
+                },
+                {
+                  "id": "historical_context",
+                  "name": "历史语境",
+                  "description": "判断回答是否交代清楚历史阶段、对象和语境。"
+                },
+                {
+                  "id": "mobilization_completeness",
+                  "name": "政治动员完整性",
+                  "description": "判断政治动员、鼓舞士气等回答是否覆盖理想信念、组织纪律、宣传鼓动和生活关怀等必要维度。"
+                },
+                {
+                  "id": "expert_feedback",
+                  "name": "专家反馈",
+                  "description": "记录赵老师或研究生标注时关注的审查理由。"
+                }
+              ],
+              "label_options": [
+                "通过",
+                "证据不足",
+                "表述不够稳妥",
+                "历史语境不清",
+                "政治动员维度不全",
+                "结论超出材料",
+                "需要专家复核"
+              ],
+              "decision_options": [
+                "通过",
+                "需要修改",
+                "需要专家复核",
+                "不能输出"
+              ],
+              "required_fields": [
+                "decision",
+                "reason",
+                "corrected_suggestion"
+              ]
+            }
+          },
+          "agent_trace": [
+            {
+              "agent": "retrieval_stage",
+              "role": "证据检索中枢",
+              "status": "no_evidence",
+              "summary": {
+                "query_entities_count": 0,
+                "hybrid_hits_count": 0
+              }
+            },
+            {
+              "agent": "generator",
+              "role": "生成智能体",
+              "status": "pass",
+              "summary": {
+                "generator_mode": "template",
+                "citations_used_count": 0
+              }
+            },
+            {
+              "agent": "source_reviewer",
+              "role": "溯源审查智能体",
+              "status": "no_evidence",
+              "summary": {
+                "checked_citation_count": 0,
+                "issue_count": 1
+              }
+            },
+            {
+              "agent": "policy_reviewer",
+              "role": "政治红线审查智能体",
+              "status": "need_review",
+              "summary": {
+                "review_required": true,
+                "max_severity": "high",
+                "risk_types": [
+                  "evidence_missing"
+                ]
+              }
+            }
+          ],
+          "final_decision": {
+            "status": "blocked",
+            "can_output": false,
+            "review_required": true,
+            "reason": "缺少可用证据或溯源检查未通过。"
+          },
+          "display_route": {
+            "intent_type": "knowledge_qa",
+            "target_grade": null,
+            "presentation_mode": "evidence_cards",
+            "timeline_ids": [],
+            "landmark_ids": [],
+            "narrative_character": null
+          }
+        }
+      },
+      {
+        "id": "v4_b02_q03",
+        "question": "《实践是检验真理的唯一标准》由谁起草，先在哪一刊物发表，何时由《光明日报》公开发表？请定位教材PDF页。",
+        "expected_chunk_ids": [
+          "chunk_sizheng_v4_012"
+        ],
+        "expected_citation": {
+          "doc": "中国共产党思想政治教育史",
+          "section_suffix": "二、真理标准问题的讨论",
+          "pdf_start": 305,
+          "pdf_end": 305
+        },
+        "actual_top_k": [],
+        "vector_ids": [],
+        "graph_ids": [],
+        "expected_rank": null,
+        "citation": null,
+        "citation_correct": null,
+        "uniquely_located": false,
+        "first_batch_interference": [],
+        "other_returned_ids": [],
+        "result": "FAIL",
+        "failure_category": "embedding / index 未更新",
+        "notes": "当前既有local轻量检索基线；只加载v1/v2，不能视为Qwen/FAISS验收。",
+        "response": {
+          "status": "success",
+          "project": "多智能体赋能的跨模态零幻觉交互式思政教育系统",
+          "query": "《实践是检验真理的唯一标准》由谁起草，先在哪一刊物发表，何时由《光明日报》公开发表？请定位教材PDF页。",
+          "query_entities": [],
+          "vector_hits": [],
+          "graph_hits": [],
+          "hybrid_hits": [],
+          "answer": "当前知识库中没有检索到足够证据，暂不生成回答。请补充资料或换一个问题。",
+          "citations_used": [],
+          "generator_mode": "template",
+          "generator_provider": "template",
+          "provider_status": "template_evidence_summary",
+          "used_fallback": true,
+          "source_check": {
+            "status": "no_evidence",
+            "issues": [
+              "当前回答没有可用 citation，系统应保持不生成或提示证据不足。"
+            ],
+            "checked_citation_count": 0
+          },
+          "policy_check": {
+            "status": "need_review",
+            "risk_types": [
+              "evidence_missing"
+            ],
+            "issues": [
+              "当前回答缺少可用证据支撑，不建议直接输出。"
+            ],
+            "review_required": true,
+            "max_severity": "high",
+            "review_items": [
+              {
+                "risk_type": "evidence_missing",
+                "dimension": "evidence_alignment",
+                "severity": "high",
+                "reason": "当前回答缺少可用证据支撑，不建议直接输出。",
+                "suggestion": "请补充检索证据，或交由人工复核。",
+                "expert_focus": "请确认该问题是否需要补充资料后再回答。"
+              }
+            ],
+            "suggestion": "请补充检索证据，或交由人工复核。",
+            "feedback_collection": {
+              "stage": "student_initial_label",
+              "recommended_reviewer": "研究生或项目组员先初标，赵老师抽样校准。",
+              "expert_review_priority": "high",
+              "review_dimensions": [
+                {
+                  "id": "evidence_alignment",
+                  "name": "证据支撑",
+                  "description": "判断回答中的结论是否能被当前 citation 证据支撑。"
+                },
+                {
+                  "id": "citation_integrity",
+                  "name": "溯源完整性",
+                  "description": "判断 citation 的文献、章节、页码是否足够完整。"
+                },
+                {
+                  "id": "expression_safety",
+                  "name": "表述稳妥性",
+                  "description": "判断是否存在绝对化、扩大化或不够严谨的政治表述。"
+                },
+                {
+                  "id": "historical_context",
+                  "name": "历史语境",
+                  "description": "判断回答是否交代清楚历史阶段、对象和语境。"
+                },
+                {
+                  "id": "mobilization_completeness",
+                  "name": "政治动员完整性",
+                  "description": "判断政治动员、鼓舞士气等回答是否覆盖理想信念、组织纪律、宣传鼓动和生活关怀等必要维度。"
+                },
+                {
+                  "id": "expert_feedback",
+                  "name": "专家反馈",
+                  "description": "记录赵老师或研究生标注时关注的审查理由。"
+                }
+              ],
+              "label_options": [
+                "通过",
+                "证据不足",
+                "表述不够稳妥",
+                "历史语境不清",
+                "政治动员维度不全",
+                "结论超出材料",
+                "需要专家复核"
+              ],
+              "decision_options": [
+                "通过",
+                "需要修改",
+                "需要专家复核",
+                "不能输出"
+              ],
+              "required_fields": [
+                "decision",
+                "reason",
+                "corrected_suggestion"
+              ]
+            }
+          },
+          "agent_trace": [
+            {
+              "agent": "retrieval_stage",
+              "role": "证据检索中枢",
+              "status": "no_evidence",
+              "summary": {
+                "query_entities_count": 0,
+                "hybrid_hits_count": 0
+              }
+            },
+            {
+              "agent": "generator",
+              "role": "生成智能体",
+              "status": "pass",
+              "summary": {
+                "generator_mode": "template",
+                "citations_used_count": 0
+              }
+            },
+            {
+              "agent": "source_reviewer",
+              "role": "溯源审查智能体",
+              "status": "no_evidence",
+              "summary": {
+                "checked_citation_count": 0,
+                "issue_count": 1
+              }
+            },
+            {
+              "agent": "policy_reviewer",
+              "role": "政治红线审查智能体",
+              "status": "need_review",
+              "summary": {
+                "review_required": true,
+                "max_severity": "high",
+                "risk_types": [
+                  "evidence_missing"
+                ]
+              }
+            }
+          ],
+          "final_decision": {
+            "status": "blocked",
+            "can_output": false,
+            "review_required": true,
+            "reason": "缺少可用证据或溯源检查未通过。"
+          },
+          "display_route": {
+            "intent_type": "knowledge_qa",
+            "target_grade": null,
+            "presentation_mode": "evidence_cards",
+            "timeline_ids": [],
+            "landmark_ids": [],
+            "narrative_character": null
+          }
+        }
+      },
+      {
+        "id": "v4_b02_q04",
+        "question": "1983年2月14日加强党员教育工作的通知如何分配党委及组织宣传部门的责任？正文从哪一PDF页开始，为什么不能只按日期所在页引用？",
+        "expected_chunk_ids": [
+          "chunk_sizheng_v4_017"
+        ],
+        "expected_citation": {
+          "doc": "中国共产党思想政治教育史",
+          "section_suffix": "一、思想政治教育制度化建设的新进展",
+          "pdf_start": 327,
+          "pdf_end": 328
+        },
+        "actual_top_k": [
+          {
+            "id": "chunk_sizheng_v1_103",
+            "citation": {
+              "doc": "中国共产党思想政治教育史",
+              "section": "第二章 土地革命时期思想政治教育的艰辛探索 / 第三节 红军反“围剿”斗争和长征中的思想政治教育 / 一、思想政治教育为反“围剿”斗争服务 / （一）动员部队提高战斗力 / 2. 发挥党支部战斗堡垒作用",
+              "page": 89
+            },
+            "score": 0.561
+          },
+          {
+            "id": "chunk_sizheng_v1_164",
+            "citation": {
+              "doc": "中国共产党思想政治教育史",
+              "section": "第三章 抗日战争时期思想政治教育的日趋成熟 / 第三节 思想政治教育理论形成体系 / 二、思想政治教育若干重要论著的发表",
+              "page": 129
+            },
+            "score": 0.491
+          }
+        ],
+        "vector_ids": [
+          "chunk_sizheng_v1_103",
+          "chunk_sizheng_v1_164"
+        ],
+        "graph_ids": [
+          "chunk_sizheng_v1_103",
+          "chunk_sizheng_v1_164"
+        ],
+        "expected_rank": null,
+        "citation": null,
+        "citation_correct": null,
+        "uniquely_located": false,
+        "first_batch_interference": [],
+        "other_returned_ids": [
+          "chunk_sizheng_v1_103",
+          "chunk_sizheng_v1_164"
+        ],
+        "result": "FAIL",
+        "failure_category": "embedding / index 未更新",
+        "notes": "当前既有local轻量检索基线；只加载v1/v2，不能视为Qwen/FAISS验收。",
+        "response": {
+          "status": "success",
+          "project": "多智能体赋能的跨模态零幻觉交互式思政教育系统",
+          "query": "1983年2月14日加强党员教育工作的通知如何分配党委及组织宣传部门的责任？正文从哪一PDF页开始，为什么不能只按日期所在页引用？",
+          "query_entities": [
+            "党员教育"
+          ],
+          "vector_hits": [
+            {
+              "id": "chunk_sizheng_v1_103",
+              "source": "中国共产党思想政治教育史",
+              "title": "发挥党支部战斗堡垒作用",
+              "text": "连队党支部是党联系士兵的重要纽带，是红军全部战斗力的基础。当时，红军主力部队的连队共产党员一般占全连人数的40%至50%。因此，各根据地红军党组织非常重视连队党支部的建设，使之成为团结战斗的堡垒。1932年1月19日，总政治部主任王稼祥向各级政治部、政治委员和党支部委员会发出了《总政关于红军中支部工作的一封信》，对党支部工作提出了20项要求。同年9月21日，王稼祥和总政治部副主任贺昌发出《总政治部关于红军中党的工作问题训令》，再次对红军中党的工作和政治工作提出指导性的意见。为加强对党员的教育，提高党员的思想政治素质，各地红军政治工作机关还编印《新党员训练大纲》《党员须知》等党员教育教材。党员先锋模范作用的发挥，筑牢了党支部的堡垒基础。",
+              "citation": {
+                "doc": "中国共产党思想政治教育史",
+                "section": "第二章 土地革命时期思想政治教育的艰辛探索 / 第三节 红军反“围剿”斗争和长征中的思想政治教育 / 一、思想政治教育为反“围剿”斗争服务 / （一）动员部队提高战斗力 / 2. 发挥党支部战斗堡垒作用",
+                "page": 89
+              },
+              "vector_score": 0.63
+            },
+            {
+              "id": "chunk_sizheng_v1_164",
+              "source": "中国共产党思想政治教育史",
+              "title": "思想政治教育若干重要论著的发表（2）",
+              "text": "1939年7月，刘少奇在延安马克思列宁学院作《论共产党员的修养》的演讲，全面论述了加强共产党员修养的必要性、修养的内容与标准、方法与途径，批判了党内各种错误思想意识。对加强党员教育和党的思想政治教育产生了重大影响。第一，强调了加强共产党员修养的必要性。“共产党员为什么要进行修养呢？”首先，这是克服自身弱点的需要。其次，是成为革命家的必然要求。“由一个幼稚的革命者，变成一个成熟的、老练的、能够‘运用自如’地掌握革命规律的革命家，要经过一个很长的革命的锻炼和修养的过程”。最后，是由党的性质和特点决定的。所以，共产党员必须在革命实践中加强自我修养。第二，明确了共产党员修养的标准和目的。刘少奇说，只要具备了党章规定的党员条件，就可以成为一名共产党员。“但是，我们每一个共产党员，不应该只是做一个起码的够格的党员，而应该按照党章的规定力求进步，不断提高自己的觉悟程度，努力学习马克思列宁主义。”“做马克思和列宁的好学生。”刘少奇还明确了共产党员修养的目的，他说：“共产党员在思想意识上进行修养的目的，就是要把自己锻炼成为一个忠诚的进步的模范党员和干部。”第三，阐述了共产党员修养的基本内容。刘少奇指出，共产党员必须在伟大的革命斗争中，长期进行各方面的修养，“要有马克思列宁主义理论的修养，要有运用马克思列宁主义的立场、观点和方法去研究和处理各种问题的修养；要有无产阶级的革命战略、战术的修养；要有无产阶级的思想意识和道德品质的修养；",
+              "citation": {
+                "doc": "中国共产党思想政治教育史",
+                "section": "第三章 抗日战争时期思想政治教育的日趋成熟 / 第三节 思想政治教育理论形成体系 / 二、思想政治教育若干重要论著的发表",
+                "page": 129
+              },
+              "vector_score": 0.53
+            }
+          ],
+          "graph_hits": [
+            {
+              "id": "chunk_sizheng_v1_103",
+              "related_entities": [
+                "党员教育"
+              ],
+              "graph_paths": [],
+              "graph_score": 0.4
+            },
+            {
+              "id": "chunk_sizheng_v1_164",
+              "related_entities": [
+                "党员教育"
+              ],
+              "graph_paths": [],
+              "graph_score": 0.4
+            }
+          ],
+          "hybrid_hits": [
+            {
+              "id": "chunk_sizheng_v1_103",
+              "source": "中国共产党思想政治教育史",
+              "title": "发挥党支部战斗堡垒作用",
+              "text": "连队党支部是党联系士兵的重要纽带，是红军全部战斗力的基础。当时，红军主力部队的连队共产党员一般占全连人数的40%至50%。因此，各根据地红军党组织非常重视连队党支部的建设，使之成为团结战斗的堡垒。1932年1月19日，总政治部主任王稼祥向各级政治部、政治委员和党支部委员会发出了《总政关于红军中支部工作的一封信》，对党支部工作提出了20项要求。同年9月21日，王稼祥和总政治部副主任贺昌发出《总政治部关于红军中党的工作问题训令》，再次对红军中党的工作和政治工作提出指导性的意见。为加强对党员的教育，提高党员的思想政治素质，各地红军政治工作机关还编印《新党员训练大纲》《党员须知》等党员教育教材。党员先锋模范作用的发挥，筑牢了党支部的堡垒基础。",
+              "citation": {
+                "doc": "中国共产党思想政治教育史",
+                "section": "第二章 土地革命时期思想政治教育的艰辛探索 / 第三节 红军反“围剿”斗争和长征中的思想政治教育 / 一、思想政治教育为反“围剿”斗争服务 / （一）动员部队提高战斗力 / 2. 发挥党支部战斗堡垒作用",
+                "page": 89
+              },
+              "vector_score": 0.63,
+              "graph_score": 0.4,
+              "related_entities": [
+                "党员教育"
+              ],
+              "graph_paths": [],
+              "hybrid_score": 0.561
+            },
+            {
+              "id": "chunk_sizheng_v1_164",
+              "source": "中国共产党思想政治教育史",
+              "title": "思想政治教育若干重要论著的发表（2）",
+              "text": "1939年7月，刘少奇在延安马克思列宁学院作《论共产党员的修养》的演讲，全面论述了加强共产党员修养的必要性、修养的内容与标准、方法与途径，批判了党内各种错误思想意识。对加强党员教育和党的思想政治教育产生了重大影响。第一，强调了加强共产党员修养的必要性。“共产党员为什么要进行修养呢？”首先，这是克服自身弱点的需要。其次，是成为革命家的必然要求。“由一个幼稚的革命者，变成一个成熟的、老练的、能够‘运用自如’地掌握革命规律的革命家，要经过一个很长的革命的锻炼和修养的过程”。最后，是由党的性质和特点决定的。所以，共产党员必须在革命实践中加强自我修养。第二，明确了共产党员修养的标准和目的。刘少奇说，只要具备了党章规定的党员条件，就可以成为一名共产党员。“但是，我们每一个共产党员，不应该只是做一个起码的够格的党员，而应该按照党章的规定力求进步，不断提高自己的觉悟程度，努力学习马克思列宁主义。”“做马克思和列宁的好学生。”刘少奇还明确了共产党员修养的目的，他说：“共产党员在思想意识上进行修养的目的，就是要把自己锻炼成为一个忠诚的进步的模范党员和干部。”第三，阐述了共产党员修养的基本内容。刘少奇指出，共产党员必须在伟大的革命斗争中，长期进行各方面的修养，“要有马克思列宁主义理论的修养，要有运用马克思列宁主义的立场、观点和方法去研究和处理各种问题的修养；要有无产阶级的革命战略、战术的修养；要有无产阶级的思想意识和道德品质的修养；",
+              "citation": {
+                "doc": "中国共产党思想政治教育史",
+                "section": "第三章 抗日战争时期思想政治教育的日趋成熟 / 第三节 思想政治教育理论形成体系 / 二、思想政治教育若干重要论著的发表",
+                "page": 129
+              },
+              "vector_score": 0.53,
+              "graph_score": 0.4,
+              "related_entities": [
+                "党员教育"
+              ],
+              "graph_paths": [],
+              "hybrid_score": 0.491
+            }
+          ],
+          "answer": "生成服务当前不可用，以下内容仅为检索证据摘要，不作为完整自然语言回答：\n- 证据 1：1939年7月，刘少奇在延安马克思列宁学院作《论共产党员的修养》的演讲，全面论述了加强共产党员修养的必要性、修养的内容与标准、方法与途径，批判了党内各种错误思想意识。对加强党员教育和党的思想政治教育产生了重大影响。第一，强调了加强共产党员修养的必要性。“共产党员为什么要进行修养呢？”首先，这是克服自身弱点的需要。其次，是成为革命家的必然要求。“由一个幼稚的革命者，变成一个成熟的、老练的、能够‘运用自如’地掌握革命规律的革命家，要经过一个很长的革命的锻炼和修养的过程”。最后，是由党的性质和特点决定的。所以，共产党员必须在革命实践中加强自我修养。第二，明确了共产党员修养的标准和目的。\n\n引用依据：\n1. 思想政治教育若干重要论著的发表（2）：来源：《中国共产党思想政治教育史》，第三章 抗日战争时期思想政治教育的日趋成熟 / 第三节 思想政治教育理论形成体系 / 二、思想政治教育若干重要论著的发表，PDF 页码 129\n\n以上内容仅依据当前检索到的证据整理，仅为检索证据摘要，请在生成服务恢复后重新生成完整回答。",
+          "citations_used": [
+            {
+              "id": "chunk_sizheng_v1_164",
+              "title": "思想政治教育若干重要论著的发表（2）",
+              "source": "中国共产党思想政治教育史",
+              "citation": {
+                "doc": "中国共产党思想政治教育史",
+                "section": "第三章 抗日战争时期思想政治教育的日趋成熟 / 第三节 思想政治教育理论形成体系 / 二、思想政治教育若干重要论著的发表",
+                "page": 129
+              },
+              "hybrid_score": 0.491
+            }
+          ],
+          "generator_mode": "template",
+          "generator_provider": "template",
+          "provider_status": "template_evidence_summary",
+          "used_fallback": true,
+          "source_check": {
+            "status": "pass",
+            "issues": [],
+            "checked_citation_count": 1
+          },
+          "policy_check": {
+            "status": "pass",
+            "risk_types": [],
+            "issues": [],
+            "review_required": false,
+            "max_severity": "none",
+            "review_items": [],
+            "suggestion": "建议保留研究生初标与赵老师抽样校准机制。",
+            "feedback_collection": {
+              "stage": "rule_seed",
+              "recommended_reviewer": "低风险样例由研究生或组员初标，高风险和争议样例交赵老师校准。",
+              "expert_review_priority": "normal",
+              "review_dimensions": [
+                {
+                  "id": "evidence_alignment",
+                  "name": "证据支撑",
+                  "description": "判断回答中的结论是否能被当前 citation 证据支撑。"
+                },
+                {
+                  "id": "citation_integrity",
+                  "name": "溯源完整性",
+                  "description": "判断 citation 的文献、章节、页码是否足够完整。"
+                },
+                {
+                  "id": "expression_safety",
+                  "name": "表述稳妥性",
+                  "description": "判断是否存在绝对化、扩大化或不够严谨的政治表述。"
+                },
+                {
+                  "id": "historical_context",
+                  "name": "历史语境",
+                  "description": "判断回答是否交代清楚历史阶段、对象和语境。"
+                },
+                {
+                  "id": "mobilization_completeness",
+                  "name": "政治动员完整性",
+                  "description": "判断政治动员、鼓舞士气等回答是否覆盖理想信念、组织纪律、宣传鼓动和生活关怀等必要维度。"
+                },
+                {
+                  "id": "expert_feedback",
+                  "name": "专家反馈",
+                  "description": "记录赵老师或研究生标注时关注的审查理由。"
+                }
+              ],
+              "label_options": [
+                "通过",
+                "证据不足",
+                "表述不够稳妥",
+                "历史语境不清",
+                "政治动员维度不全",
+                "结论超出材料",
+                "需要专家复核"
+              ],
+              "decision_options": [
+                "通过",
+                "需要修改",
+                "需要专家复核",
+                "不能输出"
+              ],
+              "required_fields": [
+                "decision",
+                "reason",
+                "corrected_suggestion"
+              ]
+            }
+          },
+          "agent_trace": [
+            {
+              "agent": "retrieval_stage",
+              "role": "证据检索中枢",
+              "status": "pass",
+              "summary": {
+                "query_entities_count": 1,
+                "hybrid_hits_count": 2
+              }
+            },
+            {
+              "agent": "generator",
+              "role": "生成智能体",
+              "status": "pass",
+              "summary": {
+                "generator_mode": "template",
+                "citations_used_count": 1
+              }
+            },
+            {
+              "agent": "source_reviewer",
+              "role": "溯源审查智能体",
+              "status": "pass",
+              "summary": {
+                "checked_citation_count": 1,
+                "issue_count": 0
+              }
+            },
+            {
+              "agent": "policy_reviewer",
+              "role": "政治红线审查智能体",
+              "status": "pass",
+              "summary": {
+                "review_required": false,
+                "max_severity": "none",
+                "risk_types": []
+              }
+            }
+          ],
+          "final_decision": {
+            "status": "approved",
+            "can_output": true,
+            "review_required": false,
+            "reason": "溯源检查和政治红线初筛均通过。"
+          },
+          "display_route": {
+            "intent_type": "knowledge_qa",
+            "target_grade": null,
+            "presentation_mode": "evidence_cards",
+            "timeline_ids": [],
+            "landmark_ids": [],
+            "narrative_character": null
+          }
+        }
+      },
+      {
+        "id": "v4_b02_q05",
+        "question": "1984年全国“五讲四美三热爱”活动工作会议何时在何地召开，推广了什么经验？实际PDF页码是否等于MinerU合并段落的起始页339？",
+        "expected_chunk_ids": [
+          "chunk_sizheng_v4_023"
+        ],
+        "expected_citation": {
+          "doc": "中国共产党思想政治教育史",
+          "section_suffix": "（三）创建文明单位和文明城市活动",
+          "pdf_start": 340,
+          "pdf_end": 340
+        },
+        "actual_top_k": [],
+        "vector_ids": [],
+        "graph_ids": [],
+        "expected_rank": null,
+        "citation": null,
+        "citation_correct": null,
+        "uniquely_located": false,
+        "first_batch_interference": [],
+        "other_returned_ids": [],
+        "result": "FAIL",
+        "failure_category": "embedding / index 未更新",
+        "notes": "当前既有local轻量检索基线；只加载v1/v2，不能视为Qwen/FAISS验收。",
+        "response": {
+          "status": "success",
+          "project": "多智能体赋能的跨模态零幻觉交互式思政教育系统",
+          "query": "1984年全国“五讲四美三热爱”活动工作会议何时在何地召开，推广了什么经验？实际PDF页码是否等于MinerU合并段落的起始页339？",
+          "query_entities": [],
+          "vector_hits": [],
+          "graph_hits": [],
+          "hybrid_hits": [],
+          "answer": "当前知识库中没有检索到足够证据，暂不生成回答。请补充资料或换一个问题。",
+          "citations_used": [],
+          "generator_mode": "template",
+          "generator_provider": "template",
+          "provider_status": "template_evidence_summary",
+          "used_fallback": true,
+          "source_check": {
+            "status": "no_evidence",
+            "issues": [
+              "当前回答没有可用 citation，系统应保持不生成或提示证据不足。"
+            ],
+            "checked_citation_count": 0
+          },
+          "policy_check": {
+            "status": "need_review",
+            "risk_types": [
+              "evidence_missing"
+            ],
+            "issues": [
+              "当前回答缺少可用证据支撑，不建议直接输出。"
+            ],
+            "review_required": true,
+            "max_severity": "high",
+            "review_items": [
+              {
+                "risk_type": "evidence_missing",
+                "dimension": "evidence_alignment",
+                "severity": "high",
+                "reason": "当前回答缺少可用证据支撑，不建议直接输出。",
+                "suggestion": "请补充检索证据，或交由人工复核。",
+                "expert_focus": "请确认该问题是否需要补充资料后再回答。"
+              }
+            ],
+            "suggestion": "请补充检索证据，或交由人工复核。",
+            "feedback_collection": {
+              "stage": "student_initial_label",
+              "recommended_reviewer": "研究生或项目组员先初标，赵老师抽样校准。",
+              "expert_review_priority": "high",
+              "review_dimensions": [
+                {
+                  "id": "evidence_alignment",
+                  "name": "证据支撑",
+                  "description": "判断回答中的结论是否能被当前 citation 证据支撑。"
+                },
+                {
+                  "id": "citation_integrity",
+                  "name": "溯源完整性",
+                  "description": "判断 citation 的文献、章节、页码是否足够完整。"
+                },
+                {
+                  "id": "expression_safety",
+                  "name": "表述稳妥性",
+                  "description": "判断是否存在绝对化、扩大化或不够严谨的政治表述。"
+                },
+                {
+                  "id": "historical_context",
+                  "name": "历史语境",
+                  "description": "判断回答是否交代清楚历史阶段、对象和语境。"
+                },
+                {
+                  "id": "mobilization_completeness",
+                  "name": "政治动员完整性",
+                  "description": "判断政治动员、鼓舞士气等回答是否覆盖理想信念、组织纪律、宣传鼓动和生活关怀等必要维度。"
+                },
+                {
+                  "id": "expert_feedback",
+                  "name": "专家反馈",
+                  "description": "记录赵老师或研究生标注时关注的审查理由。"
+                }
+              ],
+              "label_options": [
+                "通过",
+                "证据不足",
+                "表述不够稳妥",
+                "历史语境不清",
+                "政治动员维度不全",
+                "结论超出材料",
+                "需要专家复核"
+              ],
+              "decision_options": [
+                "通过",
+                "需要修改",
+                "需要专家复核",
+                "不能输出"
+              ],
+              "required_fields": [
+                "decision",
+                "reason",
+                "corrected_suggestion"
+              ]
+            }
+          },
+          "agent_trace": [
+            {
+              "agent": "retrieval_stage",
+              "role": "证据检索中枢",
+              "status": "no_evidence",
+              "summary": {
+                "query_entities_count": 0,
+                "hybrid_hits_count": 0
+              }
+            },
+            {
+              "agent": "generator",
+              "role": "生成智能体",
+              "status": "pass",
+              "summary": {
+                "generator_mode": "template",
+                "citations_used_count": 0
+              }
+            },
+            {
+              "agent": "source_reviewer",
+              "role": "溯源审查智能体",
+              "status": "no_evidence",
+              "summary": {
+                "checked_citation_count": 0,
+                "issue_count": 1
+              }
+            },
+            {
+              "agent": "policy_reviewer",
+              "role": "政治红线审查智能体",
+              "status": "need_review",
+              "summary": {
+                "review_required": true,
+                "max_severity": "high",
+                "risk_types": [
+                  "evidence_missing"
+                ]
+              }
+            }
+          ],
+          "final_decision": {
+            "status": "blocked",
+            "can_output": false,
+            "review_required": true,
+            "reason": "缺少可用证据或溯源检查未通过。"
+          },
+          "display_route": {
+            "intent_type": "knowledge_qa",
+            "target_grade": null,
+            "presentation_mode": "evidence_cards",
+            "timeline_ids": [],
+            "landmark_ids": [],
+            "narrative_character": null
+          }
+        }
+      }
+    ],
+    "date": "2026-10-09",
+    "status": "failed_on_current_sources_faiss_rebuild_blocked",
+    "real_qwen_faiss_test_completed": false,
+    "dependencies": "按requirements.txt安装在被忽略的.venv；未修改共享Python或项目依赖清单。",
+    "index_build": {
+      "script": "scripts/run_embedding_faiss_smoke_test.py",
+      "chunks": [
+        "data/processed/text_chunks_sizheng_v1.jsonl",
+        "data/processed/text_chunks_sizheng_v2.jsonl",
+        "data/processed/text_chunks_sizheng_v3.jsonl",
+        "data/processed/text_chunks_sizheng_v4.jsonl"
+      ],
+      "candidate_records": 293,
+      "candidate_v4_records": 24,
+      "completed": false,
+      "exit_code": 1,
+      "error": "RuntimeError: embedding provider failed: missing_api_key",
+      "index_written": false,
+      "v4_indexed": false,
+      "fallback_counted_as_faiss_success": false
+    },
+    "display_limits": [
+      "现有citation只提供doc/section/起始page；pdf_end在辅助核对记录中，运行接口未加载。",
+      "Q2、Q4、Q5附带跨页/日期所在页/MinerU归属页解释，不能仅凭chunk正文和起始page完整回答；需引用辅助核对记录。"
+    ],
+    "repair": [
+      "在本机.env.local配置DASHSCOPE_API_KEY；不要提交或在聊天中发送密钥。",
+      "使用原有--chunks参数重建v1-v4索引；保持模型、维度、Top-K和排序逻辑不变。",
+      "核验metadata包含293条及全部24个v4 ID，再配置DACHUANG_VECTOR_BACKEND=faiss和实际DACHUANG_FAISS_INDEX_DIR。",
+      "通过同一API处理函数重跑原5问，核对FAISS确实命中而非静默回退；记录实际排名与citation。",
+      "如要验收完整答案中的跨页解释，另行将辅助citation审计记录接入展示，或将检索验收与页码解释验收分开；本轮不改实现或问题。"
+    ],
+    "acceptance_gate": false,
+    "scope_note": "旧lizhuoyang工作区历史观察；本轮未执行Qwen/FAISS，不计本批验收失败。"
+  },
+  "runtime_retrieval": {
+    "required_for_this_delivery": false,
+    "executed_this_delivery": false,
+    "status": "not_required_not_run",
+    "counted_as_failure": false,
+    "future_enablement": "待用户另行确认",
+    "retriever_logic_changed": false,
+    "credentials_configured": false,
+    "indexes_built": false
+  },
+  "previous_worktree_git_context": {
+    "branch": "lizhuoyang",
+    "head": "3a3940120f3acbfc3fba7e6b899a14495c52b7bb",
+    "origin_main": "0ede63c2738d734727ec440f0e0396795678fab1",
+    "main_is_ancestor": true,
+    "new_branches": 0,
+    "new_worktrees": 0,
+    "raw_tracked_files": 0,
+    "ignore_probe": ".gitignore:10:/data/raw/\tdata/raw/MinerU_中国共产党思想政治教育史 __20260615145108.json",
+    "backup": "D:/dachuang_local/backups/lizhuoyang-sync-20261009",
+    "raw_originals_preserved": 10,
+    "historical_non_raw_files_preserved": 11,
+    "sync_committed": true,
+    "batch02_committed": false,
+    "pushed": false,
+    "final_diff_check": {
+      "new_batch_files": [
+        "data/processed/text_chunks_sizheng_v4.jsonl",
+        "src/etl/build_sizheng_chunks_v4.py",
+        "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/README.md",
+        "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/citation_audit.jsonl",
+        "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/citation_review.md",
+        "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/entity_types.jsonl",
+        "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/validation_report.json",
+        "tests/queries_sizheng_v4_batch02.json",
+        "tests/test_sizheng_chunks_v4.py"
+      ],
+      "new_batch_file_count": 9,
+      "tracked_worktree_modifications": [],
+      "staged_files": [],
+      "whitespace_errors": 0,
+      "relative_to_main_preserved_legacy_files": 11,
+      "no_new_branch_or_worktree_confirmed": true,
+      "local_raw_hashes_unchanged": 10
+    }
+  },
+  "git": {
+    "branch": "codex/lizhuoyang-clean-delivery",
+    "base_origin_main": "0ede63c2738d734727ec440f0e0396795678fab1",
+    "old_branch": "lizhuoyang",
+    "old_head": "3a3940120f3acbfc3fba7e6b899a14495c52b7bb",
+    "old_uncommitted_files_sha256": {
+      "data/processed/text_chunks_sizheng_v4.jsonl": "90f44874395e6654c978710855690b18238be944429d9c0dfdfd0763c5d85b63",
+      "src/etl/build_sizheng_chunks_v4.py": "fa8a384a62ad12cbb4e1ae3101e5fe2089818c277f64edb225271f3826d4bef3",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/README.md": "82499224084837a2f5cd0b9f1322e70170e351670e752f3f63c145af1e6eb708",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/citation_audit.jsonl": "7dfe3047ee26c91bfa0841a47395320eb6957a393b1e1876189715a51c9697a9",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/citation_review.md": "eb8e336c9dadee92ececf50d0450f876854359e7d2c818c6fda822b6c8b03589",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/entity_types.jsonl": "39482010fe91d1a2ef5fd96666d63191fc4d44b9aa0837df338cbe42ac7fac3d",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/validation_report.json": "d850237ba823d01b2c3fafa74a88e4d6ea8385a2b93aeea9f44451ae3fb55807",
+      "tests/queries_sizheng_v4_batch02.json": "e0188170180ff36486122b7c386d26eb3e3e1edc63c28a9951df7863984fe731",
+      "tests/test_sizheng_chunks_v4.py": "18c65bce62ff2c71e1d6f2606d5951d99b5d6d9ed142fd4498f434461a4b63eb"
+    },
+    "old_uncommitted_files_preserved": true,
+    "new_branches": 1,
+    "new_worktrees": 1,
+    "one_off_isolation_only": true,
+    "old_history_merged": false,
+    "raw_tracked_files": 0,
+    "ignore_probe": ".gitignore:10:/data/raw/\t\"data/raw/MinerU_\\344\\270\\255\\345\\233\\275\\345\\205\\261\\344\\272\\247\\345\\205\\232\\346\\200\\235\\346\\203\\263\\346\\224\\277\\346\\262\\273\\346\\225\\231\\350\\202\\262\\345\\217\\262 __20260615145108.json\"",
+    "external_raw_backup_hash_matches": 10,
+    "external_pdf_hash_verified": true,
+    "delivery_files": [
+      "data/processed/text_chunks_sizheng_v4.jsonl",
+      "src/etl/build_sizheng_chunks_v4.py",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/README.md",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/citation_audit.jsonl",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/citation_review.md",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/entity_types.jsonl",
+      "team_deliverables/lizhuoyang/2026-09-courseware-chunks/batch02/validation_report.json",
+      "tests/queries_sizheng_v4_batch02.json",
+      "tests/test_sizheng_chunks_v4.py"
+    ],
+    "pushed": false,
+    "merged": false,
+    "delivery_stage": "静态复验通过，仅上述9文件进入本地提交；不推送、不合并",
+    "final_scope_checks": {
+      "file_count": 9,
+      "only_additions": true,
+      "raw_tracked_files": 0,
+      "unexpected_files": [],
+      "secret_pattern_matches": 0,
+      "whitespace_errors": 0,
+      "v1_v2_v3_unchanged": true
+    }
+  }
+}
