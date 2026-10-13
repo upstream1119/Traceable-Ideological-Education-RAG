@@ -259,3 +259,65 @@ def test_template_answer_keeps_closing_quote_when_truncated(monkeypatch):
 
     assert "“这是一句带有完整中文引号的关键论述。”" in result["answer"]
     assert "后续补充说明较长，后续补充说明较长" not in result["answer"]
+
+
+def test_relevant_short_evidence_keeps_tail_facts(monkeypatch):
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "template")
+    text = (
+        "招生会议采用统一考试、择优录取的办法。"
+        + "招生会议的其他安排有原文依据。" * 25
+        + "当年参加考试约570万人，录取27.3万人。"
+    )
+    assert 320 < len(text) <= 640
+    result = generate_answer(
+        "招生会议采用什么录取办法，参加考试和录取人数是多少？",
+        [_hit(text=text)],
+    )
+    assert text in result["answer"]
+
+
+def test_long_evidence_still_uses_bounded_excerpt(monkeypatch):
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "template")
+    text = (
+        "招生会议采用统一考试、择优录取的办法。"
+        + "招生会议的其他安排有原文依据。" * 60
+        + "末尾事实不能冒充已完整覆盖。"
+    )
+    result = generate_answer("招生会议采用什么录取办法？", [_hit(text=text)])
+    assert "末尾事实不能冒充已完整覆盖" not in result["answer"]
+
+
+def test_verified_continuations_follow_source_order(monkeypatch):
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "template")
+    first = _hit(
+        hit_id="chunk_sizheng_v1_166",
+        text="张闻天起草《党的宣传鼓动工作提纲》，第一方面说明概念。",
+        hybrid_score=0.8,
+    )
+    second = _hit(
+        hit_id="chunk_sizheng_v1_167",
+        text="张闻天的《党的宣传鼓动工作提纲》第四方面说明组织领导。",
+        hybrid_score=0.9,
+    )
+    result = generate_answer(
+        "张闻天起草《党的宣传鼓动工作提纲》的主要内容是什么？",
+        [second, first],
+    )
+    assert [item["id"] for item in result["citations_used"]] == [
+        "chunk_sizheng_v1_166", "chunk_sizheng_v1_167",
+    ]
+    assert result["answer"].index("第一方面") < result["answer"].index("第四方面")
+    assert "证据范围说明" not in result["answer"]
+
+
+def test_unverified_citations_keep_retrieval_order(monkeypatch):
+    monkeypatch.setenv("DACHUANG_GENERATOR_MODE", "template")
+    hits = [
+        _hit(hit_id="chunk_sizheng_v1_167"),
+        _hit(hit_id="chunk_sizheng_v1_166"),
+    ]
+    hits[1]["citation"] = {**hits[1]["citation"], "page": 2}
+    result = generate_answer("思想政治教育为什么重要？", hits)
+    assert [item["id"] for item in result["citations_used"]] == [
+        "chunk_sizheng_v1_167", "chunk_sizheng_v1_166",
+    ]

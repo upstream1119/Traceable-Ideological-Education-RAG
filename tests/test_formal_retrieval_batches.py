@@ -99,3 +99,50 @@ def test_non_topic_queries_remain_blocked(local_retrieval, query):
     assert result["citations_used"] == []
     assert result["final_decision"]["status"] == "blocked"
     assert result["final_decision"]["can_output"] is False
+
+
+def test_complete_gaokao_question_keeps_required_facts(local_retrieval):
+    query = (
+        "1977年恢复高考的全国高等学校招生工作会议何时、在哪里召开？"
+        "采用什么招生办法，随后规定哪些人可以报考、需要什么文化水平，"
+        "并实行什么考核录取原则？当年12月报考和录取人数分别是多少？"
+        "请给出教材PDF页码。"
+    )
+    result = hybrid_retriever.retrieve(query)
+    for fact in (
+        "1977年8月13日至9月25日", "北京", "统一考试、择优录取",
+        "工人、农民、上山下乡和回乡知识青年、复员军人、干部和应届毕业生",
+        "高中毕业或相当于高中毕业", "德、智、体全面考核",
+        "1977年12月", "570万", "27.3万",
+    ):
+        assert fact in result["answer"]
+    citation = next(
+        item for item in result["citations_used"]
+        if item["id"] == "chunk_sizheng_v4_008"
+    )
+    assert citation["citation"]["page"] == 303
+    assert result["final_decision"]["status"] == "approved"
+
+
+def test_zhang_wentian_keeps_four_aspects_and_review_gate(local_retrieval):
+    result = hybrid_retriever.retrieve(
+        "请面向高中生，以人物叙事方式介绍张闻天起草"
+        "《党的宣传鼓动工作提纲》的背景和主要内容。"
+    )
+    for fact in (
+        "1941年6月", "中共中央宣传部", "第一", "第二",
+        "第三", "第四", "党内教育", "群众教育",
+    ):
+        assert fact in result["answer"]
+    citations = {item["id"]: item for item in result["citations_used"]}
+    for chunk_id in ("chunk_sizheng_v1_166", "chunk_sizheng_v1_167"):
+        assert citations[chunk_id]["citation"]["page"] == 130
+    assert result["final_decision"]["status"] == "needs_review"
+    assert result["final_decision"]["can_output"] is False
+    assert [item["id"] for item in result["citations_used"]] == [
+        "chunk_sizheng_v1_166", "chunk_sizheng_v1_167",
+    ]
+    assert result["answer"].index("1941年6月") < result["answer"].index(
+        "要根据群众自身的政治经验"
+    )
+    assert "未提供该文起草背景的直接说明" in result["answer"]

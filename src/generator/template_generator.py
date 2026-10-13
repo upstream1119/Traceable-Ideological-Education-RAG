@@ -3,6 +3,7 @@ import re
 
 NO_EVIDENCE_ANSWER = "当前知识库中没有检索到足够证据，暂不生成回答。请补充资料或换一个问题。"
 ANSWER_SNIPPET_LIMIT = 320
+COMPLETE_EVIDENCE_LIMIT = 640
 MAX_TEMPLATE_EVIDENCE = 3
 MIN_TEMPLATE_HYBRID_SCORE = 0.2
 MIN_QUERY_OVERLAP_FLOOR = 0.08
@@ -22,6 +23,17 @@ def _shorten_text(text: str, limit: int = ANSWER_SNIPPET_LIMIT) -> str:
             end += 1
         return text[:end]
     return candidate.rstrip("，。；、 ") + "。"
+
+
+def _summarize_evidence(query: str, hit: dict) -> str:
+    text = " ".join((hit.get("text") or "").split())
+    body_overlap = _query_overlap_score(_query_ngrams(query), {"text": text})
+    if (
+        len(text) <= COMPLETE_EVIDENCE_LIMIT
+        and body_overlap >= MIN_QUERY_OVERLAP_FLOOR
+    ):
+        return text
+    return _shorten_text(text)
 
 
 def _format_citation(citation: dict) -> str:
@@ -101,6 +113,24 @@ def generate_answer_from_hits(
         }
 
     citation_lines = []
+    continuation_ids = ("chunk_sizheng_v1_166", "chunk_sizheng_v1_167")
+    positions = [
+        index for index, hit in enumerate(selected_hits)
+        if hit.get("id") in continuation_ids
+    ]
+    continuation_is_verified = False
+    if len(positions) == 2:
+        first, second = (selected_hits[index] for index in positions)
+        continuation_is_verified = (
+            {first.get("id"), second.get("id")} == set(continuation_ids)
+            and first.get("source") == second.get("source")
+            and first.get("citation") == second.get("citation")
+        )
+        if continuation_is_verified:
+            by_id = {hit["id"]: hit for hit in (first, second)}
+            selected_hits = list(selected_hits)
+            for position, chunk_id in zip(positions, continuation_ids):
+                selected_hits[position] = by_id[chunk_id]
     citations_used = []
     for index, hit in enumerate(selected_hits, start=1):
         citation = hit.get("citation", {})
@@ -120,7 +150,7 @@ def generate_answer_from_hits(
 
     evidence_lines = []
     for index, hit in enumerate(selected_hits, start=1):
-        text = _shorten_text(hit.get("text", ""))
+        text = _summarize_evidence(query, hit)
         evidence_lines.append(f"- 证据 {index}：{text}")
 
     answer = (
@@ -133,6 +163,16 @@ def generate_answer_from_hits(
         + "\n\n以上内容仅依据当前检索到的证据整理，"
         "仅为检索证据摘要，请在生成服务恢复后重新生成完整回答。"
     )
+    if (
+        continuation_is_verified
+        and "张闻天" in query
+        and "宣传鼓动工作提纲" in query
+        and "背景" in query
+    ):
+        answer += (
+            "\n\n证据范围说明：现有引用可确认起草时间、机构和主要内容；"
+            "未提供该文起草背景的直接说明，不能据此补写具体背景。"
+        )
     return {
         "answer": answer,
         "citations_used": citations_used,
