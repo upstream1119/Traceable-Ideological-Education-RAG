@@ -41,6 +41,7 @@ FORMAL_CHUNKS_PATHS = (
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v2.jsonl",
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v3.jsonl",
     REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v4.jsonl",
+    REPO_ROOT / "data" / "processed" / "text_chunks_sizheng_v5.jsonl",
 )
 DEMO_TRIPLES_PATH = REPO_ROOT / "data" / "graph" / "triples_demo.jsonl"
 
@@ -172,7 +173,7 @@ def extract_query_entities(query: str) -> list[str]:
         for entity in item.get("entities", []):
             if entity in query and entity not in entities:
                 entities.append(entity)
-    if not entities:
+    if not entities or set(entities).issubset({"思想政治教育", "政治教育"}):
         for item in _load_demo_knowledge_base():
             for tag in item.get("tags", []):
                 if (

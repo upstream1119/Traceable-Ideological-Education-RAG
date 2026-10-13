@@ -23,10 +23,10 @@ def test_formal_batches_are_loaded(local_retrieval):
     records = hybrid_retriever._load_demo_knowledge_base()
     expected_ids = {
         f"chunk_sizheng_v{version}_{index:03}"
-        for version, count in ((1, 196), (2, 49), (3, 24), (4, 24))
+        for version, count in ((1, 196), (2, 49), (3, 24), (4, 24), (5, 15))
         for index in range(1, count + 1)
     }
-    assert len(records) == 293
+    assert len(records) == 308
     assert {record["id"] for record in records} == expected_ids
 
 
@@ -54,6 +54,27 @@ def test_batch_query_recalls_expected_evidence(local_retrieval, batch, case_id):
     for chunk_id in case["expected_chunk_ids"]:
         assert chunk_id in hits
         assert hits[chunk_id]["citation"]["doc"] == "中国共产党思想政治教育史"
+
+
+@pytest.mark.parametrize("case_index", range(10))
+def test_v5_queries_recall_and_cite_expected_evidence(local_retrieval, case_index):
+    path = Path(__file__).with_name("queries_sizheng_v5_batch03.json")
+    case = json.loads(path.read_text(encoding="utf-8"))[case_index]
+    result = hybrid_retriever.retrieve(case["question"])
+    hits = {hit["id"]: hit for hit in result["hybrid_hits"]}
+    citations = {item["id"]: item for item in result["citations_used"]}
+    for chunk_id in case["expected_chunk_ids"]:
+        assert chunk_id in hits
+        assert hits[chunk_id]["citation"] == case["expected_citation"]
+        assert chunk_id in citations
+        assert citations[chunk_id]["citation"] == case["expected_citation"]
+
+
+def test_v5_generic_entities_gain_specific_topic(local_retrieval):
+    entities = hybrid_retriever.extract_query_entities(
+        "大学生思想政治教育意见于何时由谁印发？"
+    )
+    assert "大学生思想政治教育" in entities
 
 
 def test_restored_gaokao_evidence_can_pass_gate(local_retrieval):
