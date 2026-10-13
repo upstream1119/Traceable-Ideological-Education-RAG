@@ -12,8 +12,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 DEFAULT_CASES = REPO_ROOT / "data" / "graph" / "graphsim_regression_cases.json"
-DEFAULT_OUTPUT = REPO_ROOT / "reports" / "graphsim_regression_v1_v4_results.json"
-DEFAULT_SUMMARY = REPO_ROOT / "reports" / "graphsim_regression_v1_v4_summary.md"
+DEFAULT_OUTPUT = REPO_ROOT / "reports" / "graphsim_regression_v1_v5_results.json"
+DEFAULT_SUMMARY = REPO_ROOT / "reports" / "graphsim_regression_v1_v5_summary.md"
 RUN_COMMAND = "python scripts/run_graphsim_regression.py"
 
 
@@ -125,7 +125,7 @@ def run_cases(cases: list[dict[str, Any]]) -> tuple[dict, dict]:
     }
     report = {
         "schema_version": "1.0",
-        "source": "data/graph/triples_demo.jsonl + formal sizheng v1/v2/v3/v4 chunks",
+        "source": "data/graph/triples_demo.jsonl + formal sizheng v1/v2/v3/v4/v5 chunks",
         "chunk_count": len(hybrid_retriever._load_demo_knowledge_base()),
         "mode": "mock",
         "summary": summary,
