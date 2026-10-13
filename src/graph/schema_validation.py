@@ -30,6 +30,8 @@ def validate_force_graph_payload(payload: dict, known_chunk_ids: set[str]) -> No
         if node_id in node_ids:
             raise ValueError(f"duplicate node id: {node_id}")
         node_ids.add(node_id)
+        if not isinstance(node["label"], str) or not node["label"].strip():
+            raise ValueError(f"{location}.label must be a non-empty string")
         if node["type"] not in NODE_TYPES:
             raise ValueError(f"{location}.type is invalid: {node['type']}")
         if not isinstance(node["degree"], int) or isinstance(node["degree"], bool) or node["degree"] < 0:
@@ -66,6 +68,10 @@ def validate_graph_path(path: dict, known_chunk_ids: set[str]) -> None:
         raise ValueError("path.path must contain at least two nodes")
     if not isinstance(relations, list) or not isinstance(edges, list):
         raise ValueError("path.relations and path.edges must be lists")
+    if not isinstance(hops, int) or isinstance(hops, bool) or hops <= 0:
+        raise ValueError("path.hops must be a positive non-boolean integer")
+    if path.get("from") != nodes[0] or path.get("to") != nodes[-1]:
+        raise ValueError("path from/to must match the first/last node")
     expected_hops = len(nodes) - 1
     if hops != expected_hops or len(relations) != expected_hops or len(edges) != expected_hops:
         raise ValueError("path hop count is inconsistent")
@@ -79,4 +85,11 @@ def validate_graph_path(path: dict, known_chunk_ids: set[str]) -> None:
             raise ValueError(f"{location}.original_direction must be boolean")
         _validate_chunk_ids(edge.get("source_chunk_ids"), known_chunk_ids, location)
     _validate_chunk_ids(path.get("source_chunk_ids"), known_chunk_ids, "path")
+    expected_chunk_ids: list[str] = []
+    for edge in edges:
+        for chunk_id in edge["source_chunk_ids"]:
+            if chunk_id not in expected_chunk_ids:
+                expected_chunk_ids.append(chunk_id)
+    if path["source_chunk_ids"] != expected_chunk_ids:
+        raise ValueError("path.source_chunk_ids must equal the deduplicated edge evidence ids")
 

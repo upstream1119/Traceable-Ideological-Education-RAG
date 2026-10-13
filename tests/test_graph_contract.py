@@ -74,8 +74,43 @@ def test_force_graph_contract_rejects_agreed_invalid_data(mutation, message):
         validate_force_graph_payload(payload, _chunk_ids())
 
 
-def test_graph_path_contract_rejects_inconsistent_hops_and_direction():
-    path = build_samples()["samples"][0]["graph_hits"][0]["graph_paths"][0]
+@pytest.mark.parametrize("invalid_label", ["", "   ", None, 1])
+def test_force_graph_contract_rejects_empty_or_non_string_node_label(invalid_label):
+    payload = json.loads(FORCE_GRAPH_PATH.read_text(encoding="utf-8"))
+    payload["nodes"][0]["label"] = invalid_label
+    with pytest.raises(ValueError, match="label must be a non-empty string"):
+        validate_force_graph_payload(payload, _chunk_ids())
+
+
+def _one_hop_path() -> dict:
+    return build_samples()["samples"][0]["graph_hits"][0]["graph_paths"][0]
+
+
+@pytest.mark.parametrize("invalid_hops", [True, 0, -1, 1.0, "1"])
+def test_graph_path_contract_rejects_non_positive_or_non_integer_hops(invalid_hops):
+    path = copy.deepcopy(_one_hop_path())
+    path["hops"] = invalid_hops
+    with pytest.raises(ValueError, match="positive non-boolean integer"):
+        validate_graph_path(path, _chunk_ids())
+
+
+@pytest.mark.parametrize(("field", "value"), [("from", "wrong-start"), ("to", "wrong-end")])
+def test_graph_path_contract_rejects_from_or_to_mismatch(field, value):
+    path = copy.deepcopy(_one_hop_path())
+    path[field] = value
+    with pytest.raises(ValueError, match="must match the first/last node"):
+        validate_graph_path(path, _chunk_ids())
+
+
+def test_graph_path_contract_rejects_aggregate_evidence_mismatch():
+    path = copy.deepcopy(_one_hop_path())
+    path["source_chunk_ids"].append(path["source_chunk_ids"][0])
+    with pytest.raises(ValueError, match="deduplicated edge evidence ids"):
+        validate_graph_path(path, _chunk_ids())
+
+
+def test_graph_path_contract_rejects_inconsistent_hop_count_and_direction():
+    path = _one_hop_path()
     invalid_hops = copy.deepcopy(path)
     invalid_hops["hops"] = 2
     with pytest.raises(ValueError, match="hop count is inconsistent"):
