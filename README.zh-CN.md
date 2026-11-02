@@ -1,6 +1,10 @@
 # Traceable Ideological Education RAG
 
+> 2026-11-02本地开发状态（尚未合并）：308条语料、图谱逐边原文、时空ID联动及小红军二维讲解员已接入；40题local/template工程回归通过，真实LLM/学段表达、原PDF与坐标核验仍未完成。最新运行与演示入口见[本地V1.0验收说明](docs/v1_acceptance.md)。下文保留已发布基线的历史说明。
+
 [English README](./README.md)
+
+本地一体启动：使用现有环境运行python -B scripts/run_local.py；配置、健康检查和恢复操作见[本地运行说明](docs/local_runtime.md)。启动器固定local/template，不自动安装依赖或调用付费模型。
 
 面向思政教育的可溯源 KG-RAG 系统，关注 Citation 溯源、多智能体审查、政治安全审查和跨模态学习交互。
 

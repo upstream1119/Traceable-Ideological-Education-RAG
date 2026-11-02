@@ -2,7 +2,7 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-from openai import OpenAI
+from openai import APIConnectionError, APIStatusError, APITimeoutError, OpenAI
 
 
 ZHIPU_BASE_URL = "https://open.bigmodel.cn/api/paas/v4/"
@@ -55,6 +55,10 @@ class OpenAICompatibleLLMProvider:
     default_model = ""
     base_url = ""
     extra_body = None
+    max_retries = 2
+    max_tokens = 800
+    timeout_seconds = 30
+    system_prompt = ""
 
     def generate(self, prompt: str) -> LLMGenerationResult:
         api_key = (
@@ -77,18 +81,26 @@ class OpenAICompatibleLLMProvider:
             client = OpenAI(
                 api_key=api_key,
                 base_url=self.base_url,
-                timeout=30,
-                max_retries=2,
+                timeout=self.timeout_seconds,
+                max_retries=self.max_retries,
             )
             request = {
                 "model": model,
                 "messages": [{"role": "user", "content": prompt}],
                 "temperature": 0.2,
-                "max_tokens": 800,
+                "max_tokens": self.max_tokens,
             }
+            if self.system_prompt:
+                request["messages"].insert(0, {"role": "system", "content": self.system_prompt})
             if self.extra_body:
                 request["extra_body"] = self.extra_body
             response = client.chat.completions.create(**request)
+            if getattr(response.choices[0], "finish_reason", None) == "length":
+                return LLMGenerationResult(
+                    text="",
+                    provider_name=self.name,
+                    status="truncated_response",
+                )
             text = response.choices[0].message.content or ""
             text = text.strip()
             if not text:
@@ -102,12 +114,21 @@ class OpenAICompatibleLLMProvider:
                 provider_name=self.name,
                 status="success",
             )
-        except Exception:
+        except Exception as exc:
             # 不把异常正文返回给接口，避免意外泄露请求或认证信息。
+            status = "provider_error"
+            if isinstance(exc, APITimeoutError):
+                status = "provider_timeout"
+            elif isinstance(exc, APIConnectionError):
+                status = "provider_connection_error"
+            elif isinstance(exc, APIStatusError):
+                status = {401: "provider_auth_error", 403: "provider_access_denied",
+                          429: "provider_rate_limit", 400: "provider_invalid_request",
+                          404: "provider_model_unavailable"}.get(exc.status_code, "provider_http_error")
             return LLMGenerationResult(
                 text="",
                 provider_name=self.name,
-                status="provider_error",
+                status=status,
             )
 
 
@@ -130,6 +151,9 @@ class DeepSeekLLMProvider(OpenAICompatibleLLMProvider):
 
 class QwenLLMProvider(OpenAICompatibleLLMProvider):
     name = "qwen"
+    max_retries = 0
+    max_tokens = 1200
+    extra_body = {"enable_thinking": False}
     api_key_env = "DASHSCOPE_API_KEY"
     model_env = "DACHUANG_QWEN_MODEL"
     default_model = DEFAULT_QWEN_MODEL

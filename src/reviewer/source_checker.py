@@ -1,3 +1,6 @@
+import re
+
+
 NO_EVIDENCE_STATUS = "no_evidence"
 PASS_STATUS = "pass"
 WARNING_STATUS = "warning"
@@ -17,7 +20,10 @@ def check_answer_sources(answer: str, citations_used: list[dict]) -> dict:
         }
 
     issues = []
-    has_source_marker = "来源：" in answer or "PDF 页码" in answer
+    markers = [int(number) for number in re.findall(r"\[(\d+)\]", answer)]
+    has_source_marker = "来源：" in answer or "PDF 页码" in answer or bool(markers)
+    if any(not 1 <= number <= len(citations_used) for number in markers):
+        issues.append("answer 中存在不属于本次引用的编号。")
     if not has_source_marker:
         issues.append("answer 中没有明显来源说明。")
 
@@ -34,7 +40,7 @@ def check_answer_sources(answer: str, citations_used: list[dict]) -> dict:
     status = PASS_STATUS
     if issues:
         status = WARNING_STATUS
-    if any("缺少 citation.doc" in issue or "缺少 citation.section" in issue for issue in issues):
+    if any("缺少 citation.doc" in issue or "缺少 citation.section" in issue or "不属于本次引用" in issue for issue in issues):
         status = FAIL_STATUS
 
     return {

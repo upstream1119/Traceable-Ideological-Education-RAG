@@ -1,4 +1,5 @@
 import { validateRetrieveResponse } from "./responseBoundary";
+import graphSample from "../../../reports/graphsim_integration_samples.json";
 
 const baseRoute = {
   intent_type: "knowledge_qa",
@@ -58,6 +59,51 @@ function makeResponse(
 }
 
 describe("Response Boundary", () => {
+  it.each([
+    { provider_status: { error: "upstream" } }, { provider_status: [] },
+    { generator_mode: {} }, { generator_provider: [] }, { used_fallback: "false" },
+  ])("rejects malformed generation state before rendering %j", metadata => {
+    const result = validateRetrieveResponse(makeResponse(metadata));
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.error.code).toBe("invalid_generation_metadata");
+  });
+  it("accepts real frozen paths and rejects malformed per-edge evidence before routing", () => {
+    const hits = graphSample.samples[0].graph_hits;
+    expect(validateRetrieveResponse(makeResponse({ graph_hits: hits })).ok).toBe(true);
+    const bad = JSON.parse(JSON.stringify(hits));
+    bad[0].graph_paths[0].edges[0].source_chunk_ids = null;
+    const result = validateRetrieveResponse(makeResponse({ graph_hits: bad }));
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.error.code).toBe("invalid_graph_paths");
+  });
+  const checkedGrade = {
+    target_grade: "primary", status: "passed",
+    checks: { facts: true, language: true, depth: true, coherence: true }, issues: [],
+  };
+  const online = { generator_mode: "llm", provider_status: "success", used_fallback: false };
+  it("accepts a matching online grade review", () => {
+    expect(validateRetrieveResponse(makeResponse(
+      { ...online, teaching_adaptation: checkedGrade }, { target_grade: "primary" },
+    )).ok).toBe(true);
+  });
+  it.each([
+    { teaching_adaptation: { ...checkedGrade, target_grade: "university" } },
+    { teaching_adaptation: { ...checkedGrade, checks: { ...checkedGrade.checks, facts: "true" } } },
+    { teaching_adaptation: { ...checkedGrade, issues: [null] } },
+    { used_fallback: true },
+    { generator_mode: "template" },
+    { teaching_adaptation: { ...checkedGrade, checks: { ...checkedGrade.checks, coherence: false } } },
+    { teaching_adaptation: { ...checkedGrade, status: "not_applied" } },
+  ])("rejects malformed or misleading grade metadata: %j", (overrides) => {
+    expect(validateRetrieveResponse(makeResponse(
+      { ...online, teaching_adaptation: checkedGrade, ...overrides }, { target_grade: "primary" },
+    )).ok).toBe(false);
+  });
+  it.each([{ quality_issues: {} }, { quality_issues: [null] }, { failure_stage: [] }])("rejects malformed generation hints before rendering", (metadata) => {
+    const result = validateRetrieveResponse(makeResponse(metadata));
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.error.code).toBe("invalid_generation_metadata");
+  });
   it("missing citations_used returns Contract Error", () => {
     const input = makeResponse();
     delete input.citations_used;

@@ -312,7 +312,8 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             "citation_integrity",
         )
 
-    if not _contains_any(answer, EVIDENCE_BOUNDARY_PHRASES):
+    if (source_check.get("evidence_scope") != "retrieved_evidence"
+            and not _contains_any(answer, EVIDENCE_BOUNDARY_PHRASES)):
         _add_issue(
             issues,
             risk_types,

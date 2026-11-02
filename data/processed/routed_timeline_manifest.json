@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "note": "日期仅按仓库教材分块原文绑定，未新增原始PDF视觉核验；旧路由ID保持兼容，事件名称和时间不沿用Demo概括。坐标继承旧Demo资产，仅作城市或区域参考，不是已核实历史旧址。",
+  "events": [
+    {
+      "id": "timeline_sizheng_1935_zunyi_002",
+      "title": "遵义会议精神的正式传达",
+      "date_start": "1935-02-28",
+      "date_end": "1935-02-28",
+      "landmark_id": "landmark_1935_zunyi_004",
+      "evidence_ids": ["chunk_sizheng_v1_111"],
+      "support_excerpt": "1935年2月28日，红军第二次占领遵义，在遵义召开团以上干部会议，正式传达了遵义会议精神。",
+      "scope_note": "本节点日期是会后正式传达精神的日期，不是遵义会议召开日期；支持范围为教材记载的传达与思想教育任务。"
+    },
+    {
+      "id": "timeline_sizheng_yanan_period_003",
+      "title": "延安高级干部会议上的《改造我们的学习》报告",
+      "date_start": "1941-05-19",
+      "date_end": "1941-05-19",
+      "landmark_id": "landmark_1935_yanan_005",
+      "evidence_ids": ["chunk_sizheng_v1_155"],
+      "support_excerpt": "1941年5月19日，毛泽东在延安高级干部会议上作《改造我们的学习》的报告",
+      "scope_note": "展示教材明确记载的报告节点，不将整风运动简化为单一日期，也不沿用旧Demo的1942—1948时间范围。"
+    },
+    {
+      "id": "timeline_sizheng_1949_new_china_005",
+      "title": "七届二中全会",
+      "date_start": "1949-03-05",
+      "date_end": "1949-03-13",
+      "landmark_id": "landmark_1948_xibaipo_006",
+      "evidence_ids": ["chunk_sizheng_v2_047"],
+      "support_excerpt": "中国共产党于 3 月 5 日至 13 日在河北省平山县西柏坡村召开七届二中全会。",
+      "scope_note": "展示新中国成立前的相关会议，不将西柏坡标作新中国成立地点；年份见同一教材段落开头。旧资产ID仅作为兼容键，不用其年份推导事实。"
+    }
+  ]
+}

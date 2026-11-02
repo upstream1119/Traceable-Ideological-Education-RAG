@@ -1,4 +1,5 @@
 import { AppError } from "./errors";
+import { isGraphPath, record } from "./graphContract";
 import {
   FINAL_DECISION_STATUSES,
   PRESENTATION_MODES,
@@ -213,12 +214,48 @@ export function validateRetrieveResponse(input: unknown): BoundaryResult {
     );
   }
 
+  if (!["generator_mode", "generator_provider", "provider_status"].every(
+      key => input[key] === null || typeof input[key] === "string") ||
+      (input.used_fallback !== null && typeof input.used_fallback !== "boolean") ||
+      (input.failure_stage !== undefined && input.failure_stage !== null && typeof input.failure_stage !== "string") ||
+      (input.quality_issues !== undefined && !isStringArray(input.quality_issues))) {
+    return contractFailure("invalid_generation_metadata", "生成状态提示结构非法。");
+  }
+
   if (!isSharedEvidenceShape(input)) {
     return contractFailure(
       "retrieve_response_shape_incomplete",
       "Retrieve response 缺少必要的共享证据链字段。",
     );
   }
+
+  const validHits = (hits: unknown) => Array.isArray(hits) && hits.every(hit =>
+    record(hit) && Array.isArray(hit.graph_paths) && hit.graph_paths.every(isGraphPath));
+  if (!validHits(input.graph_hits) || !validHits(input.hybrid_hits)) {
+    return contractFailure("invalid_graph_paths", "图谱路径或逐边证据不符合契约，禁止正式输出。");
+  }
+
+  const adaptation = input.teaching_adaptation;
+  if (adaptation !== undefined && adaptation !== null) {
+    const validShape = isRecord(adaptation) && adaptation.target_grade === targetGrade
+      && targetGrade !== null && isStringArray(adaptation.issues)
+      && ["passed", "needs_review", "not_applied"].includes(String(adaptation.status))
+      && isRecord(adaptation.checks)
+      && ["facts", "language", "depth", "coherence"].every((key) =>
+        adaptation.checks !== null && isRecord(adaptation.checks)
+        && (adaptation.checks[key] === null || typeof adaptation.checks[key] === "boolean"));
+    if (!validShape) {
+      return contractFailure("invalid_teaching_adaptation", "学段检查信息缺失、非法或与本次学段不一致。");
+    }
+    const checks = adaptation.checks as Record<string, boolean | null>;
+    const online = input.generator_mode === "llm" && input.provider_status === "success" && input.used_fallback === false;
+    if ((adaptation.status === "passed" && (!online || !Object.values(checks).every((value) => value === true)))
+      || (adaptation.status === "needs_review" && (!online || checks.facts !== true || checks.coherence !== true))
+      || (adaptation.status === "not_applied" && Object.values(checks).some((value) => value !== null))) {
+      return contractFailure("inconsistent_teaching_adaptation", "学段检查状态与在线、事实或连贯性结果不一致。");
+    }
+  }
+
 
   return {
     ok: true,

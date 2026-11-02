@@ -1,6 +1,9 @@
 import { type FormEvent, useEffect, useState } from "react";
 import { ContractErrorState } from "./components/ContractErrorState";
+import { RequestErrorState } from "./components/RequestErrorState";
 import { DecisionGate } from "./components/DecisionGate";
+import { LEARNING_QUESTION } from "./components/LearningFlowView";
+import { stopActiveNarration } from "./lib/narration";
 import {
   MockRetrieveDataSource,
   type MockScenarioId,
@@ -99,10 +102,16 @@ export default function App({
       return;
     }
 
+    stopActiveNarration();
     setSubmittedQuery({
       request: { query, target_grade: targetGrade },
       scenarioId,
     });
+  }
+  function retrySubmittedQuery() {
+    if (!submittedQuery) return;
+    stopActiveNarration();
+    setSubmittedQuery({ ...submittedQuery, request: { ...submittedQuery.request } });
   }
 
   return (
@@ -110,10 +119,10 @@ export default function App({
       <header className="app-header">
         <div>
           <p className="project-kicker">WEB 时空沙盘 · 证据驱动展示层</p>
-          <h1>多智能体赋能的跨模态零幻觉交互式思政教育系统</h1>
-          <p className="app-lede">以可追溯证据组织回答、时空线索与数字人讲解。</p>
+          <h1>智证思政</h1>
+          <p className="app-lede">基于知识图谱与证据审查的可信AI交互式教育系统</p>
         </div>
-        <span className="header-mark">FE-B2</span>
+        <span className="header-mark">证据驱动 · V1.0 开发中</span>
       </header>
 
       <form
@@ -126,12 +135,12 @@ export default function App({
           <h2>从可信回答开始探索一段思政历史</h2>
         </div>
         <label htmlFor="mock-scenario">
-          场景
+          场景（仅模拟数据源生效）
           <select
             id="mock-scenario"
             aria-label="Mock scenario selector"
             value={scenarioId}
-            onChange={(event) => setScenarioId(event.target.value as MockScenarioId)}
+            onChange={(event) => { stopActiveNarration(); setScenarioId(event.target.value as MockScenarioId); }}
           >
             {mockScenarios.map((scenario) => (
               <option key={scenario.id} value={scenario.id}>
@@ -146,7 +155,7 @@ export default function App({
             id="query-draft"
             aria-label="查询问题"
             value={queryDraft}
-            onChange={(event) => setQueryDraft(event.target.value)}
+            onChange={(event) => { stopActiveNarration(); setQueryDraft(event.target.value); }}
           />
         </label>
         <label htmlFor="target-grade">
@@ -155,16 +164,17 @@ export default function App({
             id="target-grade"
             aria-label="目标学段"
             value={targetGrade ?? ""}
-            onChange={(event) =>
+            onChange={(event) => {
+              stopActiveNarration();
               setTargetGrade(
                 event.target.value ? (event.target.value as TargetGrade) : null,
-              )
-            }
+              );
+            }}
           >
             <option value="">不限定</option>
             {TARGET_GRADES.map((grade) => (
               <option key={grade} value={grade}>
-                {grade}
+                {{ primary: "小学", junior_high: "初中", senior_high: "高中", university: "大学" }[grade]}
               </option>
             ))}
           </select>
@@ -174,26 +184,30 @@ export default function App({
         </button>
       </form>
 
+      <div className="example-queries" aria-label="示例问题">
+        <p>示例仅填入问题，点击“提交查询”后才会请求。</p>
+        {["遵义会议如何发挥思想政治教育作用？", "长征形成了什么精神？", LEARNING_QUESTION].map((question) => (
+          <button type="button" key={question} onClick={() => { stopActiveNarration(); setQueryDraft(question); }}>{question}</button>
+        ))}
+      </div>
+
       <details className="demo-meta">
         <summary>演示 / 开发信息</summary>
         <div className="meta-grid">
-          <p>FE-A Frozen baseline：5bc848a1855e738519774981a9ed1d368e41b582</p>
-          <p>Runtime：MockDataSource → ResponseBoundary → DecisionGate → PresentationRouter</p>
+          <p>数据源由启动配置选择；专题资料不是本次问题的检索结果。</p>
+          <p>请求 → 响应校验 → 决策门控 → 回答与证据展示；地图为城市／县域参考点。</p>
         </div>
       </details>
 
-      {runtimeState.kind === "loading" ? <p>正在加载 Mock 响应...</p> : null}
+      {runtimeState.kind === "loading" ? <p role="status">正在检索证据，请稍候……</p> : null}
       {runtimeState.kind === "success" ? (
         <DecisionGate response={runtimeState.response} />
       ) : null}
       {runtimeState.kind === "contract_error" ? (
-        <ContractErrorState error={runtimeState.error} />
+        <><ContractErrorState error={runtimeState.error} /><button type="button" onClick={retrySubmittedQuery}>重试上次查询</button></>
       ) : null}
       {runtimeState.kind === "transport_error" ? (
-        <section className="transport-error" aria-label="请求错误">
-          <h2>请求错误</h2>
-          <p>{runtimeState.error.message}</p>
-        </section>
+        <RequestErrorState error={runtimeState.error} onRetry={retrySubmittedQuery} />
       ) : null}
     </main>
   );

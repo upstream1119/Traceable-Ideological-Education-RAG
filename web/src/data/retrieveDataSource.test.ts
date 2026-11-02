@@ -23,6 +23,11 @@ function expectTransportError(error: unknown, code: string): void {
 }
 
 describe("ApiRetrieveDataSource", () => {
+  it.each(["javascript:alert(1)", "//other.example/api", "http://user:secret@localhost/api", "/api?token=example", "ftp://localhost"])("rejects malformed API base before fetch: %s", async base => {
+    const requestFetch = vi.fn();
+    await expect(new ApiRetrieveDataSource(base, 1000, requestFetch).retrieve(request)).rejects.toMatchObject({ code: "invalid_api_base_url" });
+    expect(requestFetch).not.toHaveBeenCalled();
+  });
   it("posts only query and target_grade to the configured /retrieve URL", async () => {
     const expected = getMockRetrieveResponse("approved_evidence");
     const fetchImpl = fetchStub().mockResolvedValue(

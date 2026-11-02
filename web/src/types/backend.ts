@@ -17,6 +17,17 @@ export interface GraphPath {
   hops: number;
   path: string[];
   relations: string[];
+  source_chunk_ids: string[];
+  edges: GraphPathEdge[];
+  path_text?: string;
+}
+
+export interface GraphPathEdge {
+  source: string;
+  target: string;
+  relation: string;
+  source_chunk_ids: string[];
+  original_direction: boolean;
 }
 
 export interface VectorHit {
@@ -110,6 +121,14 @@ export interface RetrieveResponse {
   generator_provider: string | null;
   provider_status: string | null;
   used_fallback: boolean | null;
+  failure_stage?: string | null;
+  quality_issues?: string[];
+  teaching_adaptation?: {
+    target_grade: TargetGrade;
+    status: "passed" | "needs_review" | "not_applied";
+    checks: { facts: boolean | null; language: boolean | null; depth: boolean | null; coherence: boolean | null };
+    issues: string[];
+  } | null;
   source_check: SourceCheck;
   policy_check: PolicyCheck;
   agent_trace: AgentTraceStep[];
