@@ -2,6 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { DecisionGate } from "./DecisionGate";
 import { getMockRetrieveResponse } from "../data/retrieveDataSource";
 
+vi.mock("./TopicGraphView", () => ({ TopicGraphView: () => null }));
+vi.mock("./TopicTimelineView", () => ({ TopicTimelineView: () => null }));
+
 describe("DecisionGate", () => {
   it("routes approved responses into PresentationRouter", () => {
     render(<DecisionGate response={getMockRetrieveResponse("approved_evidence")} />);

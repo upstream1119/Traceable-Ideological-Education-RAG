@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "theme": "从遵义会议到长征精神：沿着证据理解历史",
+    "purpose": "参赛专题时空展示资料；不是新增RAG语料或已完成地图验收",
+    "source_files": {
+      "docs/acceptance/d01_event_candidates.csv": "1e163c607632d89b4a3341c749477b52d15ec7ab3291995f8379775bddca0f80",
+      "data/processed/text_chunks_sizheng_v1.jsonl": "7b359dfa97b51ffb3ecd00a63569b522f0de2719d0c2f5151345f7eb8a3c66a2",
+      "data/processed/timeline_demo_sizheng.json": "0988802005c283a57eed930eb360c0cf72c1f64fc5f450f6f39d6e09085e1750"
+    }
+  },
+  "coordinate_note": "城市／县域参考点，不代表历史旧址精确位置；不表示实际行军路线，测绘准确度未知。",
+  "date_note": "网页补充的精确日期与教材支持范围分别记录；保留正文未获取等核对限制。",
+  "events": [
+    {
+      "id": "event_cmit_193410_yudu_departure",
+      "existing_timeline_id": null,
+      "title": "中央红军主力由于都渡河出发",
+      "date_start": "1934-10-17",
+      "date_end": "1934-10-20",
+      "date_precision": "day_range",
+      "location": {
+        "name": "江西于都县（现代县域参考点）",
+        "longitude": 115.48694444444,
+        "latitude": 25.9575,
+        "coordinate_system": "WGS84",
+        "precision": "city_or_county_reference_only"
+      },
+      "evidence_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "evidence_scope": "教材仅支持1934年10月开始战略转移；17—20日和于都渡河范围由网页补充，网页未入检索库",
+      "date_source": {
+        "title": "于都河畔：万里长征从这里出发｜于都县人民政府",
+        "url": "https://www.yudu.gov.cn/yudu/ydrw/202102/3f856d547c974b18afb023350581f9b0.shtml",
+        "accessed_on": "2026-10-14",
+        "review_method": "official_page_read"
+      },
+      "coordinate_source": {
+        "title": "Wikidata 于都县 Q1816748，P625",
+        "url": "https://www.wikidata.org/w/index.php?title=Q1816748&oldid=2526608301",
+        "revision": "2526608301",
+        "reference_count": 1,
+        "source_precision_degrees": 0.00027777777777778,
+        "accuracy_meters": null,
+        "review_status": "source_value_checked_not_survey_verified"
+      },
+      "review": {
+        "event_status": "date_source_and_chunk_mapping_checked",
+        "reviewer": "Codex（公开资料与分块核对，非人工签字）",
+        "reviewed_on": "2026-10-14",
+        "page_status": "original_pdf_not_available_for_page_mapping",
+        "book_page": null,
+        "pdf_page_index": null,
+        "human_reviewer": null,
+        "candidate_eligibility": "city_reference_scheme_approved;formal_asset_patch_pending",
+        "asset_status": "derived_from_confirmed_candidates;map_integration_pending"
+      },
+      "notes": "指主力分批渡河出发的时间范围，不等同所有部队均同日启程；不是东门渡口坐标。 坐标属性按Wikidata P625的地球WGS84定义；来源声明的小数位/角度精度不等于测绘准确度，误差米数未知。书本页码与PDF页序留空，分块标注94仅原样记录。 2026-10-14彭意涵确认采用三候选及大致城市/县域坐标；仅为方案确认，不代表原书或旧址坐标人工核实。"
+    },
+    {
+      "id": "event_cmit_193501_zunyi_conference",
+      "existing_timeline_id": "timeline_sizheng_1935_zunyi_002",
+      "title": "遵义会议",
+      "date_start": "1935-01-15",
+      "date_end": "1935-01-17",
+      "date_precision": "day_range",
+      "location": {
+        "name": "贵州遵义市（现代城市参考点）",
+        "longitude": 106.93363,
+        "latitude": 27.70498,
+        "coordinate_system": "WGS84",
+        "precision": "city_or_county_reference_only"
+      },
+      "evidence_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "evidence_scope": "教材支持遵义会议及会后传达、统一思想的教学内容；会议起止日期由网页提供",
+      "date_source": {
+        "title": "伟大征程｜遵义会议：实现伟大的历史转折｜中央纪委国家监委网站",
+        "url": "https://www.ccdi.gov.cn/yaowenn/202606/t20260607_494738.html",
+        "accessed_on": "2026-10-14",
+        "review_method": "official_search_excerpt_checked;fulltext_fetch_failed"
+      },
+      "coordinate_source": {
+        "title": "Wikidata 遵义市 Q28994，P625",
+        "url": "https://www.wikidata.org/w/index.php?title=Q28994&oldid=2550844637",
+        "revision": "2550844637",
+        "reference_count": 0,
+        "source_precision_degrees": null,
+        "accuracy_meters": null,
+        "review_status": "source_value_checked_not_survey_verified"
+      },
+      "review": {
+        "event_status": "date_source_and_chunk_mapping_checked",
+        "reviewer": "Codex（公开资料与分块核对，非人工签字）",
+        "reviewed_on": "2026-10-14",
+        "page_status": "original_pdf_not_available_for_page_mapping",
+        "book_page": null,
+        "pdf_page_index": null,
+        "human_reviewer": null,
+        "candidate_eligibility": "city_reference_scheme_approved;formal_asset_patch_pending",
+        "asset_status": "derived_from_confirmed_candidates;map_integration_pending"
+      },
+      "notes": "保留既有时间轴ID作为关联，不替换资产。Wikidata坐标无参考文献，仅作候选城市参考点；不是遵义会议会址或会议室坐标。 坐标属性按Wikidata P625的地球WGS84定义；来源声明的小数位/角度精度不等于测绘准确度，误差米数未知。书本页码与PDF页序留空，分块标注94仅原样记录。 本轮官方网页正文抓取出现重定向错误，精确日期核对来自该官方链接的公开检索摘要，并与既有草稿日期相符；未声称全文核验。 2026-10-14彭意涵确认采用三候选及大致城市/县域坐标；仅为方案确认，不代表原书或旧址坐标人工核实。"
+    },
+    {
+      "id": "event_cmit_193510_wuqi_arrival",
+      "existing_timeline_id": null,
+      "title": "中央红军到达陕北吴起镇",
+      "date_start": "1935-10-19",
+      "date_end": "1935-10-19",
+      "date_precision": "day",
+      "location": {
+        "name": "陕西吴起县（现代县域参考点；历史事件为吴起镇）",
+        "longitude": 108.17204,
+        "latitude": 36.92461,
+        "coordinate_system": "WGS84",
+        "precision": "city_or_county_reference_only"
+      },
+      "evidence_ids": [
+        "chunk_sizheng_v1_110"
+      ],
+      "evidence_scope": "教材支持1935年10月中央红军到达陕北；19日与吴起镇由网页补充",
+      "date_source": {
+        "title": "【镜头·长征路上】延安：长征胜利落脚地｜中央纪委网站",
+        "url": "https://m.ccdi.gov.cn/content/03/f9/12691.html",
+        "accessed_on": "2026-10-14",
+        "review_method": "official_page_read"
+      },
+      "coordinate_source": {
+        "title": "Wikidata 吴起县 Q1152581，P625",
+        "url": "https://www.wikidata.org/w/index.php?title=Q1152581&oldid=2526576540",
+        "revision": "2526576540",
+        "reference_count": 1,
+        "source_precision_degrees": null,
+        "accuracy_meters": null,
+        "review_status": "source_value_checked_not_survey_verified"
+      },
+      "review": {
+        "event_status": "date_source_and_chunk_mapping_checked",
+        "reviewer": "Codex（公开资料与分块核对，非人工签字）",
+        "reviewed_on": "2026-10-14",
+        "page_status": "original_pdf_not_available_for_page_mapping",
+        "book_page": null,
+        "pdf_page_index": null,
+        "human_reviewer": null,
+        "candidate_eligibility": "city_reference_scheme_approved;formal_asset_patch_pending",
+        "asset_status": "derived_from_confirmed_candidates;map_integration_pending"
+      },
+      "notes": "区分1935年中央红军到达陕北与1936年三大主力会师；现代吴起县点不代表1935年吴起镇旧址或胜利山纪念设施。 坐标属性按Wikidata P625的地球WGS84定义；来源声明的小数位/角度精度不等于测绘准确度，误差米数未知。书本页码与PDF页序留空，分块标注94仅原样记录。 2026-10-14彭意涵确认采用三候选及大致城市/县域坐标；仅为方案确认，不代表原书或旧址坐标人工核实。"
+    }
+  ],
+  "evidence_chunks": [
+    {
+      "id": "chunk_sizheng_v1_110",
+      "title": "红军长征中的思想政治教育",
+      "text": "1933 年 9 月，蒋介石纠集 100 万国民党军队向根据地发动第五次军事“围剿”，其中直接进攻中央根据地的达到 50 万人。由于受王明“左”倾教条主义错误的影响，红军在军事指挥上出现严重失误，第五次反“围剿”斗争遭到失败。1934 年 10 月，中央红军不得不进行战略大转移。1935 年 10 月，中央红军历经千辛万苦，到达陕北。1936 年 10 月，红军三大主力会师，取得了长征的伟大胜利。长征中的思想政治教育，对红军从失败走向胜利起到了重要的保障作用。",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第二章 土地革命时期思想政治教育的艰辛探索 / 第三节 红军反“围剿”斗争和长征中的思想政治教育 / 三、红军长征中的思想政治教育",
+        "page": 94
+      }
+    },
+    {
+      "id": "chunk_sizheng_v1_111",
+      "title": "传达贯彻遵义会议精神",
+      "text": "遵义会议是党和军队历史上一个生死攸关的转折点。遵义会议后，传达遵义会议精神，统一党和部队的思想，是一项紧迫的思想政治教育任务。1935年2月28日，红军第二次占领遵义，在遵义召开团以上干部会议，正式传达了遵义会议精神。此后，红军各军团逐级向下传达。遵义会议的决定，振奋了人心，得到了广大干部战士的衷心拥护。在毛泽东的直接指挥下，红军四渡赤水河，歼敌1.8万余人，使中央红军一改长征以来被动挨打的局面，取得了战略转移的主动权。此后，红军巧渡金沙江，强渡大渡河，飞夺泸定桥，不断取得新的胜利。实践是最好的教育。遵义会议后，以毛泽东为代表的党中央的正确路线逐渐武装了党和红军，奠定了红军长征胜利的思想基础。",
+      "citation": {
+        "doc": "中国共产党思想政治教育史",
+        "section": "第二章 土地革命时期思想政治教育的艰辛探索 / 第三节 红军反“围剿”斗争和长征中的思想政治教育 / 三、红军长征中的思想政治教育 / （一）加强党的正确路线教育 / 1. 传达贯彻遵义会议精神",
+        "page": 94
+      }
+    }
+  ]
+}

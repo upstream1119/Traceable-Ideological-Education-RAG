@@ -8,6 +8,7 @@ import {
 } from "./data/retrieveDataSource";
 import type { RetrieveDataSource } from "./data/retrieveDataSource";
 import type { RetrieveResponse } from "./types/backend";
+import { AppError } from "./lib/errors";
 
 function submitQuery(query = "测试问题"): void {
   fireEvent.change(screen.getByLabelText("查询问题"), {
@@ -17,6 +18,23 @@ function submitQuery(query = "测试问题"): void {
 }
 
 describe("App Shell", () => {
+  it("retries the submitted snapshot only on click, keeping a new draft unsubmitted", async () => {
+    const retrieve = vi.fn().mockRejectedValueOnce(new AppError("transport", "network_error", "后端暂不可用"))
+      .mockResolvedValueOnce(getMockRetrieveResponse("approved_evidence"));
+    const dataSource: RetrieveDataSource = { retrieve };
+    render(<App dataSourceFactory={() => dataSource} />);
+    submitQuery("原来的问题");
+    await screen.findByLabelText("请求错误");
+    expect(screen.queryByLabelText("正式回答")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("小红军数字讲解员")).not.toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText("查询问题"), { target: { value: "新的草稿" } });
+    fireEvent.change(screen.getByLabelText("目标学段"), { target: { value: "university" } });
+    expect(retrieve).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole("button", { name: "重试上次查询" }));
+    await screen.findByLabelText("EvidenceCardsView");
+    expect(retrieve).toHaveBeenLastCalledWith({ query: "原来的问题", target_grade: null });
+    expect(retrieve).toHaveBeenCalledTimes(2);
+  });
   it("does not retrieve before explicit submission", () => {
     const retrieve = vi.fn().mockResolvedValue(
       getMockRetrieveResponse("approved_evidence"),
@@ -87,10 +105,10 @@ describe("App Shell", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: "多智能体赋能的跨模态零幻觉交互式思政教育系统",
+        name: "智证思政",
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/以可追溯证据组织回答/)).toBeInTheDocument();
+    expect(screen.getByText(/基于知识图谱与证据审查/)).toBeInTheDocument();
     submitQuery();
     expect(await screen.findByLabelText("EvidenceCardsView")).toBeInTheDocument();
   });

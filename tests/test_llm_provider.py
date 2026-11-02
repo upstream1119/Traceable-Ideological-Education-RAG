@@ -10,7 +10,8 @@ def _install_fake_openai(monkeypatch, captured):
             return SimpleNamespace(
                 choices=[
                     SimpleNamespace(
-                        message=SimpleNamespace(content="基于证据生成的答案")
+                        message=SimpleNamespace(content="基于证据生成的答案"),
+                        finish_reason=captured.get("finish_reason", "stop"),
                     )
                 ]
             )
@@ -99,10 +100,26 @@ def test_qwen_provider_uses_dashscope_endpoint(monkeypatch):
     assert captured["client"]["api_key"] == "test-key"
     assert captured["client"]["base_url"] == "https://dashscope.aliyuncs.com/compatible-mode/v1"
     assert captured["request"]["model"] == "qwen-plus"
+    assert captured["client"]["timeout"] == 30
+    assert captured["client"]["max_retries"] == 0
+    assert captured["request"]["max_tokens"] == 1200
     assert captured["request"]["messages"] == [
         {"role": "user", "content": "测试提示词"}
     ]
-    assert "extra_body" not in captured["request"]
+    assert captured["request"]["extra_body"] == {"enable_thinking": False}
+
+
+def test_trusted_system_rules_are_sent_separately_from_user_data(monkeypatch):
+    captured = {}
+    monkeypatch.setenv("DASHSCOPE_API_KEY", "test-key")
+    _install_fake_openai(monkeypatch, captured)
+    provider = llm_provider.get_llm_provider("qwen")
+    provider.system_prompt = "服务端讲解规则"
+    provider.generate("问题与教材数据")
+    assert captured["request"]["messages"] == [
+        {"role": "system", "content": "服务端讲解规则"},
+        {"role": "user", "content": "问题与教材数据"},
+    ]
 
 
 def test_zhipu_provider_converts_exception_to_safe_status(monkeypatch):
@@ -124,3 +141,14 @@ def test_unknown_provider_keeps_stub_fallback():
     provider = llm_provider.get_llm_provider("unknown")
 
     assert provider.name == "stub"
+
+
+def test_qwen_provider_rejects_truncated_response(monkeypatch):
+    captured = {"finish_reason": "length"}
+    monkeypatch.setenv("DASHSCOPE_API_KEY", "test-key")
+    _install_fake_openai(monkeypatch, captured)
+
+    result = llm_provider.get_llm_provider("qwen").generate("测试提示词")
+
+    assert result.text == ""
+    assert result.status == "truncated_response"

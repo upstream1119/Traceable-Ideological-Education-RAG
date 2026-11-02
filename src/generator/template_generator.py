@@ -89,9 +89,23 @@ def select_answer_hits(query: str, hybrid_hits: list[dict], max_hits: int) -> li
         MIN_QUERY_OVERLAP_FLOOR,
     )
 
+    def relation_focus(hit: dict) -> int:
+        # 问“包括什么/提高什么”时，优先取真实路径中对应谓词的逐边来源。
+        # 不按固定chunk ID插队，也不把“关联/是”当作问题的具体关系。
+        positions = [
+            query.rfind(relation) + 1
+            for path in hit.get("graph_paths", [])
+            for relation in path.get("relations", [])
+            if len(relation) >= 2 and relation != "关联" and relation in query
+            and hit.get("id") in path.get("source_chunk_ids", [])
+        ]
+        return max(positions, default=0)
+
+    # stable sort保留其他候选的既有相对顺序；具体关系来源不再被前3条挤掉。
+    scored_hits.sort(key=lambda item: relation_focus(item[0]), reverse=True)
     selected_hits = [
         hit for hit, score in scored_hits
-        if score >= overlap_threshold
+        if score >= overlap_threshold or relation_focus(hit) > 0
     ][:max_hits]
     return selected_hits or usable_hits[:1]
 

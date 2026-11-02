@@ -1,3 +1,5 @@
+import json
+
 from src.generator import evidence_generator
 from src.generator.evidence_generator import generate_answer
 from src.generator.llm_provider import LLMGenerationResult
@@ -48,28 +50,27 @@ def test_llm_mode_keeps_contract_and_builds_prompt(monkeypatch):
     assert result["provider_status"] == "stub_no_external_call"
     assert result["answer"]
     assert result["citations_used"]
-    assert "只能依据给定证据回答" in result["prompt_preview"]
-    assert "先概括核心结论" in result["prompt_preview"]
-    assert "不要逐条复制证据标题" in result["prompt_preview"]
-    assert "使用 [1]、[2]" in result["prompt_preview"]
-    assert "来源：" in result["prompt_preview"]
+    assert "只返回JSON" in result["prompt_preview"]
+    assert "quote_id" in result["prompt_preview"]
+    assert "不能改写" not in result["prompt_preview"]
     assert "思想政治教育需要依据具体历史材料展开" in result["prompt_preview"]
 
 
 def test_llm_mode_uses_successful_provider_answer(monkeypatch):
-    answer = (
-        "思想政治教育之所以重要，是因为它能够围绕党的中心任务统一思想、凝聚共识，"
-        "并将理论教育转化为组织动员和群众实践。[1] 从历史发展看，这一工作贯穿革命、"
-        "建设和改革过程，为干部教育、组织建设和群众工作提供持续的思想保障。[1]\n\n"
-        "来源：[1]《中国共产党思想政治教育史》，测试章节，PDF 页码 1。"
-    )
+    answer = "思想政治教育需要依据具体历史材料展开。"
+    payload = {"paragraphs": [{"text": answer, "supports": [{"quote_id": "E1S1"}]}]}
+    review = {"answers_question": True, "checks": [
+        {"paragraph": 1, "supported": True, "reason": "原文直接说明。"}
+    ]}
 
     class SuccessfulProvider:
         name = "zhipu"
+        calls = 0
 
         def generate(self, prompt: str) -> LLMGenerationResult:
+            self.calls += 1
             return LLMGenerationResult(
-                text=answer,
+                text=json.dumps(payload if self.calls == 1 else review, ensure_ascii=False),
                 provider_name=self.name,
                 status="success",
             )
@@ -83,8 +84,7 @@ def test_llm_mode_uses_successful_provider_answer(monkeypatch):
 
     result = generate_answer("思想政治教育为什么重要？", [_hit()])
 
-    assert result["answer"].startswith("仅依据当前检索到的证据，")
-    assert answer in result["answer"]
+    assert result["answer"] == answer + "[1]"
     assert result["generator_provider"] == "zhipu"
     assert result["provider_status"] == "success"
     assert result["used_fallback"] is False
@@ -111,7 +111,8 @@ def test_llm_mode_rejects_incomplete_provider_answer(monkeypatch):
 
     result = generate_answer("思想政治教育为什么重要？", [_hit()])
 
-    assert result["provider_status"] == "invalid_response"
+    assert result["provider_status"] == "semantic_review_failed"
+    assert result["failure_stage"] == "validation"
     assert result["used_fallback"] is True
     assert "仅为检索证据摘要" in result["answer"]
     assert result["quality_issues"]

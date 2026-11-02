@@ -3,6 +3,9 @@ import { PresentationRouter } from "./PresentationRouter";
 import { getMockRetrieveResponse } from "../data/retrieveDataSource";
 import type { RetrieveResponse } from "../types/backend";
 
+vi.mock("./TopicGraphView", () => ({ TopicGraphView: () => null }));
+vi.mock("./TopicTimelineView", () => ({ TopicTimelineView: () => null }));
+
 function cloneResponse(response: RetrieveResponse): RetrieveResponse {
   return structuredClone(response);
 }

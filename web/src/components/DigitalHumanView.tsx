@@ -1,4 +1,5 @@
 import { SharedEvidencePanel } from "./SharedEvidencePanel";
+import { DigitalNarrator } from "./DigitalNarrator";
 import type { RetrieveResponse } from "../types/backend";
 
 interface DigitalHumanViewProps {
@@ -15,19 +16,11 @@ export function DigitalHumanView({ response }: DigitalHumanViewProps) {
         </div>
         <span className="route-badge">Digital Human</span>
       </div>
-      <div className="digital-stage">
-        <div className="presenter-orb" aria-hidden="true">讲</div>
-        <div className="presenter-copy">
-          <p className="answer-label">Narrative character</p>
-          <h3>{response.display_route.narrative_character}</h3>
-          <p>当前为 FE-B2 视觉预留区，正式数字人能力将在后续阶段接入。</p>
-        </div>
-      </div>
-      <dl className="status-grid broadcast-status">
-        <div><dt>Broadcast</dt><dd>占位状态，未调用 TTS SDK。</dd></div>
-      </dl>
+      <p className="answer-label">讲解主题人物</p>
+      <h3>{response.display_route.narrative_character}</h3>
+      <DigitalNarrator response={response} />
       <article className="answer-panel" aria-label="runtime narration">
-        <p className="answer-label">Runtime narration · 与正式回答一致</p>
+        <p className="answer-label">讲解文本 · 与当前回答一致</p>
         <p>{response.answer}</p>
       </article>
       <SharedEvidencePanel response={response} />

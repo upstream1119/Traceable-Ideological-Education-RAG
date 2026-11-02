@@ -60,6 +60,7 @@ MOCK_ENTITY_MAP = {
     "嘉兴南湖": "嘉兴南湖",
     "井冈山": "井冈山",
     "延安": "延安",
+    "延安整风": "整风运动",
     "红色家书": "红色家书",
     "家书": "红色家书",
     "精神": "革命精神",
@@ -532,6 +533,9 @@ def _build_response(
         "generator_provider": generated.get("generator_provider"),
         "provider_status": generated.get("provider_status"),
         "used_fallback": generated.get("used_fallback"),
+        "failure_stage": generated.get("failure_stage"),
+        "quality_issues": generated.get("quality_issues", []),
+        "teaching_adaptation": generated.get("teaching_adaptation"),
         "source_check": source_check,
         "policy_check": policy_check,
         "agent_trace": agent_trace,
@@ -565,11 +569,16 @@ def retrieve(query: str, target_grade: str | None = None) -> dict:
         target_grade=target_grade,
     )
 
-    generated = generate_answer(query_text, hybrid_hits)
+    generated = generate_answer(
+        query_text, hybrid_hits,
+        target_grade=display_route["target_grade"], focus_entities=query_entities,
+    )
     source_check = check_answer_sources(
         generated["answer"],
         generated["citations_used"],
     )
+    if generated.get("evidence_scope") == "retrieved_evidence":
+        source_check["evidence_scope"] = "retrieved_evidence"
     policy_check = check_policy_risk(
         generated["answer"],
         generated["citations_used"],

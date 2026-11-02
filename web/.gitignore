@@ -4,3 +4,8 @@ coverage/
 *.log
 /public/data/landmarks_demo.geojson
 /public/data/timeline_demo_sizheng.json
+/public/data/timeline_cmit_2026.json
+/public/data/topic_graph.json
+/public/data/retrieval_graph.json
+/public/data/routed_timeline.json
+/public/data/learning_flow.json

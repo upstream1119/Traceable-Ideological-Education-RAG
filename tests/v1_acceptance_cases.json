@@ -1,0 +1,1034 @@
+{
+  "schema_version": "1.0",
+  "scope": "local_rule_template_engineering_acceptance_not_llm_or_teaching_quality",
+  "provenance": {
+    "reviewed_legacy_ref": "zhangruiyang@d889927fbdaafc56c532ea9dd167234976f0ce64",
+    "reviewed_legacy_file": "data/samples_40.jsonl",
+    "legacy_disposition": "保留其通用意图/学段字段设计；不复制其科学/交通等域外问题作本项目有据正例。现40题复用主线图谱与v3-v5交付，新增负例。"
+  },
+  "demo_case_ids": [
+    "v1qa_004",
+    "v1qa_016",
+    "v1qa_002"
+  ],
+  "priority_case_ids": [
+    "v1qa_002",
+    "v1qa_004",
+    "v1qa_005",
+    "v1qa_010",
+    "v1qa_016",
+    "v1qa_001",
+    "v1qa_022",
+    "v1qa_027",
+    "v1qa_032",
+    "v1qa_040"
+  ],
+  "cases": [
+    {
+      "id": "v1qa_001",
+      "query": "请面向高中生，以人物叙事方式介绍张闻天起草《党的宣传鼓动工作提纲》的背景和主要内容。",
+      "target_grade": "primary",
+      "origin": "data/graph/graphsim_regression_cases.json#person_zhangwentian_outline",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_166",
+        "chunk_sizheng_v1_167"
+      ],
+      "source_anchors": [
+        "宣传",
+        "鼓动"
+      ],
+      "answer_anchors": [
+        "证据范围说明",
+        "未提供该文起草背景的直接说明"
+      ],
+      "expected_mode": "digital_human",
+      "expected_decision": "needs_review",
+      "requires_citations": true,
+      "manual_review": [
+        "起草背景缺直接证据，不能标记整题完全通过。",
+        "检查四方面内容及166→167引用顺序。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_166",
+        "chunk_sizheng_v1_167"
+      ]
+    },
+    {
+      "id": "v1qa_002",
+      "query": "请用人物讲解介绍毛泽东如何命名新式整军运动？",
+      "target_grade": "junior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#person_mao_naming",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v2_022"
+      ],
+      "source_anchors": [
+        "新式整军运动"
+      ],
+      "answer_anchors": [
+        "新式整军运动"
+      ],
+      "expected_mode": "digital_human",
+      "expected_decision": "approved",
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v2_022"
+      ]
+    },
+    {
+      "id": "v1qa_003",
+      "query": "新式整军运动采取了什么方法？",
+      "target_grade": "senior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#event_new_style_method",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "source_anchors": [
+        "诉苦和三查"
+      ],
+      "answer_anchors": [
+        "诉苦和三查"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v2_021"
+      ]
+    },
+    {
+      "id": "v1qa_004",
+      "query": "长征形成了什么精神？",
+      "target_grade": "university",
+      "origin": "data/graph/graphsim_regression_cases.json#event_long_march_spirit",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_117"
+      ],
+      "source_anchors": [
+        "长征精神"
+      ],
+      "answer_anchors": [
+        "长征精神"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": "approved",
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_117"
+      ]
+    },
+    {
+      "id": "v1qa_005",
+      "query": "遵义会议在哪里？",
+      "target_grade": "primary",
+      "origin": "data/graph/graphsim_regression_cases.json#event_zunyi_turning_point",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_111"
+      ],
+      "source_anchors": [
+        "1935年2月28日"
+      ],
+      "answer_anchors": [
+        "遵义"
+      ],
+      "expected_mode": "timeline_map",
+      "expected_decision": "approved",
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_111"
+      ]
+    },
+    {
+      "id": "v1qa_006",
+      "query": "中央宣传部如何指导宣传教育工作？",
+      "target_grade": "junior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#organization_central_propaganda",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v2_004"
+      ],
+      "source_anchors": [
+        "全国范围内的宣传教育工作"
+      ],
+      "answer_anchors": [
+        "全国范围内的宣传教育工作"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v2_004"
+      ]
+    },
+    {
+      "id": "v1qa_007",
+      "query": "党支部如何开展宣传工作？",
+      "target_grade": "senior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#organization_party_branch",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v2_004",
+        "chunk_sizheng_v2_005"
+      ],
+      "source_anchors": [
+        "宣传鼓动工作"
+      ],
+      "answer_anchors": [
+        "宣传鼓动工作"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。",
+        "v2_004直接支持宣传组织责任，v2_005为扩展召回候选；不要求把全部图谱候选强行加入回答引用。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v2_004"
+      ]
+    },
+    {
+      "id": "v1qa_008",
+      "query": "中国人民解放军开展了什么运动？",
+      "target_grade": "university",
+      "origin": "data/graph/graphsim_regression_cases.json#organization_pla_new_style",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v2_034"
+      ],
+      "source_anchors": [
+        "新式整军运动"
+      ],
+      "answer_anchors": [
+        "新式整军运动"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v2_034"
+      ]
+    },
+    {
+      "id": "v1qa_009",
+      "query": "宣传鼓动工作提纲标志着什么？",
+      "target_grade": "primary",
+      "origin": "data/graph/graphsim_regression_cases.json#document_outline_systematization",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_167"
+      ],
+      "source_anchors": [
+        "党的宣传教育工作系统化、规范化"
+      ],
+      "answer_anchors": [
+        "党的宣传教育工作系统化、规范化"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_167"
+      ]
+    },
+    {
+      "id": "v1qa_010",
+      "query": "党的一大如何确立思想政治教育的基本原则？",
+      "target_grade": "junior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#document_first_congress",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_028"
+      ],
+      "source_anchors": [
+        "思想政治教育的基本原则"
+      ],
+      "answer_anchors": [
+        "思想政治教育的基本原则"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。",
+        "首轮错误套用历史另一问法的needs_review；本问法尚无人工风险定稿，仅检查来源、事实锚点及门控一致性，不调整policy规则。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_028"
+      ]
+    },
+    {
+      "id": "v1qa_011",
+      "query": "思想政治教育的历史开端是什么？",
+      "target_grade": "senior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#concept_education_origin",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "source_anchors": [
+        "中国共产党人"
+      ],
+      "answer_anchors": [
+        "中国共产党人"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_001"
+      ]
+    },
+    {
+      "id": "v1qa_012",
+      "query": "三查包括什么？",
+      "target_grade": "university",
+      "origin": "data/graph/graphsim_regression_cases.json#concept_three_checks",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v2_021"
+      ],
+      "source_anchors": [
+        "查阶级、查工作、查斗志"
+      ],
+      "answer_anchors": [
+        "查阶级、查工作、查斗志"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v2_021"
+      ]
+    },
+    {
+      "id": "v1qa_013",
+      "query": "十月革命创立了什么？",
+      "target_grade": "primary",
+      "origin": "data/graph/graphsim_regression_cases.json#concept_marxism_origin",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_001"
+      ],
+      "source_anchors": [
+        "世界上第一个社会主义国家"
+      ],
+      "answer_anchors": [
+        "世界上第一个社会主义国家"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_001"
+      ]
+    },
+    {
+      "id": "v1qa_014",
+      "query": "中国共产党为什么重视干部教育？",
+      "target_grade": "junior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#concept_cadre_education",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_148"
+      ],
+      "source_anchors": [
+        "干部教育"
+      ],
+      "answer_anchors": [
+        "干部教育"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_148"
+      ]
+    },
+    {
+      "id": "v1qa_015",
+      "query": "中国人民解放军开展新式整军运动提高了什么？",
+      "target_grade": "senior_high",
+      "origin": "data/graph/graphsim_regression_cases.json#two_hop_pla_political_awareness",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v2_034",
+        "chunk_sizheng_v2_023"
+      ],
+      "source_anchors": [
+        "干部战士的政治觉悟"
+      ],
+      "answer_anchors": [
+        "干部战士的政治觉悟"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "自动词面检查不证明解释完整或因果成立。",
+        "提高了什么由v2_023支持；v2_034为两跳路径的另一来源，仍检查召回，不要求重复引用。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v2_023"
+      ]
+    },
+    {
+      "id": "v1qa_016",
+      "query": "延安整风在哪里展开？",
+      "target_grade": "university",
+      "origin": "data/processed/routed_timeline_manifest.json#timeline_sizheng_yanan_period_003",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v1_155"
+      ],
+      "source_anchors": [
+        "1941年5月19日"
+      ],
+      "answer_anchors": [
+        "延安"
+      ],
+      "expected_mode": "timeline_map",
+      "expected_decision": "approved",
+      "requires_citations": true,
+      "manual_review": [
+        "报告节点不等于整风全过程；坐标尚未正式验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v1_155"
+      ]
+    },
+    {
+      "id": "v1qa_017",
+      "query": "毛泽东1950年10月8日的命令如何阐明抗美援朝的国际主义义务？",
+      "target_grade": "primary",
+      "origin": "tests/queries_sizheng_v3_batch01.json#v3_b01_q01",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_001"
+      ],
+      "source_anchors": [
+        "1950年10月8日",
+        "国际主义义务",
+        "抗美援朝"
+      ],
+      "answer_anchors": [
+        "1950年10月8日",
+        "国际主义义务",
+        "抗美援朝"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v3_001"
+      ]
+    },
+    {
+      "id": "v1qa_018",
+      "query": "1956年1月知识分子问题会议提出了哪些思想政治教育措施？",
+      "target_grade": "junior_high",
+      "origin": "tests/queries_sizheng_v3_batch01.json#v3_b01_q02",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_002"
+      ],
+      "source_anchors": [
+        "1956年1月",
+        "知识分子问题会议",
+        "说服教育"
+      ],
+      "answer_anchors": [
+        "1956年1月",
+        "知识分子问题会议",
+        "说服教育"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v3_002"
+      ]
+    },
+    {
+      "id": "v1qa_019",
+      "query": "1952年9月2日转发的报告规定政治辅导处和辅导员承担哪些工作？",
+      "target_grade": "senior_high",
+      "origin": "tests/queries_sizheng_v3_batch01.json#v3_b01_q03",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_003"
+      ],
+      "source_anchors": [
+        "1952年9月2日",
+        "政治辅导处",
+        "教育部党组"
+      ],
+      "answer_anchors": [
+        "1952年9月2日",
+        "政治辅导处",
+        "教育部党组"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v3_003"
+      ]
+    },
+    {
+      "id": "v1qa_020",
+      "query": "1954年5月第二次全国宣传工作会议确定了哪些主要任务和总路线宣传要求？",
+      "target_grade": "university",
+      "origin": "tests/queries_sizheng_v3_batch01.json#v3_b01_q04",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_008"
+      ],
+      "source_anchors": [
+        "1954年5月",
+        "第二次全国宣传工作会议",
+        "社会主义工业化"
+      ],
+      "answer_anchors": [
+        "1954年5月",
+        "第二次全国宣传工作会议",
+        "社会主义工业化"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v3_008"
+      ]
+    },
+    {
+      "id": "v1qa_021",
+      "query": "毛泽东、周恩来、陈云如何通过座谈帮助工商业者接受社会主义改造？",
+      "target_grade": "primary",
+      "origin": "tests/queries_sizheng_v3_batch01.json#v3_b01_q05",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v3_020"
+      ],
+      "source_anchors": [
+        "毛泽东、周恩来、陈云",
+        "工商界代表人物座谈",
+        "社会主义改造"
+      ],
+      "answer_anchors": [
+        "毛泽东、周恩来、陈云",
+        "工商界代表人物座谈",
+        "社会主义改造"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v3_020"
+      ]
+    },
+    {
+      "id": "v1qa_022",
+      "query": "1977年恢复高考的全国高等学校招生工作会议何时、在哪里召开？采用什么招生办法，随后规定哪些人可以报考、需要什么文化水平，并实行什么考核录取原则？当年12月参加考试和录取人数分别是多少？请给出教材PDF页码。",
+      "target_grade": "junior_high",
+      "origin": "tests/queries_sizheng_v4_batch02.json#v4_b02_q01",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_008"
+      ],
+      "source_anchors": [
+        "1977年8月13日至9月25日",
+        "北京",
+        "570万",
+        "27.3万"
+      ],
+      "answer_anchors": [
+        "1977年8月13日至9月25日",
+        "北京",
+        "统一考试、择优录取",
+        "工人、农民、上山下乡和回乡知识青年、复员军人、干部和应届毕业生",
+        "高中毕业或相当于高中毕业",
+        "德、智、体全面考核",
+        "570万",
+        "27.3万"
+      ],
+      "expected_mode": "timeline_map",
+      "expected_decision": "approved",
+      "requires_citations": true,
+      "manual_review": [
+        "570万是参加考试人数，不扩写为报名人数；当前北京时空资产可能无匹配节点，应显示空状态。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v4_008"
+      ]
+    },
+    {
+      "id": "v1qa_023",
+      "query": "1978年高等学校文科教学工作座谈会何时、何地召开，会后组织编写了哪些政治理论课程教学大纲？证据跨哪些PDF页？",
+      "target_grade": "senior_high",
+      "origin": "tests/queries_sizheng_v4_batch02.json#v4_b02_q02",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_010"
+      ],
+      "source_anchors": [
+        "1978年6月8日至29日",
+        "武汉",
+        "四门政治理论课程的教学大纲"
+      ],
+      "answer_anchors": [
+        "1978年6月8日至29日",
+        "武汉",
+        "四门政治理论课程的教学大纲"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v4_010"
+      ]
+    },
+    {
+      "id": "v1qa_024",
+      "query": "《实践是检验真理的唯一标准》由谁起草，先在哪一刊物发表，何时由《光明日报》公开发表？请定位教材PDF页。",
+      "target_grade": "university",
+      "origin": "tests/queries_sizheng_v4_batch02.json#v4_b02_q03",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_012"
+      ],
+      "source_anchors": [
+        "胡福明",
+        "1978年5月9日",
+        "5月11日",
+        "第60期"
+      ],
+      "answer_anchors": [
+        "胡福明",
+        "1978年5月9日",
+        "5月11日",
+        "第60期"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v4_012"
+      ]
+    },
+    {
+      "id": "v1qa_025",
+      "query": "1983年2月14日加强党员教育工作的通知如何分配党委及组织宣传部门的责任？正文从哪一PDF页开始，为什么不能只按日期所在页引用？",
+      "target_grade": "primary",
+      "origin": "tests/queries_sizheng_v4_batch02.json#v4_b02_q04",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_017"
+      ],
+      "source_anchors": [
+        "1983年2月14日",
+        "第一把手要亲自抓",
+        "恢复组织员制度"
+      ],
+      "answer_anchors": [
+        "1983年2月14日",
+        "第一把手要亲自抓",
+        "恢复组织员制度"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v4_017"
+      ]
+    },
+    {
+      "id": "v1qa_026",
+      "query": "1984年全国“五讲四美三热爱”活动工作会议何时在何地召开，推广了什么经验？实际PDF页码是否等于MinerU合并段落的起始页339？",
+      "target_grade": "junior_high",
+      "origin": "tests/queries_sizheng_v4_batch02.json#v4_b02_q05",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v4_023"
+      ],
+      "source_anchors": [
+        "1984年6月11日至18日",
+        "福建省三明市",
+        "人民城市人民建"
+      ],
+      "answer_anchors": [
+        "1984年6月11日至18日",
+        "福建省三明市",
+        "人民城市人民建"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v4_023"
+      ]
+    },
+    {
+      "id": "v1qa_027",
+      "query": "邓小平在1978年中央工作会议闭幕会上作了什么题目的讲话，重点论述什么关系？",
+      "target_grade": "senior_high",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q01",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_003"
+      ],
+      "source_anchors": [
+        "在中央工作会议闭幕会上",
+        "《解放思想，实事求是，团结一致向前看》"
+      ],
+      "answer_anchors": [
+        "在中央工作会议闭幕会上",
+        "《解放思想，实事求是，团结一致向前看》"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_003"
+      ]
+    },
+    {
+      "id": "v1qa_028",
+      "query": "1984年全国高等学校思想政治工作会议何时、何地召开，由哪四个组织联合召开？请定位跨页证据。",
+      "target_grade": "university",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q02",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_005"
+      ],
+      "source_anchors": [
+        "1984年6月7日至16日",
+        "全国高等学校思想政治工作会议"
+      ],
+      "answer_anchors": [
+        "1984年6月7日至16日",
+        "全国高等学校思想政治工作会议"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_005"
+      ]
+    },
+    {
+      "id": "v1qa_029",
+      "query": "教育部1984年4月13日印发什么文件，决定在哪多少所院校首批增设什么专业？教材列举了哪三所院校？",
+      "target_grade": "primary",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q03",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_006"
+      ],
+      "source_anchors": [
+        "1984年4月13日",
+        "南开大学、复旦大学、武汉大学"
+      ],
+      "answer_anchors": [
+        "1984年4月13日",
+        "南开大学、复旦大学、武汉大学"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_006"
+      ]
+    },
+    {
+      "id": "v1qa_030",
+      "query": "1994年8月学校德育意见对学校党组织、校长和行政系统的责任分别怎样规定？",
+      "target_grade": "junior_high",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q04",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_007"
+      ],
+      "source_anchors": [
+        "1994年8月",
+        "以行政系统为主实施的德育管理体制"
+      ],
+      "answer_anchors": [
+        "1994年8月",
+        "以行政系统为主实施的德育管理体制"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_007"
+      ]
+    },
+    {
+      "id": "v1qa_031",
+      "query": "教材中的三个干部教育培训基地位于哪里？三所干部学院何时建成并举行开学典礼？",
+      "target_grade": "senior_high",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q05",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_009"
+      ],
+      "source_anchors": [
+        "上海浦东、江西井冈山、陕西延安",
+        "2005年3月"
+      ],
+      "answer_anchors": [
+        "上海浦东、江西井冈山、陕西延安",
+        "2005年3月"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_009"
+      ]
+    },
+    {
+      "id": "v1qa_032",
+      "query": "关于未成年人思想道德建设的若干意见由谁在何时颁发？为落实文件随后召开了什么会议，时间到哪一月？",
+      "target_grade": "university",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q06",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_010"
+      ],
+      "source_anchors": [
+        "2004年2月26日",
+        "未成年人思想道德建设工作会议"
+      ],
+      "answer_anchors": [
+        "2004年2月26日",
+        "未成年人思想道德建设工作会议"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_010"
+      ]
+    },
+    {
+      "id": "v1qa_033",
+      "query": "大学生思想政治教育意见于何时由谁印发，随后在2005年哪一月召开了什么落实会议？",
+      "target_grade": "primary",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q07",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_011"
+      ],
+      "source_anchors": [
+        "2004年8月26日",
+        "2005年1月"
+      ],
+      "answer_anchors": [
+        "2004年8月26日",
+        "2005年1月"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_011"
+      ]
+    },
+    {
+      "id": "v1qa_034",
+      "query": "2004年4月马克思主义理论研究和建设工程工作会议提出的研究重点、主攻方向和大致建设时长是什么？",
+      "target_grade": "junior_high",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q08",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_013"
+      ],
+      "source_anchors": [
+        "2004年4月",
+        "马克思主义理论研究和建设工程"
+      ],
+      "answer_anchors": [
+        "2004年4月",
+        "马克思主义理论研究和建设工程"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_013"
+      ]
+    },
+    {
+      "id": "v1qa_035",
+      "query": "2013年全国宣传思想工作会议在哪一月、何地召开，谁发表讲话，讲话阐述了哪些方面？请同时指出PDF起止页。",
+      "target_grade": "senior_high",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q09",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_014"
+      ],
+      "source_anchors": [
+        "2013年8月",
+        "全国宣传思想工作会议"
+      ],
+      "answer_anchors": [
+        "2013年8月",
+        "全国宣传思想工作会议"
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_014"
+      ]
+    },
+    {
+      "id": "v1qa_036",
+      "query": "2014年古田全军政治工作会议的起止时间、地点、主要任务是什么，习近平在哪一天发表讲话？",
+      "target_grade": "university",
+      "origin": "tests/queries_sizheng_v5_batch03.json#batch03_q10",
+      "expected_chunk_ids": [
+        "chunk_sizheng_v5_015"
+      ],
+      "source_anchors": [
+        "2014年10月30日至11月2日",
+        "会议主要任务是："
+      ],
+      "answer_anchors": [
+        "2014年10月30日至11月2日",
+        "会议主要任务是："
+      ],
+      "expected_mode": "evidence_cards",
+      "expected_decision": null,
+      "requires_citations": true,
+      "manual_review": [
+        "全文事实覆盖、跨页结论和原始PDF定位仍需人工核验，词面匹配不代替内容验收。"
+      ],
+      "expected_citation_ids": [
+        "chunk_sizheng_v5_015"
+      ]
+    },
+    {
+      "id": "v1qa_037",
+      "query": "xyzxyzunmatched",
+      "target_grade": "primary",
+      "origin": "2026-11-02人工构造的无证据负例",
+      "expected_chunk_ids": [],
+      "source_anchors": [],
+      "answer_anchors": [],
+      "expected_mode": "evidence_cards",
+      "expected_decision": "blocked",
+      "requires_citations": false,
+      "manual_review": [
+        "只测无证据阻断，不代表覆盖全部越界问题。"
+      ],
+      "expected_citation_ids": []
+    },
+    {
+      "id": "v1qa_038",
+      "query": "zzqv9911_no_evidence",
+      "target_grade": "junior_high",
+      "origin": "2026-11-02人工构造的无证据负例",
+      "expected_chunk_ids": [],
+      "source_anchors": [],
+      "answer_anchors": [],
+      "expected_mode": "evidence_cards",
+      "expected_decision": "blocked",
+      "requires_citations": false,
+      "manual_review": [
+        "只测无证据阻断，不代表覆盖全部越界问题。"
+      ],
+      "expected_citation_ids": []
+    },
+    {
+      "id": "v1qa_039",
+      "query": "不存在的zzqv理论是什么？",
+      "target_grade": "senior_high",
+      "origin": "2026-11-02人工构造的无证据负例",
+      "expected_chunk_ids": [],
+      "source_anchors": [],
+      "answer_anchors": [],
+      "expected_mode": "evidence_cards",
+      "expected_decision": "blocked",
+      "requires_citations": false,
+      "manual_review": [
+        "只测无证据阻断，不代表覆盖全部越界问题。"
+      ],
+      "expected_citation_ids": []
+    },
+    {
+      "id": "v1qa_040",
+      "query": "Quantum zzz9911 unmatched topic?",
+      "target_grade": "university",
+      "origin": "2026-11-02人工构造的无证据负例",
+      "expected_chunk_ids": [],
+      "source_anchors": [],
+      "answer_anchors": [],
+      "expected_mode": "evidence_cards",
+      "expected_decision": "blocked",
+      "requires_citations": false,
+      "manual_review": [
+        "只测无证据阻断，不代表覆盖全部越界问题。"
+      ],
+      "expected_citation_ids": []
+    }
+  ]
+}
