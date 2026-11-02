@@ -1,5 +1,7 @@
 # 竞赛后端能力融合（2026-11-02，本地开发）
 
+> 合入状态：本文涉及的整合功能已通过[PR #51](https://github.com/upstream1119/Traceable-Ideological-Education-RAG/pull/51)进入主线（功能合并提交0d7a2e3）。下文保留各阶段当时的“未提交/未合并”和待办记录，不作为当前Git状态；功能合并不代表真实LLM、来源/坐标、整段音频或生产部署已经验收。当前代码版本以Git为准。
+
 ## 来源与集成
 
 来源与前端迁移一致：竞赛仓库 `upstream1119/zhizheng-sizheng-cmit-2026` 的 `main@5a454064`（功能提交 `f455d5a`）。目标为大创 `pengyihan`、起点 `e9c3546`，尚未提交、推送或合并。历史贡献及权属沿用原记录。

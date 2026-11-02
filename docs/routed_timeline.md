@@ -1,5 +1,7 @@
 # 时空路由与教材引用联动（2026-11-02，本地）
 
+> 合入状态：本文涉及的整合功能已通过[PR #51](https://github.com/upstream1119/Traceable-Ideological-Education-RAG/pull/51)进入主线（功能合并提交0d7a2e3）。下文保留各阶段当时的“未提交/未合并”和待办记录，不作为当前Git状态；功能合并不代表真实LLM、来源/坐标、整段音频或生产部署已经验收。当前代码版本以Git为准。
+
 ## 本阶段交付
 
 替换TimelineMapView中的FE-B3占位。依据响应display_route的timeline_ids/landmark_ids解析事件与地点，时间轴选择、地图点位、日期依据及教材原文联动。仅消费本次路由指定ID，不加载全部事件充当当前问题结果；未知ID显示缺口。Mock仅展示标识，不混入正式资料。安全门控仍在路由之前执行。

@@ -1,6 +1,6 @@
 # Traceable Ideological Education RAG
 
-> 2026-11-02本地开发状态（尚未合并）：308条语料、图谱逐边原文、时空ID联动及小红军二维讲解员已接入；40题local/template工程回归通过，真实LLM/学段表达、原PDF与坐标核验仍未完成。最新运行与演示入口见[本地V1.0验收说明](docs/v1_acceptance.md)。下文保留已发布基线的历史说明。
+> 2026-11-02整合已通过[PR #51](https://github.com/upstream1119/Traceable-Ideological-Education-RAG/pull/51)合入主线：308条语料、图谱逐边原文、时空ID联动及小红军二维讲解员已接入；40题local/template工程回归通过。真实LLM/学段表达、原PDF与坐标核验仍未完成，不代表V1.0已正式发布。运行与演示入口见[验收说明](docs/v1_acceptance.md)，审查范围见[整合审查](docs/v1_integration_review.md)。下文保留早期基线的历史说明。
 
 [中文说明](./README.zh-CN.md)
 
