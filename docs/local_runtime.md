@@ -1,5 +1,7 @@
 # 本地启动与异常恢复（2026-11-02）
 
+> 合入状态：本文涉及的整合功能已通过[PR #51](https://github.com/upstream1119/Traceable-Ideological-Education-RAG/pull/51)进入主线（功能合并提交0d7a2e3）。下文保留各阶段当时的“未提交/未合并”和待办记录，不作为当前Git状态；功能合并不代表真实LLM、来源/坐标、整段音频或生产部署已经验收。当前代码版本以Git为准。
+
 > 本轮整合已做独立前后端审查并修复两项问题，最新验证为后端283通过/5来源跳过、前端233项及构建通过；见[整合审查](v1_integration_review.md)。下文保留启动阶段实跑记录。
 
 本入口使用现有Python环境、Node和web/node_modules，不安装依赖，不改私有.env.local，不调用付费provider，不代表生产部署或V1.0正式冻结。
