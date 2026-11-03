@@ -583,6 +583,7 @@ def retrieve(query: str, target_grade: str | None = None) -> dict:
         generated["answer"],
         generated["citations_used"],
         source_check,
+        evidence_gaps=generated.get("evidence_gaps"),
     )
     agent_trace = build_agent_trace(
         query_entities=query_entities,

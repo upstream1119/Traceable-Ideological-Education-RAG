@@ -201,6 +201,8 @@ python -m pytest tests -q
 
 ## 路线图
 
+四学段真实模型验收入口见[运行说明](docs/live_grade_acceptance.md)：默认离线预检，获准后才调用Qwen；当前尚未完成在线质量验收。
+
 | 阶段 | 目标 |
 | --- | --- |
 | Phase 1 | 建立 KG-RAG 后端、schema、检索接口和验收问题集 |
