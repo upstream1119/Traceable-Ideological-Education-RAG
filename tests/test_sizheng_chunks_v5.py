@@ -84,6 +84,13 @@ class SizhengV5Acceptance(unittest.TestCase):
     def test_02_previous_versions_unchanged(self):
         for v,digest in OLD_HASHES.items():
             raw=(ROOT/f'data/processed/text_chunks_sizheng_v{v}.jsonl').read_bytes().replace(b'\r\n',b'\n')
+            # 仅允许经原书核验的两处跨页范围，其余历史内容仍由原始哈希保护。
+            if v in {1, 2}:
+                span, start = ('122–123', 122) if v == 1 else ('169–170', 169)
+                separator = ": " if start == 122 else ":"
+                marker = f'"page"{separator}"{span}"'.encode('utf-8')
+                self.assertEqual(raw.count(marker), 1)
+                raw = raw.replace(marker, f'"page"{separator}{start}'.encode())
             self.assertEqual(hashlib.sha256(raw).hexdigest(),digest)
 
     def test_03_original_text_and_physical_bounds(self):
