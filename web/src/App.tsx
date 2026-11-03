@@ -15,11 +15,11 @@ import type { RetrieveRequest, RetrieveResponse } from "./types/backend";
 import { TARGET_GRADES, type TargetGrade } from "./types/contract";
 
 const mockScenarios: { id: MockScenarioId; label: string }[] = [
-  { id: "approved_evidence", label: "Approved Evidence" },
-  { id: "approved_timeline", label: "Approved Timeline" },
-  { id: "approved_digital_human", label: "Approved Digital Human" },
-  { id: "needs_review", label: "Needs Review" },
-  { id: "blocked", label: "Blocked" },
+  { id: "approved_evidence", label: "引用证据" },
+  { id: "approved_timeline", label: "时空地图" },
+  { id: "approved_digital_human", label: "数字讲解" },
+  { id: "needs_review", label: "待复核" },
+  { id: "blocked", label: "暂不可回答" },
   { id: "character_safe_fallback", label: "Character Safe Fallback" },
 ];
 
@@ -118,11 +118,11 @@ export default function App({
     <main className="app-shell">
       <header className="app-header">
         <div>
-          <p className="project-kicker">WEB 时空沙盘 · 证据驱动展示层</p>
+          <p className="project-kicker">思政历史 · 时空探索</p>
           <h1>智证思政</h1>
-          <p className="app-lede">基于知识图谱与证据审查的可信AI交互式教育系统</p>
+          <p className="app-lede">基于知识图谱与证据审查的可信人工智能教育系统</p>
         </div>
-        <span className="header-mark">证据驱动 · V1.0 开发中</span>
+        <span className="header-mark">智证思政 · 第一版</span>
       </header>
 
       <form
@@ -134,11 +134,11 @@ export default function App({
           <p className="section-label">当前演示查询</p>
           <h2>从可信回答开始探索一段思政历史</h2>
         </div>
-        <label htmlFor="mock-scenario">
-          场景（仅模拟数据源生效）
+        {import.meta.env.VITE_RETRIEVE_MODE !== "api" && <label htmlFor="mock-scenario">
+          演示场景
           <select
             id="mock-scenario"
-            aria-label="Mock scenario selector"
+            aria-label="演示场景"
             value={scenarioId}
             onChange={(event) => { stopActiveNarration(); setScenarioId(event.target.value as MockScenarioId); }}
           >
@@ -148,7 +148,7 @@ export default function App({
               </option>
             ))}
           </select>
-        </label>
+        </label>}
         <label htmlFor="query-draft">
           问题
           <input

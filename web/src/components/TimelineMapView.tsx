@@ -28,7 +28,7 @@ export function TimelineMapView({ response }: TimelineMapViewProps) {
           <p className="section-label">时空主视图</p>
           <h2>地图与时间线</h2>
         </div>
-        <span className="route-badge">Timeline Map</span>
+        <span className="route-badge">时空地图</span>
       </div>
       <article className="answer-panel" aria-label="正式回答">
         <AnswerReadingView response={response} onOpenEvidence={openEvidence} />

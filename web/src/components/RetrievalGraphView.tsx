@@ -21,7 +21,7 @@ export function RetrievalGraphView({ response, loadGraph = loadRetrievalGraph }:
     return () => { active = false; };
   }, [loadGraph, attempt, response, allowed, mock]);
   if (!allowed) return null;
-  if (mock) return <section className="topic-graph" aria-label="本次检索图谱"><h3>本次检索图谱</h3><p>当前为模拟数据，切换真实API后查看检索路径与正式图谱。</p></section>;
+  if (mock) return <section className="topic-graph" aria-label="本次检索图谱"><h3>本次检索图谱</h3><p>当前为模拟数据，正式查询时可查看检索路径。</p></section>;
   const paths = [...new Map([...response.graph_hits, ...response.hybrid_hits]
     .flatMap(hit => hit.graph_paths).map(p => [JSON.stringify(p), p])).values()];
   const originals = new Map<string, GraphEvidence>(graph?.evidence_chunks.map(c => [c.id, c]));

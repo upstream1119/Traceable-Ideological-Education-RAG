@@ -28,7 +28,10 @@ it("opens a citation by ID and preserves the full template and scope limitation"
   const open = vi.fn();
   render(<AnswerReadingView response={response} onOpenEvidence={open} />);
   expect(screen.getByRole("note")).toHaveTextContent("背景仍缺直接证据");
-  expect(screen.getByLabelText("原始完整回答").textContent).toBe(response.answer);
+  expect(screen.getByLabelText("原始完整回答").textContent).toBe(
+    response.answer.slice(response.answer.indexOf("- 证据 1：")),
+  );
+  expect(screen.queryByText(/生成服务当前不可用/)).not.toBeInTheDocument();
   fireEvent.click(screen.getByRole("button", { name: "[1] 查看依据" }));
   expect(open).toHaveBeenCalledWith(response.citations_used[0].id);
 });

@@ -6,6 +6,7 @@ import { splitNarration, stopActiveNarration } from "../lib/narration";
 class Utterance {
   text: string;
   onstart: (() => void) | null = null;
+  onboundary: (() => void) | null = null;
   onend: (() => void) | null = null;
   onerror: (() => void) | null = null;
   constructor(text: string) { this.text = text; }
@@ -41,7 +42,11 @@ it("starts only on click, supports pause, resume and stop", () => {
   expect(utterances[0].text).toBe(response().answer);
   act(() => utterances[0].onstart?.());
   expect(screen.getByLabelText("讲解播放状态")).toHaveTextContent("正在朗读");
+  const region = screen.getByRole("region", { name: "小红军数字讲解员" });
+  act(() => utterances[0].onboundary?.());
+  expect(region.querySelector(".narrator-mouth-beat")).toBeInTheDocument();
   fireEvent.click(screen.getByRole("button", { name: "暂停讲解" }));
+  expect(region).not.toHaveClass("is-speaking");
   expect(engine.pause).toHaveBeenCalledTimes(1);
   fireEvent.click(screen.getByRole("button", { name: "继续讲解" }));
   expect(engine.resume).toHaveBeenCalled();

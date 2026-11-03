@@ -20,6 +20,9 @@ function templateExcerpts(response: RetrieveResponse): string[] | null {
 
 export function AnswerReadingView({ response, onOpenEvidence }: AnswerReadingViewProps) {
   const excerpts = templateExcerpts(response);
+  const evidenceAnswer = response.answer
+    .replace(/^生成服务当前不可用，以下内容仅为检索证据摘要，不作为完整自然语言回答：\r?\n/, "")
+    .replace(/\r?\n\r?\n以上内容仅依据当前检索到的证据整理，仅为检索证据摘要，请在生成服务恢复后重新生成完整回答。/, "");
   const scopeNotice = response.answer.match(/(?:^|\n)证据范围说明：[^\n]+/)?.[0].trim();
   const gradeProfiles = {
     primary: ["小学", "用日常语言说明行动与作用"],
@@ -63,23 +66,21 @@ export function AnswerReadingView({ response, onOpenEvidence }: AnswerReadingVie
     {response.generator_mode === "llm" && response.used_fallback === true ? <div className="fallback-notice">
       <p role="status">{fallbackReason}，暂时展示教材证据摘要。</p>
       <details><summary>查看回退原因</summary>
-        <p>状态：{response.provider_status ?? "未知"} · 阶段：{response.failure_stage ?? "未记录"}</p>
         {response.quality_issues?.map((issue, index) => <p key={index}>{issue}</p>)}
       </details>
     </div> : null}
-    {response.generator_mode === "llm" && response.provider_status === "success" && response.used_fallback === false
-      ? null : <p className="answer-label">请结合生成方式与引用原文核查以下内容</p>}
     {excerpts ? <>
-      <h3>教材摘录要点</h3>
-      <p className="reading-note">以下为本次回答已有的教材摘录，不是另行生成的结论。</p>
+      <h3>完整回答</h3>
+      <p className="answer-original" aria-label="原始完整回答">{evidenceAnswer}</p>
+      <details className="full-answer" key={`${response.query}:${response.answer}`}>
+      <summary>参考资料</summary>
       <ol className="answer-excerpts">{excerpts.map((text, index) => <li key={index}>
         <p>{text}</p>
         <button type="button" onClick={() => onOpenEvidence(response.citations_used[index].id)}>[{index + 1}] 查看依据</button>
       </li>)}</ol>
-      <details className="full-answer" key={`${response.query}:${response.answer}`}>
-        <summary>展开完整回答</summary><p className="answer-original" aria-label="原始完整回答">{response.answer}</p>
       </details>
     </> : <>
+      <h3>完整回答</h3>
       <div aria-label="完整回答正文" className="answer-paragraphs">
         {response.answer.split(/\r?\n\s*\r?\n/).map((text, index) => <p key={index}>{text}</p>)}
       </div>

@@ -52,7 +52,7 @@ describe("App Shell", () => {
     fireEvent.change(screen.getByLabelText("目标学段"), {
       target: { value: "senior_high" },
     });
-    fireEvent.change(screen.getByLabelText("Mock scenario selector"), {
+    fireEvent.change(screen.getByLabelText("演示场景"), {
       target: { value: "approved_digital_human" },
     });
 
@@ -116,7 +116,7 @@ describe("App Shell", () => {
   it("uses the selected Mock scenario after submitting the same request", async () => {
     render(<App />);
 
-    fireEvent.change(screen.getByLabelText("Mock scenario selector"), {
+    fireEvent.change(screen.getByLabelText("演示场景"), {
       target: { value: "approved_digital_human" },
     });
     submitQuery("请用人物叙事介绍张闻天");

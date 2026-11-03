@@ -42,10 +42,12 @@ def test_server_sentence_identifiers_resolve_to_exact_originals_without_model_co
 
 
 def test_composite_paragraph_can_cite_several_complete_sentences_but_has_a_bound():
-    hits = [{"text": "甲说明。乙说明。丙说明。丁说明。戊说明。己说明。庚说明。辛说明。壬说明。"}]
+    hits = [{"text": "".join(f"第{i}条说明。" for i in range(1, 14))}]
     paragraph = {"text": "多个方面的解释。", "supports": [{"quote_id": f"E1S{i}"} for i in range(1, 6)]}
     assert len(validate_teaching_answer(json.dumps({"paragraphs": [paragraph]}), hits)[0]["supports"]) == 5
-    paragraph["supports"] = [{"quote_id": f"E1S{i}"} for i in range(1, 10)]
+    paragraph["supports"] = [{"quote_id": f"E1S{i}"} for i in range(1, 13)]
+    assert len(validate_teaching_answer(json.dumps({"paragraphs": [paragraph]}), hits)[0]["supports"]) == 12
+    paragraph["supports"].append({"quote_id": "E1S13"})
     with pytest.raises(EvidenceAlignmentError):
         validate_teaching_answer(json.dumps({"paragraphs": [paragraph]}), hits)
 
