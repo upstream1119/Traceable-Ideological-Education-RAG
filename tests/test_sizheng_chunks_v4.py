@@ -72,6 +72,13 @@ class SizhengV4Acceptance(unittest.TestCase):
             'sizheng_v3':'19bfb97bca2b07dbd316a117e8e9304a966bf66fd640cc70ce7174b5da8fde11'}
         for suffix,digest in expected.items():
             raw=(ROOT/f'data/processed/text_chunks_{suffix}.jsonl').read_bytes().replace(b'\r\n',b'\n')
+            # 2026-11-03按扫描原书核验的跨页范围，恢复起始页后继续核对全部历史内容。
+            if suffix in {'sizheng_v1', 'sizheng_v2'}:
+                span, start = ('122–123', 122) if suffix == 'sizheng_v1' else ('169–170', 169)
+                separator = ": " if start == 122 else ":"
+                marker = f'"page"{separator}"{span}"'.encode('utf-8')
+                self.assertEqual(raw.count(marker), 1)
+                raw = raw.replace(marker, f'"page"{separator}{start}'.encode())
             self.assertEqual(hashlib.sha256(raw).hexdigest(),digest)
 
     def test_entities_and_time_have_evidence(self):
