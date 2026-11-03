@@ -12,6 +12,7 @@ export function DigitalNarrator({ response }: { response: RetrieveResponse }) {
   const [error, setError] = useState(""), [imageFailed, setImageFailed] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]), [voiceId, setVoiceId] = useState("");
   const [progress, setProgress] = useState(0);
+  const [segmentCount, setSegmentCount] = useState(0);
   const active = useRef(false), session = useRef(0), release = useRef<(() => void) | null>(null);
   const utterance = useRef<SpeechSynthesisUtterance | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -22,7 +23,8 @@ export function DigitalNarrator({ response }: { response: RetrieveResponse }) {
     && !response.final_decision.review_required;
   const canSpeak = allowed && (fallback || online) && response.generator_mode !== "mock"
     && response.citations_used.length > 0 && response.answer.trim().length > 0;
-  const chunks = splitNarration(response.answer);
+  const firstEvidence = response.answer.match(/^- 证据 \d+：(.+)$/m)?.[1];
+  const preview = firstEvidence?.match(/^[^。！？]{1,120}[。！？]/)?.[0];
   function clearTimer() { if (timer.current) clearTimeout(timer.current); timer.current = null; }
   function stop() {
     session.current++; active.current = false; utterance.current = null; clearTimer();
@@ -56,9 +58,11 @@ export function DigitalNarrator({ response }: { response: RetrieveResponse }) {
   }, [supported]);
   if (!allowed) return null;
 
-  function play() {
+  function play(text: string) {
     if (!supported || !canSpeak) return;
+    const chunks = splitNarration(text);
     stop();
+    setSegmentCount(chunks.length);
     setError(""); setState("starting");
     active.current = true; release.current = claimNarration(stop);
     // claim会停止旧会话；新的会话编号必须在取得播放权后确定。
@@ -117,11 +121,13 @@ export function DigitalNarrator({ response }: { response: RetrieveResponse }) {
           {voices.map((v, i) => <option key={v.voiceURI + i} value={v.voiceURI}>{v.name}{v.localService ? "（设备音色）" : "（可能需联网）"}</option>)}
         </select></label>
         <div className="narrator-buttons">
-          <button type="button" disabled={!canSpeak || playing} onClick={play}>{fallback ? "播放证据摘要" : "播放讲解"}</button>
+          {fallback && preview ? <button type="button" disabled={!canSpeak || playing}
+            onClick={() => play("以下是证据节选。" + preview)}>播放证据节选</button> : null}
+          <button type="button" disabled={!canSpeak || playing} onClick={() => play(response.answer)}>{fallback ? "播放证据摘要" : "播放讲解"}</button>
           <button type="button" disabled={state !== "speaking" && state !== "paused"} onClick={pauseOrResume}>{state === "paused" ? "继续讲解" : "暂停讲解"}</button>
           <button type="button" disabled={!playing} onClick={stop}>停止讲解</button>
         </div>
-        <p role="status" aria-label="讲解播放状态">{labels[state]}{playing || state === "finished" ? ` · 第${progress}/${chunks.length}段` : ""}</p>
+        <p role="status" aria-label="讲解播放状态">{labels[state]}{playing || state === "finished" ? ` · 第${progress}/${segmentCount}段` : ""}</p>
         {!canSpeak ? <p>当前结果为模拟、状态未确认或缺少引用，不能作为正式讲解播放。</p> : null}
         {error ? <p role="alert">{error}</p> : null}
       </>}
