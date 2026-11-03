@@ -14,7 +14,7 @@ export function DigitalHumanView({ response }: DigitalHumanViewProps) {
           <p className="section-label">沉浸式讲解</p>
           <h2>数字人讲解</h2>
         </div>
-        <span className="route-badge">Digital Human</span>
+        <span className="route-badge">数字讲解</span>
       </div>
       <p className="answer-label">讲解主题人物</p>
       <h3>{response.display_route.narrative_character}</h3>

@@ -203,4 +203,42 @@ button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-v
 .narrator-controls [aria-label="讲解播放状态"] { margin-top:14px; }
 .narrator-image-fallback { padding:36px 12px; background:#f0dfc9; border-radius:12px; }
 .digital-narrator.is-speaking .narrator-portrait { outline:3px solid #b48443; outline-offset:5px; border-radius:12px; }
+.narrator-character { position:relative; width:min(100%, 197px); margin-inline:auto; }
+.narrator-face { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.narrator-blink { opacity:0; animation:narrator-blink 5s infinite; }
+.narrator-mouth { opacity:0; transform-origin:354px 419px; }
+.digital-narrator.is-speaking .narrator-mouth {
+  opacity:1;
+  animation:narrator-mouth .46s ease-in-out infinite alternate;
+}
+@keyframes narrator-blink {
+  0%, 45%, 49%, 100% { opacity:0; }
+  46%, 48% { opacity:1; }
+}
+@keyframes narrator-mouth {
+  from { transform:scale(.88, .38); }
+  to { transform:scale(1, 1); }
+}
+.digital-narrator.is-speaking .narrator-mouth-beat {
+  opacity:0;
+  animation:narrator-mouth-beat .34s ease-out;
+}
+@keyframes narrator-mouth-beat {
+  0%, 100% { opacity:0; transform:scale(.88, .38); }
+  25%, 65% { opacity:1; transform:scale(1, 1); }
+}
+.digital-narrator.is-speaking .narrator-character {
+  animation: narrator-speaking 1.1s ease-in-out infinite;
+  transform-origin: center 85%;
+}
+@keyframes narrator-speaking {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .digital-narrator.is-speaking .narrator-character,
+  .digital-narrator.is-speaking .narrator-mouth,
+  .narrator-blink { animation: none; }
+}
+@media(max-width:600px) { .narrator-character { width:min(100%, 146px); } }
 @media(max-width:600px) { .digital-narrator { grid-template-columns:minmax(0,1fr); padding:16px; } .narrator-portrait img { max-height:260px; } }

@@ -88,10 +88,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--api-port", type=int, default=8000)
     parser.add_argument("--web-port", type=int, default=5179)
+    parser.add_argument("--online", action="store_true", help="每次提交优先通过通义千问生成回答")
     parser.add_argument("--check-only", action="store_true")
     parser.add_argument("--duration-seconds", type=float, default=0,
                         help="验收时定时退出；默认0表示运行至Ctrl+C")
     args = parser.parse_args()
+    mode = "local/llm" if args.online else "local/template"
     children, streams = [], []
     run_dir = None
     try:
@@ -101,13 +103,14 @@ def main():
         api_url, web_url = f"http://127.0.0.1:{args.api_port}", f"http://127.0.0.1:{args.web_port}"
         if args.check_only:
             print(json.dumps({"ok": True, "python": sys.executable, "node": node,
-                              "api_url": api_url, "web_url": web_url, "mode": "local/template"}, ensure_ascii=False))
+                              "api_url": api_url, "web_url": web_url, "mode": mode}, ensure_ascii=False))
             return 0
         run_dir = ROOT / "outputs/local_runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
         run_dir.mkdir(parents=True, exist_ok=False)
         env = dict(os.environ)
         env.update({"PYTHONDONTWRITEBYTECODE": "1", "OMP_NUM_THREADS": "1",
-                    "DACHUANG_RETRIEVE_MODE": "local", "DACHUANG_GENERATOR_MODE": "template",
+                    "DACHUANG_RETRIEVE_MODE": "local", "DACHUANG_GENERATOR_MODE": "llm" if args.online else "template",
+                    "DACHUANG_LLM_PROVIDER": "qwen" if args.online else "stub",
                     "DACHUANG_VECTOR_BACKEND": "", "DACHUANG_AUDIT_ENABLED": "0",
                     "VITE_RETRIEVE_MODE": "api", "VITE_API_BASE_URL": "/api",
                     "DACHUANG_API_PROXY_TARGET": api_url})
@@ -121,7 +124,7 @@ def main():
             ([sys.executable, "-B", "-m", "uvicorn", "src.api.main:app", "--host", "127.0.0.1", "--port", str(args.api_port)], ROOT, "backend.log"),
             ([node, str(WEB / "node_modules/vite/bin/vite.js"), "--host", "127.0.0.1", "--port", str(args.web_port), "--strictPort"], WEB, "frontend.log"),
         ]
-        runtime = {"profile": "local_rule/template", "python": sys.executable, "node": node,
+        runtime = {"profile": mode, "python": sys.executable, "node": node,
                    "api_url": api_url, "web_url": web_url,
                    "configuration": {key: env[key] for key in (
                        "DACHUANG_RETRIEVE_MODE", "DACHUANG_GENERATOR_MODE", "DACHUANG_VECTOR_BACKEND",
@@ -140,7 +143,7 @@ def main():
         wait_healthy(web_url + "/api/health", children[1])
         print(json.dumps({"ready": True, "web_url": web_url, "health": api_url + "/health",
                           "proxy_health": web_url + "/api/health", "logs": str(run_dir),
-                          "mode": "local/template", "stop": "Ctrl+C"}, ensure_ascii=False), flush=True)
+                          "mode": mode, "stop": "Ctrl+C"}, ensure_ascii=False), flush=True)
         deadline = time.monotonic() + args.duration_seconds if args.duration_seconds else None
         while deadline is None or time.monotonic() < deadline:
             if any(p.poll() is not None for p in children):
