@@ -243,7 +243,10 @@ def _build_result(
     }
 
 
-def check_policy_risk(answer: str, citations_used: list[dict], source_check: dict) -> dict:
+def check_policy_risk(
+    answer: str, citations_used: list[dict], source_check: dict,
+    *, evidence_gaps: list[str] | None = None,
+) -> dict:
     """
     政治红线审查智能体最小原型。
     当前定位为专家反馈数据引擎的规则型初筛，不替代赵老师专家审查。
@@ -338,6 +341,17 @@ def check_policy_risk(answer: str, citations_used: list[dict], source_check: dic
             "删除或弱化绝对化表述，并补充证据边界。",
             "请专家确认这些绝对化表述是否符合教材和政治表达口径。",
             "expression_safety",
+        )
+
+    if "drafting_background_missing" in (evidence_gaps or []):
+        _add_issue(
+            issues, risk_types, review_items,
+            "historical_context_needs_review",
+            "问题要求起草背景，但当前证据仅能确认时间、机构和主要内容，背景缺少直接证据。",
+            SEVERITY_MEDIUM,
+            "补充经核验的起草背景直接来源；补充前保持人工复核，不作为完整回答展示或播报。",
+            "请分别核对主要内容与背景，不以模型复核通过替代缺失证据。",
+            "historical_context",
         )
 
     context_terms = _contains_any(answer, HISTORICAL_CONTEXT_TERMS)

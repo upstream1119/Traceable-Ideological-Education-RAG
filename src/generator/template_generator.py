@@ -177,12 +177,14 @@ def generate_answer_from_hits(
         + "\n\n以上内容仅依据当前检索到的证据整理，"
         "仅为检索证据摘要，请在生成服务恢复后重新生成完整回答。"
     )
+    evidence_gaps = []
     if (
         continuation_is_verified
         and "张闻天" in query
         and "宣传鼓动工作提纲" in query
         and "背景" in query
     ):
+        evidence_gaps.append("drafting_background_missing")
         answer += (
             "\n\n证据范围说明：现有引用可确认起草时间、机构和主要内容；"
             "未提供该文起草背景的直接说明，不能据此补写具体背景。"
@@ -190,4 +192,5 @@ def generate_answer_from_hits(
     return {
         "answer": answer,
         "citations_used": citations_used,
+        "evidence_gaps": evidence_gaps,
     }

@@ -212,6 +212,8 @@ Do not use the old `citations` or `debug` fields for new frontend or teammate in
 
 ## Roadmap
 
+See [four-grade live acceptance](docs/live_grade_acceptance.md) for the offline preflight and explicitly enabled Qwen run. Live quality acceptance remains pending.
+
 | Phase | Goal |
 | --- | --- |
 | Phase 1 | Build KG-RAG backend, schema, retrieval API, and validation questions |

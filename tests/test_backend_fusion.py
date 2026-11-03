@@ -50,3 +50,31 @@ def test_online_path_preserves_verified_order_and_background_limit(monkeypatch):
     assert "未提供该文起草背景的直接说明" in result["answer"]
     assert "服务端已核实的证据边界" in calls[0]
     assert len(calls) == 2
+    assert result["evidence_gaps"] == ["drafting_background_missing"]
+
+
+def test_online_background_gap_keeps_review_gate_without_sensitive_keywords(monkeypatch):
+    from src.agents.agent_trace import build_final_decision
+
+    # 模型可把敏感历史词全部省略；门控仍必须继承已知的证据缺口。
+    generated = {"answer": "起草时间与主要内容有材料依据。",
+                 "citations_used": [{"id": "chunk_sizheng_v1_166", "title": "提纲", "source": "教材",
+                                     "citation": {"doc": "教材", "section": "提纲", "page": 130}}],
+                 "evidence_gaps": ["drafting_background_missing"], "evidence_scope": "retrieved_evidence"}
+    monkeypatch.setenv("DACHUANG_RETRIEVE_MODE", "local")
+    monkeypatch.setattr("src.retriever.hybrid_retriever.generate_answer", lambda *args, **kwargs: generated)
+    response = retrieve(RetrieveRequest(query="张闻天起草提纲的背景和内容？", target_grade="senior_high"))
+    assert response["policy_check"]["review_required"] is True
+    assert response["final_decision"] == build_final_decision(
+        response["source_check"], response["policy_check"])
+    assert response["final_decision"]["status"] == "needs_review"
+    assert response["final_decision"]["can_output"] is False
+
+
+def test_question_type_precedes_grade_style_in_generation_and_review():
+    from src.reviewer.semantic_checker import build_teaching_prompt, build_teaching_review_prompt
+    prompt = build_teaching_prompt("会议何时、在哪里召开，参加人数是多少？", [], target_grade="senior_high")
+    review = build_teaching_review_prompt("会议何时、在哪里召开？", [], [], target_grade="senior_high")
+    assert "问时间、地点、条件、人数就逐项回答" in prompt
+    assert "只有问题询问作用时才回答核心作用" in prompt
+    assert "不要求首段单独列完所有事实" in review

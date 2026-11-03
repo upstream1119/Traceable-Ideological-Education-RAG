@@ -9,6 +9,7 @@ from src.reviewer.semantic_checker import (
     build_teaching_review_prompt,
     validate_teaching_answer,
     validate_teaching_review,
+    validate_question_boundaries,
     validate_grade_expression,
     expand_grade_support_context,
     validate_answer_coherence,
@@ -132,12 +133,12 @@ def generate_answer(
                         validate_grade_expression(paragraphs, target_grade)
                     except EvidenceAlignmentError as exc:
                         expression_issues.append(str(exc))
-                    paragraphs = expand_grade_support_context(paragraphs, selected_hits)
                 record_audit_event("answer_validation", status="pass", paragraphs=paragraphs,
                                    expression_issues=expression_issues)
                 failure_stage = "review"
                 review_prompt = build_teaching_review_prompt(
-                    query, paragraphs, selected_hits, target_grade=target_grade,
+                    query, expand_grade_support_context(paragraphs, selected_hits) if profile else paragraphs,
+                    selected_hits, target_grade=target_grade,
                 )
                 if profile:
                     provider.system_prompt = (
@@ -160,6 +161,11 @@ def generate_answer(
                 accepted = validate_teaching_review(
                     review.text, len(paragraphs), target_grade=target_grade,
                 )
+                if len(accepted) != len(paragraphs):
+                    quality_issues = ["已省略未通过证据复核的补充解释；保留可独立回答问题的核心答案。"]
+                paragraphs = [paragraphs[index] for index in accepted]
+                failure_stage = "evidence_boundary"
+                validate_question_boundaries(query, paragraphs, selected_hits)
                 if profile:
                     adaptation = assess_teaching_adaptation(review.text, target_grade, expression_issues)
                 record_audit_event(
@@ -167,9 +173,6 @@ def generate_answer(
                     accepted_paragraphs=accepted,
                     teaching_adaptation=adaptation,
                 )
-                if len(accepted) != len(paragraphs):
-                    quality_issues = ["已省略未通过证据复核的补充解释；保留可独立回答问题的核心答案。"]
-                paragraphs = [paragraphs[index] for index in accepted]
             except EvidenceAlignmentError as exc:
                 record_audit_event(
                     "validation_failure", failure_stage=failure_stage,
